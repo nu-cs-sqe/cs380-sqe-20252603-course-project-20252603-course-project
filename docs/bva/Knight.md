@@ -30,7 +30,7 @@
 
 |             | System under test                     | Expected output                                                     | Implemented? |
 |-------------|---------------------------------------|---------------------------------------------------------------------|--------------|
-| Test Case 1 | constructor args: `color = BLACK`     | knight stores `type = KNIGHT`; knight stores `color = BLACK`        | :x: |
+| Test Case 1 | constructor args: `color = BLACK`     | knight stores `type = KNIGHT`; knight stores `color = BLACK`        | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`     | knight stores `type = KNIGHT`; knight stores `color = WHITE`        | :x: |
 | Test Case 3 | constructor args: `color = null`      | knight constructs successfully; knight stores `type = KNIGHT`; knight stores `color = null` | :x: |
 

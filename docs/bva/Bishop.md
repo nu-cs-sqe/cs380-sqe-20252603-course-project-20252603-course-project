@@ -31,7 +31,7 @@
 
 |             | System under test                       | Expected output                                                                 | Implemented? |
 |-------------|-----------------------------------------|---------------------------------------------------------------------------------|--------------|
-| Test Case 1 | constructor args: `color = BLACK`       | bishop constructs successfully; `getType()` returns `BISHOP`; `getColor()` returns `BLACK` | :x: |
+| Test Case 1 | constructor args: `color = BLACK`       | bishop constructs successfully; `getType()` returns `BISHOP`; `getColor()` returns `BLACK` | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`       | bishop constructs successfully; `getType()` returns `BISHOP`; `getColor()` returns `WHITE` | :x: |
 | Test Case 3 | constructor args: `color = null`        | bishop constructs successfully; `getType()` returns `BISHOP`; `getColor()` returns `null`  | :x: |
 

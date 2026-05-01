@@ -31,7 +31,7 @@
 
 |             | System under test                      | Expected output                                                               | Implemented? |
 |-------------|----------------------------------------|-------------------------------------------------------------------------------|--------------|
-| Test Case 1 | constructor args: `color = BLACK`      | queen constructs successfully; `getType()` returns `QUEEN`; `getColor()` returns `BLACK` | :x: |
+| Test Case 1 | constructor args: `color = BLACK`      | queen constructs successfully; `getType()` returns `QUEEN`; `getColor()` returns `BLACK` | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`      | queen constructs successfully; `getType()` returns `QUEEN`; `getColor()` returns `WHITE` | :x: |
 | Test Case 3 | constructor args: `color = null`       | queen constructs successfully; `getType()` returns `QUEEN`; `getColor()` returns `null`  | :x: |
 

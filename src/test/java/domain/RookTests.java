@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RookTests {
     @Test
@@ -29,11 +29,8 @@ public class RookTests {
     }
 
     @Test
-    public void RookConstructor_NullColor_SetsTypeAndNullColor() {
-        Rook rook = new Rook(null);
-
-        assertEquals(PieceType.ROOK, rook.getType());
-        assertNull(rook.getColor());
+    public void RookConstructor_NullColor_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Rook(null));
     }
 
     @Test
@@ -60,15 +57,4 @@ public class RookTests {
         assertEquals(PieceColor.WHITE, copy.getColor());
     }
 
-    @Test
-    public void RookMakeCopy_NullColorRook_ReturnsDistinctRookWithNullColor() {
-        Rook rook = new Rook(null);
-
-        Piece copy = rook.makeCopy();
-
-        assertNotSame(rook, copy);
-        assertInstanceOf(Rook.class, copy);
-        assertEquals(PieceType.ROOK, copy.getType());
-        assertNull(copy.getColor());
-    }
 }

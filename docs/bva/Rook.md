@@ -32,7 +32,7 @@
 |-------------|----------------------------------------|-------------------------------------------------------------------------------|--------------|
 | Test Case 1 | constructor args: `color = BLACK`      | rook constructs successfully; rook has `type = ROOK`; rook has `color = BLACK` | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`      | rook constructs successfully; rook has `type = ROOK`; rook has `color = WHITE` | :white_check_mark: |
-| Test Case 3 | constructor args: `color = null`       | throws `IllegalArgumentException`                                              | :x: |
+| Test Case 3 | constructor args: `color = null`       | throws `IllegalArgumentException`                                              | :white_check_mark: |
 
 
 ### Method under test: `makeCopy()`
@@ -41,4 +41,4 @@
 |-------------|---------------------------------|--------------------------------------------------------------------------------------------------|--------------|
 | Test Case 4 | rook: `Rook(BLACK)`             | return a distinct `Rook` as a `Piece`; copied piece has `type = ROOK`; copied piece has `color = BLACK` | :white_check_mark: |
 | Test Case 5 | rook: `Rook(WHITE)`             | return a distinct `Rook` as a `Piece`; copied piece has `type = ROOK`; copied piece has `color = WHITE` | :white_check_mark: |
-| Test Case 6 | rook: `Rook(null)`              | null-color rook is `CAN'T SET` through the public constructor; covered by constructor null rejection | :x: |
+| Test Case 6 | rook: `Rook(null)`              | null-color rook is `CAN'T SET` through the public constructor; covered by constructor null rejection | implemented in `RookConstructor_NullColor_ThrowsIllegalArgumentException` |

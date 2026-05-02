@@ -30,9 +30,9 @@
 
 |             | System under test                    | Expected output                                                     | Implemented? |
 |-------------|--------------------------------------|---------------------------------------------------------------------|--------------|
-| Test Case 1 | constructor arg: `color = BLACK`     | pawn constructs successfully; pawn has `type = PAWN`; pawn has `color = BLACK` | :x: |
-| Test Case 2 | constructor arg: `color = WHITE`     | pawn constructs successfully; pawn has `type = PAWN`; pawn has `color = WHITE` | :x: |
-| Test Case 3 | constructor arg: `color = null`      | pawn constructs successfully; pawn has `type = PAWN`; pawn has `color = null`  | :x: |
+| Test Case 1 | constructor arg: `color = BLACK`     | pawn constructs successfully; pawn has `type = PAWN`; pawn has `color = BLACK` | :white_check_mark: |
+| Test Case 2 | constructor arg: `color = WHITE`     | pawn constructs successfully; pawn has `type = PAWN`; pawn has `color = WHITE` | :white_check_mark: |
+| Test Case 3 | constructor arg: `color = null`      | constructor throws `IllegalArgumentException`                                 | :white_check_mark: |
 
 
 ### Method under test: `makeCopy()`

@@ -29,9 +29,9 @@
 
 |             | System under test                           | Expected output                                                        | Implemented? |
 |-------------|---------------------------------------------|------------------------------------------------------------------------|--------------|
-| Test Case 1 | constructor args: `color = BLACK`           | king constructs successfully; stores `type = KING`; stores `color = BLACK` | :x: |
-| Test Case 2 | constructor args: `color = WHITE`           | king constructs successfully; stores `type = KING`; stores `color = WHITE` | :x: |
-| Test Case 3 | constructor args: `color = null`            | king constructs successfully; stores `type = KING`; stores `color = null`  | :x: |
+| Test Case 1 | constructor args: `color = BLACK`           | king constructs successfully; stores `type = KING`; stores `color = BLACK` | :white_check_mark: |
+| Test Case 2 | constructor args: `color = WHITE`           | king constructs successfully; stores `type = KING`; stores `color = WHITE` | :white_check_mark: |
+| Test Case 3 | constructor args: `color = null`            | throws `IllegalArgumentException` | :white_check_mark: |
 
 
 ### Method under test: `makeCopy()`

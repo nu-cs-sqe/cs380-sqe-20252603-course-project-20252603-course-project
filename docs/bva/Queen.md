@@ -10,7 +10,7 @@
   - `makeCopy()` has no parameters, but its behavior depends on the valid receiver state: a `Queen` with `color = BLACK` or `color = WHITE`.
 - Step 1, output equivalence classes:
   - The constructor creates a `Queen` whose type is fixed to `PieceType.QUEEN` and whose color is the supplied non-null `color`.
-  - The constructor rejects `null` color with `IllegalArgumentException`.
+  - The constructor rejects `null` color with `IllegalArgumentException` and message `"color must not be null"`.
   - `makeCopy()` returns a distinct `Queen` object whose type is `PieceType.QUEEN` and whose color matches the original queen.
 - Step 2, BVA catalog mapping from the BVA catalog:
   - `PieceColor` is `Cases`.
@@ -34,7 +34,7 @@
 |-------------|----------------------------------------|-------------------------------------------------------------------------------|--------------|
 | Test Case 1 | constructor args: `color = BLACK`      | queen constructs successfully; `getType()` returns `QUEEN`; `getColor()` returns `BLACK` | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`      | queen constructs successfully; `getType()` returns `QUEEN`; `getColor()` returns `WHITE` | :white_check_mark: |
-| Test Case 3 | constructor args: `color = null`       | `Queen(null)` throws `IllegalArgumentException`                                | :white_check_mark: |
+| Test Case 3 | constructor args: `color = null`       | `Queen(null)` throws `IllegalArgumentException` with message `"color must not be null"` | :white_check_mark: |
 
 
 ### Method under test: `makeCopy()`
@@ -43,4 +43,4 @@
 |-------------|------------------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | Test Case 4 | queen: `Queen(BLACK)`        | return a distinct `Piece`; copied piece is a `Queen`; copied piece has `type = QUEEN`; copied piece has `color = BLACK` | :white_check_mark: |
 | Test Case 5 | queen: `Queen(WHITE)`        | return a distinct `Piece`; copied piece is a `Queen`; copied piece has `type = QUEEN`; copied piece has `color = WHITE` | :white_check_mark: |
-| Test Case 6 | queen: `Queen(null)`         | `Queen(null)` throws `IllegalArgumentException`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
+| Test Case 6 | queen: `Queen(null)`         | `Queen(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |

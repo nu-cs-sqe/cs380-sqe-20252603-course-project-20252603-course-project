@@ -30,7 +30,9 @@ public class RookTests {
 
     @Test
     public void RookConstructor_NullColor_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Rook(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Rook(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 
     @Test

@@ -30,7 +30,9 @@ public class QueenTests {
 
     @Test
     public void QueenConstructor_NullColor_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Queen(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Queen(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 
     @Test
@@ -59,6 +61,8 @@ public class QueenTests {
 
     @Test
     public void QueenMakeCopy_NullColorQueen_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Queen(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Queen(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 }

@@ -10,7 +10,7 @@
   - `makeCopy()` has no parameters; its input classes are the valid existing `Knight` receiver states with `color = BLACK` or `color = WHITE`.
 - Step 1, output equivalence classes:
   - The constructor creates a `Knight` with `type = KNIGHT` and the supplied non-null `color`.
-  - The constructor rejects `null` color with `IllegalArgumentException`.
+  - The constructor rejects `null` color with `IllegalArgumentException` and message `"color must not be null"`.
   - `makeCopy()` returns a distinct `Piece` object whose runtime state is a `Knight` with `type = KNIGHT` and the same `color` as the original.
 - Step 2, BVA catalog mapping from the BVA catalog:
   - `PieceColor` is `Cases`.
@@ -33,7 +33,7 @@
 |-------------|---------------------------------------|---------------------------------------------------------------------|--------------|
 | Test Case 1 | constructor args: `color = BLACK`     | knight stores `type = KNIGHT`; knight stores `color = BLACK`        | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`     | knight stores `type = KNIGHT`; knight stores `color = WHITE`        | :white_check_mark: |
-| Test Case 3 | constructor args: `color = null`      | `Knight(null)` throws `IllegalArgumentException`                    | :white_check_mark: |
+| Test Case 3 | constructor args: `color = null`      | `Knight(null)` throws `IllegalArgumentException` with message `"color must not be null"` | :white_check_mark: |
 
 
 ### Method under test: `makeCopy()`
@@ -42,4 +42,4 @@
 |-------------|-----------------------------------|---------------------------------------------------------------------------------------------------------|--------------|
 | Test Case 4 | knight: `Knight(BLACK)`           | return a distinct `Piece`; copied piece has `type = KNIGHT`; copied piece has `color = BLACK`           | :white_check_mark: |
 | Test Case 5 | knight: `Knight(WHITE)`           | return a distinct `Piece`; copied piece has `type = KNIGHT`; copied piece has `color = WHITE`           | :white_check_mark: |
-| Test Case 6 | knight: `Knight(null)`            | `Knight(null)` throws `IllegalArgumentException`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
+| Test Case 6 | knight: `Knight(null)`            | `Knight(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |

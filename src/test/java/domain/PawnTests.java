@@ -30,7 +30,9 @@ public class PawnTests {
 
     @Test
     public void PawnConstructor_ColorNull_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Pawn(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Pawn(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 
     @Test
@@ -59,6 +61,8 @@ public class PawnTests {
 
     @Test
     public void PawnMakeCopy_NullColorPawn_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Pawn(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Pawn(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 }

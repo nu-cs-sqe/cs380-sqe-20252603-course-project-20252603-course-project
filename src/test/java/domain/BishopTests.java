@@ -30,7 +30,9 @@ public class BishopTests {
 
     @Test
     public void BishopConstructor_NullColor_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Bishop(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Bishop(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 
     @Test
@@ -59,6 +61,8 @@ public class BishopTests {
 
     @Test
     public void BishopMakeCopy_NullColorBishop_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Bishop(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Bishop(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 }

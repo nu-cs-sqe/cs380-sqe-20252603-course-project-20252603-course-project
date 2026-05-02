@@ -4,7 +4,7 @@ public class Pawn extends Piece {
     public Pawn(PieceColor color) {
         super(PieceType.PAWN, color);
         if (color == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("color must not be null");
         }
     }
 

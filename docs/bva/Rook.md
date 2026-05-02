@@ -11,7 +11,7 @@
   - A `Rook` with `color = null` is not a valid public state once constructor null handling is corrected.
 - Step 1, output equivalence classes:
   - The constructor creates a `Rook` whose `type` is always `ROOK` and whose `color` is the constructor argument for valid colors.
-  - The constructor throws `IllegalArgumentException` when `color = null`.
+  - The constructor throws `IllegalArgumentException` with message `"color must not be null"` when `color = null`.
   - `makeCopy()` returns a distinct `Rook` instance typed as `Piece`; the copy has `type = ROOK` and the same valid color as the original.
 - Step 2, BVA catalog mapping from the BVA catalog:
   - `PieceColor` is `Cases`.
@@ -32,7 +32,7 @@
 |-------------|----------------------------------------|-------------------------------------------------------------------------------|--------------|
 | Test Case 1 | constructor args: `color = BLACK`      | rook constructs successfully; rook has `type = ROOK`; rook has `color = BLACK` | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`      | rook constructs successfully; rook has `type = ROOK`; rook has `color = WHITE` | :white_check_mark: |
-| Test Case 3 | constructor args: `color = null`       | throws `IllegalArgumentException`                                              | :white_check_mark: |
+| Test Case 3 | constructor args: `color = null`       | throws `IllegalArgumentException` with message `"color must not be null"`       | :white_check_mark: |
 
 
 ### Method under test: `makeCopy()`
@@ -41,4 +41,4 @@
 |-------------|---------------------------------|--------------------------------------------------------------------------------------------------|--------------|
 | Test Case 4 | rook: `Rook(BLACK)`             | return a distinct `Rook` as a `Piece`; copied piece has `type = ROOK`; copied piece has `color = BLACK` | :white_check_mark: |
 | Test Case 5 | rook: `Rook(WHITE)`             | return a distinct `Rook` as a `Piece`; copied piece has `type = ROOK`; copied piece has `color = WHITE` | :white_check_mark: |
-| Test Case 6 | rook: `Rook(null)`              | null-color rook is `CAN'T SET` through the public constructor; covered by constructor null rejection | implemented in `RookConstructor_NullColor_ThrowsIllegalArgumentException` |
+| Test Case 6 | rook: `Rook(null)`              | null-color rook is `CAN'T SET` through the public constructor; covered by constructor null rejection with message `"color must not be null"` | implemented in `RookConstructor_NullColor_ThrowsIllegalArgumentException` |

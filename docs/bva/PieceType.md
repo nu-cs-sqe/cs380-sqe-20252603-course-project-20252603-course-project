@@ -8,27 +8,28 @@
   - Direct enum constant access has no runtime input; the public cases are `PAWN`, `ROOK`, `KNIGHT`, `BISHOP`, `QUEEN`, and `KING`.
   - `values()` has no input.
   - `valueOf(String name)` accepts exact enum identifier strings `PAWN`, `ROOK`, `KNIGHT`, `BISHOP`, `QUEEN`, and `KING`.
-  - `valueOf(String name)` also has invalid string inputs that do not exactly match an enum identifier, including private display strings such as `Pawn`, and the nullable reference boundary `null`.
+  - `valueOf(String name)` also has invalid string inputs that do not exactly match an enum identifier, including private display strings such as `Pawn`, and the nullable reference boundary `null` for Java's generated enum API.
 - Step 1, output equivalence classes:
   - Direct enum constant access evaluates to the requested `PieceType` singleton.
   - `values()` returns a non-null array containing all six `PieceType` constants in declaration order.
   - `valueOf(String)` returns the matching `PieceType` singleton for exact identifier strings.
-  - `valueOf(String)` throws `IllegalArgumentException` for non-matching non-null strings and `NullPointerException` for `null`.
+  - Java's generated `valueOf(String)` throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceType.<input>"` for non-matching non-null strings.
+  - Java's generated `valueOf(String)` throws `NullPointerException` with message `"Name is null"` for `null`; this is Java enum API behavior, not a domain design that accepts null.
 - Step 2, BVA catalog mapping from the BVA catalog:
   - `PieceType` constants are `Cases`.
-  - The `String name` input to `valueOf(String)` is a reference, so `null` uses the `Pointers` boundary.
+  - The `String name` input to `valueOf(String)` is a reference, so `null` uses the `Pointers` boundary for Java enum API behavior.
   - Non-null `String name` inputs are tested by exact enum identifier state, not by arbitrary string-length boundaries.
   - The private constructor display `name` values are implementation state; because no public accessor exposes them, they are only relevant as non-matching `valueOf(String)` inputs.
 - Step 3, concrete boundary values selected from the catalog:
   - `PieceType`: first `PAWN`, second `ROOK`, interior `KNIGHT`, `BISHOP`, `QUEEN`, and last `KING`.
   - `valueOf(String)` valid strings: `"PAWN"`, `"ROOK"`, `"KNIGHT"`, `"BISHOP"`, `"QUEEN"`, and `"KING"`.
   - `valueOf(String)` invalid strings: `"Pawn"` to confirm private display names are not public enum identifiers, and `"pawn"` to confirm exact case-sensitive matching.
-  - `valueOf(String)` pointer boundary: `null`.
+  - `valueOf(String)` invalid pointer boundary: `null`, which is rejected by Java's enum API.
   - Impossible non-string and non-enum values are omitted because they are `CAN'T SET` in Java.
 - Step 4 strategy:
   - Use each-choice across the enum `Cases` so every declared `PieceType` appears at least once.
   - Use one aggregate `values()` case to verify the complete declaration-order boundary from first through last.
-  - Add separate negative `valueOf(String)` cases for non-matching strings and the null-pointer boundary.
+  - Add separate negative `valueOf(String)` cases for non-matching strings and the null-pointer boundary of Java's generated enum API.
 
 
 ### Method under test: enum constants
@@ -60,6 +61,6 @@
 | Test Case 11 | call `PieceType.valueOf("BISHOP")`    | return `PieceType.BISHOP`    | :x: |
 | Test Case 12 | call `PieceType.valueOf("QUEEN")`     | return `PieceType.QUEEN`     | :x: |
 | Test Case 13 | call `PieceType.valueOf("KING")`      | return `PieceType.KING`      | :x: |
-| Test Case 14 | call `PieceType.valueOf("Pawn")`      | `IllegalArgumentException`   | :x: |
-| Test Case 15 | call `PieceType.valueOf("pawn")`      | `IllegalArgumentException`   | :x: |
-| Test Case 16 | call `PieceType.valueOf(null)`        | `NullPointerException`       | :x: |
+| Test Case 14 | call `PieceType.valueOf("Pawn")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceType.Pawn"` | :x: |
+| Test Case 15 | call `PieceType.valueOf("pawn")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceType.pawn"` | :x: |
+| Test Case 16 | call `PieceType.valueOf(null)`        | Java enum API throws `NullPointerException` with message `"Name is null"` | :x: |

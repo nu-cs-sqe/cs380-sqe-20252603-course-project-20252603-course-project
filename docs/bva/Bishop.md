@@ -10,7 +10,7 @@
   - `makeCopy()` has no parameters, but its behavior depends on the valid receiver state: a `Bishop` with `color = BLACK` or `color = WHITE`.
 - Step 1, output equivalence classes:
   - The constructor creates a `Bishop` whose type is fixed to `PieceType.BISHOP` and whose color is the supplied non-null `color`.
-  - The constructor rejects `null` color with `IllegalArgumentException`.
+  - The constructor rejects `null` color with `IllegalArgumentException` and message `"color must not be null"`.
   - `makeCopy()` returns a distinct `Bishop` object whose type is `PieceType.BISHOP` and whose color matches the original bishop.
 - Step 2, BVA catalog mapping from the BVA catalog:
   - `PieceColor` is `Cases`.
@@ -34,7 +34,7 @@
 |-------------|-----------------------------------------|---------------------------------------------------------------------------------|--------------|
 | Test Case 1 | constructor args: `color = BLACK`       | bishop constructs successfully; `getType()` returns `BISHOP`; `getColor()` returns `BLACK` | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`       | bishop constructs successfully; `getType()` returns `BISHOP`; `getColor()` returns `WHITE` | :white_check_mark: |
-| Test Case 3 | constructor args: `color = null`        | `Bishop(null)` throws `IllegalArgumentException`                                 | :white_check_mark: |
+| Test Case 3 | constructor args: `color = null`        | `Bishop(null)` throws `IllegalArgumentException` with message `"color must not be null"` | :white_check_mark: |
 
 
 ### Method under test: `makeCopy()`
@@ -43,4 +43,4 @@
 |-------------|--------------------------------|---------------------------------------------------------------------------------------------------------|--------------|
 | Test Case 4 | bishop: `Bishop(BLACK)`        | return a distinct `Piece`; copied piece is a `Bishop`; copied piece has `type = BISHOP`; copied piece has `color = BLACK` | :white_check_mark: |
 | Test Case 5 | bishop: `Bishop(WHITE)`        | return a distinct `Piece`; copied piece is a `Bishop`; copied piece has `type = BISHOP`; copied piece has `color = WHITE` | :white_check_mark: |
-| Test Case 6 | bishop: `Bishop(null)`         | `Bishop(null)` throws `IllegalArgumentException`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
+| Test Case 6 | bishop: `Bishop(null)`         | `Bishop(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |

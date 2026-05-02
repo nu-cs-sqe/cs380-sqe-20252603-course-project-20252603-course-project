@@ -30,7 +30,9 @@ public class KnightTests {
 
     @Test
     public void KnightConstructor_NullColor_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Knight(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Knight(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 
     @Test
@@ -59,6 +61,8 @@ public class KnightTests {
 
     @Test
     public void KnightMakeCopy_NullColorKnight_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Knight(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Knight(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 }

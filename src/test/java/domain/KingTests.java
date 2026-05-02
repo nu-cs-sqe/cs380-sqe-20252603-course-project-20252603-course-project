@@ -30,7 +30,9 @@ public class KingTests {
 
     @Test
     public void KingConstructor_ColorNull_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new King(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new King(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 
     @Test
@@ -59,6 +61,8 @@ public class KingTests {
 
     @Test
     public void MakeCopy_NullColorKing_ThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new King(null));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new King(null));
+
+        assertEquals("color must not be null", exception.getMessage());
     }
 }

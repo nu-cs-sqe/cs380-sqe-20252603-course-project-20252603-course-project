@@ -10,6 +10,6 @@ public class King extends Piece {
 
     @Override
     public Piece makeCopy() {
-        throw new UnsupportedOperationException();
+        return new King(getColor());
     }
 }

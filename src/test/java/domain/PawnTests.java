@@ -1,11 +1,14 @@
 package domain;
 
 import domain.piece.Pawn;
+import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PawnTests {
@@ -27,6 +30,35 @@ public class PawnTests {
 
     @Test
     public void PawnConstructor_ColorNull_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Pawn(null));
+    }
+
+    @Test
+    public void PawnMakeCopy_BlackPawn_ReturnsDistinctBlackPawnWithPawnType() {
+        Pawn pawn = new Pawn(PieceColor.BLACK);
+
+        Piece copy = pawn.makeCopy();
+
+        assertNotSame(pawn, copy);
+        assertInstanceOf(Pawn.class, copy);
+        assertEquals(PieceType.PAWN, copy.getType());
+        assertEquals(PieceColor.BLACK, copy.getColor());
+    }
+
+    @Test
+    public void PawnMakeCopy_WhitePawn_ReturnsDistinctWhitePawnWithPawnType() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        Piece copy = pawn.makeCopy();
+
+        assertNotSame(pawn, copy);
+        assertInstanceOf(Pawn.class, copy);
+        assertEquals(PieceType.PAWN, copy.getType());
+        assertEquals(PieceColor.WHITE, copy.getColor());
+    }
+
+    @Test
+    public void PawnMakeCopy_NullColorPawn_ThrowsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Pawn(null));
     }
 }

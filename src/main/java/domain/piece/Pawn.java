@@ -10,6 +10,6 @@ public class Pawn extends Piece {
 
     @Override
     public Piece makeCopy() {
-        throw new UnsupportedOperationException();
+        return new Pawn(getColor());
     }
 }

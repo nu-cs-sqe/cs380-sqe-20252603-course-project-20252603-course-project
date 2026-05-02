@@ -39,6 +39,6 @@
 
 |             | System under test             | Expected output                                                                                  | Implemented? |
 |-------------|-------------------------------|--------------------------------------------------------------------------------------------------|--------------|
-| Test Case 4 | pawn: `Pawn(BLACK)`           | return a distinct `Pawn`; copied pawn has `type = PAWN`; copied pawn has `color = BLACK`        | :x: |
-| Test Case 5 | pawn: `Pawn(WHITE)`           | return a distinct `Pawn`; copied pawn has `type = PAWN`; copied pawn has `color = WHITE`        | :x: |
-| Test Case 6 | pawn: `Pawn(null)`            | return a distinct `Pawn`; copied pawn has `type = PAWN`; copied pawn has `color = null`         | :x: |
+| Test Case 4 | pawn: `Pawn(BLACK)`           | return a distinct `Pawn`; copied pawn has `type = PAWN`; copied pawn has `color = BLACK`        | :white_check_mark: |
+| Test Case 5 | pawn: `Pawn(WHITE)`           | return a distinct `Pawn`; copied pawn has `type = PAWN`; copied pawn has `color = WHITE`        | :white_check_mark: |
+| Test Case 6 | pawn: `Pawn(null)`            | constructor throws `IllegalArgumentException`                                                    | :white_check_mark: |

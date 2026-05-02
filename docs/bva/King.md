@@ -38,6 +38,6 @@
 
 |             | System under test                           | Expected output                                                                                       | Implemented? |
 |-------------|---------------------------------------------|-------------------------------------------------------------------------------------------------------|--------------|
-| Test Case 4 | king: `King(BLACK)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = BLACK` | :x: |
-| Test Case 5 | king: `King(WHITE)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = WHITE` | :x: |
-| Test Case 6 | king: `King(null)`                          | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = null`  | :x: |
+| Test Case 4 | king: `King(BLACK)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = BLACK` | :white_check_mark: |
+| Test Case 5 | king: `King(WHITE)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = WHITE` | :white_check_mark: |
+| Test Case 6 | king: `King(null)`                          | throws `IllegalArgumentException` | :white_check_mark: |

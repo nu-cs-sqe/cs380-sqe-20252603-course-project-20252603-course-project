@@ -36,24 +36,24 @@
 
 |             | System under test                    | Expected output                                            | Implemented? |
 |-------------|--------------------------------------|------------------------------------------------------------|--------------|
-| Test Case 1 | access constant `PieceColor.BLACK`   | returns singleton enum constant `BLACK`; name is `"BLACK"` | :x: |
-| Test Case 2 | access constant `PieceColor.WHITE`   | returns singleton enum constant `WHITE`; name is `"WHITE"` | :x: |
+| Test Case 1 | access constant `PieceColor.BLACK`   | returns singleton enum constant `BLACK`; name is `"BLACK"` | :white_check_mark: |
+| Test Case 2 | access constant `PieceColor.WHITE`   | returns singleton enum constant `WHITE`; name is `"WHITE"` | :white_check_mark: |
 
 
 ### Method under test: `values()`
 
 |             | System under test                         | Expected output                                                          | Implemented? |
 |-------------|-------------------------------------------|--------------------------------------------------------------------------|--------------|
-| Test Case 3 | call `PieceColor.values()`                | returns array of length 2: index 0 is `BLACK`, index 1 is `WHITE`        | :x: |
-| Test Case 4 | call `PieceColor.values()` twice          | returns distinct array objects; both arrays contain `BLACK` then `WHITE` | :x: |
+| Test Case 3 | call `PieceColor.values()`                | returns array of length 2: index 0 is `BLACK`, index 1 is `WHITE`        | :white_check_mark: |
+| Test Case 4 | call `PieceColor.values()` twice          | returns distinct array objects; both arrays contain `BLACK` then `WHITE` | :white_check_mark: |
 
 
 ### Method under test: `valueOf(String name)`
 
 |             | System under test                         | Expected output                | Implemented? |
 |-------------|-------------------------------------------|--------------------------------|--------------|
-| Test Case 5 | call `PieceColor.valueOf("BLACK")`        | return `BLACK`                 | :x: |
-| Test Case 6 | call `PieceColor.valueOf("WHITE")`        | return `WHITE`                 | :x: |
+| Test Case 5 | call `PieceColor.valueOf("BLACK")`        | return `BLACK`                 | :white_check_mark: |
+| Test Case 6 | call `PieceColor.valueOf("WHITE")`        | return `WHITE`                 | :white_check_mark: |
 | Test Case 7 | call `PieceColor.valueOf(null)`           | Java enum API throws `NullPointerException` with message `"Name is null"` | :x: |
 | Test Case 8 | call `PieceColor.valueOf("black")`        | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceColor.black"` | :x: |
 | Test Case 9 | call `PieceColor.valueOf(" BLACK ")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceColor. BLACK "`; the final space is part of the message | :x: |

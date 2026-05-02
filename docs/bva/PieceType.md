@@ -36,12 +36,12 @@
 
 |             | System under test             | Expected output                                                                 | Implemented? |
 |-------------|-------------------------------|---------------------------------------------------------------------------------|--------------|
-| Test Case 1 | reference `PieceType.PAWN`    | enum constant exists; evaluates to the `PAWN` singleton                         | :x: |
-| Test Case 2 | reference `PieceType.ROOK`    | enum constant exists; evaluates to the `ROOK` singleton                         | :x: |
-| Test Case 3 | reference `PieceType.KNIGHT`  | enum constant exists; evaluates to the `KNIGHT` singleton                       | :x: |
-| Test Case 4 | reference `PieceType.BISHOP`  | enum constant exists; evaluates to the `BISHOP` singleton                       | :x: |
-| Test Case 5 | reference `PieceType.QUEEN`   | enum constant exists; evaluates to the `QUEEN` singleton                        | :x: |
-| Test Case 6 | reference `PieceType.KING`    | enum constant exists; evaluates to the `KING` singleton                         | :x: |
+| Test Case 1 | reference `PieceType.PAWN`    | enum constant exists; evaluates to the `PAWN` singleton                         | :white_check_mark: |
+| Test Case 2 | reference `PieceType.ROOK`    | enum constant exists; evaluates to the `ROOK` singleton                         | :white_check_mark: |
+| Test Case 3 | reference `PieceType.KNIGHT`  | enum constant exists; evaluates to the `KNIGHT` singleton                       | :white_check_mark: |
+| Test Case 4 | reference `PieceType.BISHOP`  | enum constant exists; evaluates to the `BISHOP` singleton                       | :white_check_mark: |
+| Test Case 5 | reference `PieceType.QUEEN`   | enum constant exists; evaluates to the `QUEEN` singleton                        | :white_check_mark: |
+| Test Case 6 | reference `PieceType.KING`    | enum constant exists; evaluates to the `KING` singleton                         | :white_check_mark: |
 
 
 ### Method under test: `values()`

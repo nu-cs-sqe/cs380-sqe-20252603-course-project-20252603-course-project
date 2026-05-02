@@ -35,12 +35,12 @@
 
 |             | System under test                             | Expected output                                                  | Implemented? |
 |-------------|-----------------------------------------------|------------------------------------------------------------------|--------------|
-| Test Case 1 | constructor args: `type = PAWN`, `color = BLACK`   | piece stores `type = PAWN`; piece stores `color = BLACK`         | :x: |
-| Test Case 2 | constructor args: `type = ROOK`, `color = WHITE`   | piece stores `type = ROOK`; piece stores `color = WHITE`         | :x: |
-| Test Case 3 | constructor args: `type = KNIGHT`, `color = BLACK` | piece stores `type = KNIGHT`; piece stores `color = BLACK`       | :x: |
-| Test Case 4 | constructor args: `type = BISHOP`, `color = WHITE` | piece stores `type = BISHOP`; piece stores `color = WHITE`       | :x: |
-| Test Case 5 | constructor args: `type = QUEEN`, `color = BLACK`  | piece stores `type = QUEEN`; piece stores `color = BLACK`        | :x: |
-| Test Case 6 | constructor args: `type = KING`, `color = WHITE`   | piece stores `type = KING`; piece stores `color = WHITE`         | :x: |
+| Test Case 1 | constructor args: `type = PAWN`, `color = BLACK`   | piece stores `type = PAWN`; piece stores `color = BLACK`         | :white_check_mark: |
+| Test Case 2 | constructor args: `type = ROOK`, `color = WHITE`   | piece stores `type = ROOK`; piece stores `color = WHITE`         | :white_check_mark: |
+| Test Case 3 | constructor args: `type = KNIGHT`, `color = BLACK` | piece stores `type = KNIGHT`; piece stores `color = BLACK`       | :white_check_mark: |
+| Test Case 4 | constructor args: `type = BISHOP`, `color = WHITE` | piece stores `type = BISHOP`; piece stores `color = WHITE`       | :white_check_mark: |
+| Test Case 5 | constructor args: `type = QUEEN`, `color = BLACK`  | piece stores `type = QUEEN`; piece stores `color = BLACK`        | :white_check_mark: |
+| Test Case 6 | constructor args: `type = KING`, `color = WHITE`   | piece stores `type = KING`; piece stores `color = WHITE`         | :white_check_mark: |
 | Test Case 7 | constructor args: `type = null`, `color = BLACK`   | throws `IllegalArgumentException` with message `"type must not be null"` | :x: |
 | Test Case 8 | constructor args: `type = PAWN`, `color = null`    | throws `IllegalArgumentException` with message `"color must not be null"` | :x: |
 

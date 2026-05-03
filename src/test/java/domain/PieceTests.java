@@ -89,6 +89,20 @@ public class PieceTests {
         assertEquals(PieceType.ROOK, piece.getType());
     }
 
+    @Test
+    public void PieceGetType_KnightTypeAndBlackColor_ReturnsKnight() {
+        TestPiece piece = new TestPiece(PieceType.KNIGHT, PieceColor.BLACK);
+
+        assertEquals(PieceType.KNIGHT, piece.getType());
+    }
+
+    @Test
+    public void PieceGetType_BishopTypeAndWhiteColor_ReturnsBishop() {
+        TestPiece piece = new TestPiece(PieceType.BISHOP, PieceColor.WHITE);
+
+        assertEquals(PieceType.BISHOP, piece.getType());
+    }
+
     private static class TestPiece extends Piece {
         TestPiece(PieceType type, PieceColor color) {
             super(type, color);

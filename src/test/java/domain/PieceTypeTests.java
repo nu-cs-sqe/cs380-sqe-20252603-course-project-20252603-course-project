@@ -83,4 +83,18 @@ class PieceTypeTests {
 
         assertEquals(PieceType.KNIGHT, actual);
     }
+
+    @Test
+    void PieceTypeValueOf_BishopIdentifier_ReturnsBishopSingleton() {
+        PieceType actual = PieceType.valueOf("BISHOP");
+
+        assertEquals(PieceType.BISHOP, actual);
+    }
+
+    @Test
+    void PieceTypeValueOf_QueenIdentifier_ReturnsQueenSingleton() {
+        PieceType actual = PieceType.valueOf("QUEEN");
+
+        assertEquals(PieceType.QUEEN, actual);
+    }
 }

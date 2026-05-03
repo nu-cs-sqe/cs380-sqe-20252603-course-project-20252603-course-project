@@ -51,8 +51,8 @@
 |--------------|--------------------------------------------------|-----------------|--------------|
 | Test Case 9  | piece: `TestPiece(PAWN, BLACK)`                  | return `PAWN`   | :white_check_mark: |
 | Test Case 10 | piece: `TestPiece(ROOK, WHITE)`                  | return `ROOK`   | :white_check_mark: |
-| Test Case 11 | piece: `TestPiece(KNIGHT, BLACK)`                | return `KNIGHT` | :x: |
-| Test Case 12 | piece: `TestPiece(BISHOP, WHITE)`                | return `BISHOP` | :x: |
+| Test Case 11 | piece: `TestPiece(KNIGHT, BLACK)`                | return `KNIGHT` | :white_check_mark: |
+| Test Case 12 | piece: `TestPiece(BISHOP, WHITE)`                | return `BISHOP` | :white_check_mark: |
 | Test Case 13 | piece: `TestPiece(QUEEN, BLACK)`                 | return `QUEEN`  | :x: |
 | Test Case 14 | piece: `TestPiece(KING, WHITE)`                  | return `KING`   | :x: |
 | Test Case 15 | attempted piece: `TestPiece(null, BLACK)`        | `CAN'T SET` through the public constructor; null-type getter state is covered by Test Case 7's `IllegalArgumentException` with message `"type must not be null"` | :x: |

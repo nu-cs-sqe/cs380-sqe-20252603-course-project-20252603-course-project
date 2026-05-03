@@ -58,8 +58,8 @@
 | Test Case 8  | call `PieceType.valueOf("PAWN")`      | return `PieceType.PAWN`      | :white_check_mark: |
 | Test Case 9  | call `PieceType.valueOf("ROOK")`      | return `PieceType.ROOK`      | :white_check_mark: |
 | Test Case 10 | call `PieceType.valueOf("KNIGHT")`    | return `PieceType.KNIGHT`    | :white_check_mark: |
-| Test Case 11 | call `PieceType.valueOf("BISHOP")`    | return `PieceType.BISHOP`    | :x: |
-| Test Case 12 | call `PieceType.valueOf("QUEEN")`     | return `PieceType.QUEEN`     | :x: |
+| Test Case 11 | call `PieceType.valueOf("BISHOP")`    | return `PieceType.BISHOP`    | :white_check_mark: |
+| Test Case 12 | call `PieceType.valueOf("QUEEN")`     | return `PieceType.QUEEN`     | :white_check_mark: |
 | Test Case 13 | call `PieceType.valueOf("KING")`      | return `PieceType.KING`      | :x: |
 | Test Case 14 | call `PieceType.valueOf("Pawn")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceType.Pawn"` | :x: |
 | Test Case 15 | call `PieceType.valueOf("pawn")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceType.pawn"` | :x: |

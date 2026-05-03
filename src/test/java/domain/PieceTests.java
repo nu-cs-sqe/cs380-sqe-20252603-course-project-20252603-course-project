@@ -6,6 +6,7 @@ import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PieceTests {
@@ -131,6 +132,35 @@ public class PieceTests {
         TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
 
         assertEquals(PieceColor.BLACK, piece.getColor());
+    }
+
+    @Test
+    public void PieceGetColor_RookTypeAndWhiteColor_ReturnsWhite() {
+        TestPiece piece = new TestPiece(PieceType.ROOK, PieceColor.WHITE);
+
+        assertEquals(PieceColor.WHITE, piece.getColor());
+    }
+
+    @Test
+    public void PieceMakeCopy_PawnTypeAndBlackColor_ReturnsDistinctCopy() {
+        TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
+
+        Piece copy = piece.makeCopy();
+
+        assertNotSame(piece, copy);
+        assertEquals(PieceType.PAWN, copy.getType());
+        assertEquals(PieceColor.BLACK, copy.getColor());
+    }
+
+    @Test
+    public void PieceMakeCopy_KingTypeAndWhiteColor_ReturnsDistinctCopy() {
+        TestPiece piece = new TestPiece(PieceType.KING, PieceColor.WHITE);
+
+        Piece copy = piece.makeCopy();
+
+        assertNotSame(piece, copy);
+        assertEquals(PieceType.KING, copy.getType());
+        assertEquals(PieceColor.WHITE, copy.getColor());
     }
 
     private static class TestPiece extends Piece {

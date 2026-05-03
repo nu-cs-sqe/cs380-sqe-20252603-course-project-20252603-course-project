@@ -63,18 +63,18 @@
 |              | System under test                                | Expected output | Implemented? |
 |--------------|--------------------------------------------------|-----------------|--------------|
 | Test Case 16 | piece: `TestPiece(PAWN, BLACK)`                  | return `BLACK`  | :white_check_mark: |
-| Test Case 17 | piece: `TestPiece(ROOK, WHITE)`                  | return `WHITE`  | :x: |
-| Test Case 18 | attempted piece: `TestPiece(PAWN, null)`         | `CAN'T SET` through the public constructor; null-color getter state is covered by Test Case 8's `IllegalArgumentException` with message `"color must not be null"` | :x: |
+| Test Case 17 | piece: `TestPiece(ROOK, WHITE)`                  | return `WHITE`  | :white_check_mark: |
+| Test Case 18 | attempted piece: `TestPiece(PAWN, null)`         | `CAN'T SET` through the public constructor; null-color getter state is covered by Test Case 8's `IllegalArgumentException` with message `"color must not be null"` | :white_check_mark: |
 
 
 ### Method under test: `makeCopy()`
 
 |              | System under test                                | Expected output                                                                                  | Implemented? |
 |--------------|--------------------------------------------------|--------------------------------------------------------------------------------------------------|--------------|
-| Test Case 19 | piece: `TestPiece(PAWN, BLACK)`                  | return a distinct `Piece`; copied piece has `type = PAWN`; copied piece has `color = BLACK`     | :x: |
-| Test Case 20 | piece: `TestPiece(KING, WHITE)`                  | return a distinct `Piece`; copied piece has `type = KING`; copied piece has `color = WHITE`     | :x: |
-| Test Case 21 | attempted piece: `TestPiece(null, BLACK)`        | `CAN'T SET` through the public constructor; null-type copy receiver state is covered by Test Case 7's `IllegalArgumentException` with message `"type must not be null"` | :x: |
-| Test Case 22 | attempted piece: `TestPiece(PAWN, null)`         | `CAN'T SET` through the public constructor; null-color copy receiver state is covered by Test Case 8's `IllegalArgumentException` with message `"color must not be null"` | :x: |
+| Test Case 19 | piece: `TestPiece(PAWN, BLACK)`                  | return a distinct `Piece`; copied piece has `type = PAWN`; copied piece has `color = BLACK`     | :white_check_mark: |
+| Test Case 20 | piece: `TestPiece(KING, WHITE)`                  | return a distinct `Piece`; copied piece has `type = KING`; copied piece has `color = WHITE`     | :white_check_mark: |
+| Test Case 21 | attempted piece: `TestPiece(null, BLACK)`        | `CAN'T SET` through the public constructor; null-type copy receiver state is covered by Test Case 7's `IllegalArgumentException` with message `"type must not be null"` | :white_check_mark: |
+| Test Case 22 | attempted piece: `TestPiece(PAWN, null)`         | `CAN'T SET` through the public constructor; null-color copy receiver state is covered by Test Case 8's `IllegalArgumentException` with message `"color must not be null"` | :white_check_mark: |
 
 
 ### Method under test: `toString()`

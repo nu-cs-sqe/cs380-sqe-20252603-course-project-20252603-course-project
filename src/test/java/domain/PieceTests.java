@@ -103,6 +103,36 @@ public class PieceTests {
         assertEquals(PieceType.BISHOP, piece.getType());
     }
 
+    @Test
+    public void PieceGetType_QueenTypeAndBlackColor_ReturnsQueen() {
+        TestPiece piece = new TestPiece(PieceType.QUEEN, PieceColor.BLACK);
+
+        assertEquals(PieceType.QUEEN, piece.getType());
+    }
+
+    @Test
+    public void PieceGetType_KingTypeAndWhiteColor_ReturnsKing() {
+        TestPiece piece = new TestPiece(PieceType.KING, PieceColor.WHITE);
+
+        assertEquals(PieceType.KING, piece.getType());
+    }
+
+    @Test
+    public void PieceGetType_NullType_ThrowsIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new TestPiece(null, PieceColor.BLACK));
+
+        assertEquals("type must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void PieceGetColor_PawnTypeAndBlackColor_ReturnsBlack() {
+        TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
+
+        assertEquals(PieceColor.BLACK, piece.getColor());
+    }
+
     private static class TestPiece extends Piece {
         TestPiece(PieceType type, PieceColor color) {
             super(type, color);

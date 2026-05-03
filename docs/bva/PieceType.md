@@ -60,7 +60,7 @@
 | Test Case 10 | call `PieceType.valueOf("KNIGHT")`    | return `PieceType.KNIGHT`    | :white_check_mark: |
 | Test Case 11 | call `PieceType.valueOf("BISHOP")`    | return `PieceType.BISHOP`    | :white_check_mark: |
 | Test Case 12 | call `PieceType.valueOf("QUEEN")`     | return `PieceType.QUEEN`     | :white_check_mark: |
-| Test Case 13 | call `PieceType.valueOf("KING")`      | return `PieceType.KING`      | :x: |
-| Test Case 14 | call `PieceType.valueOf("Pawn")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceType.Pawn"` | :x: |
-| Test Case 15 | call `PieceType.valueOf("pawn")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceType.pawn"` | :x: |
-| Test Case 16 | call `PieceType.valueOf(null)`        | Java enum API throws `NullPointerException` with message `"Name is null"` | :x: |
+| Test Case 13 | call `PieceType.valueOf("KING")`      | return `PieceType.KING`      | :white_check_mark: |
+| Test Case 14 | call `PieceType.valueOf("Pawn")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceType.Pawn"` | :white_check_mark: |
+| Test Case 15 | call `PieceType.valueOf("pawn")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceType.pawn"` | :white_check_mark: |
+| Test Case 16 | call `PieceType.valueOf(null)`        | Java enum API throws `NullPointerException` with message `"Name is null"` | :white_check_mark: |

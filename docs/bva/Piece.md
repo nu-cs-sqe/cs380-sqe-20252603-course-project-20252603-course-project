@@ -81,11 +81,11 @@
 
 |              | System under test                                | Expected output                  | Implemented? |
 |--------------|--------------------------------------------------|----------------------------------|--------------|
-| Test Case 23 | piece: `TestPiece(PAWN, BLACK)`                  | return `"BLACK PAWN"`            | :x: |
-| Test Case 24 | piece: `TestPiece(ROOK, WHITE)`                  | return `"WHITE ROOK"`            | :x: |
-| Test Case 25 | piece: `TestPiece(KNIGHT, BLACK)`                | return `"BLACK KNIGHT"`          | :x: |
-| Test Case 26 | piece: `TestPiece(BISHOP, WHITE)`                | return `"WHITE BISHOP"`          | :x: |
-| Test Case 27 | piece: `TestPiece(QUEEN, BLACK)`                 | return `"BLACK QUEEN"`           | :x: |
-| Test Case 28 | piece: `TestPiece(KING, WHITE)`                  | return `"WHITE KING"`            | :x: |
-| Test Case 29 | attempted piece: `TestPiece(null, BLACK)`        | `CAN'T SET` through the public constructor; null-type `toString()` receiver state is covered by Test Case 7's `IllegalArgumentException` with message `"type must not be null"` | :x: |
-| Test Case 30 | attempted piece: `TestPiece(PAWN, null)`         | `CAN'T SET` through the public constructor; null-color `toString()` receiver state is covered by Test Case 8's `IllegalArgumentException` with message `"color must not be null"` | :x: |
+| Test Case 23 | piece: `TestPiece(PAWN, BLACK)`                  | return `"BLACK PAWN"`            | :white_check_mark: |
+| Test Case 24 | piece: `TestPiece(ROOK, WHITE)`                  | return `"WHITE ROOK"`            | :white_check_mark: |
+| Test Case 25 | piece: `TestPiece(KNIGHT, BLACK)`                | return `"BLACK KNIGHT"`          | :white_check_mark: |
+| Test Case 26 | piece: `TestPiece(BISHOP, WHITE)`                | return `"WHITE BISHOP"`          | :white_check_mark: |
+| Test Case 27 | piece: `TestPiece(QUEEN, BLACK)`                 | return `"BLACK QUEEN"`           | :white_check_mark: |
+| Test Case 28 | piece: `TestPiece(KING, WHITE)`                  | return `"WHITE KING"`            | :white_check_mark: |
+| Test Case 29 | attempted piece: `TestPiece(null, BLACK)`        | `CAN'T SET` through the public constructor; this null-type `toString()` receiver state is covered by Test Case 7's constructor null rejection (`IllegalArgumentException` with message `"type must not be null"`) | :white_check_mark: |
+| Test Case 30 | attempted piece: `TestPiece(PAWN, null)`         | `CAN'T SET` through the public constructor; this null-color `toString()` receiver state is covered by Test Case 8's constructor null rejection (`IllegalArgumentException` with message `"color must not be null"`) | :white_check_mark: |

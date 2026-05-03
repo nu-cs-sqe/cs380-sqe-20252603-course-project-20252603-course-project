@@ -23,5 +23,10 @@ public abstract class Piece {
         return color;
     }
 
+    @Override
+    public String toString() {
+        return color + " " + type;
+    }
+
     public abstract Piece makeCopy();
 }

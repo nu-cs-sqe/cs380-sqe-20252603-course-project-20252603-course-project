@@ -163,6 +163,48 @@ public class PieceTests {
         assertEquals(PieceColor.WHITE, copy.getColor());
     }
 
+    @Test
+    public void PieceToString_PawnTypeAndBlackColor_ReturnsBlackPawn() {
+        TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
+
+        assertEquals("BLACK PAWN", piece.toString());
+    }
+
+    @Test
+    public void PieceToString_RookTypeAndWhiteColor_ReturnsWhiteRook() {
+        TestPiece piece = new TestPiece(PieceType.ROOK, PieceColor.WHITE);
+
+        assertEquals("WHITE ROOK", piece.toString());
+    }
+
+    @Test
+    public void PieceToString_KnightTypeAndBlackColor_ReturnsBlackKnight() {
+        TestPiece piece = new TestPiece(PieceType.KNIGHT, PieceColor.BLACK);
+
+        assertEquals("BLACK KNIGHT", piece.toString());
+    }
+
+    @Test
+    public void PieceToString_BishopTypeAndWhiteColor_ReturnsWhiteBishop() {
+        TestPiece piece = new TestPiece(PieceType.BISHOP, PieceColor.WHITE);
+
+        assertEquals("WHITE BISHOP", piece.toString());
+    }
+
+    @Test
+    public void PieceToString_QueenTypeAndBlackColor_ReturnsBlackQueen() {
+        TestPiece piece = new TestPiece(PieceType.QUEEN, PieceColor.BLACK);
+
+        assertEquals("BLACK QUEEN", piece.toString());
+    }
+
+    @Test
+    public void PieceToString_KingTypeAndWhiteColor_ReturnsWhiteKing() {
+        TestPiece piece = new TestPiece(PieceType.KING, PieceColor.WHITE);
+
+        assertEquals("WHITE KING", piece.toString());
+    }
+
     private static class TestPiece extends Piece {
         TestPiece(PieceType type, PieceColor color) {
             super(type, color);

@@ -1,8 +1,9 @@
-# Week X (4/27/2026-5/03/2026) 
+# Week 5 (4/27/2026-5/03/2026) 
 **Planning and Progress Tracking**:
-1. [not started] Tallie: Game Setup Phase: Piece Classes, Board UI Display, and Piece Images
-2. [not started] Trenton: Game Setup Phase: Board, Game States View Display, and Main.java
-3. [not started] Reed: Game Setup Phase: Location, Main View, and Welcome View
+1. [95% done] Tallie: Game Setup Phase: Piece Classes, Board UI Display, and Piece Images (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/11)
+3. [done] Tallie: Attend group meeting, create descriptions of each task on GitHub projects, create draft acceptance requirements/user story for one turn of the game in GitHub projects.
+4. [not started] Trenton: Game Setup Phase: Board, Game States View Display, and Main.java
+5. [not started] Reed: Game Setup Phase: Location, Main View, and Welcome View
 
 # Week 4 (4/20/2026-4/26/2026) 
 **Planning and Progress Tracking**:

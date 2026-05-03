@@ -54,7 +54,7 @@
 |-------------|-------------------------------------------|--------------------------------|--------------|
 | Test Case 5 | call `PieceColor.valueOf("BLACK")`        | return `BLACK`                 | :white_check_mark: |
 | Test Case 6 | call `PieceColor.valueOf("WHITE")`        | return `WHITE`                 | :white_check_mark: |
-| Test Case 7 | call `PieceColor.valueOf(null)`           | Java enum API throws `NullPointerException` with message `"Name is null"` | :x: |
-| Test Case 8 | call `PieceColor.valueOf("black")`        | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceColor.black"` | :x: |
-| Test Case 9 | call `PieceColor.valueOf(" BLACK ")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceColor. BLACK "`; the final space is part of the message | :x: |
-| Test Case 10 | call `PieceColor.valueOf("RED")`         | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceColor.RED"` | :x: |
+| Test Case 7 | call `PieceColor.valueOf(null)`           | Java enum API throws `NullPointerException` with message `"Name is null"` | :white_check_mark: |
+| Test Case 8 | call `PieceColor.valueOf("black")`        | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceColor.black"` | :white_check_mark: |
+| Test Case 9 | call `PieceColor.valueOf(" BLACK ")`      | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceColor. BLACK "`; the final space is part of the message | :white_check_mark: |
+| Test Case 10 | call `PieceColor.valueOf("RED")`         | Java enum API throws `IllegalArgumentException` with message `"No enum constant domain.piece.PieceColor.RED"` | :white_check_mark: |

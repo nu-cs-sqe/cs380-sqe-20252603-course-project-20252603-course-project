@@ -41,16 +41,16 @@
 | Test Case 4 | constructor args: `type = BISHOP`, `color = WHITE` | piece stores `type = BISHOP`; piece stores `color = WHITE`       | :white_check_mark: |
 | Test Case 5 | constructor args: `type = QUEEN`, `color = BLACK`  | piece stores `type = QUEEN`; piece stores `color = BLACK`        | :white_check_mark: |
 | Test Case 6 | constructor args: `type = KING`, `color = WHITE`   | piece stores `type = KING`; piece stores `color = WHITE`         | :white_check_mark: |
-| Test Case 7 | constructor args: `type = null`, `color = BLACK`   | throws `IllegalArgumentException` with message `"type must not be null"` | :x: |
-| Test Case 8 | constructor args: `type = PAWN`, `color = null`    | throws `IllegalArgumentException` with message `"color must not be null"` | :x: |
+| Test Case 7 | constructor args: `type = null`, `color = BLACK`   | throws `IllegalArgumentException` with message `"type must not be null"` | :white_check_mark: |
+| Test Case 8 | constructor args: `type = PAWN`, `color = null`    | throws `IllegalArgumentException` with message `"color must not be null"` | :white_check_mark: |
 
 
 ### Method under test: `getType()`
 
 |              | System under test                                | Expected output | Implemented? |
 |--------------|--------------------------------------------------|-----------------|--------------|
-| Test Case 9  | piece: `TestPiece(PAWN, BLACK)`                  | return `PAWN`   | :x: |
-| Test Case 10 | piece: `TestPiece(ROOK, WHITE)`                  | return `ROOK`   | :x: |
+| Test Case 9  | piece: `TestPiece(PAWN, BLACK)`                  | return `PAWN`   | :white_check_mark: |
+| Test Case 10 | piece: `TestPiece(ROOK, WHITE)`                  | return `ROOK`   | :white_check_mark: |
 | Test Case 11 | piece: `TestPiece(KNIGHT, BLACK)`                | return `KNIGHT` | :x: |
 | Test Case 12 | piece: `TestPiece(BISHOP, WHITE)`                | return `BISHOP` | :x: |
 | Test Case 13 | piece: `TestPiece(QUEEN, BLACK)`                 | return `QUEEN`  | :x: |

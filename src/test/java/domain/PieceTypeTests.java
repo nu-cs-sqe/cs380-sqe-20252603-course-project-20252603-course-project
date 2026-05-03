@@ -3,6 +3,7 @@ package domain;
 import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PieceTypeTests {
@@ -46,5 +47,40 @@ class PieceTypeTests {
         PieceType actual = PieceType.KING;
 
         assertEquals(PieceType.KING, actual);
+    }
+
+    @Test
+    void PieceTypeValues_NoArguments_ReturnsConstantsInDeclarationOrder() {
+        PieceType[] actual = PieceType.values();
+
+        assertArrayEquals(new PieceType[] {
+                PieceType.PAWN,
+                PieceType.ROOK,
+                PieceType.KNIGHT,
+                PieceType.BISHOP,
+                PieceType.QUEEN,
+                PieceType.KING
+        }, actual);
+    }
+
+    @Test
+    void PieceTypeValueOf_PawnIdentifier_ReturnsPawnSingleton() {
+        PieceType actual = PieceType.valueOf("PAWN");
+
+        assertEquals(PieceType.PAWN, actual);
+    }
+
+    @Test
+    void PieceTypeValueOf_RookIdentifier_ReturnsRookSingleton() {
+        PieceType actual = PieceType.valueOf("ROOK");
+
+        assertEquals(PieceType.ROOK, actual);
+    }
+
+    @Test
+    void PieceTypeValueOf_KnightIdentifier_ReturnsKnightSingleton() {
+        PieceType actual = PieceType.valueOf("KNIGHT");
+
+        assertEquals(PieceType.KNIGHT, actual);
     }
 }

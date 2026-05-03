@@ -6,6 +6,7 @@ import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PieceTests {
     @Test
@@ -54,6 +55,38 @@ public class PieceTests {
 
         assertEquals(PieceType.KING, piece.getType());
         assertEquals(PieceColor.WHITE, piece.getColor());
+    }
+
+    @Test
+    public void PieceConstructor_NullType_ThrowsIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new TestPiece(null, PieceColor.BLACK));
+
+        assertEquals("type must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void PieceConstructor_NullColor_ThrowsIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new TestPiece(PieceType.PAWN, null));
+
+        assertEquals("color must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void PieceGetType_PawnTypeAndBlackColor_ReturnsPawn() {
+        TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
+
+        assertEquals(PieceType.PAWN, piece.getType());
+    }
+
+    @Test
+    public void PieceGetType_RookTypeAndWhiteColor_ReturnsRook() {
+        TestPiece piece = new TestPiece(PieceType.ROOK, PieceColor.WHITE);
+
+        assertEquals(PieceType.ROOK, piece.getType());
     }
 
     private static class TestPiece extends Piece {

@@ -48,16 +48,16 @@
 
 |             | System under test       | Expected output                                                                                   | Implemented? |
 |-------------|-------------------------|---------------------------------------------------------------------------------------------------|--------------|
-| Test Case 7 | call `PieceType.values()` | return non-null array `[PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING]` in declaration order; length `6` | :x: |
+| Test Case 7 | call `PieceType.values()` | return non-null array `[PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING]` in declaration order; length `6` | :white_check_mark: |
 
 
 ### Method under test: `valueOf(String)`
 
 |              | System under test                     | Expected output              | Implemented? |
 |--------------|---------------------------------------|------------------------------|--------------|
-| Test Case 8  | call `PieceType.valueOf("PAWN")`      | return `PieceType.PAWN`      | :x: |
-| Test Case 9  | call `PieceType.valueOf("ROOK")`      | return `PieceType.ROOK`      | :x: |
-| Test Case 10 | call `PieceType.valueOf("KNIGHT")`    | return `PieceType.KNIGHT`    | :x: |
+| Test Case 8  | call `PieceType.valueOf("PAWN")`      | return `PieceType.PAWN`      | :white_check_mark: |
+| Test Case 9  | call `PieceType.valueOf("ROOK")`      | return `PieceType.ROOK`      | :white_check_mark: |
+| Test Case 10 | call `PieceType.valueOf("KNIGHT")`    | return `PieceType.KNIGHT`    | :white_check_mark: |
 | Test Case 11 | call `PieceType.valueOf("BISHOP")`    | return `PieceType.BISHOP`    | :x: |
 | Test Case 12 | call `PieceType.valueOf("QUEEN")`     | return `PieceType.QUEEN`     | :x: |
 | Test Case 13 | call `PieceType.valueOf("KING")`      | return `PieceType.KING`      | :x: |

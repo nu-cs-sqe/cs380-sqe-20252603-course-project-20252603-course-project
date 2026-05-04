@@ -1,0 +1,37 @@
+package domain.game;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.api.Test;
+
+class CardTest {
+    @Test
+    void constructorStoresPlaceholderCardType() {
+        Card card = new Card(CardType.PLACEHOLDER_CARD);
+
+        assertEquals(CardType.PLACEHOLDER_CARD, card.getType());
+    }
+
+    @ParameterizedTest
+    @EnumSource(CardType.class)
+    void constructorStoresProvidedCardType(CardType type) {
+        Card card = new Card(type);
+        assertEquals(type, card.getType());
+    }
+
+    @Test
+    void constructorRejectsNullType() {
+        assertThrows(NullPointerException.class, () -> new Card(null));
+    }
+
+    @Test
+    void constructorRejectsNullTypeWithMessage() {
+        NullPointerException exception =
+                assertThrows(NullPointerException.class, () -> new Card(null));
+
+        assertEquals("type must not be null", exception.getMessage());
+    }
+}

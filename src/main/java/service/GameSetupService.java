@@ -1,21 +1,30 @@
 package service;
 
+
+import java.util.List;
 import model.Player;
 import model.Territory;
+import model.GameState;
+import model.GamePhase;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+
 import java.util.Set;
 
 import static domain.GameConstants.TOTAL_TERRITORIES;
 
-public class GameSetupService {
+public class GameSetupService{
 
     public static final int MIN_PLAYERS = 2;
     public static final int MAX_PLAYERS = 6;
     private List<Player> Players = new ArrayList<>();
 
+    // void initializeTurnOrder(GameState gameState)
+    public void initializeTurnOrder(GameState gameState){
+        List<Player> players_TO = gameState.getPlayers();
+        // Collections.shuffle(players_TO);
+        gameState.setTurnOrder(players_TO);
     public void validatePlayerCount(int playerCount) {
         if (playerCount < MIN_PLAYERS || playerCount > MAX_PLAYERS){
             throw new IllegalArgumentException(
@@ -24,13 +33,22 @@ public class GameSetupService {
         }
     }
 
-    public void validateUniqueColors(List<PlayerColor> colors){
-        Set<PlayerColor> uniqueColors = new HashSet<>(colors);
-        if (uniqueColors.size() != colors.size()){
-            throw new IllegalArgumentException("Not all colors are unique. Expected " + uniqueColors.size() + " unique colors, but received " + colors.size() + ".");
-        }
+    // void startFirstTurn(GameState gameState)
+    public void startFirstTurn(GameState gameState){
+        List<Player> players_TO = gameState.getTurnOrder();
+        Player first_pl = players_TO.get(0);
+        gameState.setCurrentPlayer(first_pl);
     }
 
+    // GameState createNewGame(List<String> names, List<PlayerColor> colors)
+
+    public GameState createNewGame(List<String> names, List<String> colors){
+        // create a new game state
+        GameState gameState = new GameState();
+        // set the phase to setup
+        // call player generation
+        // call territory generation
+        // call territory distribution
     public List<Player> getPlayers(){
         return Players;
     }

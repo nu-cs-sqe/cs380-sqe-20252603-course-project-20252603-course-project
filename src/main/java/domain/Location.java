@@ -5,8 +5,8 @@ public class Location {
     private final int y;
 
     public Location(int x, int y) {
-        this.x = 0; // skeleton — not yet storing parameter
-        this.y = 0; // skeleton — not yet storing parameter
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {

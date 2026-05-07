@@ -18,12 +18,12 @@ Each test constructs a `Location` with the listed `x` (and `y = 3`) and calls `g
 
 |              | State of the System                  | Expected output | Implemented? |
 |--------------|--------------------------------------|-----------------|--------------|
-| Test Case 1  | `Location(0, 3)` — x at min (0)      | `0`             | :x:          |
-| Test Case 2  | `Location(7, 3)` — x at max (7)      | `7`             | :x:          |
-| Test Case 3  | `Location(1, 3)` — x at min+1 (1)   | `1`             | :x:          |
-| Test Case 4  | `Location(6, 3)` — x at max−1 (6)   | `6`             | :x:          |
-| Test Case 5  | `Location(-1, 3)` — x just below min | `-1`            | :x:          |
-| Test Case 6  | `Location(8, 3)` — x just above max  | `8`             | :x:          |
+| Test Case 1  | `Location(0, 3)` — x at min (0)      | `0`             | :white_check_mark:          |
+| Test Case 2  | `Location(7, 3)` — x at max (7)      | `7`             | :white_check_mark:          |
+| Test Case 3  | `Location(1, 3)` — x at min+1 (1)   | `1`             | :white_check_mark:          |
+| Test Case 4  | `Location(6, 3)` — x at max−1 (6)   | `6`             | :white_check_mark:          |
+| Test Case 5  | `Location(-1, 3)` — x just below min | `-1`            | :white_check_mark:          |
+| Test Case 6  | `Location(8, 3)` — x just above max  | `8`             | :white_check_mark:          |
 
 ---
 
@@ -33,9 +33,9 @@ Each test constructs a `Location` with the listed `y` (and `x = 3`) and calls `g
 
 |               | State of the System                    | Expected output | Implemented? |
 |---------------|----------------------------------------|-----------------|--------------|
-| Test Case 7   | `Location(3, 0)` — y at min (0)        | `0`             | :x:          |
-| Test Case 8   | `Location(3, 7)` — y at max (7)        | `7`             | :x:          |
-| Test Case 9   | `Location(3, 1)` — y at min+1 (1)     | `1`             | :x:          |
-| Test Case 10  | `Location(3, 6)` — y at max−1 (6)     | `6`             | :x:          |
-| Test Case 11  | `Location(3, -1)` — y just below min   | `-1`            | :x:          |
-| Test Case 12  | `Location(3, 8)` — y just above max    | `8`             | :x:          |
+| Test Case 7   | `Location(3, 0)` — y at min (0)        | `0`             | :white_check_mark:          |
+| Test Case 8   | `Location(3, 7)` — y at max (7)        | `7`             | :white_check_mark:          |
+| Test Case 9   | `Location(3, 1)` — y at min+1 (1)     | `1`             | :white_check_mark:          |
+| Test Case 10  | `Location(3, 6)` — y at max−1 (6)     | `6`             | :white_check_mark:          |
+| Test Case 11  | `Location(3, -1)` — y just below min   | `-1`            | :white_check_mark:          |
+| Test Case 12  | `Location(3, 8)` — y just above max    | `8`             | :white_check_mark:          |

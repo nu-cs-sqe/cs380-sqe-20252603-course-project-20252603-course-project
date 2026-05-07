@@ -1,5 +1,9 @@
+import com.github.spotbugs.snom.Confidence
+import com.github.spotbugs.snom.Effort
+
 plugins {
     id("java")
+    id("com.github.spotbugs") version "6.0.25"
     jacoco
 }
 
@@ -28,6 +32,25 @@ tasks.compileJava {
 tasks.test {
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
+}
+
+spotbugs {
+    ignoreFailures = false
+    showStackTraces = true
+    showProgress = true
+    effort = Effort.DEFAULT
+    reportLevel = Confidence.DEFAULT
+    reportsDir = file("spotbugs")
+    maxHeapSize = "1g"
+    extraArgs = listOf("-nested:false")
+}
+
+tasks.spotbugsMain {
+    reports.create("html") {
+        required = true
+        outputLocation = layout.buildDirectory.file("reports/spotbugs/spotbugs.html")
+        setStylesheet("fancy-hist.xsl")
+    }
 }
 
 tasks.jacocoTestReport {

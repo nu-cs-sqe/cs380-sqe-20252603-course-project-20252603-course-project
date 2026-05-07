@@ -1,3 +1,14 @@
+# Week 6 (5/4/2026-5/10/2026)
+**Planning and Progress Tracking**:
+1. [done] Tallie: Game Setup Phase: Piece Classes, Board UI Display, and Piece Images (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/11)
+2. [done] Tallie: Create task splits for One Turn of the Game
+3. [done] Tallie: Attend group meeting and meet with Dr. Yiji to confirm standards for squashing/commit history for TDD/BVA.
+4. [done] Tallie: Provide feedback and approve Game Setup Phase: Location, Main View, and Welcome View (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/19)
+5. [not started] Tallie: One Turn of the Game: Linter Setup and Team Cleanup Coordination
+6. [not started] Tallie: One Turn of the Game: Turn Handoff and Move History Flow
+7. [not started] Trenton: Task (Links to PR)
+8. [not started] Reed: Task (Links to PR)
+
 # Week 5 (4/27/2026-5/03/2026) 
 **Planning and Progress Tracking**:
 1. [95% done] Tallie: Game Setup Phase: Piece Classes, Board UI Display, and Piece Images (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/11)

@@ -3,6 +3,7 @@ import com.github.spotbugs.snom.Effort
 
 plugins {
     id("java")
+    checkstyle
     id("com.github.spotbugs") version "6.0.25"
     jacoco
 }
@@ -32,6 +33,22 @@ tasks.compileJava {
 tasks.test {
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.withType<Checkstyle>().configureEach {
+    reports {
+        xml.required = false
+        html.required = true
+        html.stylesheet = resources.text.fromFile("config/xsl/checkstyle-noframes-severity-sorted.xsl")
+    }
+}
+
+checkstyle {
+    config = resources.text.fromArchiveEntry(
+        configurations.checkstyle.get().filter { it.name.startsWith("checkstyle-") }.singleFile,
+        "google_checks.xml"
+    )
+    isIgnoreFailures = false
 }
 
 spotbugs {

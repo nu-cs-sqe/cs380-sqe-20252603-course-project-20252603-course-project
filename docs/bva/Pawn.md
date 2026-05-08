@@ -50,7 +50,7 @@
 | Test Case 2 | constructor arg: `color = WHITE`     | pawn constructs successfully; pawn has `type = PAWN`; pawn has `color = WHITE` | :white_check_mark: |
 | Test Case 3 | constructor arg: `color = null`      | constructor throws `IllegalArgumentException` with message `"color must not be null"` | :white_check_mark: |
 | Test Case 4 | design-target constructor arg: `color = WHITE` | pawn starts with `type = PAWN`, `color = WHITE`, and not-moved state for initial two-square movement | implemented in Test Case 12 |
-| Test Case 5 | design-target constructor arg: `color = BLACK` | pawn starts with `type = PAWN`, `color = BLACK`, and not-moved state for initial two-square movement | :x: |
+| Test Case 5 | design-target constructor arg: `color = BLACK` | pawn starts with `type = PAWN`, `color = BLACK`, and not-moved state for initial two-square movement | implemented in Test Case 13 |
 
 
 ### Method under test: `makeCopy()`
@@ -70,7 +70,7 @@
 | Test Case 10 | white pawn not moved; `from = Location(4, 6)`, `to = Location(4, 5)` | return `true`; minimum normal forward distance for white is one row toward smaller `y` | :x: |
 | Test Case 11 | black pawn not moved; `from = Location(4, 1)`, `to = Location(4, 2)` | return `true`; minimum normal forward distance for black is one row toward larger `y` | :x: |
 | Test Case 12 | white pawn not moved; `from = Location(4, 6)`, `to = Location(4, 4)` | return `true`; two-square initial movement is legal from the white starting row when the pawn has not moved | :white_check_mark: |
-| Test Case 13 | black pawn not moved; `from = Location(4, 1)`, `to = Location(4, 3)` | return `true`; two-square initial movement is legal from the black starting row when the pawn has not moved | :x: |
+| Test Case 13 | black pawn not moved; `from = Location(4, 1)`, `to = Location(4, 3)` | return `true`; two-square initial movement is legal from the black starting row when the pawn has not moved | :white_check_mark: |
 | Test Case 14 | white pawn after `changeToMoved()`; `from = Location(4, 5)`, `to = Location(4, 3)` | return `false`; two-square movement is not legal after the pawn has moved | :x: |
 | Test Case 15 | black pawn after `changeToMoved()`; `from = Location(4, 2)`, `to = Location(4, 4)` | return `false`; two-square movement is not legal after the pawn has moved | :x: |
 | Test Case 16 | white pawn not moved but not on starting row; `from = Location(4, 5)`, `to = Location(4, 3)` | return `false`; two-square movement is legal only from the white starting row `y = 6` | :x: |

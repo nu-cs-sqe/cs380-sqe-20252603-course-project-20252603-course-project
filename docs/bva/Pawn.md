@@ -73,7 +73,7 @@
 | Test Case 13 | black pawn not moved; `from = Location(4, 1)`, `to = Location(4, 3)` | return `true`; two-square initial movement is legal from the black starting row when the pawn has not moved | :white_check_mark: |
 | Test Case 14 | white pawn after `changeToMoved()`; `from = Location(4, 5)`, `to = Location(4, 3)` | return `false`; two-square movement is not legal after the pawn has moved | :x: |
 | Test Case 15 | black pawn after `changeToMoved()`; `from = Location(4, 2)`, `to = Location(4, 4)` | return `false`; two-square movement is not legal after the pawn has moved | :x: |
-| Test Case 16 | white pawn not moved but not on starting row; `from = Location(4, 5)`, `to = Location(4, 3)` | return `false`; two-square movement is legal only from the white starting row `y = 6` | :x: |
+| Test Case 16 | white pawn not moved but not on starting row; `from = Location(4, 5)`, `to = Location(4, 3)` | return `false`; two-square movement is legal only from the white starting row `y = 6` | :white_check_mark: |
 | Test Case 17 | black pawn not moved but not on starting row; `from = Location(4, 2)`, `to = Location(4, 4)` | return `false`; two-square movement is legal only from the black starting row `y = 1` | :x: |
 | Test Case 18 | white pawn; `from = Location(4, 6)`, `to = Location(3, 5)` | return `true`; left diagonal forward one square is a legal capture candidate for white | :x: |
 | Test Case 19 | white pawn; `from = Location(4, 6)`, `to = Location(5, 5)` | return `true`; right diagonal forward one square is a legal capture candidate for white | :x: |

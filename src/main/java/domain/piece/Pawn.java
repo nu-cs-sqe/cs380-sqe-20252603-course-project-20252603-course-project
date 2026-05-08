@@ -3,6 +3,13 @@ package domain.piece;
 import domain.Location;
 
 public class Pawn extends Piece {
+    private static final int WHITE_STARTING_ROW = 6;
+    private static final int BLACK_STARTING_ROW = 1;
+    private static final int WHITE_FORWARD = -1;
+    private static final int BLACK_FORWARD = 1;
+    private static final int DOUBLE_STEP = 2;
+    private static final int MAX_DIAGONAL_OFFSET = 1;
+
     public Pawn(PieceColor color) {
         super(PieceType.PAWN, color);
         if (color == null) {
@@ -28,26 +35,24 @@ public class Pawn extends Piece {
         int dx = to.getX() - from.getX();
         int dy = to.getY() - from.getY();
 
-        if (getColor() == PieceColor.WHITE && dx == 0 && from.getY() == 6 && dy == -1) {
-            return true;
+        int forward;
+        int startingRow;
+        if (getColor() == PieceColor.WHITE) {
+            forward = WHITE_FORWARD;
+            startingRow = WHITE_STARTING_ROW;
+        } else {
+            forward = BLACK_FORWARD;
+            startingRow = BLACK_STARTING_ROW;
         }
-        if (getColor() == PieceColor.WHITE && dx == -1 && from.getY() == 6 && dy == -1) {
-            return true;
+
+        if (from.getY() != startingRow) {
+            return false;
         }
-        if (getColor() == PieceColor.WHITE && dx == 1 && from.getY() == 6 && dy == -1) {
-            return true;
-        }
-        if (getColor() == PieceColor.BLACK && dx == 0 && from.getY() == 1 && dy == 1) {
-            return true;
-        }
-        if (getColor() == PieceColor.BLACK && dx == -1 && from.getY() == 1 && dy == 1) {
-            return true;
-        }
-        if (getColor() == PieceColor.BLACK && dx == 1 && from.getY() == 1 && dy == 1) {
-            return true;
-        }
-        return (getColor() == PieceColor.WHITE && dx == 0 && from.getY() == 6 && dy == -2)
-                || (getColor() == PieceColor.BLACK && dx == 0 && from.getY() == 1 && dy == 2);
+
+        boolean singleStep = dy == forward && Math.abs(dx) <= MAX_DIAGONAL_OFFSET;
+        boolean doubleStep = dy == DOUBLE_STEP * forward && dx == 0;
+
+        return singleStep || doubleStep;
     }
 
     private boolean isOnBoard(Location location) {

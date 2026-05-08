@@ -64,7 +64,7 @@
 |              | System under test | Expected output | Implemented? |
 |--------------|-------------------|-----------------|--------------|
 | Test Case 9  | king; `from = Location(4, 4)`, `to = Location(4, 3)` | return `true`; one-square vertical movement is legal | :white_check_mark: |
-| Test Case 10 | king; `from = Location(4, 4)`, `to = Location(4, 5)` | return `true`; one-square vertical movement in the opposite direction is legal | :x: |
+| Test Case 10 | king; `from = Location(4, 4)`, `to = Location(4, 5)` | return `true`; one-square vertical movement in the opposite direction is legal | :white_check_mark: |
 | Test Case 11 | king; `from = Location(4, 4)`, `to = Location(5, 4)` | return `true`; one-square horizontal movement is legal | :x: |
 | Test Case 12 | king; `from = Location(4, 4)`, `to = Location(3, 4)` | return `true`; one-square horizontal movement in the opposite direction is legal | :x: |
 | Test Case 13 | king; `from = Location(4, 4)`, `to = Location(5, 5)` | return `true`; one-square diagonal movement is legal | :x: |

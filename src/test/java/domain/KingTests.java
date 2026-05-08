@@ -101,4 +101,11 @@ public class KingTests {
 
         assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(5, 5)));
     }
+
+    @Test
+    public void IsValidMoveShape_OneSquareDiagonalOpposite_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(3, 3)));
+    }
 }

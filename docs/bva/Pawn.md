@@ -92,4 +92,4 @@
 | Test Case 33 | white pawn at starting row; `from = Location(4, 6)`, `to = Location(6, 5)` | return `false`; `abs(dx) = 2` exceeds `MAX_DIAGONAL_OFFSET` for a single-step forward | :white_check_mark: |
 | Test Case 34 | white pawn at starting row; `from = Location(4, 6)`, `to = Location(5, 4)` | return `false`; two-square forward with `dx = 1` is not a valid pawn shape | :white_check_mark: |
 | Test Case 35 | white pawn at starting row; `from = Location(4, 6)`, `to = Location(4, -1)` | return `false`; destination just below minimum `y` is off-board | :white_check_mark: |
-| Test Case 36 | black pawn at starting row; `from = Location(4, 1)`, `to = Location(4, 8)` | return `false`; destination just above maximum `y` is off-board | :x: |
+| Test Case 36 | black pawn at starting row; `from = Location(4, 1)`, `to = Location(4, 8)` | return `false`; destination just above maximum `y` is off-board | :white_check_mark: |

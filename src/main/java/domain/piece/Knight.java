@@ -22,6 +22,9 @@ public class Knight extends Piece {
         if (from == null) {
             throw new IllegalArgumentException("from must not be null");
         }
+        if (to == null) {
+            throw new IllegalArgumentException("to must not be null");
+        }
         if (to.getX() < MIN_BOARD_COORDINATE) {
             return false;
         }

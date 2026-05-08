@@ -212,6 +212,13 @@ public class PawnTests {
     }
 
     @Test
+    public void PawnIsValidMoveShape_FromXBelowMinimum_ReturnsFalse() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        assertEquals(false, pawn.isValidMoveShape(new Location(-1, 6), new Location(0, 5)));
+    }
+
+    @Test
     public void PawnIsValidMoveShape_NullFrom_ThrowsIllegalArgumentException() {
         Pawn pawn = new Pawn(PieceColor.WHITE);
 

@@ -77,4 +77,4 @@
 | Test Case 20 | king at maximum corner; `from = Location(7, 7)`, `to = Location(7, 8)` | return `false`; destination just above maximum `y` is off-board | :white_check_mark: |
 | Test Case 21 | king; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
 | Test Case 22 | king; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |
-| Test Case 23 | king at minimum corner; `from = Location(0, 0)`, `to = Location(0, -1)` | return `false`; destination just below minimum `y` is off-board | :x: |
+| Test Case 23 | king at minimum corner; `from = Location(0, 0)`, `to = Location(0, -1)` | return `false`; destination just below minimum `y` is off-board | :white_check_mark: |

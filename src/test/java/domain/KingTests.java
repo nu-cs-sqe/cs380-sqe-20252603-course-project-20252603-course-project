@@ -116,4 +116,11 @@ public class KingTests {
 
         assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(4, 4)));
     }
+
+    @Test
+    public void IsValidMoveShape_HorizontalOverreach_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(6, 4)));
+    }
 }

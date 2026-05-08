@@ -81,7 +81,7 @@
 | Test Case 21 | black pawn; `from = Location(4, 1)`, `to = Location(5, 2)` | return `true`; right diagonal forward one square is a legal capture candidate for black | :white_check_mark: |
 | Test Case 22 | white pawn; `from = Location(4, 6)`, `to = Location(4, 7)` | return `false`; white cannot move backward toward larger `y` | :white_check_mark: |
 | Test Case 23 | black pawn; `from = Location(4, 1)`, `to = Location(4, 0)` | return `false`; black cannot move backward toward smaller `y` | :white_check_mark: |
-| Test Case 24 | white pawn; `from = Location(4, 6)`, `to = Location(5, 6)` | return `false`; horizontal movement with `dy = 0` is illegal | :x: |
+| Test Case 24 | white pawn; `from = Location(4, 6)`, `to = Location(5, 6)` | return `false`; horizontal movement with `dy = 0` is illegal | :white_check_mark: |
 | Test Case 25 | black pawn; `from = Location(4, 1)`, `to = Location(5, 1)` | return `false`; horizontal movement with `dy = 0` is illegal | :x: |
 | Test Case 26 | white pawn; `from = Location(4, 6)`, `to = Location(4, 3)` | return `false`; forward overreach beyond the two-square initial boundary is illegal | :x: |
 | Test Case 27 | black pawn; `from = Location(4, 1)`, `to = Location(4, 4)` | return `false`; forward overreach beyond the two-square initial boundary is illegal | :x: |

@@ -46,36 +46,34 @@
 | Test Case 1 | constructor args: `color = BLACK`           | king constructs successfully; stores `type = KING`; stores `color = BLACK` | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`           | king constructs successfully; stores `type = KING`; stores `color = WHITE` | :white_check_mark: |
 | Test Case 3 | constructor args: `color = null`            | throws `IllegalArgumentException` with message `"color must not be null"` | :white_check_mark: |
-| Test Case 4 | design-target constructor arg: `color = WHITE` | king starts with `type = KING`, `color = WHITE`, and not-moved state | :x: |
-| Test Case 5 | design-target constructor arg: `color = BLACK` | king starts with `type = KING`, `color = BLACK`, and not-moved state | :x: |
 
 
 ### Method under test: `makeCopy()`
 
 |             | System under test                           | Expected output                                                                                       | Implemented? |
 |-------------|---------------------------------------------|-------------------------------------------------------------------------------------------------------|--------------|
-| Test Case 6 | king: `King(BLACK)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = BLACK` | :white_check_mark: |
-| Test Case 7 | king: `King(WHITE)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = WHITE` | :white_check_mark: |
-| Test Case 8 | king: `King(null)`                          | `King(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
+| Test Case 4 | king: `King(BLACK)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = BLACK` | :white_check_mark: |
+| Test Case 5 | king: `King(WHITE)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = WHITE` | :white_check_mark: |
+| Test Case 6 | king: `King(null)`                          | `King(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
 
 
 ### Method under test: `isValidMoveShape(Location from, Location to)`
 
 |              | System under test | Expected output | Implemented? |
 |--------------|-------------------|-----------------|--------------|
-| Test Case 9  | king; `from = Location(4, 4)`, `to = Location(4, 3)` | return `true`; one-square vertical movement is legal | :white_check_mark: |
-| Test Case 10 | king; `from = Location(4, 4)`, `to = Location(4, 5)` | return `true`; one-square vertical movement in the opposite direction is legal | :white_check_mark: |
-| Test Case 11 | king; `from = Location(4, 4)`, `to = Location(5, 4)` | return `true`; one-square horizontal movement is legal | :white_check_mark: |
-| Test Case 12 | king; `from = Location(4, 4)`, `to = Location(3, 4)` | return `true`; one-square horizontal movement in the opposite direction is legal | :white_check_mark: |
-| Test Case 13 | king; `from = Location(4, 4)`, `to = Location(5, 5)` | return `true`; one-square diagonal movement is legal | :white_check_mark: |
-| Test Case 14 | king; `from = Location(4, 4)`, `to = Location(3, 3)` | return `true`; one-square diagonal movement in the opposite direction is legal | :white_check_mark: |
-| Test Case 15 | king; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a move | :white_check_mark: |
-| Test Case 16 | king; `from = Location(4, 4)`, `to = Location(6, 4)` | return `false`; horizontal overreach with `abs(dx) = 2` is illegal | :white_check_mark: |
-| Test Case 17 | king; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; vertical overreach with `abs(dy) = 2` is illegal | :white_check_mark: |
-| Test Case 18 | king; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; diagonal overreach with `abs(dx) = 2` and `abs(dy) = 2` is illegal | :white_check_mark: |
-| Test Case 19 | king at minimum corner; `from = Location(0, 0)`, `to = Location(1, 0)` | return `true`; one-square movement from the board edge into the board is legal | :white_check_mark: |
-| Test Case 20 | king at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 0)` | return `false`; destination just below minimum `x` is off-board | :white_check_mark: |
-| Test Case 21 | king at maximum corner; `from = Location(7, 7)`, `to = Location(8, 7)` | return `false`; destination just above maximum `x` is off-board | :white_check_mark: |
-| Test Case 22 | king at maximum corner; `from = Location(7, 7)`, `to = Location(7, 8)` | return `false`; destination just above maximum `y` is off-board | :white_check_mark: |
-| Test Case 23 | king; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
-| Test Case 24 | king; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |
+| Test Case 7  | king; `from = Location(4, 4)`, `to = Location(4, 3)` | return `true`; one-square vertical movement is legal | :white_check_mark: |
+| Test Case 8  | king; `from = Location(4, 4)`, `to = Location(4, 5)` | return `true`; one-square vertical movement in the opposite direction is legal | :white_check_mark: |
+| Test Case 9  | king; `from = Location(4, 4)`, `to = Location(5, 4)` | return `true`; one-square horizontal movement is legal | :white_check_mark: |
+| Test Case 10 | king; `from = Location(4, 4)`, `to = Location(3, 4)` | return `true`; one-square horizontal movement in the opposite direction is legal | :white_check_mark: |
+| Test Case 11 | king; `from = Location(4, 4)`, `to = Location(5, 5)` | return `true`; one-square diagonal movement is legal | :white_check_mark: |
+| Test Case 12 | king; `from = Location(4, 4)`, `to = Location(3, 3)` | return `true`; one-square diagonal movement in the opposite direction is legal | :white_check_mark: |
+| Test Case 13 | king; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a move | :white_check_mark: |
+| Test Case 14 | king; `from = Location(4, 4)`, `to = Location(6, 4)` | return `false`; horizontal overreach with `abs(dx) = 2` is illegal | :white_check_mark: |
+| Test Case 15 | king; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; vertical overreach with `abs(dy) = 2` is illegal | :white_check_mark: |
+| Test Case 16 | king; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; diagonal overreach with `abs(dx) = 2` and `abs(dy) = 2` is illegal | :white_check_mark: |
+| Test Case 17 | king at minimum corner; `from = Location(0, 0)`, `to = Location(1, 0)` | return `true`; one-square movement from the board edge into the board is legal | :white_check_mark: |
+| Test Case 18 | king at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 0)` | return `false`; destination just below minimum `x` is off-board | :white_check_mark: |
+| Test Case 19 | king at maximum corner; `from = Location(7, 7)`, `to = Location(8, 7)` | return `false`; destination just above maximum `x` is off-board | :white_check_mark: |
+| Test Case 20 | king at maximum corner; `from = Location(7, 7)`, `to = Location(7, 8)` | return `false`; destination just above maximum `y` is off-board | :white_check_mark: |
+| Test Case 21 | king; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
+| Test Case 22 | king; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |

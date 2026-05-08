@@ -2,7 +2,7 @@ package domain.piece;
 
 import domain.Location;
 
-public class King extends Piece {
+public final class King extends Piece {
     private static final int MIN_BOARD_COORDINATE = 0;
     private static final int MAX_BOARD_COORDINATE = 7;
 

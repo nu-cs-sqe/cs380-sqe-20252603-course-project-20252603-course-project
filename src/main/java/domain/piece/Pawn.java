@@ -2,7 +2,7 @@ package domain.piece;
 
 import domain.Location;
 
-public class Pawn extends Piece {
+public final class Pawn extends Piece {
     private static final int WHITE_STARTING_ROW = 6;
     private static final int BLACK_STARTING_ROW = 1;
     private static final int WHITE_FORWARD = -1;

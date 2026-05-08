@@ -189,4 +189,11 @@ public class PawnTests {
 
         assertTrue(pawn.isValidMoveShape(new Location(0, 6), new Location(0, 5)));
     }
+
+    @Test
+    public void PawnIsValidMoveShape_WhitePawnAtLeftEdge_OffBoardLeft_ReturnsFalse() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        assertEquals(false, pawn.isValidMoveShape(new Location(0, 6), new Location(-1, 5)));
+    }
 }

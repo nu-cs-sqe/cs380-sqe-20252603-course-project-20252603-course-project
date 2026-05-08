@@ -131,4 +131,11 @@ public class KnightTests {
 
         assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(5, 5)));
     }
+
+    @Test
+    public void IsValidMoveShape_TwoByTwoSquare_ReturnsFalse() {
+        Knight knight = new Knight(PieceColor.WHITE);
+
+        assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(6, 6)));
+    }
 }

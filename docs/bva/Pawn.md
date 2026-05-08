@@ -67,7 +67,7 @@
 
 |              | System under test | Expected output | Implemented? |
 |--------------|-------------------|-----------------|--------------|
-| Test Case 10 | white pawn not moved; `from = Location(4, 6)`, `to = Location(4, 5)` | return `true`; minimum normal forward distance for white is one row toward smaller `y` | :x: |
+| Test Case 10 | white pawn not moved; `from = Location(4, 6)`, `to = Location(4, 5)` | return `true`; minimum normal forward distance for white is one row toward smaller `y` | :white_check_mark: |
 | Test Case 11 | black pawn not moved; `from = Location(4, 1)`, `to = Location(4, 2)` | return `true`; minimum normal forward distance for black is one row toward larger `y` | :x: |
 | Test Case 12 | white pawn not moved; `from = Location(4, 6)`, `to = Location(4, 4)` | return `true`; two-square initial movement is legal from the white starting row when the pawn has not moved | :white_check_mark: |
 | Test Case 13 | black pawn not moved; `from = Location(4, 1)`, `to = Location(4, 3)` | return `true`; two-square initial movement is legal from the black starting row when the pawn has not moved | :white_check_mark: |

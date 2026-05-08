@@ -204,4 +204,11 @@ public class GameSetupServiceTest {
         assertThrows(IllegalArgumentException.class, () -> service.validateUniqueColors(colors));
     }
 
+    @Test
+    void TC3_ValidateMaximumSizeGame() {
+        GameSetupService service = new GameSetupService();
+        int playerCount = 6;
+        assertTrue(service.validatePlayerCount(playerCount));
+    }
+
 }

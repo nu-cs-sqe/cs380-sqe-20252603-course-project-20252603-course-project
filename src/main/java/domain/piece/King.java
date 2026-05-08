@@ -16,6 +16,9 @@ public class King extends Piece {
     }
 
     public boolean isValidMoveShape(Location from, Location to) {
+        if (from == null) {
+            throw new IllegalArgumentException("from must not be null");
+        }
         if (!isOnBoard(to)) {
             return false;
         }

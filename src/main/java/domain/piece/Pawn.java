@@ -1,5 +1,7 @@
 package domain.piece;
 
+import domain.Location;
+
 public class Pawn extends Piece {
     public Pawn(PieceColor color) {
         super(PieceType.PAWN, color);
@@ -11,5 +13,12 @@ public class Pawn extends Piece {
     @Override
     public Piece makeCopy() {
         return new Pawn(getColor());
+    }
+
+    public boolean isValidMoveShape(Location from, Location to) {
+        int dx = to.getX() - from.getX();
+        int dy = to.getY() - from.getY();
+
+        return getColor() == PieceColor.WHITE && dx == 0 && from.getY() == 6 && dy == -2;
     }
 }

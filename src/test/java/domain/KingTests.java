@@ -165,4 +165,14 @@ public class KingTests {
 
         assertFalse(king.isValidMoveShape(new Location(7, 7), new Location(7, 8)));
     }
+
+    @Test
+    public void IsValidMoveShape_FromNull_ThrowsIllegalArgumentException() {
+        King king = new King(PieceColor.WHITE);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> king.isValidMoveShape(null, new Location(4, 5)));
+
+        assertEquals("from must not be null", exception.getMessage());
+    }
 }

@@ -73,4 +73,11 @@ public class KingTests {
 
         assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(4, 3)));
     }
+
+    @Test
+    public void IsValidMoveShape_OneSquareVerticalUp_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(4, 5)));
+    }
 }

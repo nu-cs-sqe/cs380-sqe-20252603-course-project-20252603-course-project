@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PawnTests {
     @Test
@@ -33,6 +34,15 @@ public class PawnTests {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Pawn(null));
 
         assertEquals("color must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void PawnConstructorAndIsValidMoveShape_ColorWhiteAtStartingRow_AllowsInitialTwoSquareMove() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        assertEquals(PieceType.PAWN, pawn.getType());
+        assertEquals(PieceColor.WHITE, pawn.getColor());
+        assertTrue(pawn.isValidMoveShape(new Location(4, 6), new Location(4, 4)));
     }
 
     @Test

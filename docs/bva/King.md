@@ -74,7 +74,7 @@
 | Test Case 17 | king; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; vertical overreach with `abs(dy) = 2` is illegal | :white_check_mark: |
 | Test Case 18 | king; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; diagonal overreach with `abs(dx) = 2` and `abs(dy) = 2` is illegal | :white_check_mark: |
 | Test Case 19 | king at minimum corner; `from = Location(0, 0)`, `to = Location(1, 0)` | return `true`; one-square movement from the board edge into the board is legal | :white_check_mark: |
-| Test Case 20 | king at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 0)` | return `false`; destination just below minimum `x` is off-board | :x: |
+| Test Case 20 | king at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 0)` | return `false`; destination just below minimum `x` is off-board | :white_check_mark: |
 | Test Case 21 | king at maximum corner; `from = Location(7, 7)`, `to = Location(8, 7)` | return `false`; destination just above maximum `x` is off-board | :x: |
 | Test Case 22 | king at maximum corner; `from = Location(7, 7)`, `to = Location(7, 8)` | return `false`; destination just above maximum `y` is off-board | :x: |
 | Test Case 23 | king; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :x: |

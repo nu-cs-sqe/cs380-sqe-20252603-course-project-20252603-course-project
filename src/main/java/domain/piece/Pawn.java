@@ -16,6 +16,9 @@ public class Pawn extends Piece {
     }
 
     public boolean isValidMoveShape(Location from, Location to) {
+        if (!isOnBoard(from) || !isOnBoard(to)) {
+            return false;
+        }
         int dx = to.getX() - from.getX();
         int dy = to.getY() - from.getY();
 
@@ -39,5 +42,10 @@ public class Pawn extends Piece {
         }
         return (getColor() == PieceColor.WHITE && dx == 0 && from.getY() == 6 && dy == -2)
                 || (getColor() == PieceColor.BLACK && dx == 0 && from.getY() == 1 && dy == 2);
+    }
+
+    private boolean isOnBoard(Location location) {
+        return location.getX() >= 0 && location.getX() <= 7
+                && location.getY() >= 0 && location.getY() <= 7;
     }
 }

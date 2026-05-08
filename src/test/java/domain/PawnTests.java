@@ -105,4 +105,11 @@ public class PawnTests {
 
         assertEquals(false, pawn.isValidMoveShape(new Location(4, 5), new Location(4, 3)));
     }
+
+    @Test
+    public void PawnIsValidMoveShape_BlackPawnOffStartingRow_DoesNotAllowTwoSquaresForward() {
+        Pawn pawn = new Pawn(PieceColor.BLACK);
+
+        assertEquals(false, pawn.isValidMoveShape(new Location(4, 2), new Location(4, 4)));
+    }
 }

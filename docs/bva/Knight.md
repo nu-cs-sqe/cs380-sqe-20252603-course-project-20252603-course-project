@@ -70,7 +70,7 @@
 | Test Case 13 | knight; `from = Location(4, 4)`, `to = Location(2, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite horizontal direction | :white_check_mark: |
 | Test Case 14 | knight; `from = Location(4, 4)`, `to = Location(6, 3)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite vertical direction | :white_check_mark: |
 | Test Case 15 | knight; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a knight move | :white_check_mark: |
-| Test Case 16 | knight; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; straight vertical movement with `dx = 0` is illegal | :x: |
+| Test Case 16 | knight; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; straight vertical movement with `dx = 0` is illegal | :white_check_mark: |
 | Test Case 17 | knight; `from = Location(4, 4)`, `to = Location(5, 5)` | return `false`; one-square diagonal movement is illegal | :x: |
 | Test Case 18 | knight; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; `2x2` movement is not an L-shape | :x: |
 | Test Case 19 | knight; `from = Location(4, 4)`, `to = Location(7, 5)` | return `false`; `abs(dx) = 3` overreaches the L-shape boundary | :x: |

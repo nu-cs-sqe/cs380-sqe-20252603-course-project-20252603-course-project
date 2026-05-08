@@ -212,6 +212,13 @@ public class PawnTests {
     }
 
     @Test
+    public void PawnIsValidMoveShape_DestinationAboveMaxY_ReturnsFalse() {
+        Pawn pawn = new Pawn(PieceColor.BLACK);
+
+        assertEquals(false, pawn.isValidMoveShape(new Location(4, 1), new Location(4, 8)));
+    }
+
+    @Test
     public void PawnIsValidMoveShape_DestinationBelowMinY_ReturnsFalse() {
         Pawn pawn = new Pawn(PieceColor.WHITE);
 

@@ -80,4 +80,4 @@
 | Test Case 23 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(8, 5)` | return `false`; destination just above maximum `x` is off-board | :white_check_mark: |
 | Test Case 24 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(5, 8)` | return `false`; destination just above maximum `y` is off-board | :white_check_mark: |
 | Test Case 25 | knight; `from = null`, `to = Location(5, 6)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
-| Test Case 26 | knight; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :x: |
+| Test Case 26 | knight; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |

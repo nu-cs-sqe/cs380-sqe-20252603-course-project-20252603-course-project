@@ -46,6 +46,15 @@ public class PawnTests {
     }
 
     @Test
+    public void PawnConstructorAndIsValidMoveShape_ColorBlackAtStartingRow_AllowsInitialTwoSquareMove() {
+        Pawn pawn = new Pawn(PieceColor.BLACK);
+
+        assertEquals(PieceType.PAWN, pawn.getType());
+        assertEquals(PieceColor.BLACK, pawn.getColor());
+        assertTrue(pawn.isValidMoveShape(new Location(4, 1), new Location(4, 3)));
+    }
+
+    @Test
     public void PawnMakeCopy_BlackPawn_ReturnsDistinctBlackPawnWithPawnType() {
         Pawn pawn = new Pawn(PieceColor.BLACK);
 

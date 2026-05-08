@@ -222,4 +222,16 @@ public class PawnTests {
 
         assertEquals("from must not be null", exception.getMessage());
     }
+
+    @Test
+    public void PawnIsValidMoveShape_NullTo_ThrowsIllegalArgumentException() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> pawn.isValidMoveShape(new Location(4, 6), null)
+        );
+
+        assertEquals("to must not be null", exception.getMessage());
+    }
 }

@@ -159,4 +159,11 @@ public class KnightTests {
 
         assertFalse(knight.isValidMoveShape(new Location(0, 0), new Location(-1, 2)));
     }
+
+    @Test
+    public void IsValidMoveShape_DestinationYBelowMinimum_ReturnsFalse() {
+        Knight knight = new Knight(PieceColor.WHITE);
+
+        assertFalse(knight.isValidMoveShape(new Location(0, 0), new Location(2, -1)));
+    }
 }

@@ -7,6 +7,7 @@ import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -107,5 +108,12 @@ public class KingTests {
         King king = new King(PieceColor.WHITE);
 
         assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(3, 3)));
+    }
+
+    @Test
+    public void IsValidMoveShape_SameSquare_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(4, 4)));
     }
 }

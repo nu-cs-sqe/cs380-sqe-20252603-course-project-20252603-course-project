@@ -25,6 +25,9 @@ public class Pawn extends Piece {
         if (getColor() == PieceColor.WHITE && dx == -1 && from.getY() == 6 && dy == -1) {
             return true;
         }
+        if (getColor() == PieceColor.WHITE && dx == 1 && from.getY() == 6 && dy == -1) {
+            return true;
+        }
         if (getColor() == PieceColor.BLACK && dx == 0 && from.getY() == 1 && dy == 1) {
             return true;
         }

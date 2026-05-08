@@ -3,6 +3,9 @@ package domain.piece;
 import domain.Location;
 
 public class King extends Piece {
+    private static final int MIN_BOARD_COORDINATE = 0;
+    private static final int MAX_BOARD_COORDINATE = 7;
+
     public King(PieceColor color) {
         super(PieceType.KING, color);
         if (color == null) {
@@ -40,7 +43,7 @@ public class King extends Piece {
     }
 
     private boolean isOnBoard(Location location) {
-        return location.getX() >= 0 && location.getX() <= 7
-                && location.getY() >= 0 && location.getY() <= 7;
+        return location.getX() >= MIN_BOARD_COORDINATE && location.getX() <= MAX_BOARD_COORDINATE
+                && location.getY() >= MIN_BOARD_COORDINATE && location.getY() <= MAX_BOARD_COORDINATE;
     }
 }

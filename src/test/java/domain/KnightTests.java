@@ -145,4 +145,11 @@ public class KnightTests {
 
         assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(7, 5)));
     }
+
+    @Test
+    public void IsValidMoveShape_LShapeFromMinimumCorner_ReturnsTrue() {
+        Knight knight = new Knight(PieceColor.WHITE);
+
+        assertTrue(knight.isValidMoveShape(new Location(0, 0), new Location(1, 2)));
+    }
 }

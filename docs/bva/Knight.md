@@ -76,7 +76,7 @@
 | Test Case 19 | knight; `from = Location(4, 4)`, `to = Location(7, 5)` | return `false`; `abs(dx) = 3` overreaches the L-shape boundary | :white_check_mark: |
 | Test Case 20 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(1, 2)` | return `true`; legal L-shape movement from a board edge into the board is allowed | :white_check_mark: |
 | Test Case 21 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 2)` | return `false`; destination just below minimum `x` is off-board | :white_check_mark: |
-| Test Case 22 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(2, -1)` | return `false`; destination just below minimum `y` is off-board | :x: |
+| Test Case 22 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(2, -1)` | return `false`; destination just below minimum `y` is off-board | :white_check_mark: |
 | Test Case 23 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(8, 5)` | return `false`; destination just above maximum `x` is off-board | :x: |
 | Test Case 24 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(5, 8)` | return `false`; destination just above maximum `y` is off-board | :x: |
 | Test Case 25 | knight; `from = null`, `to = Location(5, 6)` | throws `IllegalArgumentException` with message `"from must not be null"` | :x: |

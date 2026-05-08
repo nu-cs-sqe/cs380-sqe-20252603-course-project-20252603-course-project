@@ -78,7 +78,7 @@
 | Test Case 18 | white pawn; `from = Location(4, 6)`, `to = Location(3, 5)` | return `true`; left diagonal forward one square is a legal capture candidate for white | :white_check_mark: |
 | Test Case 19 | white pawn; `from = Location(4, 6)`, `to = Location(5, 5)` | return `true`; right diagonal forward one square is a legal capture candidate for white | :white_check_mark: |
 | Test Case 20 | black pawn; `from = Location(4, 1)`, `to = Location(3, 2)` | return `true`; left diagonal forward one square is a legal capture candidate for black | :white_check_mark: |
-| Test Case 21 | black pawn; `from = Location(4, 1)`, `to = Location(5, 2)` | return `true`; right diagonal forward one square is a legal capture candidate for black | :x: |
+| Test Case 21 | black pawn; `from = Location(4, 1)`, `to = Location(5, 2)` | return `true`; right diagonal forward one square is a legal capture candidate for black | :white_check_mark: |
 | Test Case 22 | white pawn; `from = Location(4, 6)`, `to = Location(4, 7)` | return `false`; white cannot move backward toward larger `y` | :x: |
 | Test Case 23 | black pawn; `from = Location(4, 1)`, `to = Location(4, 0)` | return `false`; black cannot move backward toward smaller `y` | :x: |
 | Test Case 24 | white pawn; `from = Location(4, 6)`, `to = Location(5, 6)` | return `false`; horizontal movement with `dy = 0` is illegal | :x: |

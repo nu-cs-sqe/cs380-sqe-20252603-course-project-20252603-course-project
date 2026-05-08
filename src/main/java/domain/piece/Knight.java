@@ -21,6 +21,9 @@ public class Knight extends Piece {
         if (to.getX() < MIN_BOARD_COORDINATE) {
             return false;
         }
+        if (to.getY() < MIN_BOARD_COORDINATE) {
+            return false;
+        }
         int dx = Math.abs(to.getX() - from.getX());
         int dy = Math.abs(to.getY() - from.getY());
         return (dx == 1 && dy == 2) || (dx == 2 && dy == 1);

@@ -24,6 +24,9 @@ public class King extends Piece {
         if (Math.abs(dx) > 1) {
             return false;
         }
+        if (Math.abs(dy) > 1) {
+            return false;
+        }
         return true;
     }
 }

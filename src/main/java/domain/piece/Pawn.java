@@ -19,6 +19,7 @@ public class Pawn extends Piece {
         int dx = to.getX() - from.getX();
         int dy = to.getY() - from.getY();
 
-        return getColor() == PieceColor.WHITE && dx == 0 && from.getY() == 6 && dy == -2;
+        return (getColor() == PieceColor.WHITE && dx == 0 && from.getY() == 6 && dy == -2)
+                || (getColor() == PieceColor.BLACK && dx == 0 && from.getY() == 1 && dy == 2);
     }
 }

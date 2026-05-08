@@ -168,4 +168,11 @@ public class PawnTests {
 
         assertEquals(false, pawn.isValidMoveShape(new Location(4, 1), new Location(5, 1)));
     }
+
+    @Test
+    public void PawnIsValidMoveShape_WhitePawnForwardOverreach_ReturnsFalse() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        assertEquals(false, pawn.isValidMoveShape(new Location(4, 6), new Location(4, 3)));
+    }
 }

@@ -25,20 +25,16 @@ public class Knight extends Piece {
         if (to == null) {
             throw new IllegalArgumentException("to must not be null");
         }
-        if (to.getX() < MIN_BOARD_COORDINATE) {
-            return false;
-        }
-        if (to.getY() < MIN_BOARD_COORDINATE) {
-            return false;
-        }
-        if (to.getX() > MAX_BOARD_COORDINATE) {
-            return false;
-        }
-        if (to.getY() > MAX_BOARD_COORDINATE) {
+        if (!isOnBoard(to)) {
             return false;
         }
         int dx = Math.abs(to.getX() - from.getX());
         int dy = Math.abs(to.getY() - from.getY());
         return (dx == 1 && dy == 2) || (dx == 2 && dy == 1);
+    }
+
+    private boolean isOnBoard(Location location) {
+        return location.getX() >= MIN_BOARD_COORDINATE && location.getX() <= MAX_BOARD_COORDINATE
+                && location.getY() >= MIN_BOARD_COORDINATE && location.getY() <= MAX_BOARD_COORDINATE;
     }
 }

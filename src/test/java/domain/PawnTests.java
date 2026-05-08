@@ -212,6 +212,13 @@ public class PawnTests {
     }
 
     @Test
+    public void PawnIsValidMoveShape_WhitePawnDoubleStepWithNonZeroDx_ReturnsFalse() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        assertEquals(false, pawn.isValidMoveShape(new Location(4, 6), new Location(5, 4)));
+    }
+
+    @Test
     public void PawnIsValidMoveShape_WhitePawnSingleStepDxExceedsMaxDiagonalOffset_ReturnsFalse() {
         Pawn pawn = new Pawn(PieceColor.WHITE);
 

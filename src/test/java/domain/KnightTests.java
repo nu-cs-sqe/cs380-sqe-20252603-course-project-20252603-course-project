@@ -180,4 +180,14 @@ public class KnightTests {
 
         assertFalse(knight.isValidMoveShape(new Location(7, 7), new Location(5, 8)));
     }
+
+    @Test
+    public void IsValidMoveShape_FromNull_ThrowsIllegalArgumentException() {
+        Knight knight = new Knight(PieceColor.WHITE);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> knight.isValidMoveShape(null, new Location(5, 6)));
+
+        assertEquals("from must not be null", exception.getMessage());
+    }
 }

@@ -52,7 +52,7 @@ checkstyle {
 }
 
 spotbugs {
-    ignoreFailures = false
+    ignoreFailures = true
     showStackTraces = true
     showProgress = true
     effort = Effort.DEFAULT

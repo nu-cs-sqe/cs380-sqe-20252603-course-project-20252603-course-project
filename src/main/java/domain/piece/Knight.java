@@ -4,6 +4,7 @@ import domain.Location;
 
 public class Knight extends Piece {
     private static final int MIN_BOARD_COORDINATE = 0;
+    private static final int MAX_BOARD_COORDINATE = 7;
 
     public Knight(PieceColor color) {
         super(PieceType.KNIGHT, color);
@@ -22,6 +23,9 @@ public class Knight extends Piece {
             return false;
         }
         if (to.getY() < MIN_BOARD_COORDINATE) {
+            return false;
+        }
+        if (to.getX() > MAX_BOARD_COORDINATE) {
             return false;
         }
         int dx = Math.abs(to.getX() - from.getX());

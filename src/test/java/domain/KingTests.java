@@ -177,6 +177,13 @@ public class KingTests {
     }
 
     @Test
+    public void IsValidMoveShape_DestinationBelowMinY_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(0, 0), new Location(0, -1)));
+    }
+
+    @Test
     public void IsValidMoveShape_ToNull_ThrowsIllegalArgumentException() {
         King king = new King(PieceColor.WHITE);
 

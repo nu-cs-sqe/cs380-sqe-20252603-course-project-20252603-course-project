@@ -16,6 +16,11 @@ public class King extends Piece {
     }
 
     public boolean isValidMoveShape(Location from, Location to) {
+        int dx = to.getX() - from.getX();
+        int dy = to.getY() - from.getY();
+        if (dx == 0 && dy == 0) {
+            return false;
+        }
         return true;
     }
 }

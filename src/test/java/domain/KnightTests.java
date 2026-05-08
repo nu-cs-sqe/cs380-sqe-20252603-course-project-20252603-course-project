@@ -138,4 +138,11 @@ public class KnightTests {
 
         assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(6, 6)));
     }
+
+    @Test
+    public void IsValidMoveShape_Dx3Dy1Overreach_ReturnsFalse() {
+        Knight knight = new Knight(PieceColor.WHITE);
+
+        assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(7, 5)));
+    }
 }

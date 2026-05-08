@@ -68,7 +68,7 @@
 | Test Case 11 | knight; `from = Location(4, 4)`, `to = Location(5, 2)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite vertical direction | :white_check_mark: |
 | Test Case 12 | knight; `from = Location(4, 4)`, `to = Location(6, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal | :white_check_mark: |
 | Test Case 13 | knight; `from = Location(4, 4)`, `to = Location(2, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite horizontal direction | :white_check_mark: |
-| Test Case 14 | knight; `from = Location(4, 4)`, `to = Location(6, 3)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite vertical direction | :x: |
+| Test Case 14 | knight; `from = Location(4, 4)`, `to = Location(6, 3)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite vertical direction | :white_check_mark: |
 | Test Case 15 | knight; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a knight move | :x: |
 | Test Case 16 | knight; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; straight vertical movement with `dx = 0` is illegal | :x: |
 | Test Case 17 | knight; `from = Location(4, 4)`, `to = Location(5, 5)` | return `false`; one-square diagonal movement is illegal | :x: |

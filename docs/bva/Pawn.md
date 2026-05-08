@@ -76,7 +76,7 @@
 | Test Case 16 | white pawn not moved but not on starting row; `from = Location(4, 5)`, `to = Location(4, 3)` | return `false`; two-square movement is legal only from the white starting row `y = 6` | :white_check_mark: |
 | Test Case 17 | black pawn not moved but not on starting row; `from = Location(4, 2)`, `to = Location(4, 4)` | return `false`; two-square movement is legal only from the black starting row `y = 1` | :white_check_mark: |
 | Test Case 18 | white pawn; `from = Location(4, 6)`, `to = Location(3, 5)` | return `true`; left diagonal forward one square is a legal capture candidate for white | :white_check_mark: |
-| Test Case 19 | white pawn; `from = Location(4, 6)`, `to = Location(5, 5)` | return `true`; right diagonal forward one square is a legal capture candidate for white | :x: |
+| Test Case 19 | white pawn; `from = Location(4, 6)`, `to = Location(5, 5)` | return `true`; right diagonal forward one square is a legal capture candidate for white | :white_check_mark: |
 | Test Case 20 | black pawn; `from = Location(4, 1)`, `to = Location(3, 2)` | return `true`; left diagonal forward one square is a legal capture candidate for black | :x: |
 | Test Case 21 | black pawn; `from = Location(4, 1)`, `to = Location(5, 2)` | return `true`; right diagonal forward one square is a legal capture candidate for black | :x: |
 | Test Case 22 | white pawn; `from = Location(4, 6)`, `to = Location(4, 7)` | return `false`; white cannot move backward toward larger `y` | :x: |

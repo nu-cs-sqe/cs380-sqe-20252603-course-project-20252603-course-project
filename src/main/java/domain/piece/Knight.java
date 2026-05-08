@@ -19,6 +19,9 @@ public class Knight extends Piece {
     }
 
     public boolean isValidMoveShape(Location from, Location to) {
+        if (from == null) {
+            throw new IllegalArgumentException("from must not be null");
+        }
         if (to.getX() < MIN_BOARD_COORDINATE) {
             return false;
         }

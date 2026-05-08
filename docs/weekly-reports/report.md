@@ -4,8 +4,8 @@
 2. [done] Tallie: Create task splits for One Turn of the Game
 3. [done] Tallie: Attend group meeting and meet with Dr. Yiji to confirm standards for squashing/commit history for TDD/BVA.
 4. [done] Tallie: Provide feedback and approve Game Setup Phase: Location, Main View, and Welcome View (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/19)
-5. [95% done] Tallie: One Turn of the Game: Linter Setup and Team Cleanup Coordination
-6. [95% done] Tallie: One Turn of the Game: Turn Handoff and Move History Flow
+5. [95% done] Tallie: One Turn of the Game: Linter Setup and Team Cleanup Coordination (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/21)
+6. [95% done] Tallie: One Turn of the Game: Turn Handoff and Move History Flow (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/23)
 7. [not started] Trenton: Task (Links to PR)
 8. [not started] Reed: Task (Links to PR)
 

@@ -64,7 +64,7 @@
 |              | System under test | Expected output | Implemented? |
 |--------------|-------------------|-----------------|--------------|
 | Test Case 9  | knight; `from = Location(4, 4)`, `to = Location(5, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal | :white_check_mark: |
-| Test Case 10 | knight; `from = Location(4, 4)`, `to = Location(3, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite horizontal direction | :x: |
+| Test Case 10 | knight; `from = Location(4, 4)`, `to = Location(3, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite horizontal direction | :white_check_mark: |
 | Test Case 11 | knight; `from = Location(4, 4)`, `to = Location(5, 2)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite vertical direction | :x: |
 | Test Case 12 | knight; `from = Location(4, 4)`, `to = Location(6, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal | :x: |
 | Test Case 13 | knight; `from = Location(4, 4)`, `to = Location(2, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite horizontal direction | :x: |

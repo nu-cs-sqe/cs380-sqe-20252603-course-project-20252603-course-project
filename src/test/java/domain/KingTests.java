@@ -144,4 +144,11 @@ public class KingTests {
 
         assertTrue(king.isValidMoveShape(new Location(0, 0), new Location(1, 0)));
     }
+
+    @Test
+    public void IsValidMoveShape_DestinationBelowMinX_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(0, 0), new Location(-1, 0)));
+    }
 }

@@ -88,4 +88,11 @@ public class KnightTests {
 
         assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(5, 2)));
     }
+
+    @Test
+    public void IsValidMoveShape_LShapeDx2Dy1_ReturnsTrue() {
+        Knight knight = new Knight(PieceColor.WHITE);
+
+        assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(6, 5)));
+    }
 }

@@ -88,6 +88,6 @@
 | Test Case 28 | white pawn at left edge; `from = Location(0, 6)`, `to = Location(0, 5)` | return `true`; a one-square forward move remains legal at board edge `x = 0` | :white_check_mark: |
 | Test Case 29 | white pawn at left edge; `from = Location(0, 6)`, `to = Location(-1, 5)` | return `false`; destination just left of the board is outside `[0, 7]` | :white_check_mark: |
 | Test Case 30 | black pawn at right edge; `from = Location(7, 1)`, `to = Location(8, 2)` | return `false`; destination just right of the board is outside `[0, 7]` | :white_check_mark: |
-| Test Case 31 | white pawn; `from = Location(4, 6)`, `to = Location(4, 6)` | return `false`; same-square movement has no legal pawn move shape | :x: |
+| Test Case 31 | white pawn; `from = Location(4, 6)`, `to = Location(4, 6)` | return `false`; same-square movement has no legal pawn move shape | :white_check_mark: |
 | Test Case 32 | white pawn; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :x: |
 | Test Case 33 | white pawn; `from = Location(4, 6)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :x: |

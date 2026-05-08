@@ -60,7 +60,6 @@
 | Test Case 6 | pawn: `Pawn(BLACK)`           | return a distinct `Pawn`; copied pawn has `type = PAWN`; copied pawn has `color = BLACK`        | :white_check_mark: |
 | Test Case 7 | pawn: `Pawn(WHITE)`           | return a distinct `Pawn`; copied pawn has `type = PAWN`; copied pawn has `color = WHITE`        | :white_check_mark: |
 | Test Case 8 | pawn: `Pawn(null)`            | `Pawn(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
-| Test Case 9 | design-target pawn after `changeToMoved()` | return a distinct `Pawn` with the same color, `type = PAWN`, and moved state preserved | :x: |
 
 
 ### Method under test: `isValidMoveShape(Location from, Location to)`
@@ -71,23 +70,21 @@
 | Test Case 11 | black pawn not moved; `from = Location(4, 1)`, `to = Location(4, 2)` | return `true`; minimum normal forward distance for black is one row toward larger `y` | :white_check_mark: |
 | Test Case 12 | white pawn not moved; `from = Location(4, 6)`, `to = Location(4, 4)` | return `true`; two-square initial movement is legal from the white starting row when the pawn has not moved | :white_check_mark: |
 | Test Case 13 | black pawn not moved; `from = Location(4, 1)`, `to = Location(4, 3)` | return `true`; two-square initial movement is legal from the black starting row when the pawn has not moved | :white_check_mark: |
-| Test Case 14 | white pawn after `changeToMoved()`; `from = Location(4, 5)`, `to = Location(4, 3)` | return `false`; two-square movement is not legal after the pawn has moved | :x: |
-| Test Case 15 | black pawn after `changeToMoved()`; `from = Location(4, 2)`, `to = Location(4, 4)` | return `false`; two-square movement is not legal after the pawn has moved | :x: |
-| Test Case 16 | white pawn not moved but not on starting row; `from = Location(4, 5)`, `to = Location(4, 3)` | return `false`; two-square movement is legal only from the white starting row `y = 6` | :white_check_mark: |
-| Test Case 17 | black pawn not moved but not on starting row; `from = Location(4, 2)`, `to = Location(4, 4)` | return `false`; two-square movement is legal only from the black starting row `y = 1` | :white_check_mark: |
-| Test Case 18 | white pawn; `from = Location(4, 6)`, `to = Location(3, 5)` | return `true`; left diagonal forward one square is a legal capture candidate for white | :white_check_mark: |
-| Test Case 19 | white pawn; `from = Location(4, 6)`, `to = Location(5, 5)` | return `true`; right diagonal forward one square is a legal capture candidate for white | :white_check_mark: |
-| Test Case 20 | black pawn; `from = Location(4, 1)`, `to = Location(3, 2)` | return `true`; left diagonal forward one square is a legal capture candidate for black | :white_check_mark: |
-| Test Case 21 | black pawn; `from = Location(4, 1)`, `to = Location(5, 2)` | return `true`; right diagonal forward one square is a legal capture candidate for black | :white_check_mark: |
-| Test Case 22 | white pawn; `from = Location(4, 6)`, `to = Location(4, 7)` | return `false`; white cannot move backward toward larger `y` | :white_check_mark: |
-| Test Case 23 | black pawn; `from = Location(4, 1)`, `to = Location(4, 0)` | return `false`; black cannot move backward toward smaller `y` | :white_check_mark: |
-| Test Case 24 | white pawn; `from = Location(4, 6)`, `to = Location(5, 6)` | return `false`; horizontal movement with `dy = 0` is illegal | :white_check_mark: |
-| Test Case 25 | black pawn; `from = Location(4, 1)`, `to = Location(5, 1)` | return `false`; horizontal movement with `dy = 0` is illegal | :white_check_mark: |
-| Test Case 26 | white pawn; `from = Location(4, 6)`, `to = Location(4, 3)` | return `false`; forward overreach beyond the two-square initial boundary is illegal | :white_check_mark: |
-| Test Case 27 | black pawn; `from = Location(4, 1)`, `to = Location(4, 4)` | return `false`; forward overreach beyond the two-square initial boundary is illegal | :white_check_mark: |
-| Test Case 28 | white pawn at left edge; `from = Location(0, 6)`, `to = Location(0, 5)` | return `true`; a one-square forward move remains legal at board edge `x = 0` | :white_check_mark: |
-| Test Case 29 | white pawn at left edge; `from = Location(0, 6)`, `to = Location(-1, 5)` | return `false`; destination just left of the board is outside `[0, 7]` | :white_check_mark: |
-| Test Case 30 | black pawn at right edge; `from = Location(7, 1)`, `to = Location(8, 2)` | return `false`; destination just right of the board is outside `[0, 7]` | :white_check_mark: |
-| Test Case 31 | white pawn; `from = Location(4, 6)`, `to = Location(4, 6)` | return `false`; same-square movement has no legal pawn move shape | :white_check_mark: |
-| Test Case 32 | white pawn; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
-| Test Case 33 | white pawn; `from = Location(4, 6)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |
+| Test Case 14 | white pawn not moved but not on starting row; `from = Location(4, 5)`, `to = Location(4, 3)` | return `false`; two-square movement is legal only from the white starting row `y = 6` | :white_check_mark: |
+| Test Case 15 | black pawn not moved but not on starting row; `from = Location(4, 2)`, `to = Location(4, 4)` | return `false`; two-square movement is legal only from the black starting row `y = 1` | :white_check_mark: |
+| Test Case 16 | white pawn; `from = Location(4, 6)`, `to = Location(3, 5)` | return `true`; left diagonal forward one square is a legal capture candidate for white | :white_check_mark: |
+| Test Case 17 | white pawn; `from = Location(4, 6)`, `to = Location(5, 5)` | return `true`; right diagonal forward one square is a legal capture candidate for white | :white_check_mark: |
+| Test Case 18 | black pawn; `from = Location(4, 1)`, `to = Location(3, 2)` | return `true`; left diagonal forward one square is a legal capture candidate for black | :white_check_mark: |
+| Test Case 19 | black pawn; `from = Location(4, 1)`, `to = Location(5, 2)` | return `true`; right diagonal forward one square is a legal capture candidate for black | :white_check_mark: |
+| Test Case 20 | white pawn; `from = Location(4, 6)`, `to = Location(4, 7)` | return `false`; white cannot move backward toward larger `y` | :white_check_mark: |
+| Test Case 21 | black pawn; `from = Location(4, 1)`, `to = Location(4, 0)` | return `false`; black cannot move backward toward smaller `y` | :white_check_mark: |
+| Test Case 22 | white pawn; `from = Location(4, 6)`, `to = Location(5, 6)` | return `false`; horizontal movement with `dy = 0` is illegal | :white_check_mark: |
+| Test Case 23 | black pawn; `from = Location(4, 1)`, `to = Location(5, 1)` | return `false`; horizontal movement with `dy = 0` is illegal | :white_check_mark: |
+| Test Case 24 | white pawn; `from = Location(4, 6)`, `to = Location(4, 3)` | return `false`; forward overreach beyond the two-square initial boundary is illegal | :white_check_mark: |
+| Test Case 25 | black pawn; `from = Location(4, 1)`, `to = Location(4, 4)` | return `false`; forward overreach beyond the two-square initial boundary is illegal | :white_check_mark: |
+| Test Case 26 | white pawn at left edge; `from = Location(0, 6)`, `to = Location(0, 5)` | return `true`; a one-square forward move remains legal at board edge `x = 0` | :white_check_mark: |
+| Test Case 27 | white pawn at left edge; `from = Location(0, 6)`, `to = Location(-1, 5)` | return `false`; destination just left of the board is outside `[0, 7]` | :white_check_mark: |
+| Test Case 28 | black pawn at right edge; `from = Location(7, 1)`, `to = Location(8, 2)` | return `false`; destination just right of the board is outside `[0, 7]` | :white_check_mark: |
+| Test Case 29 | white pawn; `from = Location(4, 6)`, `to = Location(4, 6)` | return `false`; same-square movement has no legal pawn move shape | :white_check_mark: |
+| Test Case 30 | white pawn; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
+| Test Case 31 | white pawn; `from = Location(4, 6)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |

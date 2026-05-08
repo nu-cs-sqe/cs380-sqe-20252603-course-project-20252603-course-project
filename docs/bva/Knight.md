@@ -57,28 +57,27 @@
 | Test Case 6 | knight: `Knight(BLACK)`           | return a distinct `Piece`; copied piece has `type = KNIGHT`; copied piece has `color = BLACK`           | :white_check_mark: |
 | Test Case 7 | knight: `Knight(WHITE)`           | return a distinct `Piece`; copied piece has `type = KNIGHT`; copied piece has `color = WHITE`           | :white_check_mark: |
 | Test Case 8 | knight: `Knight(null)`            | `Knight(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
-| Test Case 9 | design-target knight after `changeToMoved()` | return a distinct `Knight` with the same color, `type = KNIGHT`, and moved state preserved | :x: |
 
 
 ### Method under test: `isValidMoveShape(Location from, Location to)`
 
 |              | System under test | Expected output | Implemented? |
 |--------------|-------------------|-----------------|--------------|
-| Test Case 10 | knight; `from = Location(4, 4)`, `to = Location(5, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal | :x: |
-| Test Case 11 | knight; `from = Location(4, 4)`, `to = Location(3, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite horizontal direction | :x: |
-| Test Case 12 | knight; `from = Location(4, 4)`, `to = Location(5, 2)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite vertical direction | :x: |
-| Test Case 13 | knight; `from = Location(4, 4)`, `to = Location(6, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal | :x: |
-| Test Case 14 | knight; `from = Location(4, 4)`, `to = Location(2, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite horizontal direction | :x: |
-| Test Case 15 | knight; `from = Location(4, 4)`, `to = Location(6, 3)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite vertical direction | :x: |
-| Test Case 16 | knight; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a knight move | :x: |
-| Test Case 17 | knight; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; straight vertical movement with `dx = 0` is illegal | :x: |
-| Test Case 18 | knight; `from = Location(4, 4)`, `to = Location(5, 5)` | return `false`; one-square diagonal movement is illegal | :x: |
-| Test Case 19 | knight; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; `2x2` movement is not an L-shape | :x: |
-| Test Case 20 | knight; `from = Location(4, 4)`, `to = Location(7, 5)` | return `false`; `abs(dx) = 3` overreaches the L-shape boundary | :x: |
-| Test Case 21 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(1, 2)` | return `true`; legal L-shape movement from a board edge into the board is allowed | :x: |
-| Test Case 22 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 2)` | return `false`; destination just below minimum `x` is off-board | :x: |
-| Test Case 23 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(2, -1)` | return `false`; destination just below minimum `y` is off-board | :x: |
-| Test Case 24 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(8, 5)` | return `false`; destination just above maximum `x` is off-board | :x: |
-| Test Case 25 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(5, 8)` | return `false`; destination just above maximum `y` is off-board | :x: |
-| Test Case 26 | knight; `from = null`, `to = Location(5, 6)` | throws `IllegalArgumentException` with message `"from must not be null"` | :x: |
-| Test Case 27 | knight; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :x: |
+| Test Case 9  | knight; `from = Location(4, 4)`, `to = Location(5, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal | :x: |
+| Test Case 10 | knight; `from = Location(4, 4)`, `to = Location(3, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite horizontal direction | :x: |
+| Test Case 11 | knight; `from = Location(4, 4)`, `to = Location(5, 2)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite vertical direction | :x: |
+| Test Case 12 | knight; `from = Location(4, 4)`, `to = Location(6, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal | :x: |
+| Test Case 13 | knight; `from = Location(4, 4)`, `to = Location(2, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite horizontal direction | :x: |
+| Test Case 14 | knight; `from = Location(4, 4)`, `to = Location(6, 3)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite vertical direction | :x: |
+| Test Case 15 | knight; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a knight move | :x: |
+| Test Case 16 | knight; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; straight vertical movement with `dx = 0` is illegal | :x: |
+| Test Case 17 | knight; `from = Location(4, 4)`, `to = Location(5, 5)` | return `false`; one-square diagonal movement is illegal | :x: |
+| Test Case 18 | knight; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; `2x2` movement is not an L-shape | :x: |
+| Test Case 19 | knight; `from = Location(4, 4)`, `to = Location(7, 5)` | return `false`; `abs(dx) = 3` overreaches the L-shape boundary | :x: |
+| Test Case 20 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(1, 2)` | return `true`; legal L-shape movement from a board edge into the board is allowed | :x: |
+| Test Case 21 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 2)` | return `false`; destination just below minimum `x` is off-board | :x: |
+| Test Case 22 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(2, -1)` | return `false`; destination just below minimum `y` is off-board | :x: |
+| Test Case 23 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(8, 5)` | return `false`; destination just above maximum `x` is off-board | :x: |
+| Test Case 24 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(5, 8)` | return `false`; destination just above maximum `y` is off-board | :x: |
+| Test Case 25 | knight; `from = null`, `to = Location(5, 6)` | throws `IllegalArgumentException` with message `"from must not be null"` | :x: |
+| Test Case 26 | knight; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :x: |

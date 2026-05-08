@@ -57,26 +57,25 @@
 | Test Case 6 | king: `King(BLACK)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = BLACK` | :white_check_mark: |
 | Test Case 7 | king: `King(WHITE)`                         | return a distinct `Piece`; copied piece is a `King`; copied piece has `type = KING`; copied piece has `color = WHITE` | :white_check_mark: |
 | Test Case 8 | king: `King(null)`                          | `King(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
-| Test Case 9 | design-target king after `changeToMoved()`  | return a distinct `King` with the same color, `type = KING`, and moved state preserved | :x: |
 
 
 ### Method under test: `isValidMoveShape(Location from, Location to)`
 
 |              | System under test | Expected output | Implemented? |
 |--------------|-------------------|-----------------|--------------|
-| Test Case 10 | king; `from = Location(4, 4)`, `to = Location(4, 3)` | return `true`; one-square vertical movement is legal | :x: |
-| Test Case 11 | king; `from = Location(4, 4)`, `to = Location(4, 5)` | return `true`; one-square vertical movement in the opposite direction is legal | :x: |
-| Test Case 12 | king; `from = Location(4, 4)`, `to = Location(5, 4)` | return `true`; one-square horizontal movement is legal | :x: |
-| Test Case 13 | king; `from = Location(4, 4)`, `to = Location(3, 4)` | return `true`; one-square horizontal movement in the opposite direction is legal | :x: |
-| Test Case 14 | king; `from = Location(4, 4)`, `to = Location(5, 5)` | return `true`; one-square diagonal movement is legal | :x: |
-| Test Case 15 | king; `from = Location(4, 4)`, `to = Location(3, 3)` | return `true`; one-square diagonal movement in the opposite direction is legal | :x: |
-| Test Case 16 | king; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a move | :x: |
-| Test Case 17 | king; `from = Location(4, 4)`, `to = Location(6, 4)` | return `false`; horizontal overreach with `abs(dx) = 2` is illegal | :x: |
-| Test Case 18 | king; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; vertical overreach with `abs(dy) = 2` is illegal | :x: |
-| Test Case 19 | king; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; diagonal overreach with `abs(dx) = 2` and `abs(dy) = 2` is illegal | :x: |
-| Test Case 20 | king at minimum corner; `from = Location(0, 0)`, `to = Location(1, 0)` | return `true`; one-square movement from the board edge into the board is legal | :x: |
-| Test Case 21 | king at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 0)` | return `false`; destination just below minimum `x` is off-board | :x: |
-| Test Case 22 | king at maximum corner; `from = Location(7, 7)`, `to = Location(8, 7)` | return `false`; destination just above maximum `x` is off-board | :x: |
-| Test Case 23 | king at maximum corner; `from = Location(7, 7)`, `to = Location(7, 8)` | return `false`; destination just above maximum `y` is off-board | :x: |
-| Test Case 24 | king; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :x: |
-| Test Case 25 | king; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :x: |
+| Test Case 9  | king; `from = Location(4, 4)`, `to = Location(4, 3)` | return `true`; one-square vertical movement is legal | :x: |
+| Test Case 10 | king; `from = Location(4, 4)`, `to = Location(4, 5)` | return `true`; one-square vertical movement in the opposite direction is legal | :x: |
+| Test Case 11 | king; `from = Location(4, 4)`, `to = Location(5, 4)` | return `true`; one-square horizontal movement is legal | :x: |
+| Test Case 12 | king; `from = Location(4, 4)`, `to = Location(3, 4)` | return `true`; one-square horizontal movement in the opposite direction is legal | :x: |
+| Test Case 13 | king; `from = Location(4, 4)`, `to = Location(5, 5)` | return `true`; one-square diagonal movement is legal | :x: |
+| Test Case 14 | king; `from = Location(4, 4)`, `to = Location(3, 3)` | return `true`; one-square diagonal movement in the opposite direction is legal | :x: |
+| Test Case 15 | king; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a move | :x: |
+| Test Case 16 | king; `from = Location(4, 4)`, `to = Location(6, 4)` | return `false`; horizontal overreach with `abs(dx) = 2` is illegal | :x: |
+| Test Case 17 | king; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; vertical overreach with `abs(dy) = 2` is illegal | :x: |
+| Test Case 18 | king; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; diagonal overreach with `abs(dx) = 2` and `abs(dy) = 2` is illegal | :x: |
+| Test Case 19 | king at minimum corner; `from = Location(0, 0)`, `to = Location(1, 0)` | return `true`; one-square movement from the board edge into the board is legal | :x: |
+| Test Case 20 | king at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 0)` | return `false`; destination just below minimum `x` is off-board | :x: |
+| Test Case 21 | king at maximum corner; `from = Location(7, 7)`, `to = Location(8, 7)` | return `false`; destination just above maximum `x` is off-board | :x: |
+| Test Case 22 | king at maximum corner; `from = Location(7, 7)`, `to = Location(7, 8)` | return `false`; destination just above maximum `y` is off-board | :x: |
+| Test Case 23 | king; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :x: |
+| Test Case 24 | king; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :x: |

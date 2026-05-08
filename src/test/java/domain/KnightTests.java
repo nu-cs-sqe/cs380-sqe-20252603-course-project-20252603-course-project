@@ -1,5 +1,6 @@
 package domain;
 
+import domain.Location;
 import domain.piece.Knight;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
@@ -10,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class KnightTests {
     @Test
@@ -64,5 +66,12 @@ public class KnightTests {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Knight(null));
 
         assertEquals("color must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void IsValidMoveShape_LShapeDx1Dy2_ReturnsTrue() {
+        Knight knight = new Knight(PieceColor.WHITE);
+
+        assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(5, 6)));
     }
 }

@@ -69,7 +69,7 @@
 | Test Case 12 | king; `from = Location(4, 4)`, `to = Location(3, 4)` | return `true`; one-square horizontal movement in the opposite direction is legal | :white_check_mark: |
 | Test Case 13 | king; `from = Location(4, 4)`, `to = Location(5, 5)` | return `true`; one-square diagonal movement is legal | :white_check_mark: |
 | Test Case 14 | king; `from = Location(4, 4)`, `to = Location(3, 3)` | return `true`; one-square diagonal movement in the opposite direction is legal | :white_check_mark: |
-| Test Case 15 | king; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a move | :x: |
+| Test Case 15 | king; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a move | :white_check_mark: |
 | Test Case 16 | king; `from = Location(4, 4)`, `to = Location(6, 4)` | return `false`; horizontal overreach with `abs(dx) = 2` is illegal | :x: |
 | Test Case 17 | king; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; vertical overreach with `abs(dy) = 2` is illegal | :x: |
 | Test Case 18 | king; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; diagonal overreach with `abs(dx) = 2` and `abs(dy) = 2` is illegal | :x: |

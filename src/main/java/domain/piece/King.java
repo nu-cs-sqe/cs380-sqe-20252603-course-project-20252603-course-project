@@ -16,6 +16,9 @@ public class King extends Piece {
     }
 
     public boolean isValidMoveShape(Location from, Location to) {
+        if (!isOnBoard(to)) {
+            return false;
+        }
         int dx = to.getX() - from.getX();
         int dy = to.getY() - from.getY();
         if (dx == 0 && dy == 0) {
@@ -28,5 +31,10 @@ public class King extends Piece {
             return false;
         }
         return true;
+    }
+
+    private boolean isOnBoard(Location location) {
+        return location.getX() >= 0 && location.getX() <= 7
+                && location.getY() >= 0 && location.getY() <= 7;
     }
 }

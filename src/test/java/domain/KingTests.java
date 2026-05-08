@@ -137,4 +137,11 @@ public class KingTests {
 
         assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(6, 6)));
     }
+
+    @Test
+    public void IsValidMoveShape_OneSquareFromMinCornerIntoBoard_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(0, 0), new Location(1, 0)));
+    }
 }

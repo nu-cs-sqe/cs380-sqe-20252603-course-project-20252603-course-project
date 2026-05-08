@@ -16,6 +16,12 @@ public class Pawn extends Piece {
     }
 
     public boolean isValidMoveShape(Location from, Location to) {
+        if (from == null) {
+            throw new IllegalArgumentException("from must not be null");
+        }
+        if (to == null) {
+            throw new IllegalArgumentException("to must not be null");
+        }
         if (!isOnBoard(from) || !isOnBoard(to)) {
             return false;
         }

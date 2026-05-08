@@ -98,4 +98,11 @@ public class PawnTests {
 
         assertEquals("color must not be null", exception.getMessage());
     }
+
+    @Test
+    public void PawnIsValidMoveShape_WhitePawnOffStartingRow_DoesNotAllowTwoSquaresForward() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        assertEquals(false, pawn.isValidMoveShape(new Location(4, 5), new Location(4, 3)));
+    }
 }

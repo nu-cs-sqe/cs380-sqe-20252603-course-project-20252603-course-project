@@ -173,4 +173,11 @@ public class KnightTests {
 
         assertFalse(knight.isValidMoveShape(new Location(7, 7), new Location(8, 5)));
     }
+
+    @Test
+    public void IsValidMoveShape_DestinationYAboveMaximum_ReturnsFalse() {
+        Knight knight = new Knight(PieceColor.WHITE);
+
+        assertFalse(knight.isValidMoveShape(new Location(7, 7), new Location(5, 8)));
+    }
 }

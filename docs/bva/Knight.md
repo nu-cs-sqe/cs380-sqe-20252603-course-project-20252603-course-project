@@ -46,38 +46,36 @@
 | Test Case 1 | constructor args: `color = BLACK`     | knight stores `type = KNIGHT`; knight stores `color = BLACK`        | :white_check_mark: |
 | Test Case 2 | constructor args: `color = WHITE`     | knight stores `type = KNIGHT`; knight stores `color = WHITE`        | :white_check_mark: |
 | Test Case 3 | constructor args: `color = null`      | `Knight(null)` throws `IllegalArgumentException` with message `"color must not be null"` | :white_check_mark: |
-| Test Case 4 | design-target constructor arg: `color = WHITE` | knight starts with `type = KNIGHT`, `color = WHITE`, and not-moved state | :x: |
-| Test Case 5 | design-target constructor arg: `color = BLACK` | knight starts with `type = KNIGHT`, `color = BLACK`, and not-moved state | :x: |
 
 
 ### Method under test: `makeCopy()`
 
 |             | System under test                 | Expected output                                                                                         | Implemented? |
 |-------------|-----------------------------------|---------------------------------------------------------------------------------------------------------|--------------|
-| Test Case 6 | knight: `Knight(BLACK)`           | return a distinct `Piece`; copied piece has `type = KNIGHT`; copied piece has `color = BLACK`           | :white_check_mark: |
-| Test Case 7 | knight: `Knight(WHITE)`           | return a distinct `Piece`; copied piece has `type = KNIGHT`; copied piece has `color = WHITE`           | :white_check_mark: |
-| Test Case 8 | knight: `Knight(null)`            | `Knight(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
+| Test Case 4 | knight: `Knight(BLACK)`           | return a distinct `Piece`; copied piece has `type = KNIGHT`; copied piece has `color = BLACK`           | :white_check_mark: |
+| Test Case 5 | knight: `Knight(WHITE)`           | return a distinct `Piece`; copied piece has `type = KNIGHT`; copied piece has `color = WHITE`           | :white_check_mark: |
+| Test Case 6 | knight: `Knight(null)`            | `Knight(null)` throws `IllegalArgumentException` with message `"color must not be null"`; null-color `makeCopy()` receiver state is not constructible | :white_check_mark: |
 
 
 ### Method under test: `isValidMoveShape(Location from, Location to)`
 
 |              | System under test | Expected output | Implemented? |
 |--------------|-------------------|-----------------|--------------|
-| Test Case 9  | knight; `from = Location(4, 4)`, `to = Location(5, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal | :white_check_mark: |
-| Test Case 10 | knight; `from = Location(4, 4)`, `to = Location(3, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite horizontal direction | :white_check_mark: |
-| Test Case 11 | knight; `from = Location(4, 4)`, `to = Location(5, 2)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite vertical direction | :white_check_mark: |
-| Test Case 12 | knight; `from = Location(4, 4)`, `to = Location(6, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal | :white_check_mark: |
-| Test Case 13 | knight; `from = Location(4, 4)`, `to = Location(2, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite horizontal direction | :white_check_mark: |
-| Test Case 14 | knight; `from = Location(4, 4)`, `to = Location(6, 3)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite vertical direction | :white_check_mark: |
-| Test Case 15 | knight; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a knight move | :white_check_mark: |
-| Test Case 16 | knight; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; straight vertical movement with `dx = 0` is illegal | :white_check_mark: |
-| Test Case 17 | knight; `from = Location(4, 4)`, `to = Location(5, 5)` | return `false`; one-square diagonal movement is illegal | :white_check_mark: |
-| Test Case 18 | knight; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; `2x2` movement is not an L-shape | :white_check_mark: |
-| Test Case 19 | knight; `from = Location(4, 4)`, `to = Location(7, 5)` | return `false`; `abs(dx) = 3` overreaches the L-shape boundary | :white_check_mark: |
-| Test Case 20 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(1, 2)` | return `true`; legal L-shape movement from a board edge into the board is allowed | :white_check_mark: |
-| Test Case 21 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 2)` | return `false`; destination just below minimum `x` is off-board | :white_check_mark: |
-| Test Case 22 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(2, -1)` | return `false`; destination just below minimum `y` is off-board | :white_check_mark: |
-| Test Case 23 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(8, 5)` | return `false`; destination just above maximum `x` is off-board | :white_check_mark: |
-| Test Case 24 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(5, 8)` | return `false`; destination just above maximum `y` is off-board | :white_check_mark: |
-| Test Case 25 | knight; `from = null`, `to = Location(5, 6)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
-| Test Case 26 | knight; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |
+| Test Case 7  | knight; `from = Location(4, 4)`, `to = Location(5, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal | :white_check_mark: |
+| Test Case 8  | knight; `from = Location(4, 4)`, `to = Location(3, 6)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite horizontal direction | :white_check_mark: |
+| Test Case 9  | knight; `from = Location(4, 4)`, `to = Location(5, 2)` | return `true`; `abs(dx) = 1` and `abs(dy) = 2` is legal in the opposite vertical direction | :white_check_mark: |
+| Test Case 10 | knight; `from = Location(4, 4)`, `to = Location(6, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal | :white_check_mark: |
+| Test Case 11 | knight; `from = Location(4, 4)`, `to = Location(2, 5)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite horizontal direction | :white_check_mark: |
+| Test Case 12 | knight; `from = Location(4, 4)`, `to = Location(6, 3)` | return `true`; `abs(dx) = 2` and `abs(dy) = 1` is legal in the opposite vertical direction | :white_check_mark: |
+| Test Case 13 | knight; `from = Location(4, 4)`, `to = Location(4, 4)` | return `false`; same-square movement is not a knight move | :white_check_mark: |
+| Test Case 14 | knight; `from = Location(4, 4)`, `to = Location(4, 6)` | return `false`; straight vertical movement with `dx = 0` is illegal | :white_check_mark: |
+| Test Case 15 | knight; `from = Location(4, 4)`, `to = Location(5, 5)` | return `false`; one-square diagonal movement is illegal | :white_check_mark: |
+| Test Case 16 | knight; `from = Location(4, 4)`, `to = Location(6, 6)` | return `false`; `2x2` movement is not an L-shape | :white_check_mark: |
+| Test Case 17 | knight; `from = Location(4, 4)`, `to = Location(7, 5)` | return `false`; `abs(dx) = 3` overreaches the L-shape boundary | :white_check_mark: |
+| Test Case 18 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(1, 2)` | return `true`; legal L-shape movement from a board edge into the board is allowed | :white_check_mark: |
+| Test Case 19 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(-1, 2)` | return `false`; destination just below minimum `x` is off-board | :white_check_mark: |
+| Test Case 20 | knight at minimum corner; `from = Location(0, 0)`, `to = Location(2, -1)` | return `false`; destination just below minimum `y` is off-board | :white_check_mark: |
+| Test Case 21 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(8, 5)` | return `false`; destination just above maximum `x` is off-board | :white_check_mark: |
+| Test Case 22 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(5, 8)` | return `false`; destination just above maximum `y` is off-board | :white_check_mark: |
+| Test Case 23 | knight; `from = null`, `to = Location(5, 6)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
+| Test Case 24 | knight; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |

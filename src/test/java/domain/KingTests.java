@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class KingTests {
     @Test
@@ -64,5 +65,12 @@ public class KingTests {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new King(null));
 
         assertEquals("color must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void IsValidMoveShape_OneSquareVerticalDown_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(4, 3)));
     }
 }

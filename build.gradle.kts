@@ -1,5 +1,11 @@
+import com.github.spotbugs.snom.Confidence
+import com.github.spotbugs.snom.Effort
+
 plugins {
     id("java")
+    checkstyle
+    id("com.github.spotbugs") version "6.0.25"
+    jacoco
 }
 
 group = "nu.csse.sqe"
@@ -26,4 +32,49 @@ tasks.compileJava {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.withType<Checkstyle>().configureEach {
+    reports {
+        xml.required = false
+        html.required = true
+        html.stylesheet = resources.text.fromFile("config/xsl/checkstyle-noframes-severity-sorted.xsl")
+    }
+}
+
+checkstyle {
+    config = resources.text.fromArchiveEntry(
+        configurations.checkstyle.get().filter { it.name.startsWith("checkstyle-") }.singleFile,
+        "google_checks.xml"
+    )
+    isIgnoreFailures = false
+}
+
+spotbugs {
+    ignoreFailures = true
+    showStackTraces = true
+    showProgress = true
+    effort = Effort.DEFAULT
+    reportLevel = Confidence.DEFAULT
+    reportsDir = file("spotbugs")
+    maxHeapSize = "1g"
+    extraArgs = listOf("-nested:false")
+}
+
+tasks.spotbugsMain {
+    reports.create("html") {
+        required = true
+        outputLocation = layout.buildDirectory.file("reports/spotbugs/spotbugs.html")
+        setStylesheet("fancy-hist.xsl")
+    }
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir("reports/jacoco")
+    }
 }

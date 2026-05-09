@@ -7,9 +7,11 @@ import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class KingTests {
     @Test
@@ -64,5 +66,137 @@ public class KingTests {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new King(null));
 
         assertEquals("color must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void IsValidMoveShape_OneSquareVerticalDown_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(4, 3)));
+    }
+
+    @Test
+    public void IsValidMoveShape_OneSquareVerticalUp_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(4, 5)));
+    }
+
+    @Test
+    public void IsValidMoveShape_OneSquareHorizontalRight_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(5, 4)));
+    }
+
+    @Test
+    public void IsValidMoveShape_OneSquareHorizontalLeft_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(3, 4)));
+    }
+
+    @Test
+    public void IsValidMoveShape_OneSquareDiagonal_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(5, 5)));
+    }
+
+    @Test
+    public void IsValidMoveShape_OneSquareDiagonalOpposite_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(4, 4), new Location(3, 3)));
+    }
+
+    @Test
+    public void IsValidMoveShape_SameSquare_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(4, 4)));
+    }
+
+    @Test
+    public void IsValidMoveShape_HorizontalOverreach_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(6, 4)));
+    }
+
+    @Test
+    public void IsValidMoveShape_VerticalOverreach_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(4, 6)));
+    }
+
+    @Test
+    public void IsValidMoveShape_DiagonalOverreach_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(6, 6)));
+    }
+
+    @Test
+    public void IsValidMoveShape_OneSquareFromMinCornerIntoBoard_ReturnsTrue() {
+        King king = new King(PieceColor.WHITE);
+
+        assertTrue(king.isValidMoveShape(new Location(0, 0), new Location(1, 0)));
+    }
+
+    @Test
+    public void IsValidMoveShape_DestinationBelowMinX_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(0, 0), new Location(-1, 0)));
+    }
+
+    @Test
+    public void IsValidMoveShape_DestinationAboveMaxX_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(7, 7), new Location(8, 7)));
+    }
+
+    @Test
+    public void IsValidMoveShape_DestinationAboveMaxY_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(7, 7), new Location(7, 8)));
+    }
+
+    @Test
+    public void IsValidMoveShape_FromNull_ThrowsIllegalArgumentException() {
+        King king = new King(PieceColor.WHITE);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> king.isValidMoveShape(null, new Location(4, 5)));
+
+        assertEquals("from must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void IsValidMoveShape_DestinationBelowMinY_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(0, 0), new Location(0, -1)));
+    }
+
+    @Test
+    public void IsValidMoveShape_ToNull_ThrowsIllegalArgumentException() {
+        King king = new King(PieceColor.WHITE);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> king.isValidMoveShape(new Location(4, 4), null));
+
+        assertEquals("to must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void IsValidMoveShape_NegativeHorizontalOverreach_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(2, 4)));
     }
 }

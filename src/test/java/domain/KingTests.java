@@ -192,4 +192,11 @@ public class KingTests {
 
         assertEquals("to must not be null", exception.getMessage());
     }
+
+    @Test
+    public void IsValidMoveShape_NegativeHorizontalOverreach_ReturnsFalse() {
+        King king = new King(PieceColor.WHITE);
+
+        assertFalse(king.isValidMoveShape(new Location(4, 4), new Location(2, 4)));
+    }
 }

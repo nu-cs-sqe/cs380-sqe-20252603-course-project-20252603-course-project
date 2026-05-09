@@ -78,4 +78,4 @@
 | Test Case 21 | king; `from = null`, `to = Location(4, 5)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
 | Test Case 22 | king; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |
 | Test Case 23 | king at minimum corner; `from = Location(0, 0)`, `to = Location(0, -1)` | return `false`; destination just below minimum `y` is off-board | :white_check_mark: |
-| Test Case 24 | king; `from = Location(4, 4)`, `to = Location(2, 4)` | return `false`; horizontal overreach with `dx = -2` (LOW-ε of delta interval) is illegal | :x: |
+| Test Case 24 | king; `from = Location(4, 4)`, `to = Location(2, 4)` | return `false`; horizontal overreach with `dx = -2` (LOW-ε of delta interval) is illegal | :white_check_mark: |

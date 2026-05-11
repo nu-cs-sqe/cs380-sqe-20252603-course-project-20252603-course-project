@@ -10,7 +10,7 @@
 - addCard(card) → void
 - removeCard(card) → void
 - hasCard(type) → boolean
-- getCardOfType(type) → Card or null
+- getCardOfType(type) → `Optional<Card>`; removes first matching card from hand if present
 - storePeek(cards) → void
 - clearPeek() → void
 
@@ -18,7 +18,7 @@
 
 - `Card` uses default `equals` / `hashCode`; `removeCard` removes by object identity (same reference as in the hand).
 - `storePeek` replaces the entire peek buffer; `null` argument is treated like an empty list (clears peek, adds nothing).
-- `getCardOfType` returns the first card in hand order that matches the type.
+- `getCardOfType` removes and returns the first card in hand order that matches the type; otherwise the hand is unchanged and the result is empty.
 
 ### Method under test: `Player(id, name)` (constructor)
 
@@ -61,13 +61,13 @@ spaces: empty hand; matching type present; no matching type
 
 ### Method under test: `getCardOfType()`
 
-spaces: no match; single match; multiple matches (first wins)
+spaces: no match; single match; multiple matches (first wins, removed only that card)
 
 | test_Name                                    | State of the System      | Expected output | Implemented?       |
 |----------------------------------------------|--------------------------|-----------------|--------------------|
-| getCardOfType_NoMatch_ReturnsNull            | hand has no such type    | null            | :white_check_mark: |
-| getCardOfType_OneMatch_ReturnsThatCard       | one matching card        | that reference  | :white_check_mark: |
-| getCardOfType_MultipleMatches_ReturnsFirst   | two matching, order known| first in hand   | :white_check_mark: |
+| getCardOfType_NoMatch_ReturnsEmptyOptional   | hand has no such type    | Optional.empty, hand unchanged | :white_check_mark: |
+| getCardOfType_OneMatch_ReturnsOptionalAndRemovesFromHand | one matching card | Optional.of(card), hand empty | :white_check_mark: |
+| getCardOfType_MultipleMatches_ReturnsFirstMatchingAndRemovesOnlyThatCard | two matching, order known | Optional.of(first), other cards remain in order | :white_check_mark: |
 
 ### Method under test: `storePeek()`
 

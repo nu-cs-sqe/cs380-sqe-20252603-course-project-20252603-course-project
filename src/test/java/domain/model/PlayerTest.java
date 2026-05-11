@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -109,29 +110,40 @@ public class PlayerTest {
     }
 
     @Test
-    void getCardOfType_NoMatch_ReturnsNull() {
+    void getCardOfType_NoMatch_ReturnsEmptyOptional() {
         Player player = new Player("p1", "Alice");
         player.addCard(skipCard());
-        assertNull(player.getCardOfType(CardType.DEFUSE));
+        Optional<Card> result = player.getCardOfType(CardType.DEFUSE);
+        assertTrue(result.isEmpty());
+        assertEquals(1, player.getHand().size());
     }
 
     @Test
-    void getCardOfType_OneMatch_ReturnsThatCard() {
+    void getCardOfType_OneMatch_ReturnsOptionalAndRemovesFromHand() {
         Player player = new Player("p1", "Alice");
         Card card = defuseCard();
         player.addCard(card);
-        assertSame(card, player.getCardOfType(CardType.DEFUSE));
+        Optional<Card> result = player.getCardOfType(CardType.DEFUSE);
+        assertTrue(result.isPresent());
+        assertSame(card, result.get());
+        assertTrue(player.getHand().isEmpty());
     }
 
     @Test
-    void getCardOfType_MultipleMatches_ReturnsFirst() {
+    void getCardOfType_MultipleMatches_ReturnsFirstMatchingAndRemovesOnlyThatCard() {
         Player player = new Player("p1", "Alice");
+        Card skip = skipCard();
         Card first = defuseCard();
         Card second = new Card(CardType.DEFUSE, CardName.DEFUSE, new NoAction());
-        player.addCard(skipCard());
+        player.addCard(skip);
         player.addCard(first);
         player.addCard(second);
-        assertSame(first, player.getCardOfType(CardType.DEFUSE));
+        Optional<Card> result = player.getCardOfType(CardType.DEFUSE);
+        assertTrue(result.isPresent());
+        assertSame(first, result.get());
+        assertEquals(2, player.getHand().size());
+        assertSame(skip, player.getHand().get(0));
+        assertSame(second, player.getHand().get(1));
     }
 
     @Test

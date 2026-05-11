@@ -59,6 +59,33 @@ public class PlayerTest {
     }
 
     @Test
+    void removeCard_CardInHand_RemovesCard() {
+        Player player = new Player("p1", "Alice");
+        Card card = defuseCard();
+        player.addCard(card);
+        player.removeCard(card);
+        assertTrue(player.getHand().isEmpty());
+    }
+
+    @Test
+    void removeCard_CardNotInHand_Unchanged() {
+        Player player = new Player("p1", "Alice");
+        Card inHand = defuseCard();
+        Card other = new Card(CardType.DEFUSE, CardName.DEFUSE, new DefuseAction());
+        player.addCard(inHand);
+        player.removeCard(other);
+        assertEquals(1, player.getHand().size());
+        assertSame(inHand, player.getHand().get(0));
+    }
+
+    @Test
+    void removeCard_EmptyHand_DoesNothing() {
+        Player player = new Player("p1", "Alice");
+        assertDoesNotThrow(() -> player.removeCard(defuseCard()));
+        assertTrue(player.getHand().isEmpty());
+    }
+
+    @Test
     void getHand_IsUnmodifiable() {
         Player player = new Player("p1", "Alice");
         assertThrows(UnsupportedOperationException.class, () -> player.getHand().add(defuseCard()));

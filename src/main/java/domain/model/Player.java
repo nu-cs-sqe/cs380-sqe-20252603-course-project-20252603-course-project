@@ -38,7 +38,9 @@ public class Player {
         hand.add(card);
     }
 
-    public void removeCard(Card card) {}
+    public void removeCard(Card card) {
+        hand.remove(card);
+    }
 
     public boolean hasCard(CardType type) {
         return false;

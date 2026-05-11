@@ -45,9 +45,9 @@ spaces: card reference in hand or not; hand empty or not
 
 | test_Name                              | State of the System        | Expected output     | Implemented?       |
 |----------------------------------------|----------------------------|---------------------|--------------------|
-| removeCard_CardInHand_RemovesCard      | same ref in hand           | hand no longer contains card | :x: |
-| removeCard_CardNotInHand_Unchanged     | different ref, same fields | hand unchanged      | :x: |
-| removeCard_EmptyHand_DoesNothing       | empty hand, remove call    | still empty         | :x: |
+| removeCard_CardInHand_RemovesCard      | same ref in hand           | hand no longer contains card | :white_check_mark: |
+| removeCard_CardNotInHand_Unchanged     | different ref, same fields | hand unchanged      | :white_check_mark: |
+| removeCard_EmptyHand_DoesNothing       | empty hand, remove call    | still empty         | :white_check_mark: |
 
 ### Method under test: `hasCard()`
 

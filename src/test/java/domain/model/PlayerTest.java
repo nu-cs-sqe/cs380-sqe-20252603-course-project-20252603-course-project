@@ -86,6 +86,26 @@ public class PlayerTest {
     }
 
     @Test
+    void hasCard_EmptyHand_ReturnsFalse() {
+        Player player = new Player("p1", "Alice");
+        assertFalse(player.hasCard(CardType.DEFUSE));
+    }
+
+    @Test
+    void hasCard_MatchingType_ReturnsTrue() {
+        Player player = new Player("p1", "Alice");
+        player.addCard(defuseCard());
+        assertTrue(player.hasCard(CardType.DEFUSE));
+    }
+
+    @Test
+    void hasCard_NoMatchingType_ReturnsFalse() {
+        Player player = new Player("p1", "Alice");
+        player.addCard(skipCard());
+        assertFalse(player.hasCard(CardType.DEFUSE));
+    }
+
+    @Test
     void getHand_IsUnmodifiable() {
         Player player = new Player("p1", "Alice");
         assertThrows(UnsupportedOperationException.class, () -> player.getHand().add(defuseCard()));

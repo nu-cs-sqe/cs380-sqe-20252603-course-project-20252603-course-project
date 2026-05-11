@@ -55,9 +55,9 @@ spaces: empty hand; matching type present; no matching type
 
 | test_Name                           | State of the System   | Expected output | Implemented?       |
 |-------------------------------------|-----------------------|-----------------|--------------------|
-| hasCard_EmptyHand_ReturnsFalse      | empty hand            | false           | :x: |
-| hasCard_MatchingType_ReturnsTrue    | hand has that type    | true            | :x: |
-| hasCard_NoMatchingType_ReturnsFalse | hand has other types  | false           | :x: |
+| hasCard_EmptyHand_ReturnsFalse      | empty hand            | false           | :white_check_mark: |
+| hasCard_MatchingType_ReturnsTrue    | hand has that type    | true            | :white_check_mark: |
+| hasCard_NoMatchingType_ReturnsFalse | hand has other types  | false           | :white_check_mark: |
 
 ### Method under test: `getCardOfType()`
 

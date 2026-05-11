@@ -34,7 +34,9 @@ public class Player {
         return Collections.unmodifiableList(peekCards);
     }
 
-    public void addCard(Card card) {}
+    public void addCard(Card card) {
+        hand.add(card);
+    }
 
     public void removeCard(Card card) {}
 

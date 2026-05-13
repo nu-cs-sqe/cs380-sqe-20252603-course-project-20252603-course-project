@@ -115,7 +115,7 @@ The BVA below targets the current implementation contract visible in the source.
 |-------------|-------------------|-----------------|--------------------|
 | Test Case 14 | initialized board; call `getSnapshot()` | returns non-null `Piece[][]` | :white_check_mark: |
 | Test Case 15 | initialized board; call `getSnapshot()` | returned snapshot dimensions are `8 x 8` | :white_check_mark: |
-| Test Case 16 | snapshot at `(0,0)` | contains `Rook(BLACK)` | :x:                |
+| Test Case 16 | snapshot at `(0,0)` | contains `Rook(BLACK)` | :white_check_mark: |
 | Test Case 17 | snapshot at `(7,4)` | contains `King(WHITE)` | :x:                |
 | Test Case 18 | snapshot at `(3,3)` | contains `null` because middle squares are empty | :x:                |
 | Test Case 19 | snapshot piece copy at `(0,0)` | snapshot rook is not the same reference as internal rook | :x:                |

@@ -168,4 +168,15 @@ public class BoardTests {
         assertEquals(8, snapshot.length);
         assertEquals(8, snapshot[0].length);
     }
+
+    @Test
+    void rookAt00IsBlack() {
+        Board board = new Board();
+
+        Piece[][] s = board.getSnapshot();
+
+        assertNotNull(s[0][0]);
+        assertEquals(PieceType.ROOK, s[0][0].getType());
+        assertEquals(PieceColor.BLACK, s[0][0].getColor());
+    }
 }

@@ -211,4 +211,16 @@ public class BoardTests {
 
         assertNotSame(original, copy);
     }
+
+    @Test
+    void knightCopyPreservesTypeAndColor() {
+        Board board = new Board();
+
+        Piece[][] s = board.getSnapshot();
+
+        Piece knight = s[0][1];
+
+        assertEquals(PieceType.KNIGHT, knight.getType());
+        assertEquals(PieceColor.BLACK, knight.getColor());
+    }
 }

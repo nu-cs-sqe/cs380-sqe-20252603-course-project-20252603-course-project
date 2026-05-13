@@ -28,4 +28,14 @@ public class GameStatsViewTests {
 
         assertEquals(4, view.getComponentCount());
     }
+
+    @Test
+    void player1LabelCorrect() {
+        GameStatsView view = new GameStatsView("Alice", "Bob");
+
+        JLabel label = (JLabel) view.getComponent(1);
+
+        assertTrue(label.getText().contains("Alice"));
+        assertTrue(label.getText().contains("White"));
+    }
 }

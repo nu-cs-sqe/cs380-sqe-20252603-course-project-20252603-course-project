@@ -5,6 +5,8 @@ import ui.GameStatsView;
 
 import javax.swing.*;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameStatsViewTests {
@@ -56,5 +58,21 @@ public class GameStatsViewTests {
         JLabel label = (JLabel) view.getComponent(3);
 
         assertTrue(label.getText().contains("Alice"));
+    }
+
+    @Test
+    void labelsHaveStyling() {
+        GameStatsView view = new GameStatsView("Alice", "Bob");
+
+        JLabel label = (JLabel) view.getComponent(0);
+
+        assertEquals(new Font("Arial", Font.BOLD, 30), label.getFont());
+    }
+
+    @Test
+    void backgroundColorCorrect() {
+        GameStatsView view = new GameStatsView("Alice", "Bob");
+
+        assertEquals(new Color(104, 76, 150), view.getBackground());
     }
 }

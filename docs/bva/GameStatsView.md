@@ -103,7 +103,7 @@ The BVA below targets the constructor behavior and UI rendering contract visible
 | Test Case 3 | constructor call | panel contains exactly 4 components | :white_check_mark: |
 | Test Case 4 | constructor call | player 1 label contains `"Alice"` and `"White"` | :white_check_mark: |
 | Test Case 5 | constructor call | player 2 label contains `"Bob"` and `"Black"` | :white_check_mark: |
-| Test Case 6 | constructor call | current player label initially displays player 1 name | :x:                |
+| Test Case 6 | constructor call | current player label initially displays player 1 name | :white_check_mark: |
 | Test Case 7 | constructor call | background color is `(104, 76, 150)` | :x:                |
 | Test Case 8 | constructor call | panel is opaque | :x:                |
 | Test Case 9 | constructor with empty string inputs | labels still render structurally (no crash) | :x:                |

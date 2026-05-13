@@ -1,6 +1,7 @@
 package ui;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GameStatsView extends JPanel {
     public GameStatsView(String player1Name, String player2Name) {
@@ -22,5 +23,9 @@ public class GameStatsView extends JPanel {
         add(player1Label);
         add(player2Label);
         add(currentPlayerLabel);
+
+        playerInfoLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        playerInfoLabel.setForeground(Color.WHITE);
+        setBackground(new Color(104, 76, 150));
     }
 }

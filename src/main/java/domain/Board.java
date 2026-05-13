@@ -1,13 +1,37 @@
 package domain;
 
-import domain.piece.Piece;
+import domain.piece.*;
+
+import static domain.piece.PieceColor.BLACK;
 
 public class Board {
-    public Board() {
 
+    private final int TOTAL_ROWS = 8;
+    private final int TOTAL_COLS = 8;
+
+    private Piece[][] pieces;
+
+    public Board() {
+        initializeBoard();
+    }
+
+    private void initializeBoard() {
+        pieces = new Piece[TOTAL_ROWS][TOTAL_COLS];
+
+        for (int i = 0; i < TOTAL_COLS; i++) {
+            pieces[1][i] = new Pawn(BLACK);
+        }
     }
 
     public Piece[][] getSnapshot() {
-        return new Piece[8][8];
+        Piece[][] snapshot = new Piece[TOTAL_ROWS][TOTAL_COLS];
+
+        for (int i = 0; i < TOTAL_ROWS; i++) {
+            for (int j = 0; j < TOTAL_COLS; j++) {
+                snapshot[i][j] = pieces[i][j];
+            }
+        }
+
+        return snapshot;
     }
 }

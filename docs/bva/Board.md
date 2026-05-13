@@ -119,6 +119,6 @@ The BVA below targets the current implementation contract visible in the source.
 | Test Case 17 | snapshot at `(7,4)` | contains `King(WHITE)` | :white_check_mark: |
 | Test Case 18 | snapshot at `(3,3)` | contains `null` because middle squares are empty | :white_check_mark: |
 | Test Case 19 | snapshot piece copy at `(0,0)` | snapshot rook is not the same reference as internal rook | :white_check_mark: |
-| Test Case 20 | snapshot piece copy at `(7,1)` | copied knight preserves `PieceType = KNIGHT` and `PieceColor = WHITE` | :x:                |
-| Test Case 21 | modify returned snapshot reference at `(0,0)` | original board state remains unchanged on future snapshots | :x:                |
+| Test Case 20 | snapshot piece copy at `(7,1)` | copied knight preserves `PieceType = KNIGHT` and `PieceColor = WHITE` | :white_check_mark: |
+| Test Case 21 | modify returned snapshot reference at `(0,0)` | original board state remains unchanged on future snapshots | :white_check_mark: |
 | Test Case 22 | two successive calls to `getSnapshot()` | corresponding non-null pieces are distinct object references across snapshots | :x:                |

@@ -223,4 +223,17 @@ public class BoardTests {
         assertEquals(PieceType.KNIGHT, knight.getType());
         assertEquals(PieceColor.BLACK, knight.getColor());
     }
+
+    @Test
+    void modifyingSnapshotDoesNotChangeBoard() {
+        Board board = new Board();
+
+        Piece[][] s = board.getSnapshot();
+
+        s[0][0] = null; // attempt to modify snapshot
+
+        Piece[][] s2 = board.getSnapshot();
+
+        assertNotNull(s2[0][0]); // board must still be intact
+    }
 }

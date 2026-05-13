@@ -3,7 +3,11 @@ package domain;
 import domain.piece.Piece;
 
 public class Board {
+    public Board() {
+
+    }
+
     public Piece[][] getSnapshot() {
-        return null;
+        return new Piece[8][8];
     }
 }

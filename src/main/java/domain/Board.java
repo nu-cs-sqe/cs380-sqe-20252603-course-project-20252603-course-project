@@ -3,6 +3,7 @@ package domain;
 import domain.piece.*;
 
 import static domain.piece.PieceColor.BLACK;
+import static domain.piece.PieceColor.WHITE;
 
 public class Board {
 
@@ -20,6 +21,7 @@ public class Board {
 
         for (int i = 0; i < TOTAL_COLS; i++) {
             pieces[1][i] = new Pawn(BLACK);
+            pieces[6][i] = new Pawn(WHITE);
         }
     }
 

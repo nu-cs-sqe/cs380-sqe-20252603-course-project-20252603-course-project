@@ -9,6 +9,11 @@ public class MainTests {
     }
 
     @Test
+    void mainHandlesUnusedArgs() {
+        Main.main(new String[]{"test"});
+    }
+
+    @Test
     void mainHandlesNullArgs() {
         Main.main(null);
     }

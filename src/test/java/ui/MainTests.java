@@ -17,4 +17,9 @@ public class MainTests {
     void mainHandlesNullArgs() {
         Main.main(null);
     }
+
+    @Test
+    void mainCreatesView() {
+        Main.main(new String[]{});
+    }
 }

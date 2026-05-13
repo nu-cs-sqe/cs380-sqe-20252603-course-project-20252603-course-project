@@ -38,4 +38,23 @@ public class GameStatsViewTests {
         assertTrue(label.getText().contains("Alice"));
         assertTrue(label.getText().contains("White"));
     }
+
+    @Test
+    void player2LabelCorrect() {
+        GameStatsView view = new GameStatsView("Alice", "Bob");
+
+        JLabel label = (JLabel) view.getComponent(2);
+
+        assertTrue(label.getText().contains("Bob"));
+        assertTrue(label.getText().contains("Black"));
+    }
+
+    @Test
+    void currentPlayerStartsAsPlayer1() {
+        GameStatsView view = new GameStatsView("Alice", "Bob");
+
+        JLabel label = (JLabel) view.getComponent(3);
+
+        assertTrue(label.getText().contains("Alice"));
+    }
 }

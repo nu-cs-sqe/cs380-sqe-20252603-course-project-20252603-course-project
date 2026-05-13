@@ -101,8 +101,8 @@ The BVA below targets the constructor behavior and UI rendering contract visible
 | Test Case 1 | `new GameStatsView("Alice", "Bob")` | panel is created successfully | :white_check_mark: |
 | Test Case 2 | constructor call | layout is `BoxLayout` with `Y_AXIS` orientation | :white_check_mark: |
 | Test Case 3 | constructor call | panel contains exactly 4 components | :white_check_mark: |
-| Test Case 4 | constructor call | player 1 label contains `"Alice"` and `"White"` | :x:                |
-| Test Case 5 | constructor call | player 2 label contains `"Bob"` and `"Black"` | :x:                |
+| Test Case 4 | constructor call | player 1 label contains `"Alice"` and `"White"` | :white_check_mark: |
+| Test Case 5 | constructor call | player 2 label contains `"Bob"` and `"Black"` | :white_check_mark: |
 | Test Case 6 | constructor call | current player label initially displays player 1 name | :x:                |
 | Test Case 7 | constructor call | background color is `(104, 76, 150)` | :x:                |
 | Test Case 8 | constructor call | panel is opaque | :x:                |

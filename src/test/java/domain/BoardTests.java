@@ -38,4 +38,17 @@ public class BoardTests {
             assertEquals(PieceColor.BLACK, snapshot[1][i].getColor());
         }
     }
+
+    @Test
+    void whitePawnsInitializedCorrectly() {
+        Board board = new Board();
+
+        Piece[][] snapshot = board.getSnapshot();
+
+        for (int i = 0; i < 8; i++) {
+            assertNotNull(snapshot[6][i]);
+            assertEquals(PieceType.PAWN, snapshot[6][i].getType());
+            assertEquals(PieceColor.WHITE, snapshot[6][i].getColor());
+        }
+    }
 }

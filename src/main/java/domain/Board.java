@@ -29,6 +29,11 @@ public class Board {
 
         pieces[7][0] = new Rook(WHITE);
         pieces[7][7] = new Rook(WHITE);
+
+        pieces[0][1] = new Knight(BLACK);
+        pieces[0][6] = new Knight(BLACK);
+        pieces[7][1] = new Knight(WHITE);
+        pieces[7][6] = new Knight(WHITE);
     }
 
     public Piece[][] getSnapshot() {

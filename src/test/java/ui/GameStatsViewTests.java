@@ -1,7 +1,6 @@
-package domain;
+package ui;
 
 import org.junit.jupiter.api.Test;
-import ui.GameStatsView;
 
 import javax.swing.*;
 

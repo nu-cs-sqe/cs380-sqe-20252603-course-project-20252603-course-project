@@ -51,7 +51,9 @@ public class Board {
 
         for (int i = 0; i < TOTAL_ROWS; i++) {
             for (int j = 0; j < TOTAL_COLS; j++) {
-                snapshot[i][j] = pieces[i][j];
+                if (pieces[i][j] != null) {
+                    snapshot[i][j] = pieces[i][j].makeCopy();
+                }
             }
         }
 

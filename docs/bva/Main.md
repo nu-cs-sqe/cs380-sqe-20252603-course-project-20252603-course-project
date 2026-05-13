@@ -88,4 +88,4 @@ The BVA below targets the current UI-launching contract visible in the source.
 | Test Case 3 | `main(null)` | application launches without exception | :white_check_mark: |
 | Test Case 4 | application startup | `WelcomeView` instance is created | :white_check_mark: |
 | Test Case 5 | application startup | `WelcomeView` becomes visible via `setVisible(true)` | :white_check_mark: |
-| Test Case 6 | application startup | UI launch is delegated through `SwingUtilities.invokeLater(...)` | :x:                |
+| Test Case 6 | application startup | UI launch is delegated through `SwingUtilities.invokeLater(...)` | :white_check_mark: |

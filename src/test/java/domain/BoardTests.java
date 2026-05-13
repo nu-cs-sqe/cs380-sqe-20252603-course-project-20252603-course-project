@@ -115,4 +115,23 @@ public class BoardTests {
         assertEquals(PieceType.BISHOP, snapshot[7][5].getType());
         assertEquals(PieceColor.WHITE, snapshot[7][5].getColor());
     }
+
+    @Test
+    void queensAndKingsInitializedCorrectly() {
+        Board board = new Board();
+
+        Piece[][] snapshot = board.getSnapshot();
+
+        assertEquals(PieceType.QUEEN, snapshot[0][3].getType());
+        assertEquals(PieceColor.BLACK, snapshot[0][3].getColor());
+
+        assertEquals(PieceType.KING, snapshot[0][4].getType());
+        assertEquals(PieceColor.BLACK, snapshot[0][4].getColor());
+
+        assertEquals(PieceType.QUEEN, snapshot[7][3].getType());
+        assertEquals(PieceColor.WHITE, snapshot[7][3].getColor());
+
+        assertEquals(PieceType.KING, snapshot[7][4].getType());
+        assertEquals(PieceColor.WHITE, snapshot[7][4].getColor());
+    }
 }

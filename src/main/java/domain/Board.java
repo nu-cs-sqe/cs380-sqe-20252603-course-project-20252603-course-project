@@ -39,6 +39,8 @@ public class Board {
         pieces[0][5] = new Bishop(BLACK);
         pieces[7][2] = new Bishop(WHITE);
         pieces[7][5] = new Bishop(WHITE);
+
+
     }
 
     public Piece[][] getSnapshot() {

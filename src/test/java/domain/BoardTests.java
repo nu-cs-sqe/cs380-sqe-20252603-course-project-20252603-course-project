@@ -190,4 +190,13 @@ public class BoardTests {
         assertEquals(PieceType.KING, s[7][4].getType());
         assertEquals(PieceColor.WHITE, s[7][4].getColor());
     }
+
+    @Test
+    void middleSquareIsEmpty() {
+        Board board = new Board();
+
+        Piece[][] s = board.getSnapshot();
+
+        assertNull(s[3][3]);
+    }
 }

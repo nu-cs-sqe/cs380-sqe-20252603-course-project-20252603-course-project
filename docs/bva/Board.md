@@ -99,8 +99,8 @@ The BVA below targets the current implementation contract visible in the source.
 | Test Case 4 | board initialization | white pawns exist at row `6`, cols `0..7` | :white_check_mark: |
 | Test Case 5 | board initialization | black rooks exist at `(0,0)` and `(0,7)` | :white_check_mark: |
 | Test Case 6 | board initialization | white rooks exist at `(7,0)` and `(7,7)` | :white_check_mark: |
-| Test Case 7 | board initialization | black knights exist at `(0,1)` and `(0,6)` | :x:                |
-| Test Case 8 | board initialization | white knights exist at `(7,1)` and `(7,6)` | :x:                |
+| Test Case 7 | board initialization | black knights exist at `(0,1)` and `(0,6)` | :white_check_mark: |
+| Test Case 8 | board initialization | white knights exist at `(7,1)` and `(7,6)` | :white_check_mark: |
 | Test Case 9 | board initialization | black bishops exist at `(0,2)` and `(0,5)` | :x:                |
 | Test Case 10 | board initialization | white bishops exist at `(7,2)` and `(7,5)` | :x:                |
 | Test Case 11 | board initialization | black queen at `(0,3)` and black king at `(0,4)` | :x:                |

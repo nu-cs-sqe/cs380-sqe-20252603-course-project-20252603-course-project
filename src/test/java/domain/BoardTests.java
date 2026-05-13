@@ -158,4 +158,14 @@ public class BoardTests {
 
         assertNotSame(snapshot1[0][0], snapshot2[0][0]);
     }
+
+    @Test
+    void snapshotDimensionsAre8x8() {
+        Board board = new Board();
+
+        Piece[][] snapshot = board.getSnapshot();
+
+        assertEquals(8, snapshot.length);
+        assertEquals(8, snapshot[0].length);
+    }
 }

@@ -40,7 +40,10 @@ public class Board {
         pieces[7][2] = new Bishop(WHITE);
         pieces[7][5] = new Bishop(WHITE);
 
-
+        pieces[0][3] = new Queen(BLACK);
+        pieces[0][4] = new King(BLACK);
+        pieces[7][3] = new Queen(WHITE);
+        pieces[7][4] = new King(WHITE);
     }
 
     public Piece[][] getSnapshot() {

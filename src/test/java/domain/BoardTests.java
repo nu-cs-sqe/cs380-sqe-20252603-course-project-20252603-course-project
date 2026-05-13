@@ -64,4 +64,17 @@ public class BoardTests {
         assertEquals(PieceType.ROOK, snapshot[0][7].getType());
         assertEquals(PieceColor.BLACK, snapshot[0][7].getColor());
     }
+
+    @Test
+    void whiteRooksInitializedCorrectly() {
+        Board board = new Board();
+
+        Piece[][] snapshot = board.getSnapshot();
+
+        assertEquals(PieceType.ROOK, snapshot[7][0].getType());
+        assertEquals(PieceColor.WHITE, snapshot[7][0].getColor());
+
+        assertEquals(PieceType.ROOK, snapshot[7][7].getType());
+        assertEquals(PieceColor.WHITE, snapshot[7][7].getColor());
+    }
 }

@@ -34,6 +34,11 @@ public class Board {
         pieces[0][6] = new Knight(BLACK);
         pieces[7][1] = new Knight(WHITE);
         pieces[7][6] = new Knight(WHITE);
+
+        pieces[0][2] = new Bishop(BLACK);
+        pieces[0][5] = new Bishop(BLACK);
+        pieces[7][2] = new Bishop(WHITE);
+        pieces[7][5] = new Bishop(WHITE);
     }
 
     public Piece[][] getSnapshot() {

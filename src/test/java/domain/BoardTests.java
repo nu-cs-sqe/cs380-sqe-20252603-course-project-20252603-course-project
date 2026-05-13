@@ -236,4 +236,14 @@ public class BoardTests {
 
         assertNotNull(s2[0][0]); // board must still be intact
     }
+
+    @Test
+    void multipleSnapshotsAreIndependent() {
+        Board board = new Board();
+
+        Piece[][] s1 = board.getSnapshot();
+        Piece[][] s2 = board.getSnapshot();
+
+        assertNotSame(s1[0][0], s2[0][0]);
+    }
 }

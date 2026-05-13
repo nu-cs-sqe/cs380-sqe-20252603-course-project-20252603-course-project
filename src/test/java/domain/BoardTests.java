@@ -179,4 +179,15 @@ public class BoardTests {
         assertEquals(PieceType.ROOK, s[0][0].getType());
         assertEquals(PieceColor.BLACK, s[0][0].getColor());
     }
+
+    @Test
+    void kingAt74IsWhite() {
+        Board board = new Board();
+
+        Piece[][] s = board.getSnapshot();
+
+        assertNotNull(s[7][4]);
+        assertEquals(PieceType.KING, s[7][4].getType());
+        assertEquals(PieceColor.WHITE, s[7][4].getColor());
+    }
 }

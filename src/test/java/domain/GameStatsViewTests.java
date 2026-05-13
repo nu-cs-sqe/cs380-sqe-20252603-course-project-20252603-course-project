@@ -21,4 +21,11 @@ public class GameStatsViewTests {
 
         assertTrue(view.getLayout() instanceof BoxLayout);
     }
+
+    @Test
+    void hasFourComponents() {
+        GameStatsView view = new GameStatsView("Alice", "Bob");
+
+        assertEquals(4, view.getComponentCount());
+    }
 }

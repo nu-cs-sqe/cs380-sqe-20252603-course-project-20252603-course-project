@@ -82,4 +82,18 @@ public class GameStatsViewTests {
 
         assertEquals("Player Information", ((JLabel) view.getComponent(0)).getText());
     }
+
+    @Test
+    void nullNamesDoNotCrash() {
+        GameStatsView view = new GameStatsView(null, "Bob");
+
+        assertNotNull(view);
+    }
+
+    @Test
+    void currentPlayerLabelAccessible() {
+        GameStatsView view = new GameStatsView("Alice", "Bob");
+
+        assertNotNull(view.currentPlayerLabel);
+    }
 }

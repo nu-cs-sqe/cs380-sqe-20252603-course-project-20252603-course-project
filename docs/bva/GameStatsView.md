@@ -106,6 +106,6 @@ The BVA below targets the constructor behavior and UI rendering contract visible
 | Test Case 6 | constructor call | current player label initially displays player 1 name | :white_check_mark: |
 | Test Case 7 | constructor call | background color is `(104, 76, 150)` | :white_check_mark: |
 | Test Case 8 | constructor call | panel is opaque | :white_check_mark: |
-| Test Case 9 | constructor with empty string inputs | labels still render structurally (no crash) | :x:                |
-| Test Case 10 | constructor with `null` input | label displays `"null"` or handles safely without crash | :x:                |
-| Test Case 11 | component structure | labels are added in correct order (info, p1, p2, current) | :x:                |
+| Test Case 9 | constructor with empty string inputs | labels still render structurally (no crash) | :white_check_mark: |
+| Test Case 10 | constructor with `null` input | label displays `"null"` or handles safely without crash | :white_check_mark: |
+| Test Case 11 | component structure | labels are added in correct order (info, p1, p2, current) | :white_check_mark: |

@@ -7,4 +7,9 @@ public class MainTests {
     void mainRunsWithoutCrash() {
         Main.main(new String[]{});
     }
+
+    @Test
+    void mainHandlesNullArgs() {
+        Main.main(null);
+    }
 }

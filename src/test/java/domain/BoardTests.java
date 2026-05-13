@@ -199,4 +199,16 @@ public class BoardTests {
 
         assertNull(s[3][3]);
     }
+
+    @Test
+    void snapshotPiecesAreCopiedNotSameReference() {
+        Board board = new Board();
+
+        Piece[][] s = board.getSnapshot();
+
+        Piece original = board.getSnapshot()[0][0];
+        Piece copy = s[0][0];
+
+        assertNotSame(original, copy);
+    }
 }

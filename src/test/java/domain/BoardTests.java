@@ -147,4 +147,15 @@ public class BoardTests {
             }
         }
     }
+
+    // now testing snapshot vs initialization
+    @Test
+    void snapshotContainsCopiedPieces() {
+        Board board = new Board();
+
+        Piece[][] snapshot1 = board.getSnapshot();
+        Piece[][] snapshot2 = board.getSnapshot();
+
+        assertNotSame(snapshot1[0][0], snapshot2[0][0]);
+    }
 }

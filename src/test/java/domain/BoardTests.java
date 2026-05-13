@@ -134,4 +134,17 @@ public class BoardTests {
         assertEquals(PieceType.KING, snapshot[7][4].getType());
         assertEquals(PieceColor.WHITE, snapshot[7][4].getColor());
     }
+
+    @Test
+    void middleRowsAreEmpty() {
+        Board board = new Board();
+
+        Piece[][] snapshot = board.getSnapshot();
+
+        for (int row = 2; row <= 5; row++) {
+            for (int col = 0; col < 8; col++) {
+                assertNull(snapshot[row][col]);
+            }
+        }
+    }
 }

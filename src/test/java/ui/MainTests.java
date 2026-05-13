@@ -2,6 +2,10 @@ package ui;
 
 import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 public class MainTests {
     @Test
     void mainRunsWithoutCrash() {
@@ -21,5 +25,14 @@ public class MainTests {
     @Test
     void mainCreatesView() {
         Main.main(new String[]{});
+    }
+
+    @Test
+    void welcomeViewIsVisible() {
+        SwingUtilities.invokeLater(() -> {
+            Main.main(new String[]{});
+
+            assertDoesNotThrow(() -> new WelcomeView().setVisible(true));
+        });
     }
 }

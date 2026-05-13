@@ -99,7 +99,7 @@ The BVA below targets the constructor behavior and UI rendering contract visible
 |             | System under test | Expected output | Implemented?       |
 |-------------|-------------------|-----------------|--------------------|
 | Test Case 1 | `new GameStatsView("Alice", "Bob")` | panel is created successfully | :white_check_mark: |
-| Test Case 2 | constructor call | layout is `BoxLayout` with `Y_AXIS` orientation | :x:                |
+| Test Case 2 | constructor call | layout is `BoxLayout` with `Y_AXIS` orientation | :white_check_mark: |
 | Test Case 3 | constructor call | panel contains exactly 4 components | :x:                |
 | Test Case 4 | constructor call | player 1 label contains `"Alice"` and `"White"` | :x:                |
 | Test Case 5 | constructor call | player 2 label contains `"Bob"` and `"Black"` | :x:                |

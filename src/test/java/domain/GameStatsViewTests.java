@@ -75,4 +75,11 @@ public class GameStatsViewTests {
 
         assertEquals(new Color(104, 76, 150), view.getBackground());
     }
+
+    @Test
+    void labelsAreInCorrectOrder() {
+        GameStatsView view = new GameStatsView("Alice", "Bob");
+
+        assertEquals("Player Information", ((JLabel) view.getComponent(0)).getText());
+    }
 }

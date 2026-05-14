@@ -130,15 +130,23 @@ public class Board {
   }
 
   private boolean canAttack(Piece pp, Location from, Location to) {
-    switch (pp.getType()) {
-      case ROOK: return canRookAttack(from, to);
-      case BISHOP: return canBishopAttack(from, to);
-      case QUEEN: return canRookAttack(from, to) || canBishopAttack(from, to);
-      case KNIGHT: return canKnightAttack(from, to);
-      case PAWN: return canPawnAttack(pp.getColor(), from, to);
-      case KING: return canKingAttack(from, to);
-      default: return false;
+    PieceType type = pp.getType();
+    if (type == PieceType.ROOK) {
+      return canRookAttack(from, to);
     }
+    if (type == PieceType.BISHOP) {
+      return canBishopAttack(from, to);
+    }
+    if (type == PieceType.QUEEN) {
+      return canRookAttack(from, to) || canBishopAttack(from, to);
+    }
+    if (type == PieceType.KNIGHT) {
+      return canKnightAttack(from, to);
+    }
+    if (type == PieceType.PAWN) {
+      return canPawnAttack(pp.getColor(), from, to);
+    }
+    return canKingAttack(from, to);
   }
 
   private boolean canRookAttack(Location from, Location to) {

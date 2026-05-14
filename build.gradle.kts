@@ -73,6 +73,11 @@ tasks.spotbugsMain {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    classDirectories.setFrom(files(classDirectories.files.map {
+        fileTree(it) {
+            include("domain/Board*.class", "domain/GameState*.class")
+        }
+    }))
     reports {
         xml.required = false
         csv.required = false

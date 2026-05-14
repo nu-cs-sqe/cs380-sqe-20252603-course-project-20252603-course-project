@@ -7,7 +7,7 @@
 5. [done] Tallie: One Turn of the Game: Linter Setup and Team Cleanup Coordination (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/21)
 6. [done] Tallie: One Turn of the Game: Turn Handoff and Move History Flow (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/24)
 7. [not started] Trenton: Task (Links to PR)
-8. [not started] Reed: Task (Links to PR)
+8. [done] Reed: Attended group meeting.
 
 # Week 5 (4/27/2026-5/03/2026) 
 **Planning and Progress Tracking**:

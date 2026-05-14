@@ -90,12 +90,12 @@ Simulates a candidate move and rejects it if the current player's king would be 
 
 |       | System under test                                                                                                                | Expected output                                                              | Implemented? |
 |-------|----------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|--------------|
-| TC 35 | `from = null`; `to` is a valid location                                                                                          | throws `IllegalArgumentException` with message `"from must not be null"`     | :x:          |
-| TC 36 | `from` is a valid location; `to = null`                                                                                          | throws `IllegalArgumentException` with message `"to must not be null"`       | :x:          |
-| TC 37 | board where moving the piece at `from` to `to` does NOT leave own king in check (e.g., a non-pinned piece moves freely)          | move is allowed; returns `true`; board reflects the move                     | :x:          |
-| TC 38 | board where moving the piece at `from` to `to` leaves own king exposed to check (a pinned piece moves away from the pin line)    | move is rejected; returns `false`; board state is unchanged                  | :x:          |
-| TC 39 | board where the current player's king itself moves to a square not attacked by any opponent piece                                | move is allowed; `whiteKingLocation` (or `blackKingLocation`) is updated     | :x:          |
-| TC 40 | board where the current player's king itself moves to a square attacked by an opponent piece                                     | move is rejected; king's tracked location is unchanged; board is unchanged   | :x:          |
+| TC 35 | `from = null`; `to` is a valid location                                                                                          | throws `IllegalArgumentException` with message `"from must not be null"`     | :white_check_mark: |
+| TC 36 | `from` is a valid location; `to = null`                                                                                          | throws `IllegalArgumentException` with message `"to must not be null"`       | :white_check_mark: |
+| TC 37 | board where moving the piece at `from` to `to` does NOT leave own king in check (e.g., a non-pinned piece moves freely)          | move is allowed; returns `true`; board reflects the move                     | :white_check_mark: |
+| TC 38 | board where moving the piece at `from` to `to` leaves own king exposed to check (a pinned piece moves away from the pin line)    | move is rejected; returns `false`; board state is unchanged                  | :white_check_mark: |
+| TC 39 | board where the current player's king itself moves to a square not attacked by any opponent piece                                | move is allowed; `whiteKingLocation` (or `blackKingLocation`) is updated     | :white_check_mark: |
+| TC 40 | board where the current player's king itself moves to a square attacked by an opponent piece                                     | move is rejected; king's tracked location is unchanged; board is unchanged   | :white_check_mark: |
 
 ---
 

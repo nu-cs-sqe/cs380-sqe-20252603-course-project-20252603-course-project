@@ -101,4 +101,20 @@ class BoardTests {
         board.updateBlackKingLocation(loc);
         assertEquals(loc, board.blackKingLocation);
     }
+
+    // ── checkNotMoveIntoCheck ────────────────────────────────────────────────
+
+    @Test
+    void checkNotMoveIntoCheck_NullFrom_ThrowsIllegalArgumentException() {
+        Location to = new Location(4, 4);
+        assertThrows(IllegalArgumentException.class,
+                () -> board.checkNotMoveIntoCheck(null, to));
+    }
+
+    @Test
+    void checkNotMoveIntoCheck_NullTo_ThrowsIllegalArgumentException() {
+        Location from = new Location(4, 4);
+        assertThrows(IllegalArgumentException.class,
+                () -> board.checkNotMoveIntoCheck(from, null));
+    }
 }

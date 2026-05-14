@@ -24,6 +24,11 @@ public final class Pawn extends Piece {
     return new Pawn(getColor());
   }
 
+  @Override
+  public boolean hasMoved() {
+    return false;
+  }
+
   /** Returns true if the move shape from {@code from} to {@code to} is valid for a Pawn. */
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null) {

@@ -29,4 +29,6 @@ public abstract class Piece {
     }
 
     public abstract Piece makeCopy();
+
+    public abstract boolean hasMoved();
 }

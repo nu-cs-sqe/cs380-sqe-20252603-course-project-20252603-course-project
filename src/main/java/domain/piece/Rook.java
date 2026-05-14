@@ -12,4 +12,9 @@ public class Rook extends Piece {
     public Piece makeCopy() {
         return new Rook(getColor());
     }
+
+    @Override
+    public boolean hasMoved() {
+        return false;
+    }
 }

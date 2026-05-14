@@ -12,4 +12,9 @@ public class Queen extends Piece {
     public Piece makeCopy() {
         return new Queen(getColor());
     }
+
+    @Override
+    public boolean hasMoved() {
+        return false;
+    }
 }

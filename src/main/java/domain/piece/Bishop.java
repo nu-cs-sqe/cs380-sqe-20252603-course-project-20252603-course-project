@@ -12,4 +12,9 @@ public class Bishop extends Piece {
     public Piece makeCopy() {
         return new Bishop(getColor());
     }
+
+    @Override
+    public boolean hasMoved() {
+        return false;
+    }
 }

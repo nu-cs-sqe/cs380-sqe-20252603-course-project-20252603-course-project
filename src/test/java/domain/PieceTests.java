@@ -214,5 +214,10 @@ public class PieceTests {
         public Piece makeCopy() {
             return new TestPiece(getType(), getColor());
         }
+
+        @Override
+        public boolean hasMoved() {
+            return false;
+        }
     }
 }

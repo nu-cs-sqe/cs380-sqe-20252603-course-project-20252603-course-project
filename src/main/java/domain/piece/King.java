@@ -20,6 +20,11 @@ public final class King extends Piece {
     return new King(getColor());
   }
 
+  @Override
+  public boolean hasMoved() {
+    return false;
+  }
+
   /** Returns true if the move shape from {@code from} to {@code to} is valid for a King. */
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null) {

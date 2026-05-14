@@ -20,6 +20,11 @@ public final class Knight extends Piece {
     return new Knight(getColor());
   }
 
+  @Override
+  public boolean hasMoved() {
+    return false;
+  }
+
   /** Returns true if the move shape from {@code from} to {@code to} is valid for a Knight. */
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null) {

@@ -2,7 +2,7 @@
 
 `GameState` is a two-value enum. It has no custom public methods. BVA documents the valid enum constants; the null pointer boundary is exercised through `Board.getCurrentGameState()` and `Board.switchTurn()`.
 
-## Step 1-3 Summary
+## Step 1-4 Summary
 
 - Step 1, input equivalence classes:
   - `GameState` has two valid enum cases: `WHITE_TURN` and `BLACK_TURN`. No other value can be set in Java.

@@ -14,9 +14,6 @@ public final class Pawn extends Piece {
   /** Constructs a Pawn with the given color. */
   public Pawn(PieceColor color) {
     super(PieceType.PAWN, color);
-    if (color == null) {
-      throw new IllegalArgumentException("color must not be null");
-    }
   }
 
   @Override

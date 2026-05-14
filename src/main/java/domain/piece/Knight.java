@@ -10,9 +10,6 @@ public final class Knight extends Piece {
   /** Constructs a Knight with the given color. */
   public Knight(PieceColor color) {
     super(PieceType.KNIGHT, color);
-    if (color == null) {
-      throw new IllegalArgumentException("color must not be null");
-    }
   }
 
   @Override

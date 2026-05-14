@@ -10,9 +10,6 @@ public class King extends Piece {
   /** Constructs a King with the given color. */
   public King(PieceColor color) {
     super(PieceType.KING, color);
-    if (color == null) {
-      throw new IllegalArgumentException("color must not be null");
-    }
   }
 
   @Override

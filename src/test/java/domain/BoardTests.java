@@ -221,4 +221,185 @@ class BoardTests {
         assertThrows(IllegalArgumentException.class,
                 () -> board.castle(kingFrom, kingTo, rookFrom, null));
     }
+
+    // castle() uses Rook mocks for both slots — castle() only calls hasMoved() and getColor()
+    // on the pieces at those positions, so the concrete type at each position doesn't matter.
+
+    @Test
+    void castle_KingHasMoved_ReturnsFalseAndBoardUnchanged() {
+        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockRook = EasyMock.createMock(Rook.class);
+        EasyMock.expect(mockKing.hasMoved()).andStubReturn(true);
+        EasyMock.replay(mockKing, mockRook);
+
+        Location kingFrom = new Location(7, 4);
+        Location kingTo = new Location(7, 6);
+        Location rookFrom = new Location(7, 7);
+        Location rookTo = new Location(7, 5);
+        board.pieces[7][4] = mockKing;
+        board.pieces[7][7] = mockRook;
+        board.whiteKingLocation = kingFrom;
+
+        assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
+        assertEquals(mockKing, board.pieces[7][4]);
+        assertEquals(mockRook, board.pieces[7][7]);
+        EasyMock.verify(mockKing, mockRook);
+    }
+
+    @Test
+    void castle_RookHasMoved_ReturnsFalseAndBoardUnchanged() {
+        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockRook = EasyMock.createMock(Rook.class);
+        EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockRook.hasMoved()).andStubReturn(true);
+        EasyMock.replay(mockKing, mockRook);
+
+        Location kingFrom = new Location(7, 4);
+        Location kingTo = new Location(7, 6);
+        Location rookFrom = new Location(7, 7);
+        Location rookTo = new Location(7, 5);
+        board.pieces[7][4] = mockKing;
+        board.pieces[7][7] = mockRook;
+        board.whiteKingLocation = kingFrom;
+
+        assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
+        assertEquals(mockKing, board.pieces[7][4]);
+        assertEquals(mockRook, board.pieces[7][7]);
+        EasyMock.verify(mockKing, mockRook);
+    }
+
+    @Test
+    void castle_PieceBetweenKingAndRook_ReturnsFalseAndBoardUnchanged() {
+        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockRook = EasyMock.createMock(Rook.class);
+        Piece blocker = new Bishop(PieceColor.WHITE);
+        EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
+        EasyMock.replay(mockKing, mockRook);
+
+        Location kingFrom = new Location(7, 4);
+        Location kingTo = new Location(7, 6);
+        Location rookFrom = new Location(7, 7);
+        Location rookTo = new Location(7, 5);
+        board.pieces[7][4] = mockKing;
+        board.pieces[7][5] = blocker;
+        board.pieces[7][7] = mockRook;
+        board.whiteKingLocation = kingFrom;
+
+        assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
+        assertEquals(mockKing, board.pieces[7][4]);
+        assertEquals(blocker, board.pieces[7][5]);
+        assertEquals(mockRook, board.pieces[7][7]);
+        EasyMock.verify(mockKing, mockRook);
+    }
+
+    @Test
+    void castle_KingCurrentlyInCheck_ReturnsFalseAndBoardUnchanged() {
+        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockRook = EasyMock.createMock(Rook.class);
+        Piece blackRook = new Rook(PieceColor.BLACK);
+        EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockKing.getColor()).andStubReturn(PieceColor.WHITE);
+        EasyMock.expect(mockRook.getColor()).andStubReturn(PieceColor.WHITE);
+        EasyMock.replay(mockKing, mockRook);
+
+        // King at (7,4), black rook at (0,4) attacks king along column 4
+        Location kingFrom = new Location(7, 4);
+        Location kingTo = new Location(7, 6);
+        Location rookFrom = new Location(7, 7);
+        Location rookTo = new Location(7, 5);
+        board.pieces[7][4] = mockKing;
+        board.pieces[7][7] = mockRook;
+        board.pieces[0][4] = blackRook;
+        board.whiteKingLocation = kingFrom;
+
+        assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
+        assertEquals(mockKing, board.pieces[7][4]);
+        assertEquals(mockRook, board.pieces[7][7]);
+        EasyMock.verify(mockKing, mockRook);
+    }
+
+    @Test
+    void castle_KingTransitSquareAttacked_ReturnsFalseAndBoardUnchanged() {
+        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockRook = EasyMock.createMock(Rook.class);
+        Piece blackRook = new Rook(PieceColor.BLACK);
+        EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockKing.getColor()).andStubReturn(PieceColor.WHITE);
+        EasyMock.expect(mockRook.getColor()).andStubReturn(PieceColor.WHITE);
+        EasyMock.replay(mockKing, mockRook);
+
+        // King at (7,4) -> (7,6); transit = (7,5); black rook at (0,5) attacks (7,5)
+        Location kingFrom = new Location(7, 4);
+        Location kingTo = new Location(7, 6);
+        Location rookFrom = new Location(7, 7);
+        Location rookTo = new Location(7, 5);
+        board.pieces[7][4] = mockKing;
+        board.pieces[7][7] = mockRook;
+        board.pieces[0][5] = blackRook;
+        board.whiteKingLocation = kingFrom;
+
+        assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
+        assertEquals(mockKing, board.pieces[7][4]);
+        assertEquals(mockRook, board.pieces[7][7]);
+        EasyMock.verify(mockKing, mockRook);
+    }
+
+    @Test
+    void castle_KingLandingSquareAttacked_ReturnsFalseAndBoardUnchanged() {
+        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockRook = EasyMock.createMock(Rook.class);
+        Piece blackRook = new Rook(PieceColor.BLACK);
+        EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockKing.getColor()).andStubReturn(PieceColor.WHITE);
+        EasyMock.expect(mockRook.getColor()).andStubReturn(PieceColor.WHITE);
+        EasyMock.replay(mockKing, mockRook);
+
+        // King at (7,4) -> (7,6); landing = (7,6); black rook at (0,6) attacks (7,6)
+        Location kingFrom = new Location(7, 4);
+        Location kingTo = new Location(7, 6);
+        Location rookFrom = new Location(7, 7);
+        Location rookTo = new Location(7, 5);
+        board.pieces[7][4] = mockKing;
+        board.pieces[7][7] = mockRook;
+        board.pieces[0][6] = blackRook;
+        board.whiteKingLocation = kingFrom;
+
+        assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
+        assertEquals(mockKing, board.pieces[7][4]);
+        assertEquals(mockRook, board.pieces[7][7]);
+        EasyMock.verify(mockKing, mockRook);
+    }
+
+    @Test
+    void castle_AllPreconditionsMet_SucceedsAndRepositionesPiecesAndUpdatesKingLocation() {
+        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockRook = EasyMock.createMock(Rook.class);
+        EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
+        EasyMock.expect(mockKing.getColor()).andStubReturn(PieceColor.WHITE);
+        EasyMock.expect(mockRook.getColor()).andStubReturn(PieceColor.WHITE);
+        EasyMock.replay(mockKing, mockRook);
+
+        // King (7,4)->(7,6), Rook (7,7)->(7,5), path clear, no checks
+        Location kingFrom = new Location(7, 4);
+        Location kingTo = new Location(7, 6);
+        Location rookFrom = new Location(7, 7);
+        Location rookTo = new Location(7, 5);
+        board.pieces[7][4] = mockKing;
+        board.pieces[7][7] = mockRook;
+        board.whiteKingLocation = kingFrom;
+
+        assertTrue(board.castle(kingFrom, kingTo, rookFrom, rookTo));
+        assertEquals(mockKing, board.pieces[7][6]);
+        assertEquals(mockRook, board.pieces[7][5]);
+        assertNull(board.pieces[7][4]);
+        assertNull(board.pieces[7][7]);
+        assertEquals(7, board.whiteKingLocation.getX());
+        assertEquals(6, board.whiteKingLocation.getY());
+        EasyMock.verify(mockKing, mockRook);
+    }
 }

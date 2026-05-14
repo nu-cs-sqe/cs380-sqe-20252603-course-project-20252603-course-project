@@ -35,7 +35,7 @@ public class Board {
     }
 
     public Piece[][] getSnapshot() {
-        return null;
+        throw new UnsupportedOperationException("not yet implemented");
     }
 
     public GameState getCurrentGameState() {

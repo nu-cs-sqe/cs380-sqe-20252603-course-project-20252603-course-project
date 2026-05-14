@@ -72,4 +72,33 @@ class BoardTests {
         board.updateWhiteKingLocation(loc);
         assertEquals(loc, board.whiteKingLocation);
     }
+
+    // ── updateBlackKingLocation ──────────────────────────────────────────────
+
+    @Test
+    void updateBlackKingLocation_NullLocation_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class,
+                () -> board.updateBlackKingLocation(null));
+    }
+
+    @Test
+    void updateBlackKingLocation_MinCorner_UpdatesLocation() {
+        Location loc = new Location(0, 0);
+        board.updateBlackKingLocation(loc);
+        assertEquals(loc, board.blackKingLocation);
+    }
+
+    @Test
+    void updateBlackKingLocation_MaxCorner_UpdatesLocation() {
+        Location loc = new Location(7, 7);
+        board.updateBlackKingLocation(loc);
+        assertEquals(loc, board.blackKingLocation);
+    }
+
+    @Test
+    void updateBlackKingLocation_Interior_UpdatesLocation() {
+        Location loc = new Location(4, 4);
+        board.updateBlackKingLocation(loc);
+        assertEquals(loc, board.blackKingLocation);
+    }
 }

@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 public class GameStatsView extends JPanel {
 
-    public JLabel currentPlayerLabel;
+    private JLabel currentPlayerLabel;
 
     public GameStatsView(String player1Name, String player2Name) {
         currentPlayerLabel = new JLabel("Current Player: " + player1Name);

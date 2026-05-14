@@ -183,4 +183,42 @@ class BoardTests {
         assertEquals(4, board.whiteKingLocation.getY());
         assertEquals(whiteKing, board.pieces[4][4]);
     }
+
+    // ── castle ───────────────────────────────────────────────────────────────
+
+    @Test
+    void castle_NullKingFrom_ThrowsIllegalArgumentException() {
+        Location to = new Location(7, 6);
+        Location rookFrom = new Location(7, 7);
+        Location rookTo = new Location(7, 5);
+        assertThrows(IllegalArgumentException.class,
+                () -> board.castle(null, to, rookFrom, rookTo));
+    }
+
+    @Test
+    void castle_NullKingTo_ThrowsIllegalArgumentException() {
+        Location kingFrom = new Location(7, 4);
+        Location rookFrom = new Location(7, 7);
+        Location rookTo = new Location(7, 5);
+        assertThrows(IllegalArgumentException.class,
+                () -> board.castle(kingFrom, null, rookFrom, rookTo));
+    }
+
+    @Test
+    void castle_NullRookFrom_ThrowsIllegalArgumentException() {
+        Location kingFrom = new Location(7, 4);
+        Location kingTo = new Location(7, 6);
+        Location rookTo = new Location(7, 5);
+        assertThrows(IllegalArgumentException.class,
+                () -> board.castle(kingFrom, kingTo, null, rookTo));
+    }
+
+    @Test
+    void castle_NullRookTo_ThrowsIllegalArgumentException() {
+        Location kingFrom = new Location(7, 4);
+        Location kingTo = new Location(7, 6);
+        Location rookFrom = new Location(7, 7);
+        assertThrows(IllegalArgumentException.class,
+                () -> board.castle(kingFrom, kingTo, rookFrom, null));
+    }
 }

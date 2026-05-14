@@ -34,4 +34,11 @@ public class Board {
         }
         whiteKingLocation = location;
     }
+
+    public void updateBlackKingLocation(Location location) {
+        if (location == null) {
+            throw new IllegalArgumentException("location must not be null");
+        }
+        blackKingLocation = location;
+    }
 }

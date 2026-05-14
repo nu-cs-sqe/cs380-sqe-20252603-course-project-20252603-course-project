@@ -43,4 +43,33 @@ class BoardTests {
         board.switchTurn();
         assertEquals(GameState.WHITE_TURN, board.getCurrentGameState());
     }
+
+    // ── updateWhiteKingLocation ──────────────────────────────────────────────
+
+    @Test
+    void updateWhiteKingLocation_NullLocation_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class,
+                () -> board.updateWhiteKingLocation(null));
+    }
+
+    @Test
+    void updateWhiteKingLocation_MinCorner_UpdatesLocation() {
+        Location loc = new Location(0, 0);
+        board.updateWhiteKingLocation(loc);
+        assertEquals(loc, board.whiteKingLocation);
+    }
+
+    @Test
+    void updateWhiteKingLocation_MaxCorner_UpdatesLocation() {
+        Location loc = new Location(7, 7);
+        board.updateWhiteKingLocation(loc);
+        assertEquals(loc, board.whiteKingLocation);
+    }
+
+    @Test
+    void updateWhiteKingLocation_Interior_UpdatesLocation() {
+        Location loc = new Location(4, 4);
+        board.updateWhiteKingLocation(loc);
+        assertEquals(loc, board.whiteKingLocation);
+    }
 }

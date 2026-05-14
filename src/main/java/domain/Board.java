@@ -6,14 +6,30 @@ import domain.piece.PieceType;
 
 public class Board {
 
-    Piece[][] pieces;
-    GameState currentGameState;
-    Location whiteKingLocation;
-    Location blackKingLocation;
+    private Piece[][] pieces;
+    private GameState currentGameState;
+    private Location whiteKingLocation;
+    private Location blackKingLocation;
 
     public Board() {
         pieces = new Piece[8][8];
         currentGameState = GameState.WHITE_TURN;
+    }
+
+    public Piece getPiece(int x, int y) {
+        return pieces[x][y];
+    }
+
+    public void setPiece(int x, int y, Piece piece) {
+        pieces[x][y] = piece;
+    }
+
+    public Location getWhiteKingLocation() {
+        return whiteKingLocation;
+    }
+
+    public Location getBlackKingLocation() {
+        return blackKingLocation;
     }
 
     public Piece[][] getSnapshot() {

@@ -56,21 +56,21 @@ class BoardTests {
     void updateWhiteKingLocation_MinCorner_UpdatesLocation() {
         Location loc = new Location(0, 0);
         board.updateWhiteKingLocation(loc);
-        assertEquals(loc, board.whiteKingLocation);
+        assertEquals(loc, board.getWhiteKingLocation());
     }
 
     @Test
     void updateWhiteKingLocation_MaxCorner_UpdatesLocation() {
         Location loc = new Location(7, 7);
         board.updateWhiteKingLocation(loc);
-        assertEquals(loc, board.whiteKingLocation);
+        assertEquals(loc, board.getWhiteKingLocation());
     }
 
     @Test
     void updateWhiteKingLocation_Interior_UpdatesLocation() {
         Location loc = new Location(4, 4);
         board.updateWhiteKingLocation(loc);
-        assertEquals(loc, board.whiteKingLocation);
+        assertEquals(loc, board.getWhiteKingLocation());
     }
 
     // ── updateBlackKingLocation ──────────────────────────────────────────────
@@ -85,21 +85,21 @@ class BoardTests {
     void updateBlackKingLocation_MinCorner_UpdatesLocation() {
         Location loc = new Location(0, 0);
         board.updateBlackKingLocation(loc);
-        assertEquals(loc, board.blackKingLocation);
+        assertEquals(loc, board.getBlackKingLocation());
     }
 
     @Test
     void updateBlackKingLocation_MaxCorner_UpdatesLocation() {
         Location loc = new Location(7, 7);
         board.updateBlackKingLocation(loc);
-        assertEquals(loc, board.blackKingLocation);
+        assertEquals(loc, board.getBlackKingLocation());
     }
 
     @Test
     void updateBlackKingLocation_Interior_UpdatesLocation() {
         Location loc = new Location(4, 4);
         board.updateBlackKingLocation(loc);
-        assertEquals(loc, board.blackKingLocation);
+        assertEquals(loc, board.getBlackKingLocation());
     }
 
     // ── checkNotMoveIntoCheck ────────────────────────────────────────────────
@@ -123,15 +123,15 @@ class BoardTests {
         // White rook at (4,4), white king at (7,4) — moving rook to (4,5) leaves king safe
         Piece whiteRook = new Rook(PieceColor.WHITE);
         Piece whiteKing = new King(PieceColor.WHITE);
-        board.pieces[4][4] = whiteRook;
-        board.pieces[7][4] = whiteKing;
-        board.whiteKingLocation = new Location(7, 4);
+        board.setPiece(4, 4, whiteRook);
+        board.setPiece(7, 4, whiteKing);
+        board.updateWhiteKingLocation(new Location(7, 4));
 
         boolean result = board.checkNotMoveIntoCheck(new Location(4, 4), new Location(4, 5));
 
         assertTrue(result);
-        assertNull(board.pieces[4][4]);
-        assertEquals(whiteRook, board.pieces[4][5]);
+        assertNull(board.getPiece(4, 4));
+        assertEquals(whiteRook, board.getPiece(4, 5));
     }
 
     @Test
@@ -141,30 +141,30 @@ class BoardTests {
         Piece blackRook = new Rook(PieceColor.BLACK);
         Piece whiteBlocker = new Rook(PieceColor.WHITE);
         Piece whiteKing = new King(PieceColor.WHITE);
-        board.pieces[7][0] = blackRook;
-        board.pieces[7][2] = whiteBlocker;
-        board.pieces[7][4] = whiteKing;
-        board.whiteKingLocation = new Location(7, 4);
+        board.setPiece(7, 0, blackRook);
+        board.setPiece(7, 2, whiteBlocker);
+        board.setPiece(7, 4, whiteKing);
+        board.updateWhiteKingLocation(new Location(7, 4));
 
         boolean result = board.checkNotMoveIntoCheck(new Location(7, 2), new Location(3, 2));
 
         assertFalse(result);
-        assertEquals(whiteBlocker, board.pieces[7][2]);
-        assertNull(board.pieces[3][2]);
+        assertEquals(whiteBlocker, board.getPiece(7, 2));
+        assertNull(board.getPiece(3, 2));
     }
 
     @Test
     void checkNotMoveIntoCheck_KingMovesToSafeSquare_ReturnsTrueAndUpdatesKingLocation() {
         // White king at (4,4), no threats — move to (4,5)
         Piece whiteKing = new King(PieceColor.WHITE);
-        board.pieces[4][4] = whiteKing;
-        board.whiteKingLocation = new Location(4, 4);
+        board.setPiece(4, 4, whiteKing);
+        board.updateWhiteKingLocation(new Location(4, 4));
 
         boolean result = board.checkNotMoveIntoCheck(new Location(4, 4), new Location(4, 5));
 
         assertTrue(result);
-        assertEquals(new Location(4, 5).getX(), board.whiteKingLocation.getX());
-        assertEquals(new Location(4, 5).getY(), board.whiteKingLocation.getY());
+        assertEquals(new Location(4, 5).getX(), board.getWhiteKingLocation().getX());
+        assertEquals(new Location(4, 5).getY(), board.getWhiteKingLocation().getY());
     }
 
     @Test
@@ -172,16 +172,16 @@ class BoardTests {
         // White king at (4,4), black bishop at (2,2) — moving king to (3,3) lands on attacked square
         Piece whiteKing = new King(PieceColor.WHITE);
         Piece blackBishop = new Bishop(PieceColor.BLACK);
-        board.pieces[4][4] = whiteKing;
-        board.pieces[2][2] = blackBishop;
-        board.whiteKingLocation = new Location(4, 4);
+        board.setPiece(4, 4, whiteKing);
+        board.setPiece(2, 2, blackBishop);
+        board.updateWhiteKingLocation(new Location(4, 4));
 
         boolean result = board.checkNotMoveIntoCheck(new Location(4, 4), new Location(3, 3));
 
         assertFalse(result);
-        assertEquals(4, board.whiteKingLocation.getX());
-        assertEquals(4, board.whiteKingLocation.getY());
-        assertEquals(whiteKing, board.pieces[4][4]);
+        assertEquals(4, board.getWhiteKingLocation().getX());
+        assertEquals(4, board.getWhiteKingLocation().getY());
+        assertEquals(whiteKing, board.getPiece(4, 4));
     }
 
     // ── castle ───────────────────────────────────────────────────────────────
@@ -236,13 +236,13 @@ class BoardTests {
         Location kingTo = new Location(7, 6);
         Location rookFrom = new Location(7, 7);
         Location rookTo = new Location(7, 5);
-        board.pieces[7][4] = mockKing;
-        board.pieces[7][7] = mockRook;
-        board.whiteKingLocation = kingFrom;
+        board.setPiece(7, 4, mockKing);
+        board.setPiece(7, 7, mockRook);
+        board.updateWhiteKingLocation(kingFrom);
 
         assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
-        assertEquals(mockKing, board.pieces[7][4]);
-        assertEquals(mockRook, board.pieces[7][7]);
+        assertEquals(mockKing, board.getPiece(7, 4));
+        assertEquals(mockRook, board.getPiece(7, 7));
         EasyMock.verify(mockKing, mockRook);
     }
 
@@ -258,13 +258,13 @@ class BoardTests {
         Location kingTo = new Location(7, 6);
         Location rookFrom = new Location(7, 7);
         Location rookTo = new Location(7, 5);
-        board.pieces[7][4] = mockKing;
-        board.pieces[7][7] = mockRook;
-        board.whiteKingLocation = kingFrom;
+        board.setPiece(7, 4, mockKing);
+        board.setPiece(7, 7, mockRook);
+        board.updateWhiteKingLocation(kingFrom);
 
         assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
-        assertEquals(mockKing, board.pieces[7][4]);
-        assertEquals(mockRook, board.pieces[7][7]);
+        assertEquals(mockKing, board.getPiece(7, 4));
+        assertEquals(mockRook, board.getPiece(7, 7));
         EasyMock.verify(mockKing, mockRook);
     }
 
@@ -281,15 +281,15 @@ class BoardTests {
         Location kingTo = new Location(7, 6);
         Location rookFrom = new Location(7, 7);
         Location rookTo = new Location(7, 5);
-        board.pieces[7][4] = mockKing;
-        board.pieces[7][5] = blocker;
-        board.pieces[7][7] = mockRook;
-        board.whiteKingLocation = kingFrom;
+        board.setPiece(7, 4, mockKing);
+        board.setPiece(7, 5, blocker);
+        board.setPiece(7, 7, mockRook);
+        board.updateWhiteKingLocation(kingFrom);
 
         assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
-        assertEquals(mockKing, board.pieces[7][4]);
-        assertEquals(blocker, board.pieces[7][5]);
-        assertEquals(mockRook, board.pieces[7][7]);
+        assertEquals(mockKing, board.getPiece(7, 4));
+        assertEquals(blocker, board.getPiece(7, 5));
+        assertEquals(mockRook, board.getPiece(7, 7));
         EasyMock.verify(mockKing, mockRook);
     }
 
@@ -309,14 +309,14 @@ class BoardTests {
         Location kingTo = new Location(7, 6);
         Location rookFrom = new Location(7, 7);
         Location rookTo = new Location(7, 5);
-        board.pieces[7][4] = mockKing;
-        board.pieces[7][7] = mockRook;
-        board.pieces[0][4] = blackRook;
-        board.whiteKingLocation = kingFrom;
+        board.setPiece(7, 4, mockKing);
+        board.setPiece(7, 7, mockRook);
+        board.setPiece(0, 4, blackRook);
+        board.updateWhiteKingLocation(kingFrom);
 
         assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
-        assertEquals(mockKing, board.pieces[7][4]);
-        assertEquals(mockRook, board.pieces[7][7]);
+        assertEquals(mockKing, board.getPiece(7, 4));
+        assertEquals(mockRook, board.getPiece(7, 7));
         EasyMock.verify(mockKing, mockRook);
     }
 
@@ -336,14 +336,14 @@ class BoardTests {
         Location kingTo = new Location(7, 6);
         Location rookFrom = new Location(7, 7);
         Location rookTo = new Location(7, 5);
-        board.pieces[7][4] = mockKing;
-        board.pieces[7][7] = mockRook;
-        board.pieces[0][5] = blackRook;
-        board.whiteKingLocation = kingFrom;
+        board.setPiece(7, 4, mockKing);
+        board.setPiece(7, 7, mockRook);
+        board.setPiece(0, 5, blackRook);
+        board.updateWhiteKingLocation(kingFrom);
 
         assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
-        assertEquals(mockKing, board.pieces[7][4]);
-        assertEquals(mockRook, board.pieces[7][7]);
+        assertEquals(mockKing, board.getPiece(7, 4));
+        assertEquals(mockRook, board.getPiece(7, 7));
         EasyMock.verify(mockKing, mockRook);
     }
 
@@ -363,14 +363,14 @@ class BoardTests {
         Location kingTo = new Location(7, 6);
         Location rookFrom = new Location(7, 7);
         Location rookTo = new Location(7, 5);
-        board.pieces[7][4] = mockKing;
-        board.pieces[7][7] = mockRook;
-        board.pieces[0][6] = blackRook;
-        board.whiteKingLocation = kingFrom;
+        board.setPiece(7, 4, mockKing);
+        board.setPiece(7, 7, mockRook);
+        board.setPiece(0, 6, blackRook);
+        board.updateWhiteKingLocation(kingFrom);
 
         assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
-        assertEquals(mockKing, board.pieces[7][4]);
-        assertEquals(mockRook, board.pieces[7][7]);
+        assertEquals(mockKing, board.getPiece(7, 4));
+        assertEquals(mockRook, board.getPiece(7, 7));
         EasyMock.verify(mockKing, mockRook);
     }
 
@@ -389,17 +389,17 @@ class BoardTests {
         Location kingTo = new Location(7, 6);
         Location rookFrom = new Location(7, 7);
         Location rookTo = new Location(7, 5);
-        board.pieces[7][4] = mockKing;
-        board.pieces[7][7] = mockRook;
-        board.whiteKingLocation = kingFrom;
+        board.setPiece(7, 4, mockKing);
+        board.setPiece(7, 7, mockRook);
+        board.updateWhiteKingLocation(kingFrom);
 
         assertTrue(board.castle(kingFrom, kingTo, rookFrom, rookTo));
-        assertEquals(mockKing, board.pieces[7][6]);
-        assertEquals(mockRook, board.pieces[7][5]);
-        assertNull(board.pieces[7][4]);
-        assertNull(board.pieces[7][7]);
-        assertEquals(7, board.whiteKingLocation.getX());
-        assertEquals(6, board.whiteKingLocation.getY());
+        assertEquals(mockKing, board.getPiece(7, 6));
+        assertEquals(mockRook, board.getPiece(7, 5));
+        assertNull(board.getPiece(7, 4));
+        assertNull(board.getPiece(7, 7));
+        assertEquals(7, board.getWhiteKingLocation().getX());
+        assertEquals(6, board.getWhiteKingLocation().getY());
         EasyMock.verify(mockKing, mockRook);
     }
 }

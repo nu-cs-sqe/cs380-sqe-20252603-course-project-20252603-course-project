@@ -43,7 +43,7 @@ Returns the current `GameState`. The board starts at `WHITE_TURN` and alternates
 |       | System under test                                             | Expected output      | Implemented? |
 |-------|---------------------------------------------------------------|----------------------|--------------|
 | TC 23 | newly constructed board (no `switchTurn()` calls)             | returns `WHITE_TURN` | :white_check_mark: |
-| TC 24 | board after one call to `switchTurn()`                        | returns `BLACK_TURN` | :x:          |
+| TC 24 | board after one call to `switchTurn()`                        | returns `BLACK_TURN` | :white_check_mark: |
 
 ---
 
@@ -53,8 +53,8 @@ Alternates `currentGameState` between `WHITE_TURN` and `BLACK_TURN` after each m
 
 |       | System under test                                              | Expected output                                | Implemented? |
 |-------|----------------------------------------------------------------|------------------------------------------------|--------------|
-| TC 25 | `currentGameState = WHITE_TURN`; call `switchTurn()`          | `getCurrentGameState()` returns `BLACK_TURN`  | :x:          |
-| TC 26 | `currentGameState = BLACK_TURN`; call `switchTurn()`          | `getCurrentGameState()` returns `WHITE_TURN`  | :x:          |
+| TC 25 | `currentGameState = WHITE_TURN`; call `switchTurn()`          | `getCurrentGameState()` returns `BLACK_TURN`  | :white_check_mark: |
+| TC 26 | `currentGameState = BLACK_TURN`; call `switchTurn()`          | `getCurrentGameState()` returns `WHITE_TURN`  | :white_check_mark: |
 
 ---
 

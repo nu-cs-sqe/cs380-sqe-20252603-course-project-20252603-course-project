@@ -49,17 +49,22 @@ public class Board {
     }
 
     public void updateWhiteKingLocation(Location location) {
-        if (location == null) {
-            throw new IllegalArgumentException("location must not be null");
-        }
-        whiteKingLocation = location;
+        updateKingLocation(location, PieceColor.WHITE);
     }
 
     public void updateBlackKingLocation(Location location) {
+        updateKingLocation(location, PieceColor.BLACK);
+    }
+
+    private void updateKingLocation(Location location, PieceColor color) {
         if (location == null) {
             throw new IllegalArgumentException("location must not be null");
         }
-        blackKingLocation = location;
+        if (color == PieceColor.WHITE) {
+            whiteKingLocation = location;
+        } else {
+            blackKingLocation = location;
+        }
     }
 
     public boolean checkNotMoveIntoCheck(Location from, Location to) {

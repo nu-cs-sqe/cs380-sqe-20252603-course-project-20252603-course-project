@@ -27,4 +27,11 @@ public class Board {
                 ? GameState.BLACK_TURN
                 : GameState.WHITE_TURN;
     }
+
+    public void updateWhiteKingLocation(Location location) {
+        if (location == null) {
+            throw new IllegalArgumentException("location must not be null");
+        }
+        whiteKingLocation = location;
+    }
 }

@@ -117,4 +117,70 @@ class BoardTests {
         assertThrows(IllegalArgumentException.class,
                 () -> board.checkNotMoveIntoCheck(from, null));
     }
+
+    @Test
+    void checkNotMoveIntoCheck_MoveDoesNotExposeKing_ReturnsTrueAndAppliesMove() {
+        // White rook at (4,4), white king at (7,4) — moving rook to (4,5) leaves king safe
+        Piece whiteRook = new Rook(PieceColor.WHITE);
+        Piece whiteKing = new King(PieceColor.WHITE);
+        board.pieces[4][4] = whiteRook;
+        board.pieces[7][4] = whiteKing;
+        board.whiteKingLocation = new Location(7, 4);
+
+        boolean result = board.checkNotMoveIntoCheck(new Location(4, 4), new Location(4, 5));
+
+        assertTrue(result);
+        assertNull(board.pieces[4][4]);
+        assertEquals(whiteRook, board.pieces[4][5]);
+    }
+
+    @Test
+    void checkNotMoveIntoCheck_MovePinnedPieceExposesKing_ReturnsFalseAndBoardUnchanged() {
+        // White rook at (7,2) blocks black rook at (7,0) from reaching white king at (7,4)
+        // Moving white rook away exposes the king
+        Piece blackRook = new Rook(PieceColor.BLACK);
+        Piece whiteBlocker = new Rook(PieceColor.WHITE);
+        Piece whiteKing = new King(PieceColor.WHITE);
+        board.pieces[7][0] = blackRook;
+        board.pieces[7][2] = whiteBlocker;
+        board.pieces[7][4] = whiteKing;
+        board.whiteKingLocation = new Location(7, 4);
+
+        boolean result = board.checkNotMoveIntoCheck(new Location(7, 2), new Location(3, 2));
+
+        assertFalse(result);
+        assertEquals(whiteBlocker, board.pieces[7][2]);
+        assertNull(board.pieces[3][2]);
+    }
+
+    @Test
+    void checkNotMoveIntoCheck_KingMovesToSafeSquare_ReturnsTrueAndUpdatesKingLocation() {
+        // White king at (4,4), no threats — move to (4,5)
+        Piece whiteKing = new King(PieceColor.WHITE);
+        board.pieces[4][4] = whiteKing;
+        board.whiteKingLocation = new Location(4, 4);
+
+        boolean result = board.checkNotMoveIntoCheck(new Location(4, 4), new Location(4, 5));
+
+        assertTrue(result);
+        assertEquals(new Location(4, 5).getX(), board.whiteKingLocation.getX());
+        assertEquals(new Location(4, 5).getY(), board.whiteKingLocation.getY());
+    }
+
+    @Test
+    void checkNotMoveIntoCheck_KingMovesToAttackedSquare_ReturnsFalseAndLocationUnchanged() {
+        // White king at (4,4), black bishop at (2,2) — moving king to (3,3) lands on attacked square
+        Piece whiteKing = new King(PieceColor.WHITE);
+        Piece blackBishop = new Bishop(PieceColor.BLACK);
+        board.pieces[4][4] = whiteKing;
+        board.pieces[2][2] = blackBishop;
+        board.whiteKingLocation = new Location(4, 4);
+
+        boolean result = board.checkNotMoveIntoCheck(new Location(4, 4), new Location(3, 3));
+
+        assertFalse(result);
+        assertEquals(4, board.whiteKingLocation.getX());
+        assertEquals(4, board.whiteKingLocation.getY());
+        assertEquals(whiteKing, board.pieces[4][4]);
+    }
 }

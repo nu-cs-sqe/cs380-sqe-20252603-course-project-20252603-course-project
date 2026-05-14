@@ -64,10 +64,10 @@ Keeps `whiteKingLocation` accurate so check-detection runs against the correct s
 
 |       | System under test                                      | Expected output                                                                    | Implemented? |
 |-------|--------------------------------------------------------|------------------------------------------------------------------------------------|--------------|
-| TC 27 | `location = null`                                      | throws `IllegalArgumentException` with message `"location must not be null"`       | :x:          |
-| TC 28 | `location = (0, 0)` (minimum-coordinate corner)        | `whiteKingLocation` is now `(0, 0)`                                                | :x:          |
-| TC 29 | `location = (7, 7)` (maximum-coordinate corner)        | `whiteKingLocation` is now `(7, 7)`                                                | :x:          |
-| TC 30 | `location = (4, 4)` (interior square)                  | `whiteKingLocation` is now `(4, 4)`                                                | :x:          |
+| TC 27 | `location = null`                                      | throws `IllegalArgumentException` with message `"location must not be null"`       | :white_check_mark: |
+| TC 28 | `location = (0, 0)` (minimum-coordinate corner)        | `whiteKingLocation` is now `(0, 0)`                                                | :white_check_mark: |
+| TC 29 | `location = (7, 7)` (maximum-coordinate corner)        | `whiteKingLocation` is now `(7, 7)`                                                | :white_check_mark: |
+| TC 30 | `location = (4, 4)` (interior square)                  | `whiteKingLocation` is now `(4, 4)`                                                | :white_check_mark: |
 
 ---
 
@@ -77,10 +77,10 @@ Symmetric to `updateWhiteKingLocation`; keeps `blackKingLocation` accurate befor
 
 |       | System under test                                      | Expected output                                                                    | Implemented? |
 |-------|--------------------------------------------------------|------------------------------------------------------------------------------------|--------------|
-| TC 31 | `location = null`                                      | throws `IllegalArgumentException` with message `"location must not be null"`       | :x:          |
-| TC 32 | `location = (0, 0)` (minimum-coordinate corner)        | `blackKingLocation` is now `(0, 0)`                                                | :x:          |
-| TC 33 | `location = (7, 7)` (maximum-coordinate corner)        | `blackKingLocation` is now `(7, 7)`                                                | :x:          |
-| TC 34 | `location = (4, 4)` (interior square)                  | `blackKingLocation` is now `(4, 4)`                                                | :x:          |
+| TC 31 | `location = null`                                      | throws `IllegalArgumentException` with message `"location must not be null"`       | :white_check_mark: |
+| TC 32 | `location = (0, 0)` (minimum-coordinate corner)        | `blackKingLocation` is now `(0, 0)`                                                | :white_check_mark: |
+| TC 33 | `location = (7, 7)` (maximum-coordinate corner)        | `blackKingLocation` is now `(7, 7)`                                                | :white_check_mark: |
+| TC 34 | `location = (4, 4)` (interior square)                  | `blackKingLocation` is now `(4, 4)`                                                | :white_check_mark: |
 
 ---
 

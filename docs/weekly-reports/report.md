@@ -1,3 +1,13 @@
+# Week 7 (5/11/2026-5/17/2026)
+**Planning and Progress Tracking**:
+1. [not started] Tallie: Multiple Turns of the Game: Google Style Guide Review Against Clean Code (Links to PR)
+2. [not started] Tallie: Multiple Turns of the Game: Board Check-Avoidance, Castling, Turn State, and GameStatsView (Links to PR)
+3. [not started] Tallie: Integration Testing Week 1: Controller and UI Refresh Contract (Links to PR)
+4. [not started] Tallie: I18n Week 1: Resource Bundle Structure (Links to PR)
+5. [done] Tallie: Review PR 27 (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/27)
+6. [done] Tallie: Create draft team task splits for Multiple Turns of the Game, Integration Testing, and I18n Testing
+7. [done] Tallie: Attended group meeting.
+
 # Week 6 (5/4/2026-5/10/2026)
 **Planning and Progress Tracking**:
 1. [done] Tallie: Game Setup Phase: Piece Classes, Board UI Display, and Piece Images (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/11)

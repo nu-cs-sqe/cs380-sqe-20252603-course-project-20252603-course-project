@@ -307,6 +307,32 @@
       <property name="tokens" value="VARIABLE_DEF"/>
       <property name="allowSamelineMultipleAnnotations" value="true"/>
     </module>
+    <!-- Clean Code G25: Replace Magic Numbers with Named Constants -->
+    <module name="MagicNumber">
+      <property name="ignoreNumbers" value="-1, 0, 1, 2"/>
+      <property name="ignoreHashCodeMethod" value="true"/>
+      <property name="ignoreAnnotation" value="true"/>
+    </module>
+
+    <!-- Clean Code F1: Too Many Arguments - ideal 0, max 3 -->
+    <module name="ParameterNumber">
+      <property name="max" value="3"/>
+      <property name="tokens" value="METHOD_DEF, CTOR_DEF"/>
+    </module>
+
+    <!-- Clean Code G30: Functions Should Do One Thing - keep methods short -->
+    <module name="MethodLength">
+      <property name="max" value="30"/>
+    </module>
+
+    <!-- Clean Code G34: Functions Should Descend Only One Level of Abstraction -->
+    <module name="NestedIfDepth">
+      <property name="max" value="2"/>
+    </module>
+
+    <!-- Clean Code G8: Too Much Information - fields should not be public -->
+    <module name="VisibilityModifier"/>
+
     <module name="NonEmptyAtclauseDescription"/>
     <module name="InvalidJavadocPosition"/>
     <module name="JavadocTagContinuationIndentation"/>
@@ -328,20 +354,10 @@
       <property name="allowedAnnotations" value="Override, Test"/>
       <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF"/>
     </module>
-    <module name="MissingJavadocMethod">
-      <property name="scope" value="public"/>
-      <property name="minLineCount" value="2"/>
-      <property name="allowedAnnotations" value="Override, Test"/>
-      <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF,
-                                   COMPACT_CTOR_DEF"/>
-    </module>
-    <module name="MissingJavadocType">
-      <property name="scope" value="protected"/>
-      <property name="tokens"
-                value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
-                      RECORD_DEF, ANNOTATION_DEF"/>
-      <property name="excludeScope" value="nothing"/>
-    </module>
+    <!-- Removed MissingJavadocMethod: Clean Code C3 (Redundant Comment) - mandating Javadoc on
+         every public method encourages noise comments that merely restate the method name. -->
+    <!-- Removed MissingJavadocType: same reason - well-named classes should not need a comment
+         explaining what they are. -->
     <module name="MethodName">
       <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9_]*$"/>
       <message key="name.invalidPattern"

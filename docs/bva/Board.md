@@ -1,10 +1,10 @@
 # BVA Analysis for `Board`
 
-Test Cases 1–22 (covering `Board()` and `getSnapshot()`) are documented in PR #27 and will appear here once that branch merges. The analysis below covers only the new methods added in `feature-board-gamestate-multiple-turns-of-the-game`.
+Test Cases 1–22 (covering `Board()` and `getSnapshot()`) are documented in a separate branch and will appear here once it merges. The analysis below covers only the new methods added in `feature-board-gamestate-multiple-turns-of-the-game`.
 
 ---
 
-## Step 1-3 Summary (new methods: `getCurrentGameState`, `switchTurn`, `updateWhiteKingLocation`, `updateBlackKingLocation`, `checkNotMoveIntoCheck`, `castle`)
+## Step 1-4 Summary (new methods: `getCurrentGameState`, `switchTurn`, `updateWhiteKingLocation`, `updateBlackKingLocation`, `checkNotMoveIntoCheck`, `castle`)
 
 - Step 1, input equivalence classes:
   - `Location` params: valid on-board location (x ∈ [0,7], y ∈ [0,7]) vs null pointer.
@@ -42,8 +42,8 @@ Returns the current `GameState`. The board starts at `WHITE_TURN` and alternates
 
 |       | System under test                                             | Expected output      | Implemented? |
 |-------|---------------------------------------------------------------|----------------------|--------------|
-| TC 23 | newly constructed board (no `switchTurn()` calls)             | returns `WHITE_TURN` | :white_check_mark: |
-| TC 24 | board after one call to `switchTurn()`                        | returns `BLACK_TURN` | :white_check_mark: |
+| Test Case 23 | newly constructed board (no `switchTurn()` calls)             | returns `WHITE_TURN` | :white_check_mark: |
+| Test Case 24 | board after one call to `switchTurn()`                        | returns `BLACK_TURN` | :white_check_mark: |
 
 ---
 
@@ -53,8 +53,8 @@ Alternates `currentGameState` between `WHITE_TURN` and `BLACK_TURN` after each m
 
 |       | System under test                                              | Expected output                                | Implemented? |
 |-------|----------------------------------------------------------------|------------------------------------------------|--------------|
-| TC 25 | `currentGameState = WHITE_TURN`; call `switchTurn()`          | `getCurrentGameState()` returns `BLACK_TURN`  | :white_check_mark: |
-| TC 26 | `currentGameState = BLACK_TURN`; call `switchTurn()`          | `getCurrentGameState()` returns `WHITE_TURN`  | :white_check_mark: |
+| Test Case 25 | `currentGameState = WHITE_TURN`; call `switchTurn()`          | `getCurrentGameState()` returns `BLACK_TURN`  | :white_check_mark: |
+| Test Case 26 | `currentGameState = BLACK_TURN`; call `switchTurn()`          | `getCurrentGameState()` returns `WHITE_TURN`  | :white_check_mark: |
 
 ---
 
@@ -64,10 +64,10 @@ Keeps `whiteKingLocation` accurate so check-detection runs against the correct s
 
 |       | System under test                                      | Expected output                                                                    | Implemented? |
 |-------|--------------------------------------------------------|------------------------------------------------------------------------------------|--------------|
-| TC 27 | `location = null`                                      | throws `IllegalArgumentException` with message `"location must not be null"`       | :white_check_mark: |
-| TC 28 | `location = (0, 0)` (minimum-coordinate corner)        | `whiteKingLocation` is now `(0, 0)`                                                | :white_check_mark: |
-| TC 29 | `location = (7, 7)` (maximum-coordinate corner)        | `whiteKingLocation` is now `(7, 7)`                                                | :white_check_mark: |
-| TC 30 | `location = (4, 4)` (interior square)                  | `whiteKingLocation` is now `(4, 4)`                                                | :white_check_mark: |
+| Test Case 27 | `location = null`                                      | throws `IllegalArgumentException` with message `"location must not be null"`       | :white_check_mark: |
+| Test Case 28 | `location = (0, 0)` (minimum-coordinate corner)        | `whiteKingLocation` is now `(0, 0)`                                                | :white_check_mark: |
+| Test Case 29 | `location = (7, 7)` (maximum-coordinate corner)        | `whiteKingLocation` is now `(7, 7)`                                                | :white_check_mark: |
+| Test Case 30 | `location = (4, 4)` (interior square)                  | `whiteKingLocation` is now `(4, 4)`                                                | :white_check_mark: |
 
 ---
 
@@ -77,10 +77,10 @@ Symmetric to `updateWhiteKingLocation`; keeps `blackKingLocation` accurate befor
 
 |       | System under test                                      | Expected output                                                                    | Implemented? |
 |-------|--------------------------------------------------------|------------------------------------------------------------------------------------|--------------|
-| TC 31 | `location = null`                                      | throws `IllegalArgumentException` with message `"location must not be null"`       | :white_check_mark: |
-| TC 32 | `location = (0, 0)` (minimum-coordinate corner)        | `blackKingLocation` is now `(0, 0)`                                                | :white_check_mark: |
-| TC 33 | `location = (7, 7)` (maximum-coordinate corner)        | `blackKingLocation` is now `(7, 7)`                                                | :white_check_mark: |
-| TC 34 | `location = (4, 4)` (interior square)                  | `blackKingLocation` is now `(4, 4)`                                                | :white_check_mark: |
+| Test Case 31 | `location = null`                                      | throws `IllegalArgumentException` with message `"location must not be null"`       | :white_check_mark: |
+| Test Case 32 | `location = (0, 0)` (minimum-coordinate corner)        | `blackKingLocation` is now `(0, 0)`                                                | :white_check_mark: |
+| Test Case 33 | `location = (7, 7)` (maximum-coordinate corner)        | `blackKingLocation` is now `(7, 7)`                                                | :white_check_mark: |
+| Test Case 34 | `location = (4, 4)` (interior square)                  | `blackKingLocation` is now `(4, 4)`                                                | :white_check_mark: |
 
 ---
 
@@ -90,12 +90,12 @@ Simulates a candidate move and rejects it if the current player's king would be 
 
 |       | System under test                                                                                                                | Expected output                                                              | Implemented? |
 |-------|----------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|--------------|
-| TC 35 | `from = null`; `to` is a valid location                                                                                          | throws `IllegalArgumentException` with message `"from must not be null"`     | :white_check_mark: |
-| TC 36 | `from` is a valid location; `to = null`                                                                                          | throws `IllegalArgumentException` with message `"to must not be null"`       | :white_check_mark: |
-| TC 37 | board where moving the piece at `from` to `to` does NOT leave own king in check (e.g., a non-pinned piece moves freely)          | move is allowed; returns `true`; board reflects the move                     | :white_check_mark: |
-| TC 38 | board where moving the piece at `from` to `to` leaves own king exposed to check (a pinned piece moves away from the pin line)    | move is rejected; returns `false`; board state is unchanged                  | :white_check_mark: |
-| TC 39 | board where the current player's king itself moves to a square not attacked by any opponent piece                                | move is allowed; `whiteKingLocation` (or `blackKingLocation`) is updated     | :white_check_mark: |
-| TC 40 | board where the current player's king itself moves to a square attacked by an opponent piece                                     | move is rejected; king's tracked location is unchanged; board is unchanged   | :white_check_mark: |
+| Test Case 35 | `from = null`; `to` is a valid location                                                                                          | throws `IllegalArgumentException` with message `"from must not be null"`     | :white_check_mark: |
+| Test Case 36 | `from` is a valid location; `to = null`                                                                                          | throws `IllegalArgumentException` with message `"to must not be null"`       | :white_check_mark: |
+| Test Case 37 | board where moving the piece at `from` to `to` does NOT leave own king in check (e.g., a non-pinned piece moves freely)          | move is allowed; returns `true`; board reflects the move                     | :white_check_mark: |
+| Test Case 38 | board where moving the piece at `from` to `to` leaves own king exposed to check (a pinned piece moves away from the pin line)    | move is rejected; returns `false`; board state is unchanged                  | :white_check_mark: |
+| Test Case 39 | board where the current player's king itself moves to a square not attacked by any opponent piece                                | move is allowed; `whiteKingLocation` (or `blackKingLocation`) is updated     | :white_check_mark: |
+| Test Case 40 | board where the current player's king itself moves to a square attacked by an opponent piece                                     | move is rejected; king's tracked location is unchanged; board is unchanged   | :white_check_mark: |
 
 ---
 
@@ -105,14 +105,16 @@ Validates all castling preconditions before executing atomically. Every precondi
 
 |       | System under test                                                                                                                                                         | Expected output                                                                                          | Implemented? |
 |-------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|--------------|
-| TC 41 | `kingFrom = null`; all other args valid                                                                                                                                   | throws `IllegalArgumentException`                                                                        | :white_check_mark: |
-| TC 42 | `kingTo = null`; all other args valid                                                                                                                                     | throws `IllegalArgumentException`                                                                        | :white_check_mark: |
-| TC 43 | `rookFrom = null`; all other args valid                                                                                                                                   | throws `IllegalArgumentException`                                                                        | :white_check_mark: |
-| TC 44 | `rookTo = null`; all other args valid                                                                                                                                     | throws `IllegalArgumentException`                                                                        | :white_check_mark: |
-| TC 45 | king at `kingFrom` has `hasMoved = true`; rook has `hasMoved = false`; path clear; king not in check; transit and landing squares safe                                    | castle rejected; board unchanged                                                                         | :white_check_mark: |
-| TC 46 | king has `hasMoved = false`; rook at `rookFrom` has `hasMoved = true`; path clear; king not in check; transit and landing squares safe                                    | castle rejected; board unchanged                                                                         | :white_check_mark: |
-| TC 47 | king has `hasMoved = false`; rook has `hasMoved = false`; one piece occupies a square between `kingFrom` and `rookFrom`; king not in check; transit and landing squares safe | castle rejected; board unchanged                                                                      | :white_check_mark: |
-| TC 48 | king has `hasMoved = false`; rook has `hasMoved = false`; path clear; king IS currently in check; transit and landing squares safe                                        | castle rejected; board unchanged                                                                         | :white_check_mark: |
-| TC 49 | king has `hasMoved = false`; rook has `hasMoved = false`; path clear; king not in check; king's transit square IS attacked by an opponent piece                           | castle rejected; board unchanged                                                                         | :white_check_mark: |
-| TC 50 | king has `hasMoved = false`; rook has `hasMoved = false`; path clear; king not in check; transit square safe; king's landing square IS attacked by an opponent piece      | castle rejected; board unchanged                                                                         | :white_check_mark: |
-| TC 51 | all preconditions met: `hasMoved = false` for both king and rook; path clear; king not in check; transit and landing squares safe                                         | castle succeeds; king is at `kingTo`; rook is at `rookTo`; king's `hasMoved = true`; rook's `hasMoved = true` | :white_check_mark: |
+| Test Case 41 | `kingFrom = null`; all other args valid                                                                                                                                   | throws `IllegalArgumentException` with message `"kingFrom must not be null"`                             | :white_check_mark: |
+| Test Case 42 | `kingTo = null`; all other args valid                                                                                                                                     | throws `IllegalArgumentException` with message `"kingTo must not be null"`                               | :white_check_mark: |
+| Test Case 43 | `rookFrom = null`; all other args valid                                                                                                                                   | throws `IllegalArgumentException` with message `"rookFrom must not be null"`                             | :white_check_mark: |
+| Test Case 44 | `rookTo = null`; all other args valid                                                                                                                                     | throws `IllegalArgumentException` with message `"rookTo must not be null"`                               | :white_check_mark: |
+| Test Case 45 | king at `kingFrom` has `hasMoved = true`; rook has `hasMoved = false`; path clear; king not in check; transit and landing squares safe                                    | castle rejected; board unchanged                                                                         | :white_check_mark: |
+| Test Case 46 | king has `hasMoved = false`; rook at `rookFrom` has `hasMoved = true`; path clear; king not in check; transit and landing squares safe                                    | castle rejected; board unchanged                                                                         | :white_check_mark: |
+| Test Case 47 | king has `hasMoved = false`; rook has `hasMoved = false`; one piece occupies a square between `kingFrom` and `rookFrom`; king not in check; transit and landing squares safe | castle rejected; board unchanged                                                                      | :white_check_mark: |
+| Test Case 48 | king has `hasMoved = false`; rook has `hasMoved = false`; path clear; king IS currently in check; transit and landing squares safe                                        | castle rejected; board unchanged                                                                         | :white_check_mark: |
+| Test Case 49 | king has `hasMoved = false`; rook has `hasMoved = false`; path clear; king not in check; king's transit square IS attacked by an opponent piece                           | castle rejected; board unchanged                                                                         | :white_check_mark: |
+| Test Case 50 | king has `hasMoved = false`; rook has `hasMoved = false`; path clear; king not in check; transit square safe; king's landing square IS attacked by an opponent piece      | castle rejected; board unchanged                                                                         | :white_check_mark: |
+| Test Case 51 | all preconditions met: `hasMoved = false` for both king and rook; path clear; king not in check; transit and landing squares safe                                         | castle succeeds; king is at `kingTo`; rook is at `rookTo`; king's `hasMoved = true`; rook's `hasMoved = true` | :white_check_mark: |
+| Test Case 52 | `kingFrom` points to an empty square (no piece at that position); all other args valid; rook at `rookFrom` has `hasMoved = false`                                         | castle rejected; returns `false`; board unchanged                                                        | :white_check_mark: |
+| Test Case 53 | king at `kingFrom` has `hasMoved = false`; `rookFrom` points to an empty square (no piece at that position); all other args valid                                         | castle rejected; returns `false`; board unchanged                                                        | :white_check_mark: |

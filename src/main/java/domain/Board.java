@@ -21,4 +21,10 @@ public class Board {
     public GameState getCurrentGameState() {
         return currentGameState;
     }
+
+    public void switchTurn() {
+        currentGameState = (currentGameState == GameState.WHITE_TURN)
+                ? GameState.BLACK_TURN
+                : GameState.WHITE_TURN;
+    }
 }

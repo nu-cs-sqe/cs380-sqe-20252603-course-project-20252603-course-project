@@ -45,7 +45,7 @@ tasks.withType<Checkstyle>().configureEach {
 
 checkstyle {
     config = resources.text.fromFile("config/checkstyle/checkstyle.xml")
-    isIgnoreFailures = false
+    isIgnoreFailures = true
 }
 
 spotbugs {

@@ -222,12 +222,9 @@ class BoardTests {
                 () -> board.castle(kingFrom, kingTo, rookFrom, null));
     }
 
-    // castle() uses Rook mocks for both slots — castle() only calls hasMoved() and getColor()
-    // on the pieces at those positions, so the concrete type at each position doesn't matter.
-
     @Test
     void castle_KingHasMoved_ReturnsFalseAndBoardUnchanged() {
-        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockKing = EasyMock.createMock(King.class);
         Piece mockRook = EasyMock.createMock(Rook.class);
         EasyMock.expect(mockKing.hasMoved()).andStubReturn(true);
         EasyMock.replay(mockKing, mockRook);
@@ -248,7 +245,7 @@ class BoardTests {
 
     @Test
     void castle_RookHasMoved_ReturnsFalseAndBoardUnchanged() {
-        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockKing = EasyMock.createMock(King.class);
         Piece mockRook = EasyMock.createMock(Rook.class);
         EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
         EasyMock.expect(mockRook.hasMoved()).andStubReturn(true);
@@ -270,7 +267,7 @@ class BoardTests {
 
     @Test
     void castle_PieceBetweenKingAndRook_ReturnsFalseAndBoardUnchanged() {
-        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockKing = EasyMock.createMock(King.class);
         Piece mockRook = EasyMock.createMock(Rook.class);
         Piece blocker = new Bishop(PieceColor.WHITE);
         EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
@@ -295,7 +292,7 @@ class BoardTests {
 
     @Test
     void castle_KingCurrentlyInCheck_ReturnsFalseAndBoardUnchanged() {
-        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockKing = EasyMock.createMock(King.class);
         Piece mockRook = EasyMock.createMock(Rook.class);
         Piece blackRook = new Rook(PieceColor.BLACK);
         EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
@@ -322,7 +319,7 @@ class BoardTests {
 
     @Test
     void castle_KingTransitSquareAttacked_ReturnsFalseAndBoardUnchanged() {
-        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockKing = EasyMock.createMock(King.class);
         Piece mockRook = EasyMock.createMock(Rook.class);
         Piece blackRook = new Rook(PieceColor.BLACK);
         EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
@@ -349,7 +346,7 @@ class BoardTests {
 
     @Test
     void castle_KingLandingSquareAttacked_ReturnsFalseAndBoardUnchanged() {
-        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockKing = EasyMock.createMock(King.class);
         Piece mockRook = EasyMock.createMock(Rook.class);
         Piece blackRook = new Rook(PieceColor.BLACK);
         EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
@@ -376,7 +373,7 @@ class BoardTests {
 
     @Test
     void castle_AllPreconditionsMet_SucceedsAndRepositionesPiecesAndUpdatesKingLocation() {
-        Piece mockKing = EasyMock.createMock(Rook.class);
+        Piece mockKing = EasyMock.createMock(King.class);
         Piece mockRook = EasyMock.createMock(Rook.class);
         EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
         EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);

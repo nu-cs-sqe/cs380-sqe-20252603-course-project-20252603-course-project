@@ -28,4 +28,19 @@ class BoardTests {
         board.switchTurn();
         assertEquals(GameState.BLACK_TURN, board.getCurrentGameState());
     }
+
+    // ── switchTurn ───────────────────────────────────────────────────────────
+
+    @Test
+    void switchTurn_WhiteTurn_SwitchesToBlackTurn() {
+        board.switchTurn();
+        assertEquals(GameState.BLACK_TURN, board.getCurrentGameState());
+    }
+
+    @Test
+    void switchTurn_BlackTurn_SwitchesToWhiteTurn() {
+        board.switchTurn();
+        board.switchTurn();
+        assertEquals(GameState.WHITE_TURN, board.getCurrentGameState());
+    }
 }

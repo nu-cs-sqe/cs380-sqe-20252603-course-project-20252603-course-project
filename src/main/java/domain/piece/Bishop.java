@@ -15,6 +15,6 @@ public class Bishop extends Piece {
 
     @Override
     public boolean hasMoved() {
-        return false;
+        throw new UnsupportedOperationException("not yet implemented");
     }
 }

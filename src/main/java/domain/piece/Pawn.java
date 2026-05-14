@@ -26,7 +26,7 @@ public final class Pawn extends Piece {
 
   @Override
   public boolean hasMoved() {
-    return false;
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   /** Returns true if the move shape from {@code from} to {@code to} is valid for a Pawn. */

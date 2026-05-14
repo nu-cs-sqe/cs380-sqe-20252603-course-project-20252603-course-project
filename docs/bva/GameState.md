@@ -22,5 +22,5 @@
 
 |             | System under test                                       | Expected output                                         | Implemented? |
 |-------------|---------------------------------------------------------|---------------------------------------------------------|--------------|
-| Test Case 1 | `GameState.WHITE_TURN` referenced as a compile-time constant | enum constant is non-null; `name()` returns `"WHITE_TURN"` | :x: |
-| Test Case 2 | `GameState.BLACK_TURN` referenced as a compile-time constant | enum constant is non-null; `name()` returns `"BLACK_TURN"` | :x: |
+| Test Case 1 | `GameState.WHITE_TURN` referenced as a compile-time constant | enum constant is non-null; `name()` returns `"WHITE_TURN"` | :white_check_mark: |
+| Test Case 2 | `GameState.BLACK_TURN` referenced as a compile-time constant | enum constant is non-null; `name()` returns `"BLACK_TURN"` | :white_check_mark: |

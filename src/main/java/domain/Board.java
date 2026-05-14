@@ -6,13 +6,15 @@ import domain.piece.PieceType;
 
 public class Board {
 
+    private static final int BOARD_SIZE = 8;
+
     private Piece[][] pieces;
     private GameState currentGameState;
     private Location whiteKingLocation;
     private Location blackKingLocation;
 
     public Board() {
-        pieces = new Piece[8][8];
+        pieces = new Piece[BOARD_SIZE][BOARD_SIZE];
         currentGameState = GameState.WHITE_TURN;
     }
 
@@ -101,8 +103,8 @@ public class Board {
     }
 
     private boolean isKingInCheck(PieceColor kingColor, Location kingLoc) {
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int col = 0; col < BOARD_SIZE; col++) {
                 Piece p = pieces[row][col];
                 if (p != null && p.getColor() != kingColor) {
                     if (canAttack(p, new Location(row, col), kingLoc)) {

@@ -42,7 +42,7 @@ Returns the current `GameState`. The board starts at `WHITE_TURN` and alternates
 
 |       | System under test                                             | Expected output      | Implemented? |
 |-------|---------------------------------------------------------------|----------------------|--------------|
-| TC 23 | newly constructed board (no `switchTurn()` calls)             | returns `WHITE_TURN` | :x:          |
+| TC 23 | newly constructed board (no `switchTurn()` calls)             | returns `WHITE_TURN` | :white_check_mark: |
 | TC 24 | board after one call to `switchTurn()`                        | returns `BLACK_TURN` | :x:          |
 
 ---

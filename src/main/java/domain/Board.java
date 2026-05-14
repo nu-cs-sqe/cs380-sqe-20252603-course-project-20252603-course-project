@@ -145,6 +145,63 @@ public class Board {
         return dx <= 1 && dy <= 1 && (dx + dy > 0);
     }
 
+    public boolean castle(Location kingFrom, Location kingTo,
+                          Location rookFrom, Location rookTo) {
+        if (kingFrom == null) {
+            throw new IllegalArgumentException("kingFrom must not be null");
+        }
+        if (kingTo == null) {
+            throw new IllegalArgumentException("kingTo must not be null");
+        }
+        if (rookFrom == null) {
+            throw new IllegalArgumentException("rookFrom must not be null");
+        }
+        if (rookTo == null) {
+            throw new IllegalArgumentException("rookTo must not be null");
+        }
+
+        Piece king = pieces[kingFrom.getX()][kingFrom.getY()];
+        Piece rook = pieces[rookFrom.getX()][rookFrom.getY()];
+
+        if (king == null || king.hasMoved()) {
+            return false;
+        }
+        if (rook == null || rook.hasMoved()) {
+            return false;
+        }
+        if (hasPieceBetween(kingFrom, rookFrom)) {
+            return false;
+        }
+
+        PieceColor kingColor = king.getColor();
+        Location kingCheckLoc = (kingColor == PieceColor.WHITE)
+                ? whiteKingLocation : blackKingLocation;
+        if (isKingInCheck(kingColor, kingCheckLoc)) {
+            return false;
+        }
+
+        int colStep = Integer.signum(kingTo.getY() - kingFrom.getY());
+        Location transitSquare = new Location(kingFrom.getX(), kingFrom.getY() + colStep);
+        if (isKingInCheck(kingColor, transitSquare)) {
+            return false;
+        }
+        if (isKingInCheck(kingColor, kingTo)) {
+            return false;
+        }
+
+        pieces[kingTo.getX()][kingTo.getY()] = king;
+        pieces[kingFrom.getX()][kingFrom.getY()] = null;
+        pieces[rookTo.getX()][rookTo.getY()] = rook;
+        pieces[rookFrom.getX()][rookFrom.getY()] = null;
+
+        if (kingColor == PieceColor.WHITE) {
+            whiteKingLocation = kingTo;
+        } else {
+            blackKingLocation = kingTo;
+        }
+        return true;
+    }
+
     private boolean hasPieceBetween(Location from, Location to) {
         int rowStep = Integer.signum(to.getX() - from.getX());
         int colStep = Integer.signum(to.getY() - from.getY());

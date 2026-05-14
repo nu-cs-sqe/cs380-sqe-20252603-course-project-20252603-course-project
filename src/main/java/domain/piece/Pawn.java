@@ -4,6 +4,8 @@ import domain.Location;
 
 /** Represents a Pawn chess piece. */
 public final class Pawn extends Piece {
+  private static final int MIN_BOARD_COORDINATE = 0;
+  private static final int MAX_BOARD_COORDINATE = 7;
   private static final int WHITE_STARTING_ROW = 6;
   private static final int BLACK_STARTING_ROW = 1;
   private static final int WHITE_FORWARD = -1;
@@ -40,15 +42,8 @@ public final class Pawn extends Piece {
     int dx = to.getX() - from.getX();
     int dy = to.getY() - from.getY();
 
-    int forward;
-    int startingRow;
-    if (getColor() == PieceColor.WHITE) {
-      forward = WHITE_FORWARD;
-      startingRow = WHITE_STARTING_ROW;
-    } else {
-      forward = BLACK_FORWARD;
-      startingRow = BLACK_STARTING_ROW;
-    }
+    int forward = getForwardDirection();
+    int startingRow = getStartingRow();
 
     if (from.getY() != startingRow) {
       return false;
@@ -60,8 +55,22 @@ public final class Pawn extends Piece {
     return singleStep || doubleStep;
   }
 
+  private int getForwardDirection() {
+    if (getColor() == PieceColor.WHITE) {
+      return WHITE_FORWARD;
+    }
+    return BLACK_FORWARD;
+  }
+
+  private int getStartingRow() {
+    if (getColor() == PieceColor.WHITE) {
+      return WHITE_STARTING_ROW;
+    }
+    return BLACK_STARTING_ROW;
+  }
+
   private boolean isOnBoard(Location location) {
-    return location.getX() >= 0 && location.getX() <= 7
-        && location.getY() >= 0 && location.getY() <= 7;
+    return location.getX() >= MIN_BOARD_COORDINATE && location.getX() <= MAX_BOARD_COORDINATE
+        && location.getY() >= MIN_BOARD_COORDINATE && location.getY() <= MAX_BOARD_COORDINATE;
   }
 }

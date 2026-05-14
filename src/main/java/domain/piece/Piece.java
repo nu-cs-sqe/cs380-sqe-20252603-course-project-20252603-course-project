@@ -1,34 +1,34 @@
 package domain.piece;
 
 public abstract class Piece {
-    private final PieceType type;
-    private final PieceColor color;
+  private final PieceType type;
+  private final PieceColor color;
 
-    public Piece(PieceType type, PieceColor color) {
-        if (type == null) {
-            throw new IllegalArgumentException("type must not be null");
-        }
-        if (color == null) {
-            throw new IllegalArgumentException("color must not be null");
-        }
-        this.type = type;
-        this.color = color;
+  public Piece(PieceType type, PieceColor color) {
+    if (type == null) {
+      throw new IllegalArgumentException("type must not be null");
     }
-
-    public PieceType getType() {
-        return type;
+    if (color == null) {
+      throw new IllegalArgumentException("color must not be null");
     }
+    this.type = type;
+    this.color = color;
+  }
 
-    public PieceColor getColor() {
-        return color;
-    }
+  public PieceType getType() {
+    return type;
+  }
 
-    @Override
-    public String toString() {
-        return color + " " + type;
-    }
+  public PieceColor getColor() {
+    return color;
+  }
 
-    public abstract Piece makeCopy();
+  @Override
+  public String toString() {
+    return color + " " + type;
+  }
 
-    public abstract boolean hasMoved();
+  public abstract Piece makeCopy();
+
+  public abstract boolean hasMoved();
 }

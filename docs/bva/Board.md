@@ -4,7 +4,7 @@ Test Cases 1–22 (covering `Board()` and `getSnapshot()`) are documented in a s
 
 ---
 
-## Step 1-4 Summary (new methods: `getCurrentGameState`, `switchTurn`, `updateWhiteKingLocation`, `updateBlackKingLocation`, `checkNotMoveIntoCheck`, `castle`)
+## Step 1-4 Summary (new methods: `getCurrentGameState`, `switchTurn`, `updateWhiteKingLocation`, `updateBlackKingLocation`, `applyMoveIfKingSafe`, `castle`)
 
 - Step 1, input equivalence classes:
   - `Location` params: valid on-board location (x ∈ [0,7], y ∈ [0,7]) vs null pointer.
@@ -31,7 +31,7 @@ Test Cases 1–22 (covering `Board()` and `getSnapshot()`) are documented in a s
 - Step 4 strategy:
   - `getCurrentGameState` and `switchTurn`: each-choice across the two `GameState` cases.
   - `updateWhiteKingLocation` and `updateBlackKingLocation`: each-choice across null pointer, min corner, max corner, and interior.
-  - `checkNotMoveIntoCheck`: each-choice across null/non-null location inputs and the two check-outcome booleans (move leaves king in check vs does not), plus the special case where the king itself moves.
+  - `applyMoveIfKingSafe`: each-choice across null/non-null location inputs and the two check-outcome booleans (move leaves king in check vs does not), plus the special case where the king itself moves.
   - `castle`: each-choice for each independent precondition failure + one all-valid success case + null pointer cases per parameter.
 
 ---
@@ -84,7 +84,7 @@ Symmetric to `updateWhiteKingLocation`; keeps `blackKingLocation` accurate befor
 
 ---
 
-## Method under test: `checkNotMoveIntoCheck(Location from, Location to)`
+## Method under test: `applyMoveIfKingSafe(Location from, Location to)`
 
 Simulates a candidate move and rejects it if the current player's king would be in check afterward. Uses `Pointers` for both `Location` params and `Booleans` for the check-outcome boundary.
 

@@ -102,24 +102,24 @@ class BoardTests {
         assertEquals(loc, board.getBlackKingLocation());
     }
 
-    // ── checkNotMoveIntoCheck ────────────────────────────────────────────────
+    // ── applyMoveIfKingSafe ────────────────────────────────────────────────
 
     @Test
-    void checkNotMoveIntoCheck_NullFrom_ThrowsIllegalArgumentException() {
+    void applyMoveIfKingSafe_NullFrom_ThrowsIllegalArgumentException() {
         Location to = new Location(4, 4);
         assertThrows(IllegalArgumentException.class,
-                () -> board.checkNotMoveIntoCheck(null, to));
+                () -> board.applyMoveIfKingSafe(null, to));
     }
 
     @Test
-    void checkNotMoveIntoCheck_NullTo_ThrowsIllegalArgumentException() {
+    void applyMoveIfKingSafe_NullTo_ThrowsIllegalArgumentException() {
         Location from = new Location(4, 4);
         assertThrows(IllegalArgumentException.class,
-                () -> board.checkNotMoveIntoCheck(from, null));
+                () -> board.applyMoveIfKingSafe(from, null));
     }
 
     @Test
-    void checkNotMoveIntoCheck_MoveDoesNotExposeKing_ReturnsTrueAndAppliesMove() {
+    void applyMoveIfKingSafe_MoveDoesNotExposeKing_ReturnsTrueAndAppliesMove() {
         // White rook at (4,4), white king at (7,4) — moving rook to (4,5) leaves king safe
         Piece whiteRook = new Rook(PieceColor.WHITE);
         Piece whiteKing = new King(PieceColor.WHITE);
@@ -127,7 +127,7 @@ class BoardTests {
         board.setPiece(7, 4, whiteKing);
         board.updateWhiteKingLocation(new Location(7, 4));
 
-        boolean result = board.checkNotMoveIntoCheck(new Location(4, 4), new Location(4, 5));
+        boolean result = board.applyMoveIfKingSafe(new Location(4, 4), new Location(4, 5));
 
         assertTrue(result);
         assertNull(board.getPiece(4, 4));
@@ -135,7 +135,7 @@ class BoardTests {
     }
 
     @Test
-    void checkNotMoveIntoCheck_MovePinnedPieceExposesKing_ReturnsFalseAndBoardUnchanged() {
+    void applyMoveIfKingSafe_MovePinnedPieceExposesKing_ReturnsFalseAndBoardUnchanged() {
         // White rook at (7,2) blocks black rook at (7,0) from reaching white king at (7,4)
         // Moving white rook away exposes the king
         Piece blackRook = new Rook(PieceColor.BLACK);
@@ -146,7 +146,7 @@ class BoardTests {
         board.setPiece(7, 4, whiteKing);
         board.updateWhiteKingLocation(new Location(7, 4));
 
-        boolean result = board.checkNotMoveIntoCheck(new Location(7, 2), new Location(3, 2));
+        boolean result = board.applyMoveIfKingSafe(new Location(7, 2), new Location(3, 2));
 
         assertFalse(result);
         assertEquals(whiteBlocker, board.getPiece(7, 2));
@@ -154,13 +154,13 @@ class BoardTests {
     }
 
     @Test
-    void checkNotMoveIntoCheck_KingMovesToSafeSquare_ReturnsTrueAndUpdatesKingLocation() {
+    void applyMoveIfKingSafe_KingMovesToSafeSquare_ReturnsTrueAndUpdatesKingLocation() {
         // White king at (4,4), no threats — move to (4,5)
         Piece whiteKing = new King(PieceColor.WHITE);
         board.setPiece(4, 4, whiteKing);
         board.updateWhiteKingLocation(new Location(4, 4));
 
-        boolean result = board.checkNotMoveIntoCheck(new Location(4, 4), new Location(4, 5));
+        boolean result = board.applyMoveIfKingSafe(new Location(4, 4), new Location(4, 5));
 
         assertTrue(result);
         assertEquals(new Location(4, 5).getX(), board.getWhiteKingLocation().getX());
@@ -168,7 +168,7 @@ class BoardTests {
     }
 
     @Test
-    void checkNotMoveIntoCheck_KingMovesToAttackedSquare_ReturnsFalseAndLocationUnchanged() {
+    void applyMoveIfKingSafe_KingMovesToAttackedSquare_ReturnsFalseAndLocationUnchanged() {
         // White king at (4,4), black bishop at (2,2) — moving king to (3,3) lands on attacked square
         Piece whiteKing = new King(PieceColor.WHITE);
         Piece blackBishop = new Bishop(PieceColor.BLACK);
@@ -176,7 +176,7 @@ class BoardTests {
         board.setPiece(2, 2, blackBishop);
         board.updateWhiteKingLocation(new Location(4, 4));
 
-        boolean result = board.checkNotMoveIntoCheck(new Location(4, 4), new Location(3, 3));
+        boolean result = board.applyMoveIfKingSafe(new Location(4, 4), new Location(3, 3));
 
         assertFalse(result);
         assertEquals(4, board.getWhiteKingLocation().getX());

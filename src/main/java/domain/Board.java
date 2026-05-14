@@ -67,7 +67,7 @@ public class Board {
         }
     }
 
-    public boolean checkNotMoveIntoCheck(Location from, Location to) {
+    public boolean applyMoveIfKingSafe(Location from, Location to) {
         if (from == null) {
             throw new IllegalArgumentException("from must not be null");
         }

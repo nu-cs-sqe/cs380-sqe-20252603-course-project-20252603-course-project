@@ -22,4 +22,10 @@ class BoardTests {
     void getCurrentGameState_NewBoard_ReturnsWhiteTurn() {
         assertEquals(GameState.WHITE_TURN, board.getCurrentGameState());
     }
+
+    @Test
+    void getCurrentGameState_AfterOneSwitchTurn_ReturnsBlackTurn() {
+        board.switchTurn();
+        assertEquals(GameState.BLACK_TURN, board.getCurrentGameState());
+    }
 }

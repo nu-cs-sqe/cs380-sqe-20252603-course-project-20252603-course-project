@@ -44,10 +44,7 @@ tasks.withType<Checkstyle>().configureEach {
 }
 
 checkstyle {
-    config = resources.text.fromArchiveEntry(
-        configurations.checkstyle.get().filter { it.name.startsWith("checkstyle-") }.singleFile,
-        "google_checks.xml"
-    )
+    config = resources.text.fromFile("config/checkstyle/checkstyle.xml")
     isIgnoreFailures = false
 }
 

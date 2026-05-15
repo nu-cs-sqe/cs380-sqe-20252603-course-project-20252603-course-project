@@ -2,13 +2,17 @@ package domain.piece;
 
 import domain.Location;
 
-// Non-final to allow EasyMock subclassing in castle tests.
-public class King extends Piece {
+/** Represents a King chess piece. */
+public final class King extends Piece {
   private static final int MIN_BOARD_COORDINATE = 0;
   private static final int MAX_BOARD_COORDINATE = 7;
 
+  /** Constructs a King with the given color. */
   public King(PieceColor color) {
     super(PieceType.KING, color);
+    if (color == null) {
+      throw new IllegalArgumentException("color must not be null");
+    }
   }
 
   @Override
@@ -16,11 +20,7 @@ public class King extends Piece {
     return new King(getColor());
   }
 
-  @Override
-  public boolean hasMoved() {
-    throw new UnsupportedOperationException("not yet implemented");
-  }
-
+  /** Returns true if the move shape from {@code from} to {@code to} is valid for a King. */
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null) {
       throw new IllegalArgumentException("from must not be null");

@@ -1,6 +1,11 @@
 package domain.piece;
 
+import domain.Location;
+
 public abstract class Piece {
+  private static final int MIN_BOARD_COORDINATE = 0;
+  private static final int MAX_BOARD_COORDINATE = 7;
+
   private final PieceType type;
   private final PieceColor color;
 
@@ -30,5 +35,31 @@ public abstract class Piece {
 
   public abstract Piece makeCopy();
 
-  public abstract boolean hasMoved();
+  public boolean hasMoved() {
+    throw new UnsupportedOperationException("not yet implemented");
+  }
+
+  public boolean canAttack(Location from, Location to, Piece[][] board) {
+    throw new UnsupportedOperationException("not yet implemented");
+  }
+
+  private static boolean isOnBoard(Location location) {
+    return location.getX() >= MIN_BOARD_COORDINATE && location.getX() <= MAX_BOARD_COORDINATE
+        && location.getY() >= MIN_BOARD_COORDINATE && location.getY() <= MAX_BOARD_COORDINATE;
+  }
+
+  public static boolean hasPieceBetween(Location from, Location to, Piece[][] board) {
+    int rowStep = Integer.signum(to.getX() - from.getX());
+    int colStep = Integer.signum(to.getY() - from.getY());
+    int row = from.getX() + rowStep;
+    int col = from.getY() + colStep;
+    while (row != to.getX() || col != to.getY()) {
+      if (board[row][col] != null) {
+        return true;
+      }
+      row += rowStep;
+      col += colStep;
+    }
+    return false;
+  }
 }

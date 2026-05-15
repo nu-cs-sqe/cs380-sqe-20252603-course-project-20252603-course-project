@@ -18,12 +18,12 @@ public class Board {
     currentGameState = GameState.WHITE_TURN;
   }
 
-  public Piece getPiece(int xx, int yy) {
-    return pieces[xx][yy];
+  public Piece getPiece(int row, int col) {
+    return pieces[row][col];
   }
 
-  public void setPiece(int xx, int yy, Piece piece) {
-    pieces[xx][yy] = piece;
+  public void setPiece(int row, int col, Piece piece) {
+    pieces[row][col] = piece;
   }
 
   public Location getWhiteKingLocation() {
@@ -118,9 +118,9 @@ public class Board {
   private boolean isKingInCheck(PieceColor kingColor, Location kingLoc) {
     for (int row = 0; row < BOARD_SIZE; row++) {
       for (int col = 0; col < BOARD_SIZE; col++) {
-        Piece pp = pieces[row][col];
-        if (pp != null && pp.getColor() != kingColor) {
-          if (canAttack(pp, new Location(row, col), kingLoc)) {
+        Piece attacker = pieces[row][col];
+        if (attacker != null && attacker.getColor() != kingColor) {
+          if (attacker.canAttack(new Location(row, col), kingLoc, pieces)) {
             return true;
           }
         }
@@ -129,63 +129,8 @@ public class Board {
     return false;
   }
 
-  private boolean canAttack(Piece pp, Location from, Location to) {
-    PieceType type = pp.getType();
-    if (type == PieceType.ROOK) {
-      return canRookAttack(from, to);
-    }
-    if (type == PieceType.BISHOP) {
-      return canBishopAttack(from, to);
-    }
-    if (type == PieceType.QUEEN) {
-      return canRookAttack(from, to) || canBishopAttack(from, to);
-    }
-    if (type == PieceType.KNIGHT) {
-      return canKnightAttack(from, to);
-    }
-    if (type == PieceType.PAWN) {
-      return canPawnAttack(pp.getColor(), from, to);
-    }
-    return canKingAttack(from, to);
-  }
-
-  private boolean canRookAttack(Location from, Location to) {
-    if (from.getX() != to.getX() && from.getY() != to.getY()) {
-      return false;
-    }
-    return !hasPieceBetween(from, to);
-  }
-
-  private boolean canBishopAttack(Location from, Location to) {
-    int dx = Math.abs(to.getX() - from.getX());
-    int dy = Math.abs(to.getY() - from.getY());
-    if (dx != dy || dx == 0) {
-      return false;
-    }
-    return !hasPieceBetween(from, to);
-  }
-
-  private boolean canKnightAttack(Location from, Location to) {
-    int dx = Math.abs(to.getX() - from.getX());
-    int dy = Math.abs(to.getY() - from.getY());
-    return (dx == 2 && dy == 1) || (dx == 1 && dy == 2);
-  }
-
-  private boolean canPawnAttack(PieceColor color, Location from, Location to) {
-    int direction = (color == PieceColor.BLACK) ? 1 : -1;
-    int dx = to.getX() - from.getX();
-    int dy = Math.abs(to.getY() - from.getY());
-    return dx == direction && dy == 1;
-  }
-
-  private boolean canKingAttack(Location from, Location to) {
-    int dx = Math.abs(to.getX() - from.getX());
-    int dy = Math.abs(to.getY() - from.getY());
-    return dx <= 1 && dy <= 1 && (dx + dy > 0);
-  }
-
-  public boolean castle(Location kingFrom, Location kingTo, Location... rookLocations) {
-    CastleMove castleMove = new CastleMove(kingFrom, kingTo, rookLocations);
+  public boolean castle(Location kingFrom, Location kingTo, Location rookFrom, Location rookTo) {
+    CastleMove castleMove = new CastleMove(kingFrom, kingTo, rookFrom, rookTo);
 
     Piece king = pieces[castleMove.kingFrom.getX()][castleMove.kingFrom.getY()];
     Piece rook = pieces[castleMove.rookFrom.getX()][castleMove.rookFrom.getY()];
@@ -196,7 +141,7 @@ public class Board {
     if (rook == null || rook.hasMoved()) {
       return false;
     }
-    if (hasPieceBetween(castleMove.kingFrom, castleMove.rookFrom)) {
+    if (Piece.hasPieceBetween(castleMove.kingFrom, castleMove.rookFrom, pieces)) {
       return false;
     }
 
@@ -204,17 +149,17 @@ public class Board {
   }
 
   private void validateCastleLocations(Location kingFrom, Location kingTo,
-      Location[] rookLocations) {
+      Location rookFrom, Location rookTo) {
     if (kingFrom == null) {
       throw new IllegalArgumentException("kingFrom must not be null");
     }
     if (kingTo == null) {
       throw new IllegalArgumentException("kingTo must not be null");
     }
-    if (rookLocations[0] == null) {
+    if (rookFrom == null) {
       throw new IllegalArgumentException("rookFrom must not be null");
     }
-    if (rookLocations[1] == null) {
+    if (rookTo == null) {
       throw new IllegalArgumentException("rookTo must not be null");
     }
   }
@@ -255,41 +200,19 @@ public class Board {
     pieces[castleMove.rookFrom.getX()][castleMove.rookFrom.getY()] = null;
   }
 
-  private boolean hasPieceBetween(Location from, Location to) {
-    int rowStep = Integer.signum(to.getX() - from.getX());
-    int colStep = Integer.signum(to.getY() - from.getY());
-    int row = from.getX() + rowStep;
-    int col = from.getY() + colStep;
-    while (row != to.getX() || col != to.getY()) {
-      if (pieces[row][col] != null) {
-        return true;
-      }
-      row += rowStep;
-      col += colStep;
-    }
-    return false;
-  }
-
   private final class CastleMove {
     private final Location kingFrom;
     private final Location kingTo;
     private final Location rookFrom;
     private final Location rookTo;
 
-    private CastleMove(Location kingFrom, Location kingTo, Location[] rookLocations) {
-      validateRookLocationsCount(rookLocations);
-      validateCastleLocations(kingFrom, kingTo, rookLocations);
+    private CastleMove(Location kingFrom, Location kingTo, Location rookFrom, Location rookTo) {
+      validateCastleLocations(kingFrom, kingTo, rookFrom, rookTo);
 
       this.kingFrom = kingFrom;
       this.kingTo = kingTo;
-      this.rookFrom = rookLocations[0];
-      this.rookTo = rookLocations[1];
-    }
-
-    private void validateRookLocationsCount(Location[] rookLocations) {
-      if (rookLocations.length != 2) {
-        throw new IllegalArgumentException("rookFrom and rookTo must be provided");
-      }
+      this.rookFrom = rookFrom;
+      this.rookTo = rookTo;
     }
   }
 }

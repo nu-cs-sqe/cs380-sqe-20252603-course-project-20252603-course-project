@@ -3,19 +3,22 @@ package domain;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class GameStateTests {
 
     @Test
-    void GameState_WhiteTurn_IsNonNullWithCorrectName() {
-        assertNotNull(GameState.WHITE_TURN);
-        assertEquals("WHITE_TURN", GameState.WHITE_TURN.name());
+    void GameState_WhiteTurnAndBlackTurn_AreDistinct() {
+        assertNotEquals(GameState.WHITE_TURN, GameState.BLACK_TURN);
     }
 
     @Test
-    void GameState_BlackTurn_IsNonNullWithCorrectName() {
-        assertNotNull(GameState.BLACK_TURN);
-        assertEquals("BLACK_TURN", GameState.BLACK_TURN.name());
+    void GameState_WhiteTurn_HasOrdinalZero() {
+        assertEquals(0, GameState.WHITE_TURN.ordinal());
+    }
+
+    @Test
+    void GameState_BlackTurn_HasOrdinalOne() {
+        assertEquals(1, GameState.BLACK_TURN.ordinal());
     }
 }

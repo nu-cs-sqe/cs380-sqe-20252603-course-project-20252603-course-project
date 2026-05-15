@@ -1,17 +1,15 @@
 package domain.piece;
 
 public class Rook extends Piece {
-  public Rook(PieceColor color) {
-    super(PieceType.ROOK, color);
-  }
+    public Rook(PieceColor color) {
+        super(PieceType.ROOK, color);
+        if (color == null) {
+            throw new IllegalArgumentException("color must not be null");
+        }
+    }
 
-  @Override
-  public Piece makeCopy() {
-    return new Rook(getColor());
-  }
-
-  @Override
-  public boolean hasMoved() {
-    throw new UnsupportedOperationException("not yet implemented");
-  }
+    @Override
+    public Piece makeCopy() {
+        return new Rook(getColor());
+    }
 }

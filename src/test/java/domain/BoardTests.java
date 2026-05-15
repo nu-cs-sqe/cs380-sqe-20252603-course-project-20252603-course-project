@@ -81,8 +81,9 @@ class BoardTests {
   // updateWhiteKingLocation
   @Test
   void updateWhiteKingLocation_NullLocation_ThrowsIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class,
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.updateWhiteKingLocation(null));
+    assertEquals("location must not be null", exception.getMessage());
   }
 
   @Test
@@ -109,8 +110,9 @@ class BoardTests {
   // updateBlackKingLocation
   @Test
   void updateBlackKingLocation_NullLocation_ThrowsIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class,
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.updateBlackKingLocation(null));
+    assertEquals("location must not be null", exception.getMessage());
   }
 
   @Test
@@ -144,15 +146,17 @@ class BoardTests {
   @Test
   void applyMoveIfKingSafe_NullFrom_ThrowsIllegalArgumentException() {
     final Location to = new Location(CENTER_COORDINATE, CENTER_COORDINATE);
-    assertThrows(IllegalArgumentException.class,
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.applyMoveIfKingSafe(null, to));
+    assertEquals("from must not be null", exception.getMessage());
   }
 
   @Test
   void applyMoveIfKingSafe_NullTo_ThrowsIllegalArgumentException() {
     final Location from = new Location(CENTER_COORDINATE, CENTER_COORDINATE);
-    assertThrows(IllegalArgumentException.class,
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.applyMoveIfKingSafe(from, null));
+    assertEquals("to must not be null", exception.getMessage());
   }
 
   @Test
@@ -504,8 +508,9 @@ class BoardTests {
     final Location to = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
     final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
     final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
-    assertThrows(IllegalArgumentException.class,
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.castle(null, to, rookFrom, rookTo));
+    assertEquals("kingFrom must not be null", exception.getMessage());
   }
 
   @Test
@@ -513,8 +518,9 @@ class BoardTests {
     final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
     final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
     final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
-    assertThrows(IllegalArgumentException.class,
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.castle(kingFrom, null, rookFrom, rookTo));
+    assertEquals("kingTo must not be null", exception.getMessage());
   }
 
   @Test
@@ -522,8 +528,9 @@ class BoardTests {
     final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
     final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
     final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
-    assertThrows(IllegalArgumentException.class,
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.castle(kingFrom, kingTo, null, rookTo));
+    assertEquals("rookFrom must not be null", exception.getMessage());
   }
 
   @Test
@@ -531,8 +538,9 @@ class BoardTests {
     final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
     final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
     final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    assertThrows(IllegalArgumentException.class,
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.castle(kingFrom, kingTo, rookFrom, null));
+    assertEquals("rookTo must not be null", exception.getMessage());
   }
 
   @Test

@@ -659,12 +659,20 @@ class BoardTests {
   void castle_KingTransitSquareAttacked_ReturnsFalseAndBoardUnchanged() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
-    final Piece blackAttacker = mockAttacker(PieceColor.BLACK, true);
+    final Piece blackAttacker = EasyMock.createMock(Piece.class);
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockKing.getColor()).andStubReturn(PieceColor.WHITE);
     EasyMock.expect(mockRook.getColor()).andStubReturn(PieceColor.WHITE);
-    EasyMock.replay(mockKing, mockRook);
+    EasyMock.expect(blackAttacker.getColor()).andStubReturn(PieceColor.BLACK);
+    EasyMock.expect(blackAttacker.getType()).andStubReturn(PieceType.PAWN);
+    EasyMock.expect(blackAttacker.canAttack(
+        EasyMock.anyObject(Location.class),
+        EasyMock.anyObject(Location.class),
+        EasyMock.anyObject(Piece[][].class)
+    )).andReturn(false)  // starting square not attacked
+      .andReturn(true);  // transit square attacked
+    EasyMock.replay(mockKing, mockRook, blackAttacker);
 
     final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
     final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
@@ -685,12 +693,21 @@ class BoardTests {
   void castle_KingLandingSquareAttacked_ReturnsFalseAndBoardUnchanged() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
-    final Piece blackAttacker = mockAttacker(PieceColor.BLACK, true);
+    final Piece blackAttacker = EasyMock.createMock(Piece.class);
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockKing.getColor()).andStubReturn(PieceColor.WHITE);
     EasyMock.expect(mockRook.getColor()).andStubReturn(PieceColor.WHITE);
-    EasyMock.replay(mockKing, mockRook);
+    EasyMock.expect(blackAttacker.getColor()).andStubReturn(PieceColor.BLACK);
+    EasyMock.expect(blackAttacker.getType()).andStubReturn(PieceType.PAWN);
+    EasyMock.expect(blackAttacker.canAttack(
+        EasyMock.anyObject(Location.class),
+        EasyMock.anyObject(Location.class),
+        EasyMock.anyObject(Piece[][].class)
+    )).andReturn(false)  // starting square not attacked
+      .andReturn(false)  // transit square not attacked
+      .andReturn(true);  // landing square attacked
+    EasyMock.replay(mockKing, mockRook, blackAttacker);
 
     final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
     final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);

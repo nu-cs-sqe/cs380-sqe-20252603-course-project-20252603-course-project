@@ -43,11 +43,6 @@ public abstract class Piece {
     throw new UnsupportedOperationException("not yet implemented");
   }
 
-  private static boolean isOnBoard(Location location) {
-    return location.getX() >= MIN_BOARD_COORDINATE && location.getX() <= MAX_BOARD_COORDINATE
-        && location.getY() >= MIN_BOARD_COORDINATE && location.getY() <= MAX_BOARD_COORDINATE;
-  }
-
   public static boolean hasPieceBetween(Location from, Location to, Piece[][] board) {
     int rowStep = Integer.signum(to.getX() - from.getX());
     int colStep = Integer.signum(to.getY() - from.getY());

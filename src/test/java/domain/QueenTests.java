@@ -1,6 +1,5 @@
 package domain;
 
-import domain.Location;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import domain.piece.Piece;

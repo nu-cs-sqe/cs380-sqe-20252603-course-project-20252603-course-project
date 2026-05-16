@@ -3,25 +3,25 @@ package domain.piece;
 import domain.Location;
 
 public class Queen extends Piece {
-    public Queen(PieceColor color) {
-        super(PieceType.QUEEN, color);
-        if (color == null) {
-            throw new IllegalArgumentException("color must not be null");
-        }
-    }
+	public Queen(PieceColor color) {
+		super(PieceType.QUEEN, color);
+		if (color == null) {
+			throw new IllegalArgumentException("color must not be null");
+		}
+	}
 
-    @Override
-    public Piece makeCopy() {
-        return new Queen(getColor());
-    }
+	@Override
+	public Piece makeCopy() {
+		return new Queen(getColor());
+	}
 
-    public boolean isValidMoveShape(Location from, Location to) {
-        if (from == null) {
-            throw new IllegalArgumentException("from must not be null");
-        }
-        if (to == null) {
-            throw new IllegalArgumentException("to must not be null");
-        }
-        return false;
-    }
+	public boolean isValidMoveShape(Location from, Location to) {
+		if (from == null) {
+			throw new IllegalArgumentException("from must not be null");
+		}
+		if (to == null) {
+			throw new IllegalArgumentException("to must not be null");
+		}
+		return false;
+	}
 }

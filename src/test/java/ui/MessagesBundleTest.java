@@ -1,7 +1,6 @@
 package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -32,7 +31,6 @@ class MessagesBundleTest {
   void messagesBundle_LoadWithLocaleUS_HasExpectedTitle() {
     ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.US);
     String title = bundle.getString("mainWindow.title");
-    assertNotNull(title);
     assertFalse(title.isBlank(), "mainWindow.title should not be blank in en_US bundle");
   }
 

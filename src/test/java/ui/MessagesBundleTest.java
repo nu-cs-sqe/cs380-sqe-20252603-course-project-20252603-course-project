@@ -41,11 +41,13 @@ class MessagesBundleTest {
 
   @Test
   void messagesBundle_EsUsBundle_ContainsSameKeysAsDefault() {
-    ResourceBundle defaultBundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.ROOT);
-    ResourceBundle esUsBundle = ResourceBundle.getBundle(BUNDLE_NAME, new Locale("es", "US"));
-    Set<String> defaultKeys = new HashSet<>(Collections.list(defaultBundle.getKeys()));
-    Set<String> esUsKeys = new HashSet<>(Collections.list(esUsBundle.getKeys()));
-    assertEquals(defaultKeys, esUsKeys, "es_US bundle key set differs from default bundle key set");
+    assertSameKeysAsDefault(new Locale("es", "US"));
+  }
+
+  @Test
+  void messagesBundle_EnUsBundle_ContainsSameKeysAsDefault() {
+    assertEquals(Locale.US, ResourceBundle.getBundle(BUNDLE_NAME, Locale.US).getLocale());
+    assertSameKeysAsDefault(Locale.US);
   }
 
   private void assertContainsAllRequiredKeys(ResourceBundle bundle) {
@@ -54,13 +56,11 @@ class MessagesBundleTest {
     }
   }
 
-  @Test
-  void messagesBundle_EnUsBundle_ContainsSameKeysAsDefault() {
+  private void assertSameKeysAsDefault(Locale locale) {
     ResourceBundle defaultBundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.ROOT);
-    ResourceBundle enUsBundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.US);
-    assertEquals(Locale.US, enUsBundle.getLocale());
+    ResourceBundle localeBundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
     Set<String> defaultKeys = new HashSet<>(Collections.list(defaultBundle.getKeys()));
-    Set<String> enUsKeys = new HashSet<>(Collections.list(enUsBundle.getKeys()));
-    assertEquals(defaultKeys, enUsKeys, "en_US bundle key set differs from default bundle key set");
+    Set<String> localeKeys = new HashSet<>(Collections.list(localeBundle.getKeys()));
+    assertEquals(defaultKeys, localeKeys, locale + " bundle key set differs from default bundle key set");
   }
 }

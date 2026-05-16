@@ -42,6 +42,14 @@ class MessagesBundleTest {
   }
 
   @Test
+  void messagesBundle_EsUsBundle_ContainsAllRequiredKeys() {
+    ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, new Locale("es", "US"));
+    for (String key : REQUIRED_KEYS) {
+      assertTrue(bundle.containsKey(key), "es_US bundle missing key: " + key);
+    }
+  }
+
+  @Test
   void messagesBundle_EnUsBundle_ContainsSameKeysAsDefault() {
     ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.US);
     assertEquals(new Locale("en", "US"), bundle.getLocale());

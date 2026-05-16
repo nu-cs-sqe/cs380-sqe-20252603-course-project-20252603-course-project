@@ -26,9 +26,11 @@ class MessagesBundleTest {
   );
 
   @Test
-  void messagesBundle_LoadWithLocaleUS_IsNotNull() {
+  void messagesBundle_LoadWithLocaleUS_HasExpectedTitle() {
     ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.US);
-    assertNotNull(bundle);
+    String title = bundle.getString("mainWindow.title");
+    assertNotNull(title);
+    assertTrue(!title.isBlank(), "mainWindow.title should not be blank in en_US bundle");
   }
 
   @Test

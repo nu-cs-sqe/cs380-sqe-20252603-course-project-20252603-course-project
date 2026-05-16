@@ -1,5 +1,7 @@
 package domain.piece;
 
+import domain.Location;
+
 public class Queen extends Piece {
     public Queen(PieceColor color) {
         super(PieceType.QUEEN, color);
@@ -11,5 +13,15 @@ public class Queen extends Piece {
     @Override
     public Piece makeCopy() {
         return new Queen(getColor());
+    }
+
+    public boolean isValidMoveShape(Location from, Location to) {
+        if (from == null) {
+            throw new IllegalArgumentException("from must not be null");
+        }
+        if (to == null) {
+            throw new IllegalArgumentException("to must not be null");
+        }
+        return false; // implementation owned by issue #14
     }
 }

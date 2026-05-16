@@ -37,17 +37,17 @@ class MessagesBundleTest {
 
   @Test
   void messagesBundle_DefaultBundle_ContainsAllRequiredKeys() {
-    ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.ROOT);
-    for (String key : REQUIRED_KEYS) {
-      assertTrue(bundle.containsKey(key), "Default bundle missing key: " + key);
-    }
+    assertContainsAllRequiredKeys(ResourceBundle.getBundle(BUNDLE_NAME, Locale.ROOT));
   }
 
   @Test
   void messagesBundle_EsUsBundle_ContainsAllRequiredKeys() {
-    ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, new Locale("es", "US"));
+    assertContainsAllRequiredKeys(ResourceBundle.getBundle(BUNDLE_NAME, new Locale("es", "US")));
+  }
+
+  private void assertContainsAllRequiredKeys(ResourceBundle bundle) {
     for (String key : REQUIRED_KEYS) {
-      assertTrue(bundle.containsKey(key), "es_US bundle missing key: " + key);
+      assertTrue(bundle.containsKey(key), bundle.getLocale() + " bundle missing key: " + key);
     }
   }
 

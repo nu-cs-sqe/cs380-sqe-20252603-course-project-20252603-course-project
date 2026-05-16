@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -51,10 +53,11 @@ class MessagesBundleTest {
 
   @Test
   void messagesBundle_EnUsBundle_ContainsSameKeysAsDefault() {
-    ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.US);
-    assertEquals(new Locale("en", "US"), bundle.getLocale());
-    for (String key : REQUIRED_KEYS) {
-      assertTrue(bundle.containsKey(key), "en_US bundle missing key: " + key);
-    }
+    ResourceBundle defaultBundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.ROOT);
+    ResourceBundle enUsBundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.US);
+    assertEquals(new Locale("en", "US"), enUsBundle.getLocale());
+    Set<String> defaultKeys = new HashSet<>(Collections.list(defaultBundle.getKeys()));
+    Set<String> enUsKeys = new HashSet<>(Collections.list(enUsBundle.getKeys()));
+    assertEquals(defaultKeys, enUsKeys, "en_US bundle key set differs from default bundle key set");
   }
 }

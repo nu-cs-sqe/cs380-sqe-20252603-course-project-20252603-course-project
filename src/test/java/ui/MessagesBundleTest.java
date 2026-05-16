@@ -46,7 +46,6 @@ class MessagesBundleTest {
 
   @Test
   void messagesBundle_EnUsBundle_ContainsSameKeysAsDefault() {
-    assertEquals(Locale.US, ResourceBundle.getBundle(BUNDLE_NAME, Locale.US).getLocale());
     assertSameKeysAsDefault(Locale.US);
   }
 
@@ -59,6 +58,7 @@ class MessagesBundleTest {
   private void assertSameKeysAsDefault(Locale locale) {
     ResourceBundle defaultBundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.ROOT);
     ResourceBundle localeBundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
+    assertEquals(locale, localeBundle.getLocale(), "expected " + locale + " bundle to load but got fallback");
     Set<String> defaultKeys = new HashSet<>(Collections.list(defaultBundle.getKeys()));
     Set<String> localeKeys = new HashSet<>(Collections.list(localeBundle.getKeys()));
     assertEquals(defaultKeys, localeKeys, locale + " bundle key set differs from default bundle key set");

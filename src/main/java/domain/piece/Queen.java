@@ -22,6 +22,6 @@ public class Queen extends Piece {
         if (to == null) {
             throw new IllegalArgumentException("to must not be null");
         }
-        return false; // implementation owned by issue #14
+        return false;
     }
 }

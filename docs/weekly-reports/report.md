@@ -2,7 +2,7 @@
 **Planning and Progress Tracking**:
 1. [95% done] Tallie: Multiple Turns of the Game: Google Style Guide Review Against Clean Code (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/44)
 2. [95% done] Tallie: Multiple Turns of the Game: Board Check-Avoidance, Castling, Turn State, and GameStatsView (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/45)
-3. [not started] Tallie: Integration Testing Week 1: Controller and UI Refresh Contract (Links to PR)
+3. [50% done] Tallie: Integration Testing Week 1: Controller and UI Refresh Contract (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/47)
 4. [95% done] Tallie: I18n Week 1: Resource Bundle Structure (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/46)
 5. [done] Tallie: Review PR 27 (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/27)
 6. [done] Tallie: Create draft team task splits for Multiple Turns of the Game, Integration Testing, and I18n Testing

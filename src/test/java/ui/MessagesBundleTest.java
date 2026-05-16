@@ -2,6 +2,7 @@ package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
@@ -32,7 +33,7 @@ class MessagesBundleTest {
     ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.US);
     String title = bundle.getString("mainWindow.title");
     assertNotNull(title);
-    assertTrue(!title.isBlank(), "mainWindow.title should not be blank in en_US bundle");
+    assertFalse(title.isBlank(), "mainWindow.title should not be blank in en_US bundle");
   }
 
   @Test

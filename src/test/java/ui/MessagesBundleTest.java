@@ -55,7 +55,7 @@ class MessagesBundleTest {
   void messagesBundle_EnUsBundle_ContainsSameKeysAsDefault() {
     ResourceBundle defaultBundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.ROOT);
     ResourceBundle enUsBundle = ResourceBundle.getBundle(BUNDLE_NAME, Locale.US);
-    assertEquals(new Locale("en", "US"), enUsBundle.getLocale());
+    assertEquals(Locale.US, enUsBundle.getLocale());
     Set<String> defaultKeys = new HashSet<>(Collections.list(defaultBundle.getKeys()));
     Set<String> enUsKeys = new HashSet<>(Collections.list(enUsBundle.getKeys()));
     assertEquals(defaultKeys, enUsKeys, "en_US bundle key set differs from default bundle key set");

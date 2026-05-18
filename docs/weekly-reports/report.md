@@ -9,6 +9,11 @@
 7. [done] Tallie: Created user stories, use cases, and requirements for Multiple Turns of the Game (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/32)
 8. [done] Tallie: Created broad integration testing plan (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/28) and i18n testing plan (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/36)
 9. [done] Tallie: Attended group meeting.
+11. [done] Reed: Attended group meeting.
+12. [starting] Reed: Integration Testing Week 1: Piece Movement API Readiness
+13. [done] Trenton: Attended group meeting.
+14. [in-progress] Trenton: Respond to Tallie's comments on PR#27.
+15. [starting] Trenton: Integration Testing Week 1: Board Setup Contract and Snapshot Shape
 
 # Week 6 (5/4/2026-5/10/2026)
 **Planning and Progress Tracking**:

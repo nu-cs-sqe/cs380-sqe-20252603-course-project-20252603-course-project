@@ -1,3 +1,9 @@
+# Week 8 (5/18/2026-5/24/2026) 
+**Planning and Progress Tracking**:
+1. [done] Tallie: Create draft team task split, user stories, use cases, and requirements for One Win Condition (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/50, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/51, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/52, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/53)
+2. [done] Tallie: Create draft team task split for week 2 of i18n testing (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/57, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/58, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/59)
+3. [done] Tallie: Create draft team task split for week 2 of integration testing (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/61, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/62, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/63)
+
 # Week 7 (5/11/2026-5/17/2026)
 **Planning and Progress Tracking**:
 1. [95% done] Tallie: Multiple Turns of the Game: Google Style Guide Review Against Clean Code (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/44)

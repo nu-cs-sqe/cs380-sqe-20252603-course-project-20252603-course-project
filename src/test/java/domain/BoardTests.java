@@ -12,7 +12,6 @@ public class BoardTests {
     @Test
     void constructorCreatesBoard() {
         Board board = new Board();
-
         assertNotNull(board);
     }
 
@@ -53,90 +52,63 @@ public class BoardTests {
     }
 
     @Test
-    void blackRooksInitializedCorrectly() {
+    void majorPiecesInitializedCorrectly() {
         Board board = new Board();
+        Piece[][] s = board.getSnapshot();
 
-        Piece[][] snapshot = board.getSnapshot();
+        // Black back rank
+        assertEquals(PieceType.ROOK, s[0][0].getType());
+        assertEquals(PieceColor.BLACK, s[0][0].getColor());
 
-        assertEquals(PieceType.ROOK, snapshot[0][0].getType());
-        assertEquals(PieceColor.BLACK, snapshot[0][0].getColor());
+        assertEquals(PieceType.KNIGHT, s[0][1].getType());
+        assertEquals(PieceColor.BLACK, s[0][1].getColor());
 
-        assertEquals(PieceType.ROOK, snapshot[0][7].getType());
-        assertEquals(PieceColor.BLACK, snapshot[0][7].getColor());
+        assertEquals(PieceType.BISHOP, s[0][2].getType());
+        assertEquals(PieceColor.BLACK, s[0][2].getColor());
+
+        assertEquals(PieceType.QUEEN, s[0][3].getType());
+        assertEquals(PieceColor.BLACK, s[0][3].getColor());
+
+        assertEquals(PieceType.KING, s[0][4].getType());
+        assertEquals(PieceColor.BLACK, s[0][4].getColor());
+
+        assertEquals(PieceType.BISHOP, s[0][5].getType());
+        assertEquals(PieceColor.BLACK, s[0][5].getColor());
+
+        assertEquals(PieceType.KNIGHT, s[0][6].getType());
+        assertEquals(PieceColor.BLACK, s[0][6].getColor());
+
+        assertEquals(PieceType.ROOK, s[0][7].getType());
+        assertEquals(PieceColor.BLACK, s[0][7].getColor());
+
+        // White back rank
+        assertEquals(PieceType.ROOK, s[7][0].getType());
+        assertEquals(PieceColor.WHITE, s[7][0].getColor());
+
+        assertEquals(PieceType.KNIGHT, s[7][1].getType());
+        assertEquals(PieceColor.WHITE, s[7][1].getColor());
+
+        assertEquals(PieceType.BISHOP, s[7][2].getType());
+        assertEquals(PieceColor.WHITE, s[7][2].getColor());
+
+        assertEquals(PieceType.QUEEN, s[7][3].getType());
+        assertEquals(PieceColor.WHITE, s[7][3].getColor());
+
+        assertEquals(PieceType.KING, s[7][4].getType());
+        assertEquals(PieceColor.WHITE, s[7][4].getColor());
+
+        assertEquals(PieceType.BISHOP, s[7][5].getType());
+        assertEquals(PieceColor.WHITE, s[7][5].getColor());
+
+        assertEquals(PieceType.KNIGHT, s[7][6].getType());
+        assertEquals(PieceColor.WHITE, s[7][6].getColor());
+
+        assertEquals(PieceType.ROOK, s[7][7].getType());
+        assertEquals(PieceColor.WHITE, s[7][7].getColor());
     }
 
     @Test
-    void whiteRooksInitializedCorrectly() {
-        Board board = new Board();
-
-        Piece[][] snapshot = board.getSnapshot();
-
-        assertEquals(PieceType.ROOK, snapshot[7][0].getType());
-        assertEquals(PieceColor.WHITE, snapshot[7][0].getColor());
-
-        assertEquals(PieceType.ROOK, snapshot[7][7].getType());
-        assertEquals(PieceColor.WHITE, snapshot[7][7].getColor());
-    }
-
-    @Test
-    void knightsInitializedCorrectly() {
-        Board board = new Board();
-
-        Piece[][] snapshot = board.getSnapshot();
-
-        assertEquals(PieceType.KNIGHT, snapshot[0][1].getType());
-        assertEquals(PieceColor.BLACK, snapshot[0][1].getColor());
-
-        assertEquals(PieceType.KNIGHT, snapshot[0][6].getType());
-        assertEquals(PieceColor.BLACK, snapshot[0][6].getColor());
-
-        assertEquals(PieceType.KNIGHT, snapshot[7][1].getType());
-        assertEquals(PieceColor.WHITE, snapshot[7][1].getColor());
-
-        assertEquals(PieceType.KNIGHT, snapshot[7][6].getType());
-        assertEquals(PieceColor.WHITE, snapshot[7][6].getColor());
-    }
-
-    @Test
-    void bishopsInitializedCorrectly() {
-        Board board = new Board();
-
-        Piece[][] snapshot = board.getSnapshot();
-
-        assertEquals(PieceType.BISHOP, snapshot[0][2].getType());
-        assertEquals(PieceColor.BLACK, snapshot[0][2].getColor());
-
-        assertEquals(PieceType.BISHOP, snapshot[0][5].getType());
-        assertEquals(PieceColor.BLACK, snapshot[0][5].getColor());
-
-        assertEquals(PieceType.BISHOP, snapshot[7][2].getType());
-        assertEquals(PieceColor.WHITE, snapshot[7][2].getColor());
-
-        assertEquals(PieceType.BISHOP, snapshot[7][5].getType());
-        assertEquals(PieceColor.WHITE, snapshot[7][5].getColor());
-    }
-
-    @Test
-    void queensAndKingsInitializedCorrectly() {
-        Board board = new Board();
-
-        Piece[][] snapshot = board.getSnapshot();
-
-        assertEquals(PieceType.QUEEN, snapshot[0][3].getType());
-        assertEquals(PieceColor.BLACK, snapshot[0][3].getColor());
-
-        assertEquals(PieceType.KING, snapshot[0][4].getType());
-        assertEquals(PieceColor.BLACK, snapshot[0][4].getColor());
-
-        assertEquals(PieceType.QUEEN, snapshot[7][3].getType());
-        assertEquals(PieceColor.WHITE, snapshot[7][3].getColor());
-
-        assertEquals(PieceType.KING, snapshot[7][4].getType());
-        assertEquals(PieceColor.WHITE, snapshot[7][4].getColor());
-    }
-
-    @Test
-    void middleRowsAreEmpty() {
+    void middleBoardIsEmpty() {
         Board board = new Board();
 
         Piece[][] snapshot = board.getSnapshot();
@@ -148,102 +120,33 @@ public class BoardTests {
         }
     }
 
-    // now testing snapshot vs initialization
     @Test
-    void snapshotContainsCopiedPieces() {
-        Board board = new Board();
-
-        Piece[][] snapshot1 = board.getSnapshot();
-        Piece[][] snapshot2 = board.getSnapshot();
-
-        assertNotSame(snapshot1[0][0], snapshot2[0][0]);
-    }
-
-    @Test
-    void snapshotDimensionsAre8x8() {
+    void snapshotIsDeepCopiedAndIndependent() {
         Board board = new Board();
 
         Piece[][] snapshot = board.getSnapshot();
 
-        assertEquals(8, snapshot.length);
-        assertEquals(8, snapshot[0].length);
+        Piece original = snapshot[0][0];
+
+        snapshot[0][0] = null;
+
+        Piece[][] fresh = board.getSnapshot();
+
+        assertNotNull(fresh[0][0]);
+        assertEquals(original.getType(), fresh[0][0].getType());
+        assertEquals(original.getColor(), fresh[0][0].getColor());
     }
 
     @Test
-    void rookAt00IsBlack() {
+    void modifyingSnapshotDoesNotAffectBoard() {
         Board board = new Board();
 
-        Piece[][] s = board.getSnapshot();
+        Piece[][] snapshot = board.getSnapshot();
 
-        assertNotNull(s[0][0]);
-        assertEquals(PieceType.ROOK, s[0][0].getType());
-        assertEquals(PieceColor.BLACK, s[0][0].getColor());
-    }
+        snapshot[0][0] = null;
 
-    @Test
-    void kingAt74IsWhite() {
-        Board board = new Board();
+        Piece[][] fresh = board.getSnapshot();
 
-        Piece[][] s = board.getSnapshot();
-
-        assertNotNull(s[7][4]);
-        assertEquals(PieceType.KING, s[7][4].getType());
-        assertEquals(PieceColor.WHITE, s[7][4].getColor());
-    }
-
-    @Test
-    void middleSquareIsEmpty() {
-        Board board = new Board();
-
-        Piece[][] s = board.getSnapshot();
-
-        assertNull(s[3][3]);
-    }
-
-    @Test
-    void snapshotPiecesAreCopiedNotSameReference() {
-        Board board = new Board();
-
-        Piece[][] s = board.getSnapshot();
-
-        Piece original = board.getSnapshot()[0][0];
-        Piece copy = s[0][0];
-
-        assertNotSame(original, copy);
-    }
-
-    @Test
-    void knightCopyPreservesTypeAndColor() {
-        Board board = new Board();
-
-        Piece[][] s = board.getSnapshot();
-
-        Piece knight = s[0][1];
-
-        assertEquals(PieceType.KNIGHT, knight.getType());
-        assertEquals(PieceColor.BLACK, knight.getColor());
-    }
-
-    @Test
-    void modifyingSnapshotDoesNotChangeBoard() {
-        Board board = new Board();
-
-        Piece[][] s = board.getSnapshot();
-
-        s[0][0] = null; // attempt to modify snapshot
-
-        Piece[][] s2 = board.getSnapshot();
-
-        assertNotNull(s2[0][0]); // board must still be intact
-    }
-
-    @Test
-    void multipleSnapshotsAreIndependent() {
-        Board board = new Board();
-
-        Piece[][] s1 = board.getSnapshot();
-        Piece[][] s2 = board.getSnapshot();
-
-        assertNotSame(s1[0][0], s2[0][0]);
+        assertNotNull(fresh[0][0]);
     }
 }

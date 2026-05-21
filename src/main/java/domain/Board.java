@@ -7,8 +7,13 @@ import static domain.piece.PieceColor.WHITE;
 
 public class Board {
 
-    private final int TOTAL_ROWS = 8;
-    private final int TOTAL_COLS = 8;
+    private static final int TOTAL_ROWS = 8;
+    private static final int TOTAL_COLS = 8;
+
+    private static final int BLACK_BACK_RANK = 0;
+    private static final int BLACK_PAWN_ROW = 1;
+    private static final int WHITE_PAWN_ROW = 6;
+    private static final int WHITE_BACK_RANK = 7;
 
     private Piece[][] pieces;
 
@@ -20,30 +25,33 @@ public class Board {
         pieces = new Piece[TOTAL_ROWS][TOTAL_COLS];
 
         for (int i = 0; i < TOTAL_COLS; i++) {
-            pieces[1][i] = new Pawn(BLACK);
-            pieces[6][i] = new Pawn(WHITE);
+            pieces[BLACK_PAWN_ROW][i] = new Pawn(BLACK);
+            pieces[WHITE_PAWN_ROW][i] = new Pawn(WHITE);
         }
 
-        pieces[0][0] = new Rook(BLACK);
-        pieces[0][7] = new Rook(BLACK);
+        pieces[BLACK_BACK_RANK][0] = new Rook(BLACK);
+        pieces[BLACK_BACK_RANK][7] = new Rook(BLACK);
 
-        pieces[7][0] = new Rook(WHITE);
-        pieces[7][7] = new Rook(WHITE);
+        pieces[WHITE_BACK_RANK][0] = new Rook(WHITE);
+        pieces[WHITE_BACK_RANK][7] = new Rook(WHITE);
 
-        pieces[0][1] = new Knight(BLACK);
-        pieces[0][6] = new Knight(BLACK);
-        pieces[7][1] = new Knight(WHITE);
-        pieces[7][6] = new Knight(WHITE);
+        pieces[BLACK_BACK_RANK][1] = new Knight(BLACK);
+        pieces[BLACK_BACK_RANK][6] = new Knight(BLACK);
 
-        pieces[0][2] = new Bishop(BLACK);
-        pieces[0][5] = new Bishop(BLACK);
-        pieces[7][2] = new Bishop(WHITE);
-        pieces[7][5] = new Bishop(WHITE);
+        pieces[WHITE_BACK_RANK][1] = new Knight(WHITE);
+        pieces[WHITE_BACK_RANK][6] = new Knight(WHITE);
 
-        pieces[0][3] = new Queen(BLACK);
-        pieces[0][4] = new King(BLACK);
-        pieces[7][3] = new Queen(WHITE);
-        pieces[7][4] = new King(WHITE);
+        pieces[BLACK_BACK_RANK][2] = new Bishop(BLACK);
+        pieces[BLACK_BACK_RANK][5] = new Bishop(BLACK);
+
+        pieces[WHITE_BACK_RANK][2] = new Bishop(WHITE);
+        pieces[WHITE_BACK_RANK][5] = new Bishop(WHITE);
+
+        pieces[BLACK_BACK_RANK][3] = new Queen(BLACK);
+        pieces[BLACK_BACK_RANK][4] = new King(BLACK);
+
+        pieces[WHITE_BACK_RANK][3] = new Queen(WHITE);
+        pieces[WHITE_BACK_RANK][4] = new King(WHITE);
     }
 
     public Piece[][] getSnapshot() {
@@ -59,6 +67,4 @@ public class Board {
 
         return snapshot;
     }
-
-
 }

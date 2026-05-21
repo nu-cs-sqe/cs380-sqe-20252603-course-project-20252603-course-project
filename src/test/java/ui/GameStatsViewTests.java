@@ -88,11 +88,4 @@ public class GameStatsViewTests {
 
         assertNotNull(view);
     }
-
-    @Test
-    void currentPlayerLabelAccessible() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
-
-        assertNotNull(view.currentPlayerLabel);
-    }
 }

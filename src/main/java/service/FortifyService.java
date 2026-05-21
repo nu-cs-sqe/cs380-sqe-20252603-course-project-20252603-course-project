@@ -21,8 +21,11 @@ public class FortifyService {
         return true;
     }
     public boolean areConnectedThroughOwnedTerritories(Player player, Territory source, Territory destination, GameState gameState){
-
-        return true;
+        TerritoryAdjacencyService TAS = new TerritoryAdjacencyService();
+        if (TAS.areAdjacent(source, destination)){
+            return true;
+        }
+        return false;
     }
 
 

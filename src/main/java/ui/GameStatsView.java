@@ -1,8 +1,13 @@
 package ui;
 
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
-import java.awt.*;
 
 public class GameStatsView extends JPanel {
 
@@ -20,7 +25,11 @@ public class GameStatsView extends JPanel {
 
     private JLabel currentPlayerLabel;
 
+    /**
+     * Creates the game stats panel showing player information.
+     */
     public GameStatsView(String player1Name, String player2Name) {
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setOpaque(true);
         setBackground(PANEL_BACKGROUND);
@@ -39,7 +48,8 @@ public class GameStatsView extends JPanel {
         );
         styleBodyLabel(player2Label);
 
-        currentPlayerLabel = new JLabel("Current Player: " + player1Name);
+        currentPlayerLabel =
+                new JLabel("Current Player: " + player1Name);
         currentPlayerLabel.setFont(HEADER_FONT);
         currentPlayerLabel.setForeground(LABEL_FOREGROUND);
 
@@ -55,6 +65,9 @@ public class GameStatsView extends JPanel {
         label.setBorder(LEFT_INDENT);
     }
 
+    /**
+     * Updates the displayed current player.
+     */
     public void setCurrentPlayer(String name) {
         currentPlayerLabel.setText("Current Player: " + name);
     }

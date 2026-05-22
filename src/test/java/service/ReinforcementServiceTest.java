@@ -87,6 +87,7 @@ public class ReinforcementServiceTest {
         rs.placeReinforcements(player1, t1, armies_we_will_place, gameState);
         int remaining_army_count_post_place = player1.getRemainingArmiesToPlace();
         assertEquals(1, remaining_army_count_post_place);
+    }
     void shouldReturnZeroBonusWhenPlayerControlsNoFullContinent() {
         // player has 5/6 in AFRICA continent, one in Asia, no bonus
         ReinforcementService rs = new ReinforcementService();

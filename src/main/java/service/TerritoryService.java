@@ -39,5 +39,34 @@ public final class TerritoryService {
 
         from.setArmyCount(from.getArmyCount() - attackerLosses);
         to.setArmyCount(to.getArmyCount() - defenderLosses);
+    public static void conquerTerritory(Player attacker, Territory from, Territory to, int armiesToMove, GameState gameState) {
+        // Validate input
+        if (armiesToMove <= 0) {
+            throw new IllegalArgumentException("armiesToMove must be greater than 0");
+        }
+
+        if (from.getArmyCount() < armiesToMove + 1) {
+            throw new IllegalArgumentException("attacking territory must keep at least 1 army behind");
+        }
+
+        if (from.getOwner().getId() != attacker.getId()) {
+            throw new IllegalArgumentException("attacker does not own the attacking territory");
+        }
+
+        // Transfer ownership to the attacker
+        Player defender = to.getOwner();
+        to.setOwner(attacker);
+
+        // Move armies from attacking territory to conquered territory
+        from.setArmyCount(from.getArmyCount() - armiesToMove);
+        to.setArmyCount(armiesToMove);
+
+        // Update controlled territories
+        attacker.addControlledTerritory(to);
+        
+        // If defender is null, the territory was unoccupied, so we don't need to remove it from the defender's controlled territories
+        if (defender != null) {
+            defender.getControlledTerritories().remove(to);
+        }
     }
 }

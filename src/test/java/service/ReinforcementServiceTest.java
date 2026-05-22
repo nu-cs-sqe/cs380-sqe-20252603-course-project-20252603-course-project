@@ -330,6 +330,7 @@ public class ReinforcementServiceTest {
         rs.placeReinforcements(player1, t1, armies_we_will_place, gameState);
         int new_army_count_post_place = t1.getArmyCount();
         assertEquals(5, new_army_count_post_place);
+    }
     void shouldNotGrantBonusWhenOneTerritoryInContinentIsOwnedByAnotherPlayer() {
         // one continent, 2 players, all but one go to one player
         ReinforcementService rs = new ReinforcementService();

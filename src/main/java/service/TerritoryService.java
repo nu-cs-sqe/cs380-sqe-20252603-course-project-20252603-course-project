@@ -5,6 +5,7 @@ import java.util.List;
 import model.GameState;
 import model.Player;
 import model.Territory;
+import model.BattleResult;
 
 public final class TerritoryService {
 
@@ -30,6 +31,15 @@ public final class TerritoryService {
             return false;
         }
         return territory.getOwner().getId() == player.getId();
+    }
+
+    public static void applyBattleResult(Territory from, Territory to, BattleResult result) {
+        int attackerLosses = result.getAttackerLosses();
+        int defenderLosses = result.getDefenderLosses();
+
+        from.setArmyCount(from.getArmyCount() - attackerLosses);
+        to.setArmyCount(to.getArmyCount() - defenderLosses);
+
     }
 
     public static void conquerTerritory(Player attacker, Territory from, Territory to, int armiesToMove, GameState gameState) {
@@ -63,3 +73,4 @@ public final class TerritoryService {
         }
     }
 }
+

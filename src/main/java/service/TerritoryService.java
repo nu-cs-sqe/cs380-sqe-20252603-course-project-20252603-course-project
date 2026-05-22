@@ -39,6 +39,9 @@ public final class TerritoryService {
 
         from.setArmyCount(from.getArmyCount() - attackerLosses);
         to.setArmyCount(to.getArmyCount() - defenderLosses);
+
+    }
+    
     public static void conquerTerritory(Player attacker, Territory from, Territory to, int armiesToMove, GameState gameState) {
         // Validate input
         if (armiesToMove <= 0) {
@@ -69,4 +72,4 @@ public final class TerritoryService {
             defender.getControlledTerritories().remove(to);
         }
     }
-}
+

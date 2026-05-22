@@ -1,10 +1,14 @@
 package service;
 
+import model.GameState;
 import model.Player;
 import model.GameState;
 import model.Territory;
 import model.Continent;
+import domain.TerritoryCatalog;
+import java.util.Map;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReinforcementService {
 

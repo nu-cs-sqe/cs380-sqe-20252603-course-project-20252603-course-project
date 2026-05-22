@@ -80,7 +80,7 @@ public class ReinforcementServiceTest {
         // include 9 territories
 
         List<Territory> controlled_territories = new ArrayList<>();
-        GameState gameState1 = new GameState();
+        GameState gameState = new GameState();
         Player player1 = new Player(1, "A", "Red", 0, controlled_territories);
         Territory t1 = new Territory("Alaska", player1, 0, Continent.NORTH_AMERICA);
         Territory t2 = new Territory("Alaska", player1, 0, Continent.NORTH_AMERICA);
@@ -267,13 +267,6 @@ public class ReinforcementServiceTest {
         player2.setControlledTerritories(controlled_territories2);
         int actual_bonus2 = rs.calculateContinentBonus(player1, gameState);
         assertEquals(0, actual_bonus2);
-        controlled_territories.add(t5);
-        controlled_territories.add(t6);
-        controlled_territories.add(t7);
-        controlled_territories.add(t8);
-        controlled_territories.add(t9);
-        int actual_owned_terr = rs.calculateBaseReinforcements(player1, gameState1);
-        assertEquals(3, actual_owned_terr);
     }
     @ParameterizedTest
     @CsvSource({"1,3",

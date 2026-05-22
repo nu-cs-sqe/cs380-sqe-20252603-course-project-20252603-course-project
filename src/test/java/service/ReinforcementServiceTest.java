@@ -57,6 +57,7 @@ public class ReinforcementServiceTest {
         Territory t4 = new Territory("East Africa", player1, 0, Continent.AFRICA);
         Territory t5 = new Territory("South Africa", player1, 0, Continent.AFRICA);
         Territory t6 = new Territory("Japan", player1, 0, Continent.ASIA);
+    }
     void shouldReturnMinimumReinforcementWhenPlayerOwnsFewTerritories() {
         // TC1
         ReinforcementService rs = new ReinforcementService();

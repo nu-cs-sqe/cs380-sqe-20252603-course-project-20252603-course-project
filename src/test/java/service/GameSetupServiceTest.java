@@ -1,6 +1,10 @@
 package service;
 
+import model.Player;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,5 +62,23 @@ public class GameSetupServiceTest {
         int playerCount = 4;
         assertDoesNotThrow(() -> service.validatePlayerCount(playerCount));
     }
+
+    @Test
+    void TC1_CreatePlayersBasic(){
+        GameSetupService service = new GameSetupService();
+        List<String> names = new ArrayList<>(List.of("P1", "P2", "P3"));
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW));
+        assertDoesNotThrow(() -> service.createPlayers(names, colors));
+        List<Player> players = service.getPlayers();
+        assertEquals(3, players.size());
+        assertEquals("P1", players.get(0).getName());
+        assertEquals("P2", players.get(1).getName());
+        assertEquals("P3", players.get(2).getName());
+        assertEquals(PlayerColor.BLUE, players.get(0).getColor());
+        assertEquals(PlayerColor.GREEN, players.get(1).getColor());
+        assertEquals(PlayerColor.YELLOW, players.get(2).getColor());
+    }
+
+
 
 }

@@ -11,3 +11,8 @@
 | TC6_ValidateINT_MIN              | playerCount is INT_MIN | The playerCount is rejected | :white_check_mark: |
 | TC7_ValidateInRangeOfValidGame   | playerCount is 4       | The playerCount is accepted | :white_check_mark: |
 
+### Method under test: createPlayer
+|                        | State of the System                                            | Expected output                                                                                       | Implemented? |
+|------------------------|----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------|
+| TC1_CreatePlayersBasic | Standard list of names and colors of matching length are used. | createPlayer should initilize the private field Players successfully with a list of Player instances. | :white_check_mark:          |
+

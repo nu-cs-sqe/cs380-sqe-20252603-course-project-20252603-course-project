@@ -131,4 +131,42 @@ public class GameSetupServiceTest {
         assertEquals(PlayerColor.YELLOW, players.get(2).getColor());
     }
 
+    @Test
+    void TC7_CreatePlayersBasicRepeatColors(){
+        GameSetupService service = new GameSetupService();
+        List<String> names = new ArrayList<>(List.of("P1", "P1", "P3"));
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.BLUE, PlayerColor.YELLOW));
+        assertDoesNotThrow(() -> service.createPlayers(names, colors));
+        List<Player> players = service.getPlayers();
+        assertEquals(3, players.size());
+        assertEquals("P1", players.get(0).getName());
+        assertEquals("P1", players.get(1).getName());
+        assertEquals("P3", players.get(2).getName());
+        assertEquals(PlayerColor.BLUE, players.get(0).getColor());
+        assertEquals(PlayerColor.BLUE, players.get(1).getColor());
+        assertEquals(PlayerColor.YELLOW, players.get(2).getColor());
+    }
+
+    @Test
+    void TC8_CreatePlayersBasicMaxLen(){
+        GameSetupService service = new GameSetupService();
+        List<String> names = new ArrayList<>(List.of("John", "Mike", "Tom", "rus", "321", "SAM!"));
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.RED, PlayerColor.BLACK, PlayerColor.WHITE));
+        assertDoesNotThrow(() -> service.createPlayers(names, colors));
+        List<Player> players = service.getPlayers();
+        assertEquals(6, players.size());
+        assertEquals("John", players.get(0).getName());
+        assertEquals("Mike", players.get(1).getName());
+        assertEquals("Tom", players.get(2).getName());
+        assertEquals("rus", players.get(3).getName());
+        assertEquals("321", players.get(4).getName());
+        assertEquals("SAM!", players.get(5).getName());
+        assertEquals(PlayerColor.BLUE, players.get(0).getColor());
+        assertEquals(PlayerColor.GREEN, players.get(1).getColor());
+        assertEquals(PlayerColor.YELLOW, players.get(2).getColor());
+        assertEquals(PlayerColor.RED, players.get(3).getColor());
+        assertEquals(PlayerColor.BLACK, players.get(4).getColor());
+        assertEquals(PlayerColor.WHITE, players.get(5).getColor());
+
+    }
 }

@@ -16,4 +16,5 @@
 |------------------------|-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------|
 | TC1_CreatePlayersBasic | Standard list of names and colors of matching length are used.                          | createPlayer should initilize the private field Players successfully with a list of Player instances. | :white_check_mark:          |
 | TC2_CreatePlayersUnequalListLengthSmallerNames | Names list is shorter than the color list (names has fewer elements, index mismatch).   | createPlayer should throw an error. It is not possible to create valid Players list.| :white_check_mark:          |
+| TC3_CreatePlayersUnequalListLengthSmallerColors | Colors list is shorter than the names list (colors has fewer elements, index mismatch). | createPlayer should throw an error. It is not possible to create valid Players list.| :white_check_mark:          |
 

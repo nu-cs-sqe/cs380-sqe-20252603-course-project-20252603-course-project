@@ -88,5 +88,13 @@ public class GameSetupServiceTest {
                 () -> service.createPlayers(names, colors));
     }
 
+    @Test
+    void TC3_CreatePlayersUnequalListLengthSmallerColors(){
+        GameSetupService service = new GameSetupService();
+        List<String> names = new ArrayList<>(List.of("P1", "P2", "P3"));
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        assertThrows(IllegalArgumentException.class,
+                () -> service.createPlayers(names, colors));
+    }
 
 }

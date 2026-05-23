@@ -39,7 +39,7 @@ public class TerritoryAssignmentServiceTest {
     @Test
     public void playerOwnsTerritory_trueWhenOwnerIdsMatch() {
         GameState state = new GameState();
-        Player p = new Player(1, "Alice", "red", 5, new ArrayList<>());
+        Player p = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
         Territory t = new Territory("Alaska", p, 0, Continent.NORTH_AMERICA);
         state.setTerritories(List.of(t));
 
@@ -49,7 +49,7 @@ public class TerritoryAssignmentServiceTest {
     @Test
     public void playerOwnsTerritory_falseWhenOwnerNull() {
         GameState state = new GameState();
-        Player p = new Player(1, "Alice", "red", 5, new ArrayList<>());
+        Player p = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
         Territory t = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
         state.setTerritories(List.of(t));
 
@@ -58,8 +58,8 @@ public class TerritoryAssignmentServiceTest {
     @Test
     public void playerOwnsTerritory_falseWhenDifferentPlayer() {
         GameState state = new GameState();
-        Player owner = new Player(2, "Bob", "blue", 3, new ArrayList<>());
-        Player p = new Player(1, "Alice", "red", 5, new ArrayList<>());
+        Player owner = new Player(2, "Bob", PlayerColor.BLUE, 3, new ArrayList<>());
+        Player p = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
         Territory t = new Territory("Alaska", owner, 0, Continent.NORTH_AMERICA);
         state.setTerritories(List.of(t));
 
@@ -70,7 +70,7 @@ public class TerritoryAssignmentServiceTest {
     @Test
     public void assignArmyToTerritory_successfullyAddsArmiesAndDeductsPlayer() {
         GameState state = new GameState();
-        Player player = new Player(1, "Alice", "red", 5, new ArrayList<>());
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
         Territory t = new Territory("Alaska", player, 2, Continent.NORTH_AMERICA);
         state.setTerritories(List.of(t));
 
@@ -83,7 +83,7 @@ public class TerritoryAssignmentServiceTest {
     @Test
     public void assignArmyToTerritory_throwsWhenNotEnoughArmies() {
         GameState state = new GameState();
-        Player player = new Player(1, "Alice", "red", 2, new ArrayList<>());
+        Player player = new Player(1, "Alice", PlayerColor.RED, 2, new ArrayList<>());
         Territory t = new Territory("Alaska", player, 0, Continent.NORTH_AMERICA);
         state.setTerritories(List.of(t));
 
@@ -93,8 +93,8 @@ public class TerritoryAssignmentServiceTest {
     @Test
     public void assignArmyToTerritory_throwsWhenPlayerDoesNotOwn() {
         GameState state = new GameState();
-        Player owner = new Player(2, "Bob", "blue", 5, new ArrayList<>());
-        Player player = new Player(1, "Alice", "red", 5, new ArrayList<>());
+        Player owner = new Player(2, "Bob", PlayerColor.BLUE, 5, new ArrayList<>());
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
         Territory t = new Territory("Alaska", owner, 0, Continent.NORTH_AMERICA);
         state.setTerritories(List.of(t));
 
@@ -105,7 +105,7 @@ public class TerritoryAssignmentServiceTest {
     @Test
     public void assignTerritoryToPlayer_setsOwnerCorrectly() {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
-        Player player = new Player(1, "Alice", "Red", 5, new ArrayList<>());
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
         Territory territory = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
 
         service.assignTerritoryToPlayer(territory, player);
@@ -122,10 +122,10 @@ public class TerritoryAssignmentServiceTest {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
         
-        Player p1 = new Player(1, "Alice", "red", 20, new ArrayList<>());
-        Player p2 = new Player(2, "Bob", "blue", 20, new ArrayList<>());
-        Player p3 = new Player(3, "Charlie", "green", 20, new ArrayList<>());
-        Player p4 = new Player(4, "David", "yellow", 20, new ArrayList<>());
+        Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+        Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+        Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
+        Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
         state.setPlayers(List.of(p1, p2, p3, p4));
 
         service.assignTerritories(state);
@@ -144,8 +144,8 @@ public class TerritoryAssignmentServiceTest {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
         
-        Player p1 = new Player(1, "Alice", "red", 20, new ArrayList<>());
-        Player p2 = new Player(2, "Bob", "blue", 20, new ArrayList<>());
+        Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+        Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
         state.setPlayers(List.of(p1, p2));
 
         service.assignTerritories(state);
@@ -166,10 +166,10 @@ public class TerritoryAssignmentServiceTest {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
         
-        Player p1 = new Player(1, "Alice", "red", 20, new ArrayList<>());
-        Player p2 = new Player(2, "Bob", "blue", 20, new ArrayList<>());
-        Player p3 = new Player(3, "Charlie", "green", 20, new ArrayList<>());
-        Player p4 = new Player(4, "David", "yellow", 20, new ArrayList<>());
+        Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+        Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+        Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
+        Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
         state.setPlayers(List.of(p1, p2, p3, p4));
 
         service.assignTerritories(state);
@@ -196,8 +196,8 @@ public class TerritoryAssignmentServiceTest {
             TerritoryAssignmentService service = new TerritoryAssignmentService();
             GameState state = new GameState();
         
-            Player p1 = new Player(1, "Alice", "red", 20, new ArrayList<>());
-            Player p2 = new Player(2, "Bob", "blue", 20, new ArrayList<>());
+            Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+            Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
             state.setPlayers(List.of(p1, p2));
 
             service.assignTerritories(state);
@@ -212,9 +212,9 @@ public class TerritoryAssignmentServiceTest {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
         
-        Player p1 = new Player(1, "Alice", "red", 20, new ArrayList<>());
-        Player p2 = new Player(2, "Bob", "blue", 20, new ArrayList<>());
-        Player p3 = new Player(3, "Charlie", "green", 20, new ArrayList<>());
+        Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+        Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+        Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
         state.setPlayers(List.of(p1, p2, p3));
 
         service.assignTerritories(state);
@@ -230,10 +230,10 @@ public class TerritoryAssignmentServiceTest {
 		TerritoryAssignmentService service = new TerritoryAssignmentService();
 		GameState state = new GameState();
 
-		Player p1 = new Player(1, "Alice", "red", 20, new ArrayList<>());
-		Player p2 = new Player(2, "Bob", "blue", 20, new ArrayList<>());
-		Player p3 = new Player(3, "Charlie", "green", 20, new ArrayList<>());
-		Player p4 = new Player(4, "David", "yellow", 20, new ArrayList<>());
+		Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+		Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+		Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
+		Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
 		state.setPlayers(List.of(p1, p2, p3, p4));
 
 		service.assignTerritories(state);
@@ -251,11 +251,11 @@ public class TerritoryAssignmentServiceTest {
             TerritoryAssignmentService service = new TerritoryAssignmentService();
             GameState state = new GameState();
         
-            Player p1 = new Player(1, "Alice", "red", 20, new ArrayList<>());
-            Player p2 = new Player(2, "Bob", "blue", 20, new ArrayList<>());
-            Player p3 = new Player(3, "Charlie", "green", 20, new ArrayList<>());
-            Player p4 = new Player(4, "David", "yellow", 20, new ArrayList<>());
-            Player p5 = new Player(5, "Eve", "purple", 20, new ArrayList<>());
+            Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+            Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+            Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
+            Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
+            Player p5 = new Player(5, "Eve", PlayerColor.BLACK, 20, new ArrayList<>());
             state.setPlayers(List.of(p1, p2, p3, p4, p5));
 
             service.assignTerritories(state);
@@ -274,12 +274,12 @@ public class TerritoryAssignmentServiceTest {
             TerritoryAssignmentService service = new TerritoryAssignmentService();
             GameState state = new GameState();
         
-            Player p1 = new Player(1, "Alice", "red", 20, new ArrayList<>());
-            Player p2 = new Player(2, "Bob", "blue", 20, new ArrayList<>());
-            Player p3 = new Player(3, "Charlie", "green", 20, new ArrayList<>());
-            Player p4 = new Player(4, "David", "yellow", 20, new ArrayList<>());
-            Player p5 = new Player(5, "Eve", "purple", 20, new ArrayList<>());
-            Player p6 = new Player(6, "Frank", "orange", 20, new ArrayList<>());
+            Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+            Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+            Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
+            Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
+            Player p5 = new Player(5, "Eve", PlayerColor.BLACK, 20, new ArrayList<>());
+            Player p6 = new Player(6, "Frank", PlayerColor.WHITE, 20, new ArrayList<>());
             state.setPlayers(List.of(p1, p2, p3, p4, p5, p6));
 
             service.assignTerritories(state);
@@ -309,8 +309,8 @@ public class TerritoryAssignmentServiceTest {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
         
-        Player p1 = new Player(1, "Alice", "red", 20, new ArrayList<>());
-        Player p2 = new Player(2, "Bob", "blue", 20, new ArrayList<>());
+        Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+        Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
         state.setPlayers(List.of(p1, p2));
 
         service.assignTerritories(state);

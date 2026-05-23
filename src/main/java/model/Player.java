@@ -1,5 +1,7 @@
 package model;
 
+import service.PlayerColor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +9,11 @@ public class Player {
 
 	private int id;
 	private String name;
-	private String color;
+	private PlayerColor color;
 	private int remainingArmiesToPlace;
 	private List<Territory> controlledTerritories;
 
-	public Player(int id, String name, String color, int remainingArmiesToPlace, List<Territory> controlledTerritories) {
+	public Player(int id, String name, PlayerColor color, int remainingArmiesToPlace, List<Territory> controlledTerritories) {
 		setId(id);
 		setName(name);
 		setColor(color);
@@ -41,11 +43,11 @@ public class Player {
 		this.name = name;
 	}
 
-	public String getColor() {
+	public PlayerColor getColor() {
 		return color;
 	}
 
-	public void setColor(String color) {
+	public void setColor(PlayerColor color) {
 		this.color = color;
 	}
 

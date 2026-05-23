@@ -97,4 +97,13 @@ public class GameSetupServiceTest {
                 () -> service.createPlayers(names, colors));
     }
 
+    @Test
+    void TC4_CreatePlayersBothListsEmpty(){
+        GameSetupService service = new GameSetupService();
+        List<String> names = new ArrayList<>(List.of());
+        List<PlayerColor> colors = new ArrayList<>(List.of());
+        assertThrows(IllegalArgumentException.class,
+                () -> service.createPlayers(names, colors));
+    }
+
 }

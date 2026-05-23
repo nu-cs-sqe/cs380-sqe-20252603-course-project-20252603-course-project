@@ -30,3 +30,4 @@
 | TC1_ValidateUniqueColorsNoRepeats | List colors, of type PlayerColors, contains a list of non-repeating, valid, colors.           | This is unique, so no error should be thrown. List accepted.               | :white_check_mark:          |
 | TC2_ValidateUniqueColorsRepeats   | List colors, of type PlayerColors, contains a list of repeating, but otherwise valid, colors. | This is a non-unique list, so an error should be thrown. List rejected.    | :white_check_mark:          |
 | TC3_ValidateUniqueColorsEmpty | List colors, of type PlayerColors, contains an empty list.                                    | This is unique, albeit empty, so no error should be thrown. List accepted. | :white_check_mark:          |
+| TC4_ValidateUniqueColorsManyRepeats   | List colors, of type PlayerColors, contains a list of repeating, but otherwise valid, colors. | This is a non-unique list, so an error should be thrown. List rejected.    | :white_check_mark:          |

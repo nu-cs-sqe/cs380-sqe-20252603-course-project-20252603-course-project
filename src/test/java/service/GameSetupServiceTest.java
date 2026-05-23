@@ -204,5 +204,11 @@ public class GameSetupServiceTest {
         assertDoesNotThrow(() -> service.validateUniqueColors(colors));
     }
 
+    @Test
+    void TC4_ValidateUniqueColorsManyRepeats(){
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.BLACK, PlayerColor.GREEN, PlayerColor.RED, PlayerColor.GREEN));
+        assertThrows(IllegalArgumentException.class, () -> service.validateUniqueColors(colors));
+    }
 
 }

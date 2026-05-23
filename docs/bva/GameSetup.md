@@ -24,3 +24,7 @@
 | TC8_CreatePlayersBasicMaxLen                    | Standard list of names and colors of matching length are used. Maximum number of players.           | createPlayer should initilize the private field Players successfully with a list of Player instances. | :white_check_mark:          |
 | TC9_CreatePlayersBasicMinLen                    | Standard list of names and colors of matching length are used. Minimum number of players.           | createPlayer should initilize the private field Players successfully with a list of Player instances. | :white_check_mark:          |
 
+### Method under test: validateUniqueColors
+|       | State of the System                                                                 | Expected output                                              | Implemented? |
+|-------|-------------------------------------------------------------------------------------|--------------------------------------------------------------|-------------|
+| TC1_ValidateUniqueColorsNoRepeats | List colors, of type PlayerColors, contains a list of non-repeating, valid, colors. | This is unique, so no error should be thrown. List accepted. | :white_check_mark:          |

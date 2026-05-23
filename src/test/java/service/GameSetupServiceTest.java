@@ -183,5 +183,12 @@ public class GameSetupServiceTest {
         assertEquals(PlayerColor.GREEN, players.get(1).getColor());
     }
 
+    @Test
+    void TC1_ValidateUniqueColorsNoRepeats(){
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        assertDoesNotThrow(() -> service.validateUniqueColors(colors));
+    }
+
 
 }

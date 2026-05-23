@@ -4,7 +4,9 @@ import model.Player;
 import model.Territory;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static domain.GameConstants.TOTAL_TERRITORIES;
 
@@ -19,6 +21,13 @@ public class GameSetupService {
             throw new IllegalArgumentException(
                     "Player count must be between " + MIN_PLAYERS + " and " + MAX_PLAYERS + ", but got: " + playerCount
             );
+        }
+    }
+
+    public void validateUniqueColors(List<PlayerColor> colors){
+        Set<PlayerColor> uniqueColors = new HashSet<>(colors);
+        if (uniqueColors.size() != colors.size()){
+            throw new IllegalArgumentException("Not all colors are unique. Expected " + uniqueColors.size() + " unique colors, but received (" + colors.size() + ".");
         }
     }
 
@@ -37,6 +46,5 @@ public class GameSetupService {
             Players.add(new Player(i, names.get(i), colors.get(i), 0, new ArrayList<>()));
         }
     }
-
 
 }

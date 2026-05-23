@@ -19,4 +19,5 @@
 | TC3_CreatePlayersUnequalListLengthSmallerColors | Colors list is shorter than the names list (colors has fewer elements, index mismatch).             | createPlayer should throw an error. It is not possible to create valid Players list.                  | :white_check_mark:          |
 | TC4_CreatePlayersBothListsEmpty | Both lists, colors and names, are empty.                                                            | createPlayer should throw an error. This should propogate up from the validatePlayerCount method.     | :white_check_mark:          |
 | TC5_CreatePlayersBothListsOversized | Both lists, colors and names, have an equal number of elements greater than the maximum allowed, 6. | createPlayer should throw an error. This should propogate up from the validatePlayerCount method.     | :white_check_mark:          |
+| TC6_CreatePlayersBasicRepeatNames | Standard list of names and colors of matching length are used, but some names are repeated.         | createPlayer should initilize the private field Players successfully with a list of Player instances. | :white_check_mark:          |
 

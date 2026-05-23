@@ -22,4 +22,5 @@
 | TC6_CreatePlayersBasicRepeatNames               | Standard list of names and colors of matching length are used, but some names are repeated.         | createPlayer should initilize the private field Players successfully with a list of Player instances. | :white_check_mark:          |
 | TC7_CreatePlayersBasicRepeatColors              | Standard list of names and colors of matching length are used, but some colors are repeated.        | createPlayer should initilize the private field Players successfully with a list of Player instances. | :white_check_mark:          |
 | TC8_CreatePlayersBasicMaxLen                    | Standard list of names and colors of matching length are used. Maximum number of players.           | createPlayer should initilize the private field Players successfully with a list of Player instances. | :white_check_mark:          |
+| TC9_CreatePlayersBasicMinLen                    | Standard list of names and colors of matching length are used. Minimum number of players.           | createPlayer should initilize the private field Players successfully with a list of Player instances. | :white_check_mark:          |
 

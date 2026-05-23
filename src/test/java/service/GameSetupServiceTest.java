@@ -167,6 +167,21 @@ public class GameSetupServiceTest {
         assertEquals(PlayerColor.RED, players.get(3).getColor());
         assertEquals(PlayerColor.BLACK, players.get(4).getColor());
         assertEquals(PlayerColor.WHITE, players.get(5).getColor());
-
     }
+
+    @Test
+    void TC9_CreatePlayersBasicMinLen(){
+        GameSetupService service = new GameSetupService();
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        assertDoesNotThrow(() -> service.createPlayers(names, colors));
+        List<Player> players = service.getPlayers();
+        assertEquals(2, players.size());
+        assertEquals("John", players.get(0).getName());
+        assertEquals("Mike", players.get(1).getName());
+        assertEquals(PlayerColor.BLUE, players.get(0).getColor());
+        assertEquals(PlayerColor.GREEN, players.get(1).getColor());
+    }
+
+
 }

@@ -1,7 +1,5 @@
 package service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,10 +8,23 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import domain.GameConstants;
+import model.BattleResult;
 import model.Continent;
 import model.GameState;
 import model.Player;
 import model.Territory;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+
 
 public class TerritoryAssignmentServiceTest {
 
@@ -320,6 +331,229 @@ public class TerritoryAssignmentServiceTest {
             assertNotNull(t.getOwner(), "Territory " + t.getName() + " should have an owner");
             assertTrue(t.getOwner().getId() == 1 || t.getOwner().getId() == 2,
                 "Territory " + t.getName() + " owner should be one of the players");
+        }
+    }
+
+    // TerritoryService - applyBattleResult tests
+    @Test
+    public void shouldUpdateBothTerritoriesAfterBattleRound() {
+        Territory from = new Territory("Alaska", null, 20, Continent.NORTH_AMERICA);
+        Territory to = new Territory("Greenland", null, 15, Continent.NORTH_AMERICA);
+        BattleResult result = new BattleResult(5, 4);
+
+        TerritoryService.applyBattleResult(from, to, result);
+
+        assertEquals(15, from.getArmyCount(), "Attacker should have 5 fewer armies");
+        assertEquals(11, to.getArmyCount(), "Defender should have 4 fewer armies");
+    }
+
+    // TerritoryService - conquerTerritory tests
+    @Test
+    public void conquerTerritory_changesOwnership() {
+        GameState state = new GameState();
+        Player attacker = new Player(1, "Alice", PlayerColor.RED, 0, new ArrayList<>());
+        Player defender = new Player(2, "Bob", PlayerColor.BLUE, 0, new ArrayList<>());
+
+        Territory from = new Territory("Alaska", attacker, 5, Continent.NORTH_AMERICA);
+        Territory to = new Territory("Greenland", defender, 1, Continent.NORTH_AMERICA);
+
+        state.setTerritories(List.of(from, to));
+        attacker.addControlledTerritory(from);
+        defender.addControlledTerritory(to);
+
+        TerritoryService.conquerTerritory(attacker, from, to, 3, state);
+
+        assertSame(attacker, to.getOwner());
+    }
+
+    @Test
+    public void conquerTerritory_movesArmies() {
+        GameState state = new GameState();
+        Player attacker = new Player(1, "Alice", PlayerColor.RED, 0, new ArrayList<>());
+        Player defender = new Player(2, "Bob", PlayerColor.BLUE, 0, new ArrayList<>());
+
+        Territory from = new Territory("Alaska", attacker, 5, Continent.NORTH_AMERICA);
+        Territory to = new Territory("Greenland", defender, 1, Continent.NORTH_AMERICA);
+
+        state.setTerritories(List.of(from, to));
+        attacker.addControlledTerritory(from);
+        defender.addControlledTerritory(to);
+
+        TerritoryService.conquerTerritory(attacker, from, to, 3, state);
+
+        assertEquals(2, from.getArmyCount());
+        assertEquals(3, to.getArmyCount());
+    }
+
+    @Test
+    public void conquerTerritory_attackingTerritoryKeepsAtLeastOneArmy() {
+        GameState state = new GameState();
+        Player attacker = new Player(1, "Alice", PlayerColor.RED, 0, new ArrayList<>());
+        Player defender = new Player(2, "Bob", PlayerColor.BLUE, 0, new ArrayList<>());
+
+        Territory from = new Territory("Alaska", attacker, 5, Continent.NORTH_AMERICA);
+        Territory to = new Territory("Greenland", defender, 1, Continent.NORTH_AMERICA);
+
+        state.setTerritories(List.of(from, to));
+        attacker.addControlledTerritory(from);
+        defender.addControlledTerritory(to);
+
+        TerritoryService.conquerTerritory(attacker, from, to, 4, state);
+
+        assertEquals(1, from.getArmyCount(), "Attacking territory must keep at least 1 army");
+    }
+
+    @Test
+    public void conquerTerritory_updateAttackerControlledTerritories() {
+        GameState state = new GameState();
+        Player attacker = new Player(1, "Alice", PlayerColor.RED, 0, new ArrayList<>());
+        Player defender = new Player(2, "Bob", PlayerColor.BLUE, 0, new ArrayList<>());
+
+        Territory from = new Territory("Alaska", attacker, 5, Continent.NORTH_AMERICA);
+        Territory to = new Territory("Greenland", defender, 1, Continent.NORTH_AMERICA);
+
+        state.setTerritories(List.of(from, to));
+        attacker.addControlledTerritory(from);
+        defender.addControlledTerritory(to);
+
+        TerritoryService.conquerTerritory(attacker, from, to, 2, state);
+
+        assertTrue(attacker.getControlledTerritories().contains(to));
+    }
+
+    @Test
+    public void conquerTerritory_removeFromDefenderControlledTerritories() {
+        GameState state = new GameState();
+        Player attacker = new Player(1, "Alice", PlayerColor.RED, 0, new ArrayList<>());
+        Player defender = new Player(2, "Bob", PlayerColor.BLUE, 0, new ArrayList<>());
+
+        Territory from = new Territory("Alaska", attacker, 5, Continent.NORTH_AMERICA);
+        Territory to = new Territory("Greenland", defender, 1, Continent.NORTH_AMERICA);
+
+        state.setTerritories(List.of(from, to));
+        attacker.addControlledTerritory(from);
+        defender.addControlledTerritory(to);
+
+        TerritoryService.conquerTerritory(attacker, from, to, 2, state);
+
+        assertFalse(defender.getControlledTerritories().contains(to));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1, 5})
+    public void conquerTerritory_throwsWithInvalidArmiesToMove(int armiesToMove) {
+        GameState state = new GameState();
+        Player attacker = new Player(1, "Alice", PlayerColor.RED, 0, new ArrayList<>());
+        Player defender = new Player(2, "Bob", PlayerColor.BLUE, 0, new ArrayList<>());
+
+        Territory from = new Territory("Alaska", attacker, 5, Continent.NORTH_AMERICA);
+        Territory to = new Territory("Greenland", defender, 1, Continent.NORTH_AMERICA);
+
+        state.setTerritories(List.of(from, to));
+        attacker.addControlledTerritory(from);
+        defender.addControlledTerritory(to);
+
+        assertThrows(IllegalArgumentException.class, () -> TerritoryService.conquerTerritory(attacker, from, to, armiesToMove, state));
+    }
+
+
+    @Test
+    public void conquerTerritory_throwsWhenAttackerDoesNotOwnFromTerritory() {
+        GameState state = new GameState();
+        Player attacker = new Player(1, "Alice", PlayerColor.RED, 0, new ArrayList<>());
+        Player owner = new Player(3, "Charlie", PlayerColor.GREEN, 0, new ArrayList<>());
+        Player defender = new Player(2, "Bob", PlayerColor.BLUE, 0, new ArrayList<>());
+
+        Territory from = new Territory("Alaska", owner, 5, Continent.NORTH_AMERICA);
+        Territory to = new Territory("Greenland", defender, 1, Continent.NORTH_AMERICA);
+
+        state.setTerritories(List.of(from, to));
+        owner.addControlledTerritory(from);
+        defender.addControlledTerritory(to);
+
+        assertThrows(IllegalArgumentException.class, () -> TerritoryService.conquerTerritory(attacker, from, to, 2, state));
+    }
+
+    @Test
+    public void conquerTerritory_conquerUnoccupiedTerritory() {
+        GameState state = new GameState();
+        Player attacker = new Player(1, "Alice", PlayerColor.RED, 0, new ArrayList<>());
+
+        Territory from = new Territory("Alaska", attacker, 5, Continent.NORTH_AMERICA);
+        Territory to = new Territory("Greenland", null, 0, Continent.NORTH_AMERICA);
+
+        state.setTerritories(List.of(from, to));
+        attacker.addControlledTerritory(from);
+
+        TerritoryService.conquerTerritory(attacker, from, to, 2, state);
+
+        assertSame(attacker, to.getOwner());
+        assertEquals(2, to.getArmyCount());
+        assertEquals(3, from.getArmyCount());
+    }
+
+    @Test
+    public void placeInitialOneArmy_emptyState() {
+        TerritoryAssignmentService service = new TerritoryAssignmentService();
+        GameState state = new GameState();
+
+        state.setTerritories(List.of());
+
+        service.placeInitialOneArmyPerTerritory(state);
+
+        assertEquals(0, state.getTerritories().size());
+    }
+
+    @Test
+    public void placeInitialOneArmy_singleTerritory() {
+        TerritoryAssignmentService service = new TerritoryAssignmentService();
+        GameState state = new GameState();
+
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
+        Territory territory = new Territory("Alaska", player, 0, Continent.NORTH_AMERICA);
+        state.setTerritories(List.of(territory));
+
+        service.placeInitialOneArmyPerTerritory(state);
+
+        assertEquals(1, state.getTerritories().size());
+        assertEquals(1, territory.getArmyCount());
+    }
+
+    @Test
+    public void placeInitialOneArmy_multipleTerritories() {
+        TerritoryAssignmentService service = new TerritoryAssignmentService();
+        GameState state = new GameState();
+
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
+        Territory territory1 = new Territory("Alaska", player, 0, Continent.NORTH_AMERICA);
+        Territory territory2 = new Territory("Northwest Territory", player, 0, Continent.NORTH_AMERICA);
+        state.setTerritories(List.of(territory1, territory2));
+
+        service.placeInitialOneArmyPerTerritory(state);
+
+        assertEquals(2, state.getTerritories().size());
+        assertEquals(1, territory1.getArmyCount());
+        assertEquals(1, territory2.getArmyCount());
+    }
+
+    @Test
+    public void placeInitialOneArmy_maxTerritories() {
+        TerritoryAssignmentService service = new TerritoryAssignmentService();
+        GameState state = new GameState();
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
+        List<Territory> territories = new ArrayList<>();
+
+        for (int i = 1; i <= GameConstants.TOTAL_TERRITORIES; i++) {
+            territories.add(new Territory("Territory " + i, player, 0, Continent.NORTH_AMERICA));
+        }
+
+        state.setTerritories(territories);
+
+        service.placeInitialOneArmyPerTerritory(state);
+
+        assertEquals(GameConstants.TOTAL_TERRITORIES, state.getTerritories().size());
+        for (Territory territory : state.getTerritories()) {
+            assertEquals(1, territory.getArmyCount());
         }
     }
 }

@@ -23,7 +23,7 @@ public class ReinforcementServiceTest {
         ReinforcementService rs = new ReinforcementService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
-        Player player1 = new Player(1, "A", "Red", 4, controlled_territories1);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 4, controlled_territories1);
         Territory t1 = new Territory("Indonesia", player1, 3, Continent.AUSTRALIA);
         Territory t2 = new Territory("Greenland", player1, 1, Continent.NORTH_AMERICA);
         controlled_territories1.add(t1);
@@ -39,8 +39,8 @@ public class ReinforcementServiceTest {
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
         List<Territory> controlled_territories2 = new ArrayList<>();
-        Player player1 = new Player(1, "A", "Red", 4, controlled_territories1);
-        Player player2 = new Player(2, "B", "Blue", 4, controlled_territories2);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 4, controlled_territories1);
+        Player player2 = new Player(2, "B", PlayerColor.BLUE, 4, controlled_territories2);
         Territory t1 = new Territory("Indonesia", player1, 3, Continent.AUSTRALIA);
         Territory t2 = new Territory("Greenland", player1, 1, Continent.NORTH_AMERICA);
         Territory t3 = new Territory("Peru", player2, 1, Continent.SOUTH_AMERICA);
@@ -60,7 +60,7 @@ public class ReinforcementServiceTest {
         ReinforcementService rs = new ReinforcementService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
-        Player player1 = new Player(1, "A", "Red", 4, controlled_territories1);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 4, controlled_territories1);
         Territory t1 = new Territory("Indonesia", player1, 3, Continent.AUSTRALIA);
         Territory t2 = new Territory("Greenland", player1, 1, Continent.NORTH_AMERICA);
         controlled_territories1.add(t1);
@@ -77,7 +77,7 @@ public class ReinforcementServiceTest {
         ReinforcementService rs = new ReinforcementService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
-        Player player1 = new Player(1, "A", "Red", 4, controlled_territories1);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 4, controlled_territories1);
         Territory t1 = new Territory("Indonesia", player1, 3, Continent.AUSTRALIA);
         Territory t2 = new Territory("Greenland", player1, 1, Continent.NORTH_AMERICA);
         controlled_territories1.add(t1);
@@ -94,7 +94,7 @@ public class ReinforcementServiceTest {
 
         GameState gameState = new GameState();
         List<Territory> controlled_territories = new ArrayList<>();
-        Player player1 = new Player(1, "A", "Red", 0, controlled_territories);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories);
         Territory t1 = new Territory("Egypt", player1, 0, Continent.AFRICA);
         Territory t2 = new Territory("Congo", player1, 0, Continent.AFRICA);
         Territory t3 = new Territory("Madagascar", player1, 0, Continent.AFRICA);
@@ -119,7 +119,7 @@ public class ReinforcementServiceTest {
         ReinforcementService rs = new ReinforcementService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories = new ArrayList<>();
-        Player player1 = new Player(1, "A", "Red", 0, controlled_territories);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories);
         Territory t1 = new Territory("Egypt", player1, 0, Continent.AFRICA);
         Territory t2 = new Territory("Congo", player1, 0, Continent.AFRICA);
         Territory t3 = new Territory("Madagascar", player1, 0, Continent.AFRICA);
@@ -132,7 +132,7 @@ public class ReinforcementServiceTest {
         ReinforcementService rs = new ReinforcementService();
         List<Territory> controlled_territories = new ArrayList<>();
         GameState gameState1 = new GameState();
-        Player player1 = new Player(1, "A", "Red", 0, controlled_territories);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories);
         Territory t1 = new Territory("Alaska", player1, 0, Continent.NORTH_AMERICA);
         Territory t2 = new Territory("Indonesia", player1, 0, Continent.AUSTRALIA);
         controlled_territories.add(t1);
@@ -150,7 +150,7 @@ public class ReinforcementServiceTest {
 
         List<Territory> controlled_territories = new ArrayList<>();
         GameState gameState = new GameState();
-        Player player1 = new Player(1, "A", "Red", 0, controlled_territories);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories);
         Territory t1 = new Territory("Alaska", player1, 0, Continent.NORTH_AMERICA);
         Territory t2 = new Territory("Alaska", player1, 0, Continent.NORTH_AMERICA);
         Territory t3 = new Territory("Central America", player1, 0, Continent.NORTH_AMERICA);
@@ -173,7 +173,7 @@ public class ReinforcementServiceTest {
         // Australia
 
         List<Territory> controlled_territories2 = new ArrayList<>();
-        Player player2 = new Player(1, "A", "Red", 0, controlled_territories2);
+        Player player2 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories2);
         Territory t21 = new Territory("Western Australia", player1, 0, Continent.AUSTRALIA);
         Territory t22 = new Territory("Eastern Australia", player1, 0, Continent.AUSTRALIA);
         Territory t23 = new Territory("Indonesia", player1, 0, Continent.AUSTRALIA);
@@ -188,7 +188,7 @@ public class ReinforcementServiceTest {
 
         // South America
         List<Territory> controlled_territories3 = new ArrayList<>();
-        Player player3 = new Player(1, "A", "Red", 0, controlled_territories3);
+        Player player3 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories3);
         Territory t31 = new Territory("Peru", player1, 0, Continent.SOUTH_AMERICA);
         Territory t32 = new Territory("Argentina", player1, 0, Continent.SOUTH_AMERICA);
         Territory t33 = new Territory("Venezuela", player1, 0, Continent.SOUTH_AMERICA);
@@ -203,7 +203,7 @@ public class ReinforcementServiceTest {
 
         // North America
         List<Territory> controlled_territories4 = new ArrayList<>();
-        Player player4 = new Player(1, "A", "Red", 0, controlled_territories4);
+        Player player4 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories4);
         Territory t41 = new Territory("Alaska", player1, 0, Continent.NORTH_AMERICA);
         Territory t42 = new Territory("Northwest Territory", player1, 0, Continent.NORTH_AMERICA);
         Territory t43 = new Territory("Greenland", player1, 0, Continent.NORTH_AMERICA);
@@ -228,7 +228,7 @@ public class ReinforcementServiceTest {
 
         // Europe
         List<Territory> controlled_territories5 = new ArrayList<>();
-        Player player5 = new Player(1, "A", "Red", 0, controlled_territories5);
+        Player player5 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories5);
         Territory t51 = new Territory("Iceland", player1, 0, Continent.EUROPE);
         Territory t52 = new Territory("Great Britain", player1, 0, Continent.EUROPE);
         Territory t53 = new Territory("Western Europe", player1, 0, Continent.EUROPE);
@@ -249,7 +249,7 @@ public class ReinforcementServiceTest {
 
         // Asia
         List<Territory> controlled_territories6 = new ArrayList<>();
-        Player player6 = new Player(1, "A", "Red", 0, controlled_territories6);
+        Player player6 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories6);
         Territory t61 = new Territory("Ural", player1, 0, Continent.ASIA);
         Territory t62 = new Territory("Siberia", player1, 0, Continent.ASIA);
         Territory t63 = new Territory("Yakutsk", player1, 0, Continent.ASIA);
@@ -287,7 +287,7 @@ public class ReinforcementServiceTest {
         ReinforcementService rs = new ReinforcementService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories = new ArrayList<>();
-        Player player1 = new Player(1, "A", "Red", 0, controlled_territories);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories);
         Territory t1 = new Territory("Egypt", player1, 0, Continent.AFRICA);
         Territory t2 = new Territory("Congo", player1, 0, Continent.AFRICA);
         Territory t3 = new Territory("Madagascar", player1, 0, Continent.AFRICA);
@@ -320,7 +320,7 @@ public class ReinforcementServiceTest {
         ReinforcementService rs = new ReinforcementService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
-        Player player1 = new Player(1, "A", "Red", 4, controlled_territories1);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 4, controlled_territories1);
         Territory t1 = new Territory("Indonesia", player1, 3, Continent.AUSTRALIA);
         Territory t2 = new Territory("Greenland", player1, 1, Continent.NORTH_AMERICA);
         controlled_territories1.add(t1);
@@ -337,8 +337,8 @@ public class ReinforcementServiceTest {
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
         List<Territory> controlled_territories2 = new ArrayList<>();
-        Player player1 = new Player(1, "A", "Red", 0, controlled_territories1);
-        Player player2 = new Player(1, "A", "Red", 0, controlled_territories2);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories1);
+        Player player2 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories2);
         Territory t21 = new Territory("Western Australia", player1, 0, Continent.AUSTRALIA);
         Territory t22 = new Territory("Eastern Australia", player1, 0, Continent.AUSTRALIA);
         Territory t23 = new Territory("Indonesia", player1, 0, Continent.AUSTRALIA);
@@ -388,7 +388,7 @@ public class ReinforcementServiceTest {
             controlled_territories.add(terr);
         }
         List<Territory> first_group = controlled_territories.subList(0, len);
-        Player player1 = new Player(1, "A", "Red", 0, first_group);
+        Player player1 = new Player(1, "A", PlayerColor.RED, 0, first_group);
         int actual_owned_terr = rs.calculateBaseReinforcements(player1, gameState1);
         assertEquals(expected, actual_owned_terr);
 

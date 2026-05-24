@@ -1,5 +1,6 @@
 package service;
 
+import model.GameState;
 import model.Player;
 import org.junit.jupiter.api.Test;
 
@@ -205,7 +206,13 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC1_shouldInitializeTurnOrderAfterSetup() {}
+    void TC1_shouldInitializeTurnOrderAfterSetup() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.orchestration(names, colors);
+        assertNotNull(gameState.getTurnOrder());
+    }
 
     @Test
     void TC2_shouldSetCurrentPlayerToFirstPlayerInTurnOrder() {}

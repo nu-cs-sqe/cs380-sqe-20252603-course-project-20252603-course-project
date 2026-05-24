@@ -58,18 +58,20 @@ public class GameSetupService {
         Player first_pl = players_TO.get(0);
         gameState.setCurrentPlayer(first_pl);
     }
-    public GameState createNewGame(List<String> names, List<String> colors){
+    public GameState createNewGame(List<String> names, List<PlayerColor> colors){
         // create a new game state
         GameState gameState = new GameState();
-        // set the phase to setup
         // call player generation
+        createPlayers(names, colors);
+        gameState.setPlayers(getPlayers());
         // call territory generation
-        // call territory distribution
+        TerritoryAssignmentService TAS = new TerritoryAssignmentService();
+        TAS.assignTerritories(gameState);
 
         return gameState;
     }
-    public GameState orchestration(List<String> pre_names, List<String> pre_colors){
-        GameState gameState = createNewGame(pre_names, pre_colors);
+    public GameState orchestration(List<String> pre_names, List<PlayerColor> colors){
+        GameState gameState = createNewGame(pre_names, colors);
         initializeTurnOrder(gameState);
         startFirstTurn(gameState);
         gameState.setCurrentPhase(GamePhase.REINFORCEMENT);

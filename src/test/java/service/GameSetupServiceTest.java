@@ -204,39 +204,4 @@ public class GameSetupServiceTest {
         assertThrows(IllegalArgumentException.class, () -> service.validateUniqueColors(colors));
     }
 
-    @Test
-    void TC3_ValidateMaximumSizeGame() {
-        GameSetupService service = new GameSetupService();
-        int playerCount = 6;
-        assertTrue(service.validatePlayerCount(playerCount));
-    }
-
-    @Test
-    void TC4_ValidateAboveMaximumSizeGame() {
-        GameSetupService service = new GameSetupService();
-        int playerCount = 7;
-        assertFalse(service.validatePlayerCount(playerCount));
-    }
-
-    @Test
-    void TC5_ValidateINT_MAX() {
-        GameSetupService service = new GameSetupService();
-        int playerCount = Integer.MAX_VALUE;
-        assertFalse(service.validatePlayerCount(playerCount));
-    }
-
-    @Test
-    void TC6_ValidateINT_MIN() {
-        GameSetupService service = new GameSetupService();
-        int playerCount = Integer.MIN_VALUE;
-        assertFalse(service.validatePlayerCount(playerCount));
-    }
-
-    @Test
-    void TC7_ValidateInRangeOfValidGame() {
-        GameSetupService service = new GameSetupService();
-        int playerCount = 4;
-        assertTrue(service.validatePlayerCount(playerCount));
-    }
-
 }

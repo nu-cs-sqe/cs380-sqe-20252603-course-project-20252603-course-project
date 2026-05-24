@@ -246,6 +246,21 @@ public class GameSetupServiceTest {
         assertEquals(PlayerColor.GREEN, gameState.getPlayers().get(1).getColor());
         assertEquals("John", gameState.getPlayers().get(0).getName());
         assertEquals("Mike", gameState.getPlayers().get(1).getName());
+        assertEquals(GamePhase.REINFORCEMENT, gameState.getCurrentPhase());
+    }
+
+    @Test
+    void TC5_Create_Game_Function_Requirements() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.createNewGame(names, colors);
+        assertEquals(42, gameState.getTerritories().size());
+        assertEquals(2, gameState.getPlayers().size());
+        assertEquals(PlayerColor.BLUE, gameState.getPlayers().get(0).getColor());
+        assertEquals(PlayerColor.GREEN, gameState.getPlayers().get(1).getColor());
+        assertEquals("John", gameState.getPlayers().get(0).getName());
+        assertEquals("Mike", gameState.getPlayers().get(1).getName());
     }
 
 

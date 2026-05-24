@@ -235,7 +235,18 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC4_shouldReturnFullyInitializedGameState() {}
+    void TC4_shouldReturnFullyInitializedGameState() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.orchestration(names, colors);
+        assertEquals(42, gameState.getTerritories().size());
+        assertEquals(2, gameState.getPlayers().size());
+        assertEquals(PlayerColor.BLUE, gameState.getPlayers().get(0).getColor());
+        assertEquals(PlayerColor.GREEN, gameState.getPlayers().get(1).getColor());
+        assertEquals("John", gameState.getPlayers().get(0).getName());
+        assertEquals("Mike", gameState.getPlayers().get(1).getName());
+    }
 
 
 }

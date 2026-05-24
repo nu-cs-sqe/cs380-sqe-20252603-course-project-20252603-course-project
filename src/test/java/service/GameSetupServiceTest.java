@@ -1,5 +1,6 @@
 package service;
 
+import model.GamePhase;
 import model.GameState;
 import model.Player;
 import org.junit.jupiter.api.Test;
@@ -225,7 +226,13 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC3_shouldSetGamePhaseToReinforcementWhenSetupCompletes() {}
+    void TC3_shouldSetGamePhaseToReinforcementWhenSetupCompletes() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.orchestration(names, colors);
+        assertEquals(GamePhase.REINFORCEMENT, gameState.getCurrentPhase());
+    }
 
     @Test
     void TC4_shouldReturnFullyInitializedGameState() {}

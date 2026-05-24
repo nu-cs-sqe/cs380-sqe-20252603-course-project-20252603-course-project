@@ -31,3 +31,17 @@
 | TC2_ValidateUniqueColorsRepeats   | List colors, of type PlayerColors, contains a list of repeating, but otherwise valid, colors. | This is a non-unique list, so an error should be thrown. List rejected.    | :white_check_mark:          |
 | TC3_ValidateUniqueColorsEmpty | List colors, of type PlayerColors, contains an empty list.                                    | This is unique, albeit empty, so no error should be thrown. List accepted. | :white_check_mark:          |
 | TC4_ValidateUniqueColorsManyRepeats   | List colors, of type PlayerColors, contains a list of repeating, but otherwise valid, colors. | This is a non-unique list, so an error should be thrown. List rejected.    | :white_check_mark:          |
+
+### Method under test: create_new_game
+|                                       | State of the System                           | Expected output                                                          | Implemented?       |
+|---------------------------------------|-----------------------------------------------|--------------------------------------------------------------------------|--------------------|
+| TC1_Create_Game_Function_Requirements | List colors, List of PlayerColors, all valid, | Should return created GameState with valid players and territories added | :white_check_mark: |
+
+
+### Method under test: orchestra
+|                                                         | State of the System                                                           | Expected output                                                                                                                             | Implemented? |
+|---------------------------------------------------------|-------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| TC1_shouldInitializeTurnOrderAfterSetup                 | Lists of unique and valid PlayerColors and names, allows for valid creation.  | GameState is properly orchestrated, TurnOrder is not null.                                                                                  | :white_check_mark:          |
+| TC2_shouldSetCurrentPlayerToFirstPlayerInTurnOrder      | Lists of unique and valid PlayerColors and names, allows for valid creation.  | GameState is properly orchestrated, First Player is not null, and is a player object.                                                       | :white_check_mark:          |
+| TC3_shouldSetGamePhaseToReinforcementWhenSetupCompletes | Lists of unique and valid PlayerColors and names, allows for valid creation.  | GameState is properly orchestrated. GamePhase is correctly set to GamePhase.Reinforcement                                                   | :white_check_mark:          |
+| TC4_shouldReturnFullyInitializedGameState               | Lists of unique and valid PlayerColors and names, allows for valid creation.  | GameState is properly orchestrated, Territories and Player numbers are correct, as well as other requirements for game State initialization | :white_check_mark:          |

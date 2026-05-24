@@ -250,7 +250,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC5_Create_Game_Function_Requirements() {
+    void TC1_Create_Game_Function_Requirements() {
         GameSetupService service = new GameSetupService();
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
         List<String> names = new ArrayList<>(List.of("John", "Mike"));

@@ -215,7 +215,14 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC2_shouldSetCurrentPlayerToFirstPlayerInTurnOrder() {}
+    void TC2_shouldSetCurrentPlayerToFirstPlayerInTurnOrder() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.orchestration(names, colors);
+        assertNotNull(gameState.getCurrentPlayer());
+        assertInstanceOf(Player.class, gameState.getCurrentPlayer());
+    }
 
     @Test
     void TC3_shouldSetGamePhaseToReinforcementWhenSetupCompletes() {}

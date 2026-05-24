@@ -4,7 +4,10 @@ import model.GamePhase;
 import model.GameState;
 import model.Player;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GameSetupService {
 
@@ -16,6 +19,30 @@ public class GameSetupService {
             throw new IllegalArgumentException(
                     "Player count must be between " + MIN_PLAYERS + " and " + MAX_PLAYERS + ", but got: " + playerCount
             );
+        }
+    }
+
+    public void validateUniqueColors(List<PlayerColor> colors){
+        Set<PlayerColor> uniqueColors = new HashSet<>(colors);
+        if (uniqueColors.size() != colors.size()){
+            throw new IllegalArgumentException("Not all colors are unique. Expected " + uniqueColors.size() + " unique colors, but received " + colors.size() + ".");
+        }
+    }
+
+    public List<Player> getPlayers(){
+        return Players;
+    }
+
+    public void createPlayers(List<String> names, List<PlayerColor> colors) {
+        if (names.size() != colors.size()){
+            throw new IllegalArgumentException("Size of name list (" + names.size() + ") and color list (" + colors.size() + ") differ.");
+        }
+        int numberOfPlayers = names.size();
+        validatePlayerCount(numberOfPlayers);
+        validateUniqueColors(colors);
+        Players.clear();
+        for(int i = 0; i < numberOfPlayers; i++){
+            Players.add(new Player(i, names.get(i), colors.get(i), 0, new ArrayList<>()));
         }
     }
 

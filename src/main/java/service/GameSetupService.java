@@ -13,6 +13,7 @@ public class GameSetupService {
 
     public static final int MIN_PLAYERS = 2;
     public static final int MAX_PLAYERS = 6;
+    private List<Player> Players = new ArrayList<>();
 
     public void validatePlayerCount(int playerCount) {
         if (playerCount < MIN_PLAYERS || playerCount > MAX_PLAYERS){

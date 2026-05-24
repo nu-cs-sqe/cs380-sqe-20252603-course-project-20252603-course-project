@@ -204,4 +204,17 @@ public class GameSetupServiceTest {
         assertThrows(IllegalArgumentException.class, () -> service.validateUniqueColors(colors));
     }
 
+    @Test
+    void TC1_shouldInitializeTurnOrderAfterSetup() {}
+
+    @Test
+    void TC2_shouldSetCurrentPlayerToFirstPlayerInTurnOrder() {}
+
+    @Test
+    void TC3_shouldSetGamePhaseToReinforcementWhenSetupCompletes() {}
+
+    @Test
+    void TC4_shouldReturnFullyInitializedGameState() {}
+
+
 }

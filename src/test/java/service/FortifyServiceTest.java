@@ -18,7 +18,9 @@ public class FortifyServiceTest {
 
     @Test
     void shouldAllowFortifyBetweenConnectedOwnedTerritories() {
-
+        GameState gameState = new GameState();
+        Player player1 = new Player(1, );
+        Territory t1 = new Territory("Western United States");
     }
 
     @Test

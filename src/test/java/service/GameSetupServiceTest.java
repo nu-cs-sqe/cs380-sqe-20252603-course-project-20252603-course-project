@@ -1,5 +1,7 @@
 package service;
 
+import model.GamePhase;
+import model.GameState;
 import model.Player;
 import org.junit.jupiter.api.Test;
 
@@ -203,5 +205,63 @@ public class GameSetupServiceTest {
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.BLACK, PlayerColor.GREEN, PlayerColor.RED, PlayerColor.GREEN));
         assertThrows(IllegalArgumentException.class, () -> service.validateUniqueColors(colors));
     }
+
+    @Test
+    void TC1_shouldInitializeTurnOrderAfterSetup() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.setupOrchestration(names, colors);
+        assertDoesNotThrow(() -> gameState.getTurnOrder());
+    }
+
+    @Test
+    void TC2_shouldSetCurrentPlayerToFirstPlayerInTurnOrder() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.setupOrchestration(names, colors);
+        assertDoesNotThrow(() -> gameState.getCurrentPlayer());
+        assertInstanceOf(Player.class, gameState.getCurrentPlayer());
+    }
+
+    @Test
+    void TC3_shouldSetGamePhaseToReinforcementWhenSetupCompletes() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.setupOrchestration(names, colors);
+        assertEquals(GamePhase.REINFORCEMENT, gameState.getCurrentPhase());
+    }
+
+    @Test
+    void TC4_shouldReturnFullyInitializedGameState() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.setupOrchestration(names, colors);
+        assertEquals(42, gameState.getTerritories().size());
+        assertEquals(2, gameState.getPlayers().size());
+        assertEquals(PlayerColor.BLUE, gameState.getPlayers().get(0).getColor());
+        assertEquals(PlayerColor.GREEN, gameState.getPlayers().get(1).getColor());
+        assertEquals("John", gameState.getPlayers().get(0).getName());
+        assertEquals("Mike", gameState.getPlayers().get(1).getName());
+        assertEquals(GamePhase.REINFORCEMENT, gameState.getCurrentPhase());
+    }
+
+    @Test
+    void TC1_Create_Game_Function_Requirements() {
+        GameSetupService service = new GameSetupService();
+        List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
+        List<String> names = new ArrayList<>(List.of("John", "Mike"));
+        GameState gameState = service.createNewGame(names, colors);
+        assertEquals(42, gameState.getTerritories().size());
+        assertEquals(2, gameState.getPlayers().size());
+        assertEquals(PlayerColor.BLUE, gameState.getPlayers().get(0).getColor());
+        assertEquals(PlayerColor.GREEN, gameState.getPlayers().get(1).getColor());
+        assertEquals("John", gameState.getPlayers().get(0).getName());
+        assertEquals("Mike", gameState.getPlayers().get(1).getName());
+    }
+
 
 }

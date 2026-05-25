@@ -200,4 +200,11 @@ public class KnightTests {
 
         assertEquals("to must not be null", exception.getMessage());
     }
+
+    @Test
+    public void KnightCanJump_ReturnsTrue() {
+        Knight knight = new Knight(PieceColor.WHITE);
+
+        assertTrue(knight.canJump());
+    }
 }

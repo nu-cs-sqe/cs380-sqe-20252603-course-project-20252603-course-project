@@ -6,8 +6,10 @@ import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PieceTests {
     @Test
@@ -203,6 +205,57 @@ public class PieceTests {
         TestPiece piece = new TestPiece(PieceType.KING, PieceColor.WHITE);
 
         assertEquals("WHITE KING", piece.toString());
+    }
+
+    @Test
+    public void PieceCanJump_DefaultPiece_ReturnsFalse() {
+        TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
+
+        assertFalse(piece.canJump());
+    }
+
+    @Test
+    public void PieceIsSameColor_BothBlack_ReturnsTrue() {
+        TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
+        TestPiece other = new TestPiece(PieceType.ROOK, PieceColor.BLACK);
+
+        assertTrue(piece.isSameColor(other));
+    }
+
+    @Test
+    public void PieceIsSameColor_BothWhite_ReturnsTrue() {
+        TestPiece piece = new TestPiece(PieceType.KING, PieceColor.WHITE);
+        TestPiece other = new TestPiece(PieceType.QUEEN, PieceColor.WHITE);
+
+        assertTrue(piece.isSameColor(other));
+    }
+
+    @Test
+    public void PieceIsSameColor_BlackAndWhite_ReturnsFalse() {
+        TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
+        TestPiece other = new TestPiece(PieceType.PAWN, PieceColor.WHITE);
+
+        assertFalse(piece.isSameColor(other));
+    }
+
+    @Test
+    public void PieceIsSameColor_WhiteAndBlack_ReturnsFalse() {
+        TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.WHITE);
+        TestPiece other = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
+
+        assertFalse(piece.isSameColor(other));
+    }
+
+    @Test
+    public void PieceIsSameColor_NullOther_ThrowsIllegalArgumentException() {
+        TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> piece.isSameColor(null)
+        );
+
+        assertEquals("other must not be null", exception.getMessage());
     }
 
     private static class TestPiece extends Piece {

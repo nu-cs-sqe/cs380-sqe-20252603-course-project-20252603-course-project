@@ -269,4 +269,25 @@ public class PawnTests {
 
         assertEquals("to must not be null", exception.getMessage());
     }
+
+    @Test
+    public void PawnIsValidMoveShape_WhitePawnNotAtStartingRow_SingleSquareForward_ReturnsTrue() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        assertTrue(pawn.isValidMoveShape(new Location(4, 5), new Location(4, 4)));
+    }
+
+    @Test
+    public void PawnIsValidMoveShape_BlackPawnNotAtStartingRow_SingleSquareForward_ReturnsTrue() {
+        Pawn pawn = new Pawn(PieceColor.BLACK);
+
+        assertTrue(pawn.isValidMoveShape(new Location(4, 3), new Location(4, 4)));
+    }
+
+    @Test
+    public void PawnCanJump_ReturnsFalse() {
+        Pawn pawn = new Pawn(PieceColor.WHITE);
+
+        assertFalse(pawn.canJump());
+    }
 }

@@ -335,4 +335,20 @@ public class BoardTests {
     assertNotNull(snapshot[BLACK_BACK_RANK][COL_D]);
     assertNotNull(snapshot[BLACK_BACK_RANK][COL_E]);
   }
+
+  @Test
+  void movePieceValidMoveOnlyUpdatesTwoSquares() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK + 1);
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertTrue(result);
+    assertNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+    assertNotNull(snapshot[BLACK_PAWN_RANK + 1][COL_E]);
+  }
 }

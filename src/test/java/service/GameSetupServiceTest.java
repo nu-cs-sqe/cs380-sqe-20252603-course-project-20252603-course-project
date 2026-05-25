@@ -211,7 +211,7 @@ public class GameSetupServiceTest {
         GameSetupService service = new GameSetupService();
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
         List<String> names = new ArrayList<>(List.of("John", "Mike"));
-        GameState gameState = service.orchestration(names, colors);
+        GameState gameState = service.setup_orchestration(names, colors);
         assertNotNull(gameState.getTurnOrder());
     }
 
@@ -220,7 +220,7 @@ public class GameSetupServiceTest {
         GameSetupService service = new GameSetupService();
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
         List<String> names = new ArrayList<>(List.of("John", "Mike"));
-        GameState gameState = service.orchestration(names, colors);
+        GameState gameState = service.setup_orchestration(names, colors);
         assertNotNull(gameState.getCurrentPlayer());
         assertInstanceOf(Player.class, gameState.getCurrentPlayer());
     }
@@ -230,7 +230,7 @@ public class GameSetupServiceTest {
         GameSetupService service = new GameSetupService();
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
         List<String> names = new ArrayList<>(List.of("John", "Mike"));
-        GameState gameState = service.orchestration(names, colors);
+        GameState gameState = service.setup_orchestration(names, colors);
         assertEquals(GamePhase.REINFORCEMENT, gameState.getCurrentPhase());
     }
 
@@ -239,7 +239,7 @@ public class GameSetupServiceTest {
         GameSetupService service = new GameSetupService();
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
         List<String> names = new ArrayList<>(List.of("John", "Mike"));
-        GameState gameState = service.orchestration(names, colors);
+        GameState gameState = service.setup_orchestration(names, colors);
         assertEquals(42, gameState.getTerritories().size());
         assertEquals(2, gameState.getPlayers().size());
         assertEquals(PlayerColor.BLUE, gameState.getPlayers().get(0).getColor());

@@ -35,7 +35,7 @@ public class FortifyServiceTest {
     }
 
     @Test
-    void shouldRejectFortifyWhenSourceIsNotOwnedByPlayer() {
+    void T2_shouldRejectFortifyWhenSourceIsNotOwnedByPlayer() {
         FortifyService FS = new FortifyService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
@@ -53,7 +53,7 @@ public class FortifyServiceTest {
     }
 
     @Test
-    void shouldRejectFortifyWhenDestinationIsNotOwnedByPlayer(){
+    void T3_shouldRejectFortifyWhenDestinationIsNotOwnedByPlayer(){
         FortifyService FS = new FortifyService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
@@ -71,17 +71,29 @@ public class FortifyServiceTest {
     }
 
     @Test
-    void shouldRejectFortifyWhenTerritoriesAreNotConnected(){
+    void T4_shouldRejectFortifyWhenTerritoriesAreNotConnected(){
+        FortifyService FS = new FortifyService();
+        GameState gameState = new GameState();
+        List<Territory> controlled_territories1 = new ArrayList<>();
+        List<Territory> controlled_territories2 = new ArrayList<>();
+        Player player1 = new Player(1, "A", PlayerColor.RED, 1, controlled_territories1);
+        Player player2 = new Player(2, "B", PlayerColor.BLUE, 1, controlled_territories2);
+        Territory t1 = new Territory("Western United States", player1, 5, Continent.NORTH_AMERICA);
+        Territory t2 = new Territory("Iceland", player2, 1, Continent.EUROPE);
+        controlled_territories1.add(t1);
+        controlled_territories2.add(t2);
+        player1.setControlledTerritories(controlled_territories1);
+        player2.setControlledTerritories(controlled_territories2);
+        assertFalse(FS.areConnectedThroughOwnedTerritories(player1, t1, t2, gameState));
+    }
+
+    @Test
+    void T5_shouldRejectFortifyWhenSourceHasOnlyOneArmy(){
 
     }
 
     @Test
-    void shouldRejectFortifyWhenSourceHasOnlyOneArmy(){
-
-    }
-
-    @Test
-    void shouldRejectFortifyWhenMoveWouldLeaveSourceEmpty(){
+    void T6_shouldRejectFortifyWhenMoveWouldLeaveSourceEmpty(){
         
     }
 }

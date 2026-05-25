@@ -80,57 +80,57 @@ public class BoardTests {
   @Test
   void Constructor_InitialState_MajorPiecesInitializedCorrectly() {
     Board board = new Board();
-    Piece[][] s = board.getSnapshot();
+    Piece[][] snapshot = board.getSnapshot();
 
     // Black back rank
-    assertEquals(PieceType.ROOK, s[BLACK_BACK_RANK][COL_A].getType());
-    assertEquals(PieceColor.BLACK, s[BLACK_BACK_RANK][COL_A].getColor());
+    assertEquals(PieceType.ROOK, snapshot[BLACK_BACK_RANK][COL_A].getType());
+    assertEquals(PieceColor.BLACK, snapshot[BLACK_BACK_RANK][COL_A].getColor());
 
-    assertEquals(PieceType.KNIGHT, s[BLACK_BACK_RANK][COL_B].getType());
-    assertEquals(PieceColor.BLACK, s[BLACK_BACK_RANK][COL_B].getColor());
+    assertEquals(PieceType.KNIGHT, snapshot[BLACK_BACK_RANK][COL_B].getType());
+    assertEquals(PieceColor.BLACK, snapshot[BLACK_BACK_RANK][COL_B].getColor());
 
-    assertEquals(PieceType.BISHOP, s[BLACK_BACK_RANK][COL_C].getType());
-    assertEquals(PieceColor.BLACK, s[BLACK_BACK_RANK][COL_C].getColor());
+    assertEquals(PieceType.BISHOP, snapshot[BLACK_BACK_RANK][COL_C].getType());
+    assertEquals(PieceColor.BLACK, snapshot[BLACK_BACK_RANK][COL_C].getColor());
 
-    assertEquals(PieceType.QUEEN, s[BLACK_BACK_RANK][COL_D].getType());
-    assertEquals(PieceColor.BLACK, s[BLACK_BACK_RANK][COL_D].getColor());
+    assertEquals(PieceType.QUEEN, snapshot[BLACK_BACK_RANK][COL_D].getType());
+    assertEquals(PieceColor.BLACK, snapshot[BLACK_BACK_RANK][COL_D].getColor());
 
-    assertEquals(PieceType.KING, s[BLACK_BACK_RANK][COL_E].getType());
-    assertEquals(PieceColor.BLACK, s[BLACK_BACK_RANK][COL_E].getColor());
+    assertEquals(PieceType.KING, snapshot[BLACK_BACK_RANK][COL_E].getType());
+    assertEquals(PieceColor.BLACK, snapshot[BLACK_BACK_RANK][COL_E].getColor());
 
-    assertEquals(PieceType.BISHOP, s[BLACK_BACK_RANK][COL_F].getType());
-    assertEquals(PieceColor.BLACK, s[BLACK_BACK_RANK][COL_F].getColor());
+    assertEquals(PieceType.BISHOP, snapshot[BLACK_BACK_RANK][COL_F].getType());
+    assertEquals(PieceColor.BLACK, snapshot[BLACK_BACK_RANK][COL_F].getColor());
 
-    assertEquals(PieceType.KNIGHT, s[BLACK_BACK_RANK][COL_G].getType());
-    assertEquals(PieceColor.BLACK, s[BLACK_BACK_RANK][COL_G].getColor());
+    assertEquals(PieceType.KNIGHT, snapshot[BLACK_BACK_RANK][COL_G].getType());
+    assertEquals(PieceColor.BLACK, snapshot[BLACK_BACK_RANK][COL_G].getColor());
 
-    assertEquals(PieceType.ROOK, s[BLACK_BACK_RANK][COL_H].getType());
-    assertEquals(PieceColor.BLACK, s[BLACK_BACK_RANK][COL_H].getColor());
+    assertEquals(PieceType.ROOK, snapshot[BLACK_BACK_RANK][COL_H].getType());
+    assertEquals(PieceColor.BLACK, snapshot[BLACK_BACK_RANK][COL_H].getColor());
 
     // White back rank
-    assertEquals(PieceType.ROOK, s[WHITE_BACK_RANK][COL_A].getType());
-    assertEquals(PieceColor.WHITE, s[WHITE_BACK_RANK][COL_A].getColor());
+    assertEquals(PieceType.ROOK, snapshot[WHITE_BACK_RANK][COL_A].getType());
+    assertEquals(PieceColor.WHITE, snapshot[WHITE_BACK_RANK][COL_A].getColor());
 
-    assertEquals(PieceType.KNIGHT, s[WHITE_BACK_RANK][COL_B].getType());
-    assertEquals(PieceColor.WHITE, s[WHITE_BACK_RANK][COL_B].getColor());
+    assertEquals(PieceType.KNIGHT, snapshot[WHITE_BACK_RANK][COL_B].getType());
+    assertEquals(PieceColor.WHITE, snapshot[WHITE_BACK_RANK][COL_B].getColor());
 
-    assertEquals(PieceType.BISHOP, s[WHITE_BACK_RANK][COL_C].getType());
-    assertEquals(PieceColor.WHITE, s[WHITE_BACK_RANK][COL_C].getColor());
+    assertEquals(PieceType.BISHOP, snapshot[WHITE_BACK_RANK][COL_C].getType());
+    assertEquals(PieceColor.WHITE, snapshot[WHITE_BACK_RANK][COL_C].getColor());
 
-    assertEquals(PieceType.QUEEN, s[WHITE_BACK_RANK][COL_D].getType());
-    assertEquals(PieceColor.WHITE, s[WHITE_BACK_RANK][COL_D].getColor());
+    assertEquals(PieceType.QUEEN, snapshot[WHITE_BACK_RANK][COL_D].getType());
+    assertEquals(PieceColor.WHITE, snapshot[WHITE_BACK_RANK][COL_D].getColor());
 
-    assertEquals(PieceType.KING, s[WHITE_BACK_RANK][COL_E].getType());
-    assertEquals(PieceColor.WHITE, s[WHITE_BACK_RANK][COL_E].getColor());
+    assertEquals(PieceType.KING, snapshot[WHITE_BACK_RANK][COL_E].getType());
+    assertEquals(PieceColor.WHITE, snapshot[WHITE_BACK_RANK][COL_E].getColor());
 
-    assertEquals(PieceType.BISHOP, s[WHITE_BACK_RANK][COL_F].getType());
-    assertEquals(PieceColor.WHITE, s[WHITE_BACK_RANK][COL_F].getColor());
+    assertEquals(PieceType.BISHOP, snapshot[WHITE_BACK_RANK][COL_F].getType());
+    assertEquals(PieceColor.WHITE, snapshot[WHITE_BACK_RANK][COL_F].getColor());
 
-    assertEquals(PieceType.KNIGHT, s[WHITE_BACK_RANK][COL_G].getType());
-    assertEquals(PieceColor.WHITE, s[WHITE_BACK_RANK][COL_G].getColor());
+    assertEquals(PieceType.KNIGHT, snapshot[WHITE_BACK_RANK][COL_G].getType());
+    assertEquals(PieceColor.WHITE, snapshot[WHITE_BACK_RANK][COL_G].getColor());
 
-    assertEquals(PieceType.ROOK, s[WHITE_BACK_RANK][COL_H].getType());
-    assertEquals(PieceColor.WHITE, s[WHITE_BACK_RANK][COL_H].getColor());
+    assertEquals(PieceType.ROOK, snapshot[WHITE_BACK_RANK][COL_H].getType());
+    assertEquals(PieceColor.WHITE, snapshot[WHITE_BACK_RANK][COL_H].getColor());
   }
 
   @Test

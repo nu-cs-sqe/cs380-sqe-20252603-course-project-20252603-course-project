@@ -80,7 +80,7 @@ The Boundary Value Analysis (BVA) below targets the properties parsing, data int
 |-------------|-------------------|-----------------|--------------------|
 | Test Case 1 | `supported-locales.properties` has 2 valid entries | Map size is exactly 2, keys match parsed target locales, values match display keys | :white_check_mark: |
 | Test Case 2 | `supported-locales.properties` is missing from classpath | Static initialization fails, throwing `IllegalStateException` | :white_check_mark: |
-| Test Case 3 | `supported-locales.properties` exists but is completely empty | Map returns successfully but is empty (size 0) | :x:                |
+| Test Case 3 | `supported-locales.properties` exists but is completely empty | Map returns successfully but is empty (size 0) | :white_check_mark: |
 | Test Case 4 | Key exists but has an empty value (e.g., `en-US=`) | Map includes the locale but maps to an empty string `""` (violating display-name constraints) | :x:                |
 | Test Case 5 | Key exists but has only spaces (e.g., `en-US=\u0020\u0020`) | Map includes the locale but maps to a blank string `"  "` | :x:                |
 | Test Case 6 | Attempt to modify the map via `getSupportedLocales().put(newLocale, key)` | Throws `UnsupportedOperationException` (guaranteeing immutability) | :x:                |

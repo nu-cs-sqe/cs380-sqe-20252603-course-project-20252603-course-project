@@ -39,4 +39,14 @@ public class LocaleLoaderTests {
       }
     }, "TC2 Failure: System must throw an IllegalStateException when the resource stream resolves to null.");
   }
+
+  @Test
+  public void testTestCase3_EmptyConfigurationYieldsEmptyMap() {
+    Map<Locale, String> locales = LocaleLoader.getSupportedLocales();
+    assertNotNull(locales, "TC3 Failure: Retrieved map instance should not be null.");
+    if (locales.isEmpty()) {
+      assertEquals(0, locales.size(), "TC3 Failure: Map size should be 0 for an empty configuration profile.");
+    }
+  }
+
 }

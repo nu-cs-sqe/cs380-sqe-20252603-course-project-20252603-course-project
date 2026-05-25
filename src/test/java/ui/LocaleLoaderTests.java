@@ -41,11 +41,11 @@ public class LocaleLoaderTests {
 
   @Test
   public void testTestCase3_EmptyConfigurationYieldsEmptyMap() {
-    Map<Locale, String> locales = LocaleLoader.getSupportedLocales();
+    Map<Locale, String> locales = LocaleLoader.loadLocalesFromPath("empty-locales.properties");
+
     assertNotNull(locales, "TC3 Failure: Retrieved map instance should not be null.");
-    if (locales.isEmpty()) {
-      assertEquals(0, locales.size(), "TC3 Failure: Map size should be 0 for an empty configuration profile.");
-    }
+    assertTrue(locales.isEmpty(), "TC3 Failure: Map should be empty for an empty configuration profile.");
+    assertEquals(0, locales.size(), "TC3 Failure: Map size should be 0 for an empty configuration profile.");
   }
 
   @Test

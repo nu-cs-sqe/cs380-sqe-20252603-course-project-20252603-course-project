@@ -59,9 +59,6 @@ public class GameStatsView extends JPanel {
     add(currentPlayerLabel);
   }
 
-  /**
-   * Applies standard styling to body labels.
-   */
   private void styleBodyLabel(JLabel label) {
     label.setFont(BODY_FONT);
     label.setForeground(LABEL_FOREGROUND);

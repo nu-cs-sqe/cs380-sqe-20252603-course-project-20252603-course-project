@@ -138,4 +138,4 @@ The BVA below targets the current implementation contract visible in the source.
 | 31 | to out-of-bounds | rejected, no mutation | :white_check_mark: |
 | 32 | same-color destination | rejected, no mutation | :white_check_mark: |
 | 33 | valid move mutation invariant | exactly two squares updated | :white_check_mark: |
-| 34 | invalid move invariant | zero board changes | :x:                |
+| 34 | invalid move invariant | zero board changes | :white_check_mark: |

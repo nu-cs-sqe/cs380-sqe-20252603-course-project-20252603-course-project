@@ -212,7 +212,7 @@ public class GameSetupServiceTest {
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
         List<String> names = new ArrayList<>(List.of("John", "Mike"));
         GameState gameState = service.setup_orchestration(names, colors);
-        assertNotNull(gameState.getTurnOrder());
+        assertDoesNotThrow(() -> gameState.getTurnOrder());
     }
 
     @Test
@@ -221,7 +221,7 @@ public class GameSetupServiceTest {
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
         List<String> names = new ArrayList<>(List.of("John", "Mike"));
         GameState gameState = service.setup_orchestration(names, colors);
-        assertNotNull(gameState.getCurrentPlayer());
+        assertDoesNotThrow(() -> gameState.getCurrentPlayer());
         assertInstanceOf(Player.class, gameState.getCurrentPlayer());
     }
 

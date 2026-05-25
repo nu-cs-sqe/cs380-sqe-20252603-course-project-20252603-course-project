@@ -19,12 +19,21 @@ public class LocaleLoader {
   private static final Map<Locale, String> supportedLocales;
 
   static {
+    // Initialize the real map using the default configuration file path
+    supportedLocales = Collections.unmodifiableMap(loadLocalesFromPath(CONFIG_PATH));
+  }
+
+  /**
+   * Helper method extracted to accept an injectable resource path for testing (Clean Code T1).
+   * It handles reading the stream and parsing properties into a working map.
+   */
+  static Map<Locale, String> loadLocalesFromPath(String resourcePath) {
     Map<Locale, String> workingMap = new LinkedHashMap<>();
     Properties properties = new Properties();
 
-    try (InputStream input = LocaleLoader.class.getClassLoader().getResourceAsStream(CONFIG_PATH)) {
+    try (InputStream input = LocaleLoader.class.getClassLoader().getResourceAsStream(resourcePath)) {
       if (input == null) {
-        throw new IllegalStateException("Critical Configuration Error: " + CONFIG_PATH + " not found on classpath.");
+        throw new IllegalStateException("Critical Configuration Error: " + resourcePath + " not found on classpath.");
       }
 
       properties.load(input);
@@ -39,7 +48,7 @@ public class LocaleLoader {
       throw new RuntimeException("Failed to initialize system locales from configuration properties.", e);
     }
 
-    supportedLocales = Collections.unmodifiableMap(workingMap);
+    return workingMap;
   }
 
   /**

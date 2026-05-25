@@ -32,13 +32,11 @@ public class LocaleLoaderTests {
 
   @Test
   public void testTestCase2_MissingResourceThrowsException() {
-    assertThrows(IllegalStateException.class, () -> {
-      String fakePath = "non-existent-file.properties";
-      InputStream input = LocaleLoader.class.getClassLoader().getResourceAsStream(fakePath);
-      if (input == null) {
-        throw new IllegalStateException("Critical Configuration Error: " + fakePath + " not found on classpath.");
-      }
-    }, "TC2 Failure: System must throw an IllegalStateException when the resource stream resolves to null.");
+    assertThrows(
+        IllegalStateException.class,
+        () -> LocaleLoader.loadLocalesFromPath("non-existent-file.properties"),
+        "TC2 Failure: System must throw an IllegalStateException when the resource stream resolves to null."
+    );
   }
 
   @Test

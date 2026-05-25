@@ -23,6 +23,17 @@ public abstract class Piece {
         return color;
     }
 
+    public boolean canJump() {
+        return false;
+    }
+
+    public boolean isSameColor(Piece other) {
+        if (other == null) {
+            throw new IllegalArgumentException("other must not be null");
+        }
+        return this.color == other.color;
+    }
+
     @Override
     public String toString() {
         return color + " " + type;

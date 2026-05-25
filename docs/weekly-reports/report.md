@@ -6,6 +6,12 @@
 4. [95% done] Tallie: Fix checkstyle method naming convention (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/72)
 5. [95% done] Tallie: Feature pitest setup multiple turns of the game (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/67)
 6. [done] Tallie: Review PR 27 (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/27)
+7. [in-progress] Tallie: update Checkstyle script to have test case naming use Prof. Zhang-introduced rather than Google scheme
+8. [in-progress] Reed: Feature piece moves one turn of the game (PR 70)
+9. [in-progress] Reed: Feature language selector i18n (PR 69)
+10. [in-progress] Reed: Feature piece api integration (PR 68)
+11. [in-progress] Trenton: Feature turn validation one turn of the game (PR 73)
+12. [in-progress] Trenton: Feature locale metadata i18n (PR 74)
 
 # Week 7 (5/11/2026-5/17/2026)
 **Planning and Progress Tracking**:

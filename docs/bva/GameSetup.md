@@ -32,7 +32,7 @@
 | TC3_ValidateUniqueColorsEmpty | List colors, of type PlayerColors, contains an empty list.                                    | This is unique, albeit empty, so no error should be thrown. List accepted. | :white_check_mark:          |
 | TC4_ValidateUniqueColorsManyRepeats   | List colors, of type PlayerColors, contains a list of repeating, but otherwise valid, colors. | This is a non-unique list, so an error should be thrown. List rejected.    | :white_check_mark:          |
 
-### Method under test: create_new_game
+### Method under test: CreateNewGame
 |                                       | State of the System                           | Expected output                                                          | Implemented?       |
 |---------------------------------------|-----------------------------------------------|--------------------------------------------------------------------------|--------------------|
 | TC1_Create_Game_Function_Requirements | List colors, List of PlayerColors, all valid, | Should return created GameState with valid players and territories added | :white_check_mark: |

@@ -65,4 +65,28 @@ public class LocaleLoaderTests {
       assertFalse(value.trim().isEmpty(), "TC5 Failure: Key mapping value cannot consist solely of whitespace characters.");
     }
   }
+
+  @Test
+  public void testTestCase6_ReturnedMapIsStrictlyImmutable() {
+    Map<Locale, String> locales = LocaleLoader.getSupportedLocales();
+    assertNotNull(locales, "TC6 Failure: Target collection is null.");
+
+    Locale rogueLocale = Locale.forLanguageTag("fr-FR");
+    String rogueKey = "language.french";
+
+    // Verify that mutating mutations throw an UnsupportedOperationException
+    assertThrows(UnsupportedOperationException.class, () -> {
+      locales.put(rogueLocale, rogueKey);
+    }, "TC6 Failure: Mutating getSupportedLocales() via .put() must throw an UnsupportedOperationException.");
+
+    assertThrows(UnsupportedOperationException.class, () -> {
+      locales.clear();
+    }, "TC6 Failure: Mutating getSupportedLocales() via .clear() must throw an UnsupportedOperationException.");
+
+    assertThrows(UnsupportedOperationException.class, () -> {
+      if (!locales.isEmpty()) {
+        locales.remove(locales.keySet().iterator().next());
+      }
+    }, "TC6 Failure: Mutating getSupportedLocales() via .remove() must throw an UnsupportedOperationException.");
+  }
 }

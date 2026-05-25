@@ -25,7 +25,8 @@ public class Location {
 
   /** Returns true if this location is within the 8×8 board. */
   public boolean isOnBoard() {
-    return false;
+    return x >= MIN_BOARD_COORDINATE && x <= MAX_BOARD_COORDINATE
+        && y >= MIN_BOARD_COORDINATE && y <= MAX_BOARD_COORDINATE;
   }
 
   /** Returns squares strictly between this location and {@code to} along the same rank, file, or diagonal. */
@@ -33,6 +34,19 @@ public class Location {
     if (to == null) {
       throw new IllegalArgumentException("to must not be null");
     }
-    return new ArrayList<>();
+    List<Location> squares = new ArrayList<>();
+    int stepX = Integer.signum(to.getX() - x);
+    int stepY = Integer.signum(to.getY() - y);
+    if (stepX == 0 && stepY == 0) {
+      return squares;
+    }
+    int cx = x + stepX;
+    int cy = y + stepY;
+    while (cx != to.getX() || cy != to.getY()) {
+      squares.add(new Location(cx, cy));
+      cx += stepX;
+      cy += stepY;
+    }
+    return squares;
   }
 }

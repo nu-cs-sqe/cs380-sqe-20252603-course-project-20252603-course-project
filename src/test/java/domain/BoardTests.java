@@ -285,4 +285,14 @@ public class BoardTests {
         () -> board.movePiece(null, new Location(COL_E, BLACK_PAWN_RANK))
     );
   }
+
+  @Test
+  void movePieceNullToThrowsException() {
+    Board board = new Board();
+
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> board.movePiece(new Location(COL_E, BLACK_PAWN_RANK), null)
+    );
+  }
 }

@@ -24,7 +24,7 @@ public class WelcomeView extends JFrame {
 
   private void createWelcomeScreenUI() {
     // Audit Fixed: String constants extracted to bundles
-    setTitle(messages.getString("ui.welcome.title"));
+    setTitle(messages.getString("welcome.title"));
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setResizable(IS_WINDOW_RESIZABLE);
 
@@ -42,18 +42,18 @@ public class WelcomeView extends JFrame {
 
     // Row 0: Player 1
     gbc.gridx = 0; gbc.gridy = 0;
-    panel.add(new JLabel(messages.getString("ui.welcome.player1Label")), gbc);
+    panel.add(new JLabel(messages.getString("welcome.player1Label")), gbc);
     gbc.gridx = 1;
     panel.add(player1NameField, gbc);
 
     // Row 1: Player 2
     gbc.gridx = 0; gbc.gridy = 1;
-    panel.add(new JLabel(messages.getString("ui.welcome.player2Label")), gbc);
+    panel.add(new JLabel(messages.getString("welcome.player2Label")), gbc);
     gbc.gridx = 1;
     panel.add(player2NameField, gbc);
 
     // Row 2: Action Button
-    JButton startButton = new JButton(messages.getString("ui.welcome.startButton"));
+    JButton startButton = new JButton(messages.getString("welcome.startButton"));
     gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
     gbc.fill = GridBagConstraints.NONE;
     gbc.anchor = GridBagConstraints.CENTER;
@@ -65,8 +65,8 @@ public class WelcomeView extends JFrame {
 
       if (p1.isEmpty() || p2.isEmpty()) {
         JOptionPane.showMessageDialog(this,
-            messages.getString("ui.welcome.missingNameMessage"),
-            messages.getString("ui.welcome.missingNameTitle"),
+            messages.getString("welcome.missingNameMessage"),
+            messages.getString("welcome.missingNameTitle"),
             JOptionPane.WARNING_MESSAGE);
         return;
       }

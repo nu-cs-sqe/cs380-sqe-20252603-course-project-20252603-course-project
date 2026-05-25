@@ -27,7 +27,7 @@ public class MainView extends JFrame {
 
   private void configureMainView() {
     // Resolved String Literal: Sourced dynamically via locale keys
-    setTitle(messages.getString("ui.window.title"));
+    setTitle(messages.getString("window.title"));
 
     // Explicit Window Behavior Definition
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

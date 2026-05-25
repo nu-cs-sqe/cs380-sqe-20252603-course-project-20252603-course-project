@@ -67,7 +67,7 @@ public class GameSetupService {
 
         return gameState;
     }
-    public GameState setup_orchestration(List<String> pre_names, List<PlayerColor> colors){
+    public GameState setupOrchestration(List<String> pre_names, List<PlayerColor> colors){
         GameState gameState = createNewGame(pre_names, colors);
         initializeTurnOrder(gameState);
         startFirstTurn(gameState);

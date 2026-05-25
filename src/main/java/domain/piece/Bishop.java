@@ -18,7 +18,7 @@ public final class Bishop extends Piece {
     return new Bishop(getColor());
   }
 
-  /** Returns true if the move from {@code from} to {@code to} follows a bishop's movement pattern. */
+  /** Returns true if the move shape from {@code from} to {@code to} is a valid bishop shape. */
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null) {
       throw new IllegalArgumentException("from must not be null");

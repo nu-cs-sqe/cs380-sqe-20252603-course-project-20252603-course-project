@@ -18,7 +18,7 @@ public final class Rook extends Piece {
     return new Rook(getColor());
   }
 
-  /** Returns true if the move from {@code from} to {@code to} follows a rook's movement pattern. */
+  /** Returns true if the move shape from {@code from} to {@code to} is a valid rook shape. */
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null) {
       throw new IllegalArgumentException("from must not be null");

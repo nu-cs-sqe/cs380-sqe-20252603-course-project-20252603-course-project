@@ -7,41 +7,41 @@ public class Location {
   private static final int MIN_BOARD_COORDINATE = 0;
   private static final int MAX_BOARD_COORDINATE = 7;
 
-  private final int x;
-  private final int y;
+  private final int col;
+  private final int row;
 
   public Location(int x, int y) {
-    this.x = x;
-    this.y = y;
+    this.col = x;
+    this.row = y;
   }
 
   public int getX() {
-    return x;
+    return col;
   }
 
   public int getY() {
-    return y;
+    return row;
   }
 
   /** Returns true if this location is within the 8×8 board. */
   public boolean isOnBoard() {
-    return x >= MIN_BOARD_COORDINATE && x <= MAX_BOARD_COORDINATE
-        && y >= MIN_BOARD_COORDINATE && y <= MAX_BOARD_COORDINATE;
+    return col >= MIN_BOARD_COORDINATE && col <= MAX_BOARD_COORDINATE
+        && row >= MIN_BOARD_COORDINATE && row <= MAX_BOARD_COORDINATE;
   }
 
-  /** Returns squares strictly between this location and {@code to} along the same rank, file, or diagonal. */
+  /** Returns squares strictly between this location and {@code to} along the move path. */
   public List<Location> getIntermediateSquares(Location to) {
     if (to == null) {
       throw new IllegalArgumentException("to must not be null");
     }
     List<Location> squares = new ArrayList<>();
-    int stepX = Integer.signum(to.getX() - x);
-    int stepY = Integer.signum(to.getY() - y);
+    int stepX = Integer.signum(to.getX() - col);
+    int stepY = Integer.signum(to.getY() - row);
     if (stepX == 0 && stepY == 0) {
       return squares;
     }
-    int cx = x + stepX;
-    int cy = y + stepY;
+    int cx = col + stepX;
+    int cy = row + stepY;
     while (cx != to.getX() || cy != to.getY()) {
       squares.add(new Location(cx, cy));
       cx += stepX;

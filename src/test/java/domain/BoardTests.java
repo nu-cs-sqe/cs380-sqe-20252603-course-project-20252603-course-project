@@ -295,4 +295,16 @@ public class BoardTests {
         () -> board.movePiece(new Location(COL_E, BLACK_PAWN_RANK), null)
     );
   }
+
+  @Test
+  void movePieceFromOutOfBoundsReturnsFalse() {
+    Board board = new Board();
+
+    Location from = new Location(-1, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK + 1);
+
+    boolean result = board.movePiece(from, to);
+
+    assertFalse(result);
+  }
 }

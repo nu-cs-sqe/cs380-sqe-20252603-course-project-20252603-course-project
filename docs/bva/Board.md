@@ -133,8 +133,8 @@ The BVA below targets the current implementation contract visible in the source.
 | 26 | capture move | opponent piece removed, moved into target | :white_check_mark: |
 | 27 | same-square move | rejected, no mutation | :white_check_mark: |
 | 28 | null from | throws IllegalArgumentException | :white_check_mark: |
-| 29 | null to | throws IllegalArgumentException | :x:                |
-| 30 | from out-of-bounds | rejected, no mutation | :x:                |
+| 29 | null to | throws IllegalArgumentException | :white_check_mark: |
+| 30 | from out-of-bounds | rejected, no mutation | :white_check_mark: |
 | 31 | to out-of-bounds | rejected, no mutation | :x:                |
 | 32 | same-color destination | rejected, no mutation | :x:                |
 | 33 | valid move mutation invariant | exactly two squares updated | :x:                |

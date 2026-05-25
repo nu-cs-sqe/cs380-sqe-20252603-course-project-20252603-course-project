@@ -128,6 +128,11 @@ public class Board {
       throw new IllegalArgumentException("to must not be null");
     }
 
+    if (from.getX() < 0 || from.getX() >= TOTAL_COLS || from.getY() < 0 || from.getY() >= TOTAL_ROWS ||
+        to.getX() < 0 || to.getX() >= TOTAL_COLS || to.getY() < 0 || to.getY() >= TOTAL_ROWS) {
+      return false;
+    }
+
     Piece piece = pieces[from.getY()][from.getX()];
     if (piece == null) {
       return false;

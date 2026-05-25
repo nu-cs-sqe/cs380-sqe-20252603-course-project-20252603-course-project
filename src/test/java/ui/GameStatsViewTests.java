@@ -1,91 +1,92 @@
 package ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
-
 import javax.swing.*;
-
 import java.awt.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class GameStatsViewTests {
-    @Test
-    void panelIsCreated() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
 
-        assertNotNull(view);
-    }
+  @Test
+  void panelIsCreated() {
+    GameStatsView view = new GameStatsView("Alice", "Bob");
 
-    @Test
-    void layoutIsBoxLayoutYAxis() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
+    assertNotNull(view);
+  }
 
-        assertTrue(view.getLayout() instanceof BoxLayout);
-    }
+  @Test
+  void layoutIsBoxLayoutYAxis() {
+    GameStatsView view = new GameStatsView("Alice", "Bob");
 
-    @Test
-    void hasFourComponents() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
+    assertTrue(view.getLayout() instanceof BoxLayout);
+  }
 
-        assertEquals(4, view.getComponentCount());
-    }
+  @Test
+  void hasFourComponents() {
+    GameStatsView view = new GameStatsView("Alice", "Bob");
 
-    @Test
-    void player1LabelCorrect() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
+    assertEquals(4, view.getComponentCount());
+  }
 
-        JLabel label = (JLabel) view.getComponent(1);
+  @Test
+  void player1LabelCorrect() {
+    GameStatsView view = new GameStatsView("Alice", "Bob");
 
-        assertTrue(label.getText().contains("Alice"));
-        assertTrue(label.getText().contains("White"));
-    }
+    JLabel label = (JLabel) view.getComponent(1);
 
-    @Test
-    void player2LabelCorrect() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
+    assertTrue(label.getText().contains("Alice"));
+    assertTrue(label.getText().contains("White"));
+  }
 
-        JLabel label = (JLabel) view.getComponent(2);
+  @Test
+  void player2LabelCorrect() {
+    GameStatsView view = new GameStatsView("Alice", "Bob");
 
-        assertTrue(label.getText().contains("Bob"));
-        assertTrue(label.getText().contains("Black"));
-    }
+    JLabel label = (JLabel) view.getComponent(2);
 
-    @Test
-    void currentPlayerStartsAsPlayer1() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
+    assertTrue(label.getText().contains("Bob"));
+    assertTrue(label.getText().contains("Black"));
+  }
 
-        JLabel label = (JLabel) view.getComponent(3);
+  @Test
+  void currentPlayerStartsAsPlayer1() {
+    GameStatsView view = new GameStatsView("Alice", "Bob");
 
-        assertTrue(label.getText().contains("Alice"));
-    }
+    JLabel label = (JLabel) view.getComponent(3);
 
-    @Test
-    void labelsHaveStyling() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
+    assertTrue(label.getText().contains("Alice"));
+  }
 
-        JLabel label = (JLabel) view.getComponent(0);
+  @Test
+  void labelsHaveStyling() {
+    GameStatsView view = new GameStatsView("Alice", "Bob");
 
-        assertEquals(new Font("Arial", Font.BOLD, 30), label.getFont());
-    }
+    JLabel label = (JLabel) view.getComponent(0);
 
-    @Test
-    void backgroundColorCorrect() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
+    assertEquals(new Font("Arial", Font.BOLD, 30), label.getFont());
+  }
 
-        assertEquals(new Color(104, 76, 150), view.getBackground());
-    }
+  @Test
+  void backgroundColorCorrect() {
+    GameStatsView view = new GameStatsView("Alice", "Bob");
 
-    @Test
-    void labelsAreInCorrectOrder() {
-        GameStatsView view = new GameStatsView("Alice", "Bob");
+    assertEquals(new Color(104, 76, 150), view.getBackground());
+  }
 
-        assertEquals("Player Information", ((JLabel) view.getComponent(0)).getText());
-    }
+  @Test
+  void labelsAreInCorrectOrder() {
+    GameStatsView view = new GameStatsView("Alice", "Bob");
 
-    @Test
-    void nullNamesDoNotCrash() {
-        GameStatsView view = new GameStatsView(null, "Bob");
+    assertEquals("Player Information", ((JLabel) view.getComponent(0)).getText());
+  }
 
-        assertNotNull(view);
-    }
+  @Test
+  void nullNamesDoNotCrash() {
+    GameStatsView view = new GameStatsView(null, "Bob");
+
+    assertNotNull(view);
+  }
 }

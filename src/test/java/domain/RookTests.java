@@ -1,62 +1,64 @@
 package domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import domain.piece.Rook;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public class RookTests {
-    @Test
-    public void RookConstructor_BlackColor_SetsTypeAndColor() {
-        Rook rook = new Rook(PieceColor.BLACK);
 
-        assertEquals(PieceType.ROOK, rook.getType());
-        assertEquals(PieceColor.BLACK, rook.getColor());
-    }
+  @Test
+  public void rookConstructorBlackColorSetsTypeAndColor() {
+    Rook rook = new Rook(PieceColor.BLACK);
 
-    @Test
-    public void RookConstructor_WhiteColor_SetsTypeAndColor() {
-        Rook rook = new Rook(PieceColor.WHITE);
+    assertEquals(PieceType.ROOK, rook.getType());
+    assertEquals(PieceColor.BLACK, rook.getColor());
+  }
 
-        assertEquals(PieceType.ROOK, rook.getType());
-        assertEquals(PieceColor.WHITE, rook.getColor());
-    }
+  @Test
+  public void rookConstructorWhiteColorSetsTypeAndColor() {
+    Rook rook = new Rook(PieceColor.WHITE);
 
-    @Test
-    public void RookConstructor_NullColor_ThrowsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Rook(null));
+    assertEquals(PieceType.ROOK, rook.getType());
+    assertEquals(PieceColor.WHITE, rook.getColor());
+  }
 
-        assertEquals("color must not be null", exception.getMessage());
-    }
+  @Test
+  public void rookConstructorNullColorThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> new Rook(null));
 
-    @Test
-    public void RookMakeCopy_BlackRook_ReturnsDistinctRookWithSameColor() {
-        Rook rook = new Rook(PieceColor.BLACK);
+    assertEquals("color must not be null", exception.getMessage());
+  }
 
-        Piece copy = rook.makeCopy();
+  @Test
+  public void rookMakeCopyBlackRookReturnsDistinctRookWithSameColor() {
+    Rook rook = new Rook(PieceColor.BLACK);
 
-        assertNotSame(rook, copy);
-        assertInstanceOf(Rook.class, copy);
-        assertEquals(PieceType.ROOK, copy.getType());
-        assertEquals(PieceColor.BLACK, copy.getColor());
-    }
+    Piece copy = rook.makeCopy();
 
-    @Test
-    public void RookMakeCopy_WhiteRook_ReturnsDistinctRookWithSameColor() {
-        Rook rook = new Rook(PieceColor.WHITE);
+    assertNotSame(rook, copy);
+    assertInstanceOf(Rook.class, copy);
+    assertEquals(PieceType.ROOK, copy.getType());
+    assertEquals(PieceColor.BLACK, copy.getColor());
+  }
 
-        Piece copy = rook.makeCopy();
+  @Test
+  public void rookMakeCopyWhiteRookReturnsDistinctRookWithSameColor() {
+    Rook rook = new Rook(PieceColor.WHITE);
 
-        assertNotSame(rook, copy);
-        assertInstanceOf(Rook.class, copy);
-        assertEquals(PieceType.ROOK, copy.getType());
-        assertEquals(PieceColor.WHITE, copy.getColor());
-    }
+    Piece copy = rook.makeCopy();
+
+    assertNotSame(rook, copy);
+    assertInstanceOf(Rook.class, copy);
+    assertEquals(PieceType.ROOK, copy.getType());
+    assertEquals(PieceColor.WHITE, copy.getColor());
+  }
 
 }

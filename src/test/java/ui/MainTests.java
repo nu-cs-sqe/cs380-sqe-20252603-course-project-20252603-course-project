@@ -8,46 +8,47 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTests {
-    @Test
-    void mainRunsWithoutCrash() {
-        Main.main(new String[]{});
-    }
 
-    @Test
-    void mainHandlesUnusedArgs() {
-        Main.main(new String[]{"test"});
-    }
+  @Test
+  void mainRunsWithoutCrash() {
+    Main.main(new String[]{});
+  }
 
-    @Test
-    void mainHandlesNullArgs() {
-        Main.main(null);
-    }
+  @Test
+  void mainHandlesUnusedArgs() {
+    Main.main(new String[]{"test"});
+  }
 
-    @Test
-    void mainCreatesView() {
-        Main.main(new String[]{});
-    }
+  @Test
+  void mainHandlesNullArgs() {
+    Main.main(null);
+  }
 
-    @Test
-    void welcomeViewIsVisible() {
-        SwingUtilities.invokeLater(() -> {
-            Main.main(new String[]{});
+  @Test
+  void mainCreatesView() {
+    Main.main(new String[]{});
+  }
 
-            assertDoesNotThrow(() -> new WelcomeView().setVisible(true));
-        });
-    }
+  @Test
+  void welcomeViewIsVisible() {
+    SwingUtilities.invokeLater(() -> {
+      Main.main(new String[]{});
 
-    @Test
-    void uiLaunchRunsOnEdt() throws Exception {
+      assertDoesNotThrow(() -> new WelcomeView().setVisible(true));
+    });
+  }
 
-        final boolean[] ranOnEdt = {false};
+  @Test
+  void uiLaunchRunsOnEdt() throws Exception {
 
-        SwingUtilities.invokeAndWait(() -> {
-            Main.main(new String[]{});
+    final boolean[] ranOnEdt = {false};
 
-            ranOnEdt[0] = SwingUtilities.isEventDispatchThread();
-        });
+    SwingUtilities.invokeAndWait(() -> {
+      Main.main(new String[]{});
 
-        assertTrue(ranOnEdt[0]);
-    }
+      ranOnEdt[0] = SwingUtilities.isEventDispatchThread();
+    });
+
+    assertTrue(ranOnEdt[0]);
+  }
 }

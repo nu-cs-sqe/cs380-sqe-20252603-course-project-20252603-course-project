@@ -1,68 +1,71 @@
 package domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import domain.piece.Piece;
 import domain.piece.Queen;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public class QueenTests {
-    @Test
-    public void QueenConstructor_BlackColor_SetsTypeAndColor() {
-        Queen queen = new Queen(PieceColor.BLACK);
 
-        assertEquals(PieceType.QUEEN, queen.getType());
-        assertEquals(PieceColor.BLACK, queen.getColor());
-    }
+  @Test
+  public void queenConstructorBlackColorSetsTypeAndColor() {
+    Queen queen = new Queen(PieceColor.BLACK);
 
-    @Test
-    public void QueenConstructor_WhiteColor_SetsTypeAndColor() {
-        Queen queen = new Queen(PieceColor.WHITE);
+    assertEquals(PieceType.QUEEN, queen.getType());
+    assertEquals(PieceColor.BLACK, queen.getColor());
+  }
 
-        assertEquals(PieceType.QUEEN, queen.getType());
-        assertEquals(PieceColor.WHITE, queen.getColor());
-    }
+  @Test
+  public void queenConstructorWhiteColorSetsTypeAndColor() {
+    Queen queen = new Queen(PieceColor.WHITE);
 
-    @Test
-    public void QueenConstructor_NullColor_ThrowsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Queen(null));
+    assertEquals(PieceType.QUEEN, queen.getType());
+    assertEquals(PieceColor.WHITE, queen.getColor());
+  }
 
-        assertEquals("color must not be null", exception.getMessage());
-    }
+  @Test
+  public void queenConstructorNullColorThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> new Queen(null));
 
-    @Test
-    public void QueenMakeCopy_BlackQueen_ReturnsDistinctQueenWithSameTypeAndColor() {
-        Queen queen = new Queen(PieceColor.BLACK);
+    assertEquals("color must not be null", exception.getMessage());
+  }
 
-        Piece copy = queen.makeCopy();
+  @Test
+  public void queenMakeCopyBlackQueenReturnsDistinctQueenWithSameTypeAndColor() {
+    Queen queen = new Queen(PieceColor.BLACK);
 
-        assertNotSame(queen, copy);
-        assertInstanceOf(Queen.class, copy);
-        assertEquals(PieceType.QUEEN, copy.getType());
-        assertEquals(PieceColor.BLACK, copy.getColor());
-    }
+    Piece copy = queen.makeCopy();
 
-    @Test
-    public void QueenMakeCopy_WhiteQueen_ReturnsDistinctQueenWithSameTypeAndColor() {
-        Queen queen = new Queen(PieceColor.WHITE);
+    assertNotSame(queen, copy);
+    assertInstanceOf(Queen.class, copy);
+    assertEquals(PieceType.QUEEN, copy.getType());
+    assertEquals(PieceColor.BLACK, copy.getColor());
+  }
 
-        Piece copy = queen.makeCopy();
+  @Test
+  public void queenMakeCopyWhiteQueenReturnsDistinctQueenWithSameTypeAndColor() {
+    Queen queen = new Queen(PieceColor.WHITE);
 
-        assertNotSame(queen, copy);
-        assertInstanceOf(Queen.class, copy);
-        assertEquals(PieceType.QUEEN, copy.getType());
-        assertEquals(PieceColor.WHITE, copy.getColor());
-    }
+    Piece copy = queen.makeCopy();
 
-    @Test
-    public void QueenMakeCopy_NullColorQueen_ThrowsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Queen(null));
+    assertNotSame(queen, copy);
+    assertInstanceOf(Queen.class, copy);
+    assertEquals(PieceType.QUEEN, copy.getType());
+    assertEquals(PieceColor.WHITE, copy.getColor());
+  }
 
-        assertEquals("color must not be null", exception.getMessage());
-    }
+  @Test
+  public void queenMakeCopyNullColorQueenThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> new Queen(null));
+
+    assertEquals("color must not be null", exception.getMessage());
+  }
 }

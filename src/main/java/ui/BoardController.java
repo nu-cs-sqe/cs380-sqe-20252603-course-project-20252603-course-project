@@ -5,23 +5,24 @@ import domain.Location;
 import domain.piece.Piece;
 
 public class BoardController {
-    private BoardView boardView;
-    private Board board;
 
-    public BoardController() {
-        this.board = new Board();
-    }
+  private BoardView boardView;
+  private Board board;
 
-    void setBoardView(BoardView boardView) {
-        this.boardView = boardView;
-    }
+  public BoardController() {
+    this.board = new Board();
+  }
 
-    public void handleSquareClick(Location location) {
-        // TODO
-        System.out.println("TEST: Square clicked at " + location.getX() + ", " + location.getY());
-    }
+  void setBoardView(BoardView boardView) {
+    this.boardView = boardView;
+  }
 
-    public Piece[][] getBoardSnapshot() {
-        return this.board.getSnapshot();
-    }
+  public void handleSquareClick(Location location) {
+    // TODO
+    System.out.println("TEST: Square clicked at " + location.getX() + ", " + location.getY());
+  }
+
+  public Piece[][] getBoardSnapshot() {
+    return this.board.getSnapshot();
+  }
 }

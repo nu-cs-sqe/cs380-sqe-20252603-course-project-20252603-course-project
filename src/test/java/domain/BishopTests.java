@@ -1,68 +1,80 @@
 package domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import domain.piece.Bishop;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public class BishopTests {
-    @Test
-    public void BishopConstructor_BlackColor_SetsTypeAndColor() {
-        Bishop bishop = new Bishop(PieceColor.BLACK);
 
-        assertEquals(PieceType.BISHOP, bishop.getType());
-        assertEquals(PieceColor.BLACK, bishop.getColor());
-    }
+  private static final PieceColor BLACK = PieceColor.BLACK;
+  private static final PieceColor WHITE = PieceColor.WHITE;
 
-    @Test
-    public void BishopConstructor_WhiteColor_SetsTypeAndColor() {
-        Bishop bishop = new Bishop(PieceColor.WHITE);
+  private static final String NULL_COLOR_MESSAGE = "color must not be null";
 
-        assertEquals(PieceType.BISHOP, bishop.getType());
-        assertEquals(PieceColor.WHITE, bishop.getColor());
-    }
+  @Test
+  public void bishopConstructorBlackColorSetsTypeAndColor() {
+    Bishop bishop = new Bishop(BLACK);
 
-    @Test
-    public void BishopConstructor_NullColor_ThrowsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Bishop(null));
+    assertEquals(PieceType.BISHOP, bishop.getType());
+    assertEquals(BLACK, bishop.getColor());
+  }
 
-        assertEquals("color must not be null", exception.getMessage());
-    }
+  @Test
+  public void bishopConstructorWhiteColorSetsTypeAndColor() {
+    Bishop bishop = new Bishop(WHITE);
 
-    @Test
-    public void BishopMakeCopy_BlackBishop_ReturnsDistinctBishopWithSameTypeAndColor() {
-        Bishop bishop = new Bishop(PieceColor.BLACK);
+    assertEquals(PieceType.BISHOP, bishop.getType());
+    assertEquals(WHITE, bishop.getColor());
+  }
 
-        Piece copy = bishop.makeCopy();
+  @Test
+  public void bishopConstructorNullColorThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> new Bishop(null)
+    );
 
-        assertNotSame(bishop, copy);
-        assertInstanceOf(Bishop.class, copy);
-        assertEquals(PieceType.BISHOP, copy.getType());
-        assertEquals(PieceColor.BLACK, copy.getColor());
-    }
+    assertEquals(NULL_COLOR_MESSAGE, exception.getMessage());
+  }
 
-    @Test
-    public void BishopMakeCopy_WhiteBishop_ReturnsDistinctBishopWithSameTypeAndColor() {
-        Bishop bishop = new Bishop(PieceColor.WHITE);
+  @Test
+  public void bishopMakeCopyBlackBishopReturnsDistinctBishopWithSameTypeAndColor() {
+    Bishop bishop = new Bishop(BLACK);
 
-        Piece copy = bishop.makeCopy();
+    Piece copy = bishop.makeCopy();
 
-        assertNotSame(bishop, copy);
-        assertInstanceOf(Bishop.class, copy);
-        assertEquals(PieceType.BISHOP, copy.getType());
-        assertEquals(PieceColor.WHITE, copy.getColor());
-    }
+    assertNotSame(bishop, copy);
+    assertInstanceOf(Bishop.class, copy);
+    assertEquals(PieceType.BISHOP, copy.getType());
+    assertEquals(BLACK, copy.getColor());
+  }
 
-    @Test
-    public void BishopMakeCopy_NullColorBishop_ThrowsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Bishop(null));
+  @Test
+  public void bishopMakeCopyWhiteBishopReturnsDistinctBishopWithSameTypeAndColor() {
+    Bishop bishop = new Bishop(WHITE);
 
-        assertEquals("color must not be null", exception.getMessage());
-    }
+    Piece copy = bishop.makeCopy();
+
+    assertNotSame(bishop, copy);
+    assertInstanceOf(Bishop.class, copy);
+    assertEquals(PieceType.BISHOP, copy.getType());
+    assertEquals(WHITE, copy.getColor());
+  }
+
+  @Test
+  public void bishopMakeCopyNullColorBishopThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> new Bishop(null)
+    );
+
+    assertEquals(NULL_COLOR_MESSAGE, exception.getMessage());
+  }
 }

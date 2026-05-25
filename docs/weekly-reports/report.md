@@ -77,3 +77,16 @@ Luke Wejman
 4. [in-progress]: Implement orchestration and finalize gamesetup (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/pull/22/)
 
 
+# Week 8 (05/17/2026-05/24/2026)
+**Planning and Progress Tracking**:
+
+Samuel Grayson
+1. [done] : Complete BVA, TDD, and full implementation for player color initilization. ([Links to PR] https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/pull/57)
+3. [in-progress] : Complete BVA, TDD, and full implementation for dice rolling and comparison rules. ([Links_to_issue] https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/28)
+4. [in-progress] : Complete BVA, TDD, and full implementation for attack validation rules. ([Links_to_issue] https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/27)
+5. [in-progress] : Setup linter(s).
+6. [in-progress] : Write new issues for future tasks.
+
+
+
+

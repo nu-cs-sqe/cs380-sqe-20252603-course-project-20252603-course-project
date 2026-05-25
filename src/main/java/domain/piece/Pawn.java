@@ -48,12 +48,8 @@ public final class Pawn extends Piece {
       startingRow = BLACK_STARTING_ROW;
     }
 
-    if (from.getY() != startingRow) {
-      return false;
-    }
-
     boolean singleStep = dy == forward && Math.abs(dx) <= MAX_DIAGONAL_OFFSET;
-    boolean doubleStep = dy == DOUBLE_STEP * forward && dx == 0;
+    boolean doubleStep = from.getY() == startingRow && dy == DOUBLE_STEP * forward && dx == 0;
 
     return singleStep || doubleStep;
   }

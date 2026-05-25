@@ -26,20 +26,20 @@ public final class Pawn extends Piece {
 
   /** Returns true if the move shape from {@code from} to {@code to} is valid for a Pawn. */
   public boolean isValidMoveShape(Location from, Location to) {
-    if (from == null) {
-      throw new IllegalArgumentException("from must not be null");
+    if (from == null || to == null) {
+      throw new IllegalArgumentException("from/to must not be null");
     }
-    if (to == null) {
-      throw new IllegalArgumentException("to must not be null");
-    }
+
     if (!isOnBoard(from) || !isOnBoard(to)) {
       return false;
     }
+
     int dx = to.getX() - from.getX();
     int dy = to.getY() - from.getY();
 
     int forward;
     int startingRow;
+
     if (getColor() == PieceColor.WHITE) {
       forward = WHITE_FORWARD;
       startingRow = WHITE_STARTING_ROW;
@@ -48,14 +48,16 @@ public final class Pawn extends Piece {
       startingRow = BLACK_STARTING_ROW;
     }
 
-    if (from.getY() != startingRow) {
-      return false;
-    }
+    boolean singleStep = dy == forward && dx == 0;
 
-    boolean singleStep = dy == forward && Math.abs(dx) <= MAX_DIAGONAL_OFFSET;
-    boolean doubleStep = dy == DOUBLE_STEP * forward && dx == 0;
+    boolean doubleStep =
+        from.getY() == startingRow &&
+            dy == 2 * forward &&
+            dx == 0;
 
-    return singleStep || doubleStep;
+    boolean capture = dy == forward && Math.abs(dx) == 1;
+
+    return singleStep || doubleStep || capture;
   }
 
   private boolean isOnBoard(Location location) {

@@ -6,9 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
+import domain.piece.Rook;
 import org.junit.jupiter.api.Test;
 
 public class BoardTests {
@@ -229,5 +231,32 @@ public class BoardTests {
     );
 
     assertNull(after[BLACK_PAWN_RANK + 2][COL_A]); // destination unchanged
+  }
+
+  @Test
+  void movePieceCaptureRemovesOpponentPiece() {
+    Board board = new Board();
+
+    Location whiteFrom = new Location(COL_F, WHITE_PAWN_RANK);
+    Location whiteTo = new Location(COL_F, WHITE_PAWN_RANK - 2);
+    assertTrue(board.movePiece(whiteFrom, whiteTo));
+
+    Location blackFrom = new Location(COL_E, BLACK_PAWN_RANK);
+    Location blackTo = new Location(COL_E, BLACK_PAWN_RANK + 2);
+    assertTrue(board.movePiece(blackFrom, blackTo));
+
+    Location from = blackTo;
+    Location to = whiteTo;
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertTrue(result);
+
+    assertNull(snapshot[BLACK_PAWN_RANK + 2][COL_E]);
+
+    assertNotNull(snapshot[WHITE_PAWN_RANK - 2][COL_F]);
+    assertEquals(PieceColor.BLACK, snapshot[WHITE_PAWN_RANK - 2][COL_F].getColor());
   }
 }

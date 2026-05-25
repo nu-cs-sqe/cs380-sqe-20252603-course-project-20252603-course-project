@@ -201,4 +201,33 @@ public class BoardTests {
     assertNotNull(snapshot[BLACK_PAWN_RANK][COL_E]);
     assertEquals(PieceType.PAWN, snapshot[BLACK_PAWN_RANK][COL_E].getType());
   }
+
+  @Test
+  void movePieceBlockedPathReturnsFalseAndNoMutation() {
+    Board board = new Board();
+
+    Location from = new Location(COL_A, BLACK_BACK_RANK);
+    Location to = new Location(COL_A, BLACK_PAWN_RANK + 2);
+
+    Piece[][] before = board.getSnapshot();
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] after = board.getSnapshot();
+
+    assertFalse(result);
+
+    assertEquals(
+        before[BLACK_BACK_RANK][COL_A].getType(),
+        after[BLACK_BACK_RANK][COL_A].getType()
+    );
+
+    assertNotNull(after[BLACK_PAWN_RANK][COL_A]); // blocker still exists
+    assertEquals(
+        before[BLACK_PAWN_RANK][COL_A].getType(),
+        after[BLACK_PAWN_RANK][COL_A].getType()
+    );
+
+    assertNull(after[BLACK_PAWN_RANK + 2][COL_A]); // destination unchanged
+  }
 }

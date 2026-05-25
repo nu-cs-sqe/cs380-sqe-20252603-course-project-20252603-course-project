@@ -128,8 +128,8 @@ The BVA below targets the current implementation contract visible in the source.
 | Test Case | System under test | Expected output | Implemented?       |
 |------------|------------------|----------------|--------------------|
 | 23 | valid move (piece + legal shape) | piece moved from → to, source becomes null | :white_check_mark: |
-| 24 | invalid move shape | board state unchanged | :x:                |
-| 25 | blocked path (rook/bishop/queen) | board state unchanged | :x:                |
+| 24 | invalid move shape | board state unchanged | :white_check_mark: |
+| 25 | blocked path (rook/bishop/queen) | board state unchanged | :white_check_mark: |
 | 26 | capture move | opponent piece removed, moved into target | :x:                |
 | 27 | same-square move | rejected, no mutation | :x:                |
 | 28 | null from | throws IllegalArgumentException | :x:                |

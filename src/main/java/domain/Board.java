@@ -121,11 +121,26 @@ public class Board {
    * Moves a piece from one location on the board to a new one.
    */
   public boolean movePiece(Location from, Location to) {
+
     if (from == null) {
       throw new IllegalArgumentException("from must not be null");
     }
     if (to == null) {
       throw new IllegalArgumentException("to must not be null");
+    }
+
+    if (from.getX() < 0 || from.getX() >= 8 ||
+        from.getY() < 0 || from.getY() >= 8) {
+      return false;
+    }
+
+    if (to.getX() < 0 || to.getX() >= 8 ||
+        to.getY() < 0 || to.getY() >= 8) {
+      return false;
+    }
+
+    if (from.getX() == to.getX() && from.getY() == to.getY()) {
+      return false;
     }
 
     Piece piece = pieces[from.getY()][from.getX()];
@@ -141,15 +156,18 @@ public class Board {
         break;
       case ROOK:
         valid = ((Rook) piece).isValidMoveShape(from, to);
+        if (valid) valid = isPathClear(from, to);
         break;
       case KNIGHT:
         valid = ((Knight) piece).isValidMoveShape(from, to);
         break;
       case BISHOP:
         valid = ((Bishop) piece).isValidMoveShape(from, to);
+        if (valid) valid = isPathClear(from, to);
         break;
       case QUEEN:
         valid = ((Queen) piece).isValidMoveShape(from, to);
+        if (valid) valid = isPathClear(from, to);
         break;
       case KING:
         valid = ((King) piece).isValidMoveShape(from, to);
@@ -164,6 +182,24 @@ public class Board {
 
     pieces[to.getY()][to.getX()] = piece;
     pieces[from.getY()][from.getX()] = null;
+    return true;
+  }
+
+  private boolean isPathClear(Location from, Location to) {
+    int dx = Integer.compare(to.getX(), from.getX());
+    int dy = Integer.compare(to.getY(), from.getY());
+
+    int x = from.getX() + dx;
+    int y = from.getY() + dy;
+
+    while (x != to.getX() || y != to.getY()) {
+      if (pieces[y][x] != null) {
+        return false;
+      }
+      x += dx;
+      y += dy;
+    }
+
     return true;
   }
 }

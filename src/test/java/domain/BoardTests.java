@@ -259,4 +259,19 @@ public class BoardTests {
     assertNotNull(snapshot[WHITE_PAWN_RANK - 2][COL_F]);
     assertEquals(PieceColor.BLACK, snapshot[WHITE_PAWN_RANK - 2][COL_F].getColor());
   }
+
+  @Test
+  void movePieceSameSquareReturnsFalse() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK);
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertFalse(result);
+    assertNotNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+  }
 }

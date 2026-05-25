@@ -131,7 +131,7 @@ The BVA below targets the current implementation contract visible in the source.
 | 24 | invalid move shape | board state unchanged | :white_check_mark: |
 | 25 | blocked path (rook/bishop/queen) | board state unchanged | :white_check_mark: |
 | 26 | capture move | opponent piece removed, moved into target | :white_check_mark: |
-| 27 | same-square move | rejected, no mutation | :x:                |
+| 27 | same-square move | rejected, no mutation | :white_check_mark: |
 | 28 | null from | throws IllegalArgumentException | :x:                |
 | 29 | null to | throws IllegalArgumentException | :x:                |
 | 30 | from out-of-bounds | rejected, no mutation | :x:                |

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import domain.piece.Pawn;
@@ -273,5 +274,15 @@ public class BoardTests {
 
     assertFalse(result);
     assertNotNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+  }
+
+  @Test
+  void movePieceNullFromThrowsException() {
+    Board board = new Board();
+
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> board.movePiece(null, new Location(COL_E, BLACK_PAWN_RANK))
+    );
   }
 }

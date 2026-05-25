@@ -1,20 +1,20 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import domain.piece.Rook;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class RookTests {
 
   @Test
-  public void rookConstructorBlackColorSetsTypeAndColor() {
+  public void RookConstructor_BlackColor_SetsTypeAndColor() {
     Rook rook = new Rook(PieceColor.BLACK);
 
     assertEquals(PieceType.ROOK, rook.getType());
@@ -22,7 +22,7 @@ public class RookTests {
   }
 
   @Test
-  public void rookConstructorWhiteColorSetsTypeAndColor() {
+  public void RookConstructor_WhiteColor_SetsTypeAndColor() {
     Rook rook = new Rook(PieceColor.WHITE);
 
     assertEquals(PieceType.ROOK, rook.getType());
@@ -30,7 +30,7 @@ public class RookTests {
   }
 
   @Test
-  public void rookConstructorNullColorThrowsIllegalArgumentException() {
+  public void RookConstructor_NullColor_ThrowsIllegalArgumentException() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> new Rook(null));
 
@@ -38,7 +38,7 @@ public class RookTests {
   }
 
   @Test
-  public void rookMakeCopyBlackRookReturnsDistinctRookWithSameColor() {
+  public void RookMakeCopy_BlackRook_ReturnsDistinctRookWithSameColor() {
     Rook rook = new Rook(PieceColor.BLACK);
 
     Piece copy = rook.makeCopy();
@@ -50,7 +50,7 @@ public class RookTests {
   }
 
   @Test
-  public void rookMakeCopyWhiteRookReturnsDistinctRookWithSameColor() {
+  public void RookMakeCopy_WhiteRook_ReturnsDistinctRookWithSameColor() {
     Rook rook = new Rook(PieceColor.WHITE);
 
     Piece copy = rook.makeCopy();

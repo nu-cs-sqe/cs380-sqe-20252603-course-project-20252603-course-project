@@ -89,7 +89,17 @@ public class FortifyServiceTest {
 
     @Test
     void T5_shouldRejectFortifyWhenSourceHasOnlyOneArmy(){
-
+        FortifyService FS = new FortifyService();
+        GameState gameState = new GameState();
+        List<Territory> controlled_territories = new ArrayList<>();
+        Player player1 = new Player(1, "A", PlayerColor.RED, 1, controlled_territories);
+        Territory t1 = new Territory("Western United States", player1, 1, Continent.NORTH_AMERICA);
+        Territory t2 = new Territory("Eastern United States", player1, 0, Continent.NORTH_AMERICA);
+        controlled_territories.add(t1);
+        controlled_territories.add(t2);
+        player1.setControlledTerritories(controlled_territories);
+        assertTrue(FS.areConnectedThroughOwnedTerritories(player1, t1, t2, gameState));
+        assertFalse(FS.canFortify(player1, t1, t2, 1, gameState));
     }
 
     @Test

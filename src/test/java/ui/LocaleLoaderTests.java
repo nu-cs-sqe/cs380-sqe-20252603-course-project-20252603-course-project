@@ -1,6 +1,7 @@
 package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -49,4 +50,19 @@ public class LocaleLoaderTests {
     }
   }
 
+  @Test
+  public void testTestCase4And5_VerifyNoEmptyOrBlankBundleKeys() {
+    Map<Locale, String> locales = LocaleLoader.getSupportedLocales();
+
+    for (Map.Entry<Locale, String> entry : locales.entrySet()) {
+      String value = entry.getValue();
+
+      // TC4: Check against empty strings
+      assertNotNull(value, "TC4 Failure: Resource key string cannot be null.");
+      assertFalse(value.isEmpty(), "TC4 Failure: Key mapping value cannot be empty (e.g. 'en-US=').");
+
+      // TC5: Check against blank whitespace configurations
+      assertFalse(value.trim().isEmpty(), "TC5 Failure: Key mapping value cannot consist solely of whitespace characters.");
+    }
+  }
 }

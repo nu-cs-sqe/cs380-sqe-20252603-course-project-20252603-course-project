@@ -29,9 +29,9 @@ public class LocaleLoader {
 
       properties.load(input);
 
-      for (String stringName : properties.stringPropertyNames()) {
-        Locale locale = Locale.forLanguageTag(stringName);
-        String displayNameKey = properties.getProperty(stringName);
+      for (String localeTag : properties.stringPropertyNames()) {
+        Locale locale = Locale.forLanguageTag(localeTag);
+        String displayNameKey = properties.getProperty(localeTag);
         workingMap.put(locale, displayNameKey);
       }
 

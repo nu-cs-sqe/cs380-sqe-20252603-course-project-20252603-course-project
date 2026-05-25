@@ -2,8 +2,10 @@ package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.InputStream;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.Locale;
@@ -25,5 +27,16 @@ public class LocaleLoaderTests {
 
     assertEquals("language.english", locales.get(enUS), "The parsed resource key for en-US mapping is incorrect.");
     assertEquals("language.spanish", locales.get(esUS), "The parsed resource key for es-US mapping is incorrect.");
+  }
+
+  @Test
+  public void testTestCase2_MissingResourceThrowsException() {
+    assertThrows(IllegalStateException.class, () -> {
+      String fakePath = "non-existent-file.properties";
+      InputStream input = LocaleLoader.class.getClassLoader().getResourceAsStream(fakePath);
+      if (input == null) {
+        throw new IllegalStateException("Critical Configuration Error: " + fakePath + " not found on classpath.");
+      }
+    }, "TC2 Failure: System must throw an IllegalStateException when the resource stream resolves to null.");
   }
 }

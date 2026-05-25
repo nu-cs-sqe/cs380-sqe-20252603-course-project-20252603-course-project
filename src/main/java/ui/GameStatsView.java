@@ -48,8 +48,8 @@ public class GameStatsView extends JPanel {
         new JLabel("Player 2: " + player2Name + " (Team: Black)");
     styleBodyLabel(player2Label);
 
-    currentPlayerLabel =
-        new JLabel("Current Player: " + player1Name);
+    // Initialize with neutral state
+    currentPlayerLabel = new JLabel("Current Player:");
     currentPlayerLabel.setFont(HEADER_FONT);
     currentPlayerLabel.setForeground(LABEL_FOREGROUND);
 

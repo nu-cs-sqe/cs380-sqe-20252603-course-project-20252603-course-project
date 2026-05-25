@@ -49,7 +49,6 @@ public class GameSetupService {
 
     public void initializeTurnOrder(GameState gameState){
         List<Player> players_TO = gameState.getPlayers();
-        // Collections.shuffle(players_TO);
         gameState.setTurnOrder(players_TO);
     }
 
@@ -59,12 +58,10 @@ public class GameSetupService {
         gameState.setCurrentPlayer(first_pl);
     }
     public GameState createNewGame(List<String> names, List<PlayerColor> colors){
-        // create a new game state
+
         GameState gameState = new GameState();
-        // call player generation
         createPlayers(names, colors);
         gameState.setPlayers(getPlayers());
-        // call territory generation
         TerritoryAssignmentService TAS = new TerritoryAssignmentService();
         TAS.assignTerritories(gameState);
 
@@ -78,7 +75,7 @@ public class GameSetupService {
         return gameState;
 
     }
-    }
+}
 
 
 

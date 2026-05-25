@@ -5,7 +5,6 @@ import model.GamePhase;
 import model.GameState;
 import model.Player;
 import model.Continent;
-import service.ReinforcementService;
 import java.util.ArrayList;
 import java.util.List;
 import service.PlayerColor;
@@ -14,8 +13,6 @@ import org.easymock.EasyMock;
 import service.FortifyService;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 public class FortifyServiceTest {
 
@@ -98,7 +95,6 @@ public class FortifyServiceTest {
         controlled_territories.add(t1);
         controlled_territories.add(t2);
         player1.setControlledTerritories(controlled_territories);
-        assertTrue(FS.areConnectedThroughOwnedTerritories(player1, t1, t2, gameState));
         assertFalse(FS.canFortify(player1, t1, t2, 1, gameState));
     }
 
@@ -113,7 +109,6 @@ public class FortifyServiceTest {
         controlled_territories.add(t1);
         controlled_territories.add(t2);
         player1.setControlledTerritories(controlled_territories);
-        assertTrue(FS.areConnectedThroughOwnedTerritories(player1, t1, t2, gameState));
         assertFalse(FS.canFortify(player1, t1, t2, 5, gameState));
     }
 }

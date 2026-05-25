@@ -1,5 +1,7 @@
 package domain.piece;
 
+import domain.Location;
+
 public class Rook extends Piece {
     public Rook(PieceColor color) {
         super(PieceType.ROOK, color);
@@ -12,4 +14,8 @@ public class Rook extends Piece {
     public Piece makeCopy() {
         return new Rook(getColor());
     }
+
+  public boolean isValidMoveShape(Location from, Location to) {
+      return true;
+  }
 }

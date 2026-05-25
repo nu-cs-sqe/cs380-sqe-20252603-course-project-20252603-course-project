@@ -116,4 +116,54 @@ public class Board {
 
     return snapshot;
   }
+
+  /**
+   * Moves a piece from one location on the board to a new one.
+   */
+  public boolean movePiece(Location from, Location to) {
+    if (from == null) {
+      throw new IllegalArgumentException("from must not be null");
+    }
+    if (to == null) {
+      throw new IllegalArgumentException("to must not be null");
+    }
+
+    Piece piece = pieces[from.getY()][from.getX()];
+    if (piece == null) {
+      return false;
+    }
+
+    boolean valid;
+
+    switch (piece.getType()) {
+      case PAWN:
+        valid = ((Pawn) piece).isValidMoveShape(from, to);
+        break;
+      case ROOK:
+        valid = ((Rook) piece).isValidMoveShape(from, to);
+        break;
+      case KNIGHT:
+        valid = ((Knight) piece).isValidMoveShape(from, to);
+        break;
+      case BISHOP:
+        valid = ((Bishop) piece).isValidMoveShape(from, to);
+        break;
+      case QUEEN:
+        valid = ((Queen) piece).isValidMoveShape(from, to);
+        break;
+      case KING:
+        valid = ((King) piece).isValidMoveShape(from, to);
+        break;
+      default:
+        throw new IllegalStateException("Unknown piece type: " + piece.getType());
+    }
+
+    if (!valid) {
+      return false;
+    }
+
+    pieces[to.getY()][to.getX()] = piece;
+    pieces[from.getY()][from.getX()] = null;
+    return true;
+  }
 }

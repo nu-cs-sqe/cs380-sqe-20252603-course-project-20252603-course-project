@@ -3,6 +3,7 @@ package domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import domain.piece.Piece;
 import domain.piece.PieceColor;
@@ -166,5 +167,21 @@ public class BoardTests {
     Piece[][] fresh = board.getSnapshot();
 
     assertNotNull(fresh[BLACK_BACK_RANK][COL_A]);
+  }
+
+  @Test
+  void movePieceValidMoveUpdatesSourceAndDestination() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK + 1);
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertTrue(result);
+    assertNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+    assertNotNull(snapshot[BLACK_PAWN_RANK + 1][COL_E]);
   }
 }

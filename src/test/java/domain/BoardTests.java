@@ -1,12 +1,17 @@
 package domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
+import domain.piece.Rook;
 import org.junit.jupiter.api.Test;
 
 public class BoardTests {
@@ -34,13 +39,13 @@ public class BoardTests {
   private static final int COL_H = 7;
 
   @Test
-  void constructorCreatesBoard() {
+  void Constructor_ValidInput_CreatesNonNullInstance() {
     Board board = new Board();
     assertNotNull(board);
   }
 
   @Test
-  void snapshotHasCorrectDimensions() {
+  void GetSnapshot_InitialState_HasCorrectDimensions() {
     Board board = new Board();
     Piece[][] snapshot = board.getSnapshot();
 
@@ -49,7 +54,7 @@ public class BoardTests {
   }
 
   @Test
-  void blackPawnsInitializedCorrectly() {
+  void Constructor_InitialState_BlackPawnsInitializedCorrectly() {
     Board board = new Board();
     Piece[][] snapshot = board.getSnapshot();
 
@@ -61,7 +66,7 @@ public class BoardTests {
   }
 
   @Test
-  void whitePawnsInitializedCorrectly() {
+  void Constructor_InitialState_WhitePawnsInitializedCorrectly() {
     Board board = new Board();
     Piece[][] snapshot = board.getSnapshot();
 
@@ -73,7 +78,7 @@ public class BoardTests {
   }
 
   @Test
-  void majorPiecesInitializedCorrectly() {
+  void Constructor_InitialState_MajorPiecesInitializedCorrectly() {
     Board board = new Board();
     Piece[][] s = board.getSnapshot();
 
@@ -129,7 +134,7 @@ public class BoardTests {
   }
 
   @Test
-  void middleBoardIsEmpty() {
+  void Constructor_InitialState_MiddleBoardIsEmpty() {
     Board board = new Board();
     Piece[][] snapshot = board.getSnapshot();
 
@@ -141,7 +146,7 @@ public class BoardTests {
   }
 
   @Test
-  void snapshotIsDeepCopiedAndIndependent() {
+  void GetSnapshot_InitialState_IsDeepCopiedAndIndependent() {
     Board board = new Board();
     Piece[][] snapshot = board.getSnapshot();
 
@@ -157,7 +162,7 @@ public class BoardTests {
   }
 
   @Test
-  void modifyingSnapshotDoesNotAffectBoard() {
+  void GetSnapshot_ModifiedSnapshot_DoesNotAffectBoard() {
     Board board = new Board();
     Piece[][] snapshot = board.getSnapshot();
 

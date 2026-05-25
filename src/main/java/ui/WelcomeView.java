@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 public class WelcomeView extends JFrame {
 
-  // Dimensional Constants to eliminate Magic Numbers
   private static final int TEXT_FIELD_COLUMNS = 16;
   private static final int PADDING_TOP_BOTTOM = 20;
   private static final int PADDING_LEFT_RIGHT = 30;
@@ -15,7 +14,7 @@ public class WelcomeView extends JFrame {
 
   private JTextField player1NameField;
   private JTextField player2NameField;
-  private final ResourceBundle messages; // Localization bundle instance
+  private final ResourceBundle messages;
 
   public WelcomeView(ResourceBundle messages) {
     this.messages = messages;
@@ -23,7 +22,6 @@ public class WelcomeView extends JFrame {
   }
 
   private void createWelcomeScreenUI() {
-    // Audit Fixed: String constants extracted to bundles
     setTitle(messages.getString("welcome.title"));
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setResizable(IS_WINDOW_RESIZABLE);
@@ -40,19 +38,16 @@ public class WelcomeView extends JFrame {
     player1NameField = new JTextField(TEXT_FIELD_COLUMNS);
     player2NameField = new JTextField(TEXT_FIELD_COLUMNS);
 
-    // Row 0: Player 1
     gbc.gridx = 0; gbc.gridy = 0;
     panel.add(new JLabel(messages.getString("welcome.player1Label")), gbc);
     gbc.gridx = 1;
     panel.add(player1NameField, gbc);
 
-    // Row 1: Player 2
     gbc.gridx = 0; gbc.gridy = 1;
     panel.add(new JLabel(messages.getString("welcome.player2Label")), gbc);
     gbc.gridx = 1;
     panel.add(player2NameField, gbc);
 
-    // Row 2: Action Button
     JButton startButton = new JButton(messages.getString("welcome.startButton"));
     gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
     gbc.fill = GridBagConstraints.NONE;
@@ -71,7 +66,6 @@ public class WelcomeView extends JFrame {
         return;
       }
 
-      // FIXES COMPILATION ERROR: Pass down the bundle resource reference cleanly
       MainView mainView = new MainView(p1, p2, messages);
       mainView.pack();
       mainView.setLocationRelativeTo(null);

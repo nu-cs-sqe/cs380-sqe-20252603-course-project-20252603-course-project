@@ -71,7 +71,7 @@ public class GameStatsView extends JPanel {
   /**
    * Updates the displayed current player.
    */
-  public void setCurrentPlayer(String name) {
+  public void updateCurrentPlayerLabel(String name) {
     currentPlayerLabel.setText("Current Player: " + name);
   }
 }

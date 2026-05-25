@@ -13,6 +13,8 @@ import java.util.Properties;
  */
 public class LocaleLoader {
 
+  private LocaleLoader() {}
+
   private static final String CONFIG_PATH = "supported-locales.properties";
   private static final Map<Locale, String> supportedLocales;
 

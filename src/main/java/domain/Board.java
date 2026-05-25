@@ -26,16 +26,10 @@ public class Board {
 
   private Piece[][] pieces;
 
-  /**
-   * Constructs a board and initializes pieces.
-   */
   public Board() {
     initializeBoard();
   }
 
-  /**
-   * Initializes all chess pieces in starting positions.
-   */
   private void initializeBoard() {
     pieces = new Piece[TOTAL_ROWS][TOTAL_COLS];
 
@@ -46,9 +40,6 @@ public class Board {
     initializeRoyalPieces();
   }
 
-  /**
-   * Initializes pawns.
-   */
   private void initializePawns() {
     for (int col = 0; col < TOTAL_COLS; col++) {
       pieces[BLACK_PAWN_ROW][col] = new Pawn(BLACK);
@@ -56,9 +47,6 @@ public class Board {
     }
   }
 
-  /**
-   * Initializes rooks.
-   */
   private void initializeRooks() {
     pieces[BLACK_BACK_RANK][0] = new Rook(BLACK);
     pieces[BLACK_BACK_RANK][7] = new Rook(BLACK);
@@ -67,9 +55,6 @@ public class Board {
     pieces[WHITE_BACK_RANK][7] = new Rook(WHITE);
   }
 
-  /**
-   * Initializes knights.
-   */
   private void initializeKnights() {
     pieces[BLACK_BACK_RANK][1] = new Knight(BLACK);
     pieces[BLACK_BACK_RANK][6] = new Knight(BLACK);
@@ -78,9 +63,6 @@ public class Board {
     pieces[WHITE_BACK_RANK][6] = new Knight(WHITE);
   }
 
-  /**
-   * Initializes bishops.
-   */
   private void initializeBishops() {
     pieces[BLACK_BACK_RANK][2] = new Bishop(BLACK);
     pieces[BLACK_BACK_RANK][5] = new Bishop(BLACK);
@@ -89,9 +71,6 @@ public class Board {
     pieces[WHITE_BACK_RANK][5] = new Bishop(WHITE);
   }
 
-  /**
-   * Initializes queens and kings.
-   */
   private void initializeRoyalPieces() {
     pieces[BLACK_BACK_RANK][3] = new Queen(BLACK);
     pieces[BLACK_BACK_RANK][4] = new King(BLACK);

@@ -10,12 +10,14 @@ public class FortifyService {
 
     public boolean canFortify(Player player, Territory source, Territory destination, int armiesToMove, GameState gameState){
         if (source.getArmyCount() < armiesToMove){
+            System.out.println("cond 1 early return");
             return false;
         }
-        if (source.getOwner().equals(player)){
+        if (!source.getOwner().equals(player)){
             return false;
         }
-        if (destination.getOwner().equals(player)){
+        if (!destination.getOwner().equals(player)){
+            System.out.println("cond 3 early return");
             return false;
         }
         return true;

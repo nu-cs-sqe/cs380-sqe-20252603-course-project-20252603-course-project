@@ -9,14 +9,7 @@ public class FortifyService {
 
 
     public boolean canFortify(Player player, Territory source, Territory destination, int armiesToMove, GameState gameState){
-        if (source.getArmyCount() < armiesToMove){
-            return false;
-        }
-        if (source.getArmyCount() <= 1){
-            return false;
-        }
-        if (source.getArmyCount() == armiesToMove)
-        {
+        if (source.getArmyCount() < armiesToMove || source.getArmyCount() <= 1 || source.getArmyCount() == armiesToMove){
             return false;
         }
         if (!source.getOwner().equals(player)){

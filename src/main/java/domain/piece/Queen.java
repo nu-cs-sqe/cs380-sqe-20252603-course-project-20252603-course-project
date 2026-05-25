@@ -26,7 +26,15 @@ public final class Queen extends Piece {
     if (to == null) {
       throw new IllegalArgumentException("to must not be null");
     }
-    return false;
+    if (!to.isOnBoard()) {
+      return false;
+    }
+    int dx = Math.abs(to.getX() - from.getX());
+    int dy = Math.abs(to.getY() - from.getY());
+    if (dx == 0 && dy == 0) {
+      return false;
+    }
+    return dx == 0 || dy == 0 || dx == dy;
   }
 
   /** Returns true if the move is legal given the board state. */
@@ -40,6 +48,15 @@ public final class Queen extends Piece {
     if (board == null) {
       throw new IllegalArgumentException("board must not be null");
     }
-    return false;
+    if (!isValidMoveShape(from, to)) {
+      return false;
+    }
+    for (Location square : from.getIntermediateSquares(to)) {
+      if (board[square.getY()][square.getX()] != null) {
+        return false;
+      }
+    }
+    Piece target = board[to.getY()][to.getX()];
+    return target == null || target.getColor() != getColor();
   }
 }

@@ -33,6 +33,16 @@
            default="checkstyle-suppressions.xml" />
     <property name="optional" value="true"/>
   </module>
+  <!-- MethodNameTest applies only to test files; suppress it in main sources -->
+  <module name="SuppressionSingleFilter">
+    <property name="id" value="MethodNameTest"/>
+    <property name="files" value=".*src.*main.*"/>
+  </module>
+  <!-- MethodNameRegular applies only to main files; suppress it in test sources -->
+  <module name="SuppressionSingleFilter">
+    <property name="id" value="MethodNameRegular"/>
+    <property name="files" value=".*src.*test.*"/>
+  </module>
 
   <!-- Checks for whitespace                               -->
   <!-- See http://checkstyle.org/config_whitespace.html -->

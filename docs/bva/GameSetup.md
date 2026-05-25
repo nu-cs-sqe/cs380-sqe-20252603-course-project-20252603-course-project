@@ -38,7 +38,7 @@
 | TC1_Create_Game_Function_Requirements | List colors, List of PlayerColors, all valid, | Should return created GameState with valid players and territories added | :white_check_mark: |
 
 
-### Method under test: setup_orchestration
+### Method under test: setupOrchestration
 |                                                         | State of the System                                                           | Expected output                                                                                                                             | Implemented? |
 |---------------------------------------------------------|-------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | TC1_shouldInitializeTurnOrderAfterSetup                 | Lists of unique and valid PlayerColors and names, allows for valid creation.  | GameState is properly orchestrated, TurnOrder is not null.                                                                                  | :white_check_mark:          |

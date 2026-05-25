@@ -3,6 +3,9 @@
 1. [done] Tallie: Create draft team task split, user stories, use cases, and requirements for One Win Condition (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/50, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/51, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/52, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/53)
 2. [done] Tallie: Create draft team task split for week 2 of i18n testing (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/57, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/58, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/59)
 3. [done] Tallie: Create draft team task split for week 2 of integration testing (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/61, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/62, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/63)
+4. [95% done] Tallie: Fix checkstyle method naming convention (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/72)
+5. [95% done] Tallie: Feature pitest setup multiple turns of the game (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/67)
+6. [done] Tallie: Review PR 27 (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/27)
 
 # Week 7 (5/11/2026-5/17/2026)
 **Planning and Progress Tracking**:

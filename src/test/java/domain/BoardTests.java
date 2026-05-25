@@ -319,4 +319,20 @@ public class BoardTests {
 
     assertFalse(result);
   }
+
+  @Test
+  void movePieceSameColorDestinationReturnsFalse() {
+    Board board = new Board();
+
+    Location from = new Location(COL_D, BLACK_BACK_RANK); // queen
+    Location to = new Location(COL_E, BLACK_BACK_RANK);   // king
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertFalse(result);
+    assertNotNull(snapshot[BLACK_BACK_RANK][COL_D]);
+    assertNotNull(snapshot[BLACK_BACK_RANK][COL_E]);
+  }
 }

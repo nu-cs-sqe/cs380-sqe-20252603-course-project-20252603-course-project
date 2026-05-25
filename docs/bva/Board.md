@@ -125,17 +125,17 @@ The BVA below targets the current implementation contract visible in the source.
 
 ## Method under test: `movePiece(Location from, Location to)`
 
-| Test Case | System under test | Expected output | Implemented? |
-|------------|------------------|----------------|-----|
-| 23 | valid move (piece + legal shape) | piece moved from → to, source becomes null | :x: |
-| 24 | invalid move shape | board state unchanged | :x: |
-| 25 | blocked path (rook/bishop/queen) | board state unchanged | :x: |
-| 26 | capture move | opponent piece removed, moved into target | :x: |
-| 27 | same-square move | rejected, no mutation | :x: |
-| 28 | null from | throws IllegalArgumentException | :x: |
-| 29 | null to | throws IllegalArgumentException | :x: |
-| 30 | from out-of-bounds | rejected, no mutation | :x: |
-| 31 | to out-of-bounds | rejected, no mutation | :x: |
-| 32 | same-color destination | rejected, no mutation | :x: |
-| 33 | valid move mutation invariant | exactly two squares updated | :x: |
-| 34 | invalid move invariant | zero board changes | :x: |
+| Test Case | System under test | Expected output | Implemented?       |
+|------------|------------------|----------------|--------------------|
+| 23 | valid move (piece + legal shape) | piece moved from → to, source becomes null | :white_check_mark: |
+| 24 | invalid move shape | board state unchanged | :x:                |
+| 25 | blocked path (rook/bishop/queen) | board state unchanged | :x:                |
+| 26 | capture move | opponent piece removed, moved into target | :x:                |
+| 27 | same-square move | rejected, no mutation | :x:                |
+| 28 | null from | throws IllegalArgumentException | :x:                |
+| 29 | null to | throws IllegalArgumentException | :x:                |
+| 30 | from out-of-bounds | rejected, no mutation | :x:                |
+| 31 | to out-of-bounds | rejected, no mutation | :x:                |
+| 32 | same-color destination | rejected, no mutation | :x:                |
+| 33 | valid move mutation invariant | exactly two squares updated | :x:                |
+| 34 | invalid move invariant | zero board changes | :x:                |

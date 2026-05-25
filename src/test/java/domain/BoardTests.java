@@ -1,6 +1,7 @@
 package domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -183,5 +184,21 @@ public class BoardTests {
     assertTrue(result);
     assertNull(snapshot[BLACK_PAWN_RANK][COL_E]);
     assertNotNull(snapshot[BLACK_PAWN_RANK + 1][COL_E]);
+  }
+
+  @Test
+  void movePieceInvalidMoveShapeDoesNotModifyBoard() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK + 3);
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertFalse(result);
+    assertNotNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+    assertEquals(PieceType.PAWN, snapshot[BLACK_PAWN_RANK][COL_E].getType());
   }
 }

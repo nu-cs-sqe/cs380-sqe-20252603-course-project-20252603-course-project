@@ -121,6 +121,9 @@ Luke Wejman
 7. [in-progress]: Elimination Phase: Implement player elimination logic (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/52)
 8. [in-progress]: Win Phase: Implement win condition detection (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/53)
 
+YC Qiu
+1. [Done]: Code Reviewing for the JavaFX PR, dice rolling PR.
+2. [in-progress]: integrate Attack phase logic.
 
 
 

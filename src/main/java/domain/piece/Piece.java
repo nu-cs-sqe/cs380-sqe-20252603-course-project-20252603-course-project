@@ -1,5 +1,7 @@
 package domain.piece;
 
+import domain.Location;
+
 public abstract class Piece {
     private final PieceType type;
     private final PieceColor color;
@@ -29,4 +31,13 @@ public abstract class Piece {
     }
 
     public abstract Piece makeCopy();
+
+    protected static void requireLocations(Location from, Location to) {
+        if (from == null) {
+            throw new IllegalArgumentException("from must not be null");
+        }
+        if (to == null) {
+            throw new IllegalArgumentException("to must not be null");
+        }
+    }
 }

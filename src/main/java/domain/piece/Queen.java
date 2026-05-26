@@ -17,12 +17,7 @@ public final class Queen extends Piece {
   }
 
   public boolean isValidMoveShape(Location from, Location to) {
-    if (from == null) {
-      throw new IllegalArgumentException("from must not be null");
-    }
-    if (to == null) {
-      throw new IllegalArgumentException("to must not be null");
-    }
+    requireLocations(from, to);
     int dx = Math.abs(to.getX() - from.getX());
     int dy = Math.abs(to.getY() - from.getY());
     if (dx == 0 && dy == 0) {

@@ -13,7 +13,7 @@ public class GameStatsView extends JPanel {
   }
 
   public GameStatsView(String player1Name, String player2Name, GameState initialState) {
-    currentPlayerLabel = new JLabel("Current Player: " + player1Name);
+    this(player1Name, player2Name);
   }
 
   public void updateCurrentPlayerLabel(String playerName) {

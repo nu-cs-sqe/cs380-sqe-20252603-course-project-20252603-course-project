@@ -82,5 +82,21 @@ public class AttackServiceTest {
         assertFalse(attackService.canAttack(attacker, atackingTerritory, defendingTerritory));
     }
 
+    @Test
+    void T5_shouldRejectAttackWhenAttackingTerritoryHasOnlyOneArmy(){
+        TerritoryAdjacencyService adjacencyService = new TerritoryAdjacencyService();
+        AttackService attackService = new AttackService(adjacencyService);
+        List<Territory> controlled_territories1 = new ArrayList<>();
+        List<Territory> controlled_territories2 = new ArrayList<>();
+        Player attacker = new Player(1, "A", PlayerColor.RED, 1, controlled_territories1);
+        Player defender = new Player(2, "B", PlayerColor.BLUE, 1, controlled_territories2);
+        Territory atackingTerritory = new Territory("Western United States", attacker, 1, Continent.NORTH_AMERICA);
+        Territory defendingTerritory = new Territory("Eastern United States", defender, 1, Continent.NORTH_AMERICA);
+        controlled_territories1.add(atackingTerritory);
+        controlled_territories2.add(defendingTerritory);
+        attacker.setControlledTerritories(controlled_territories1);
+        defender.setControlledTerritories(controlled_territories2);
+        assertFalse(attackService.canAttack(attacker, atackingTerritory, defendingTerritory));
+    }
 
 }

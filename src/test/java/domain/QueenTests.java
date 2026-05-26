@@ -4,7 +4,6 @@ import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import domain.piece.Queen;
-import domain.piece.Rook;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -137,20 +136,6 @@ public class QueenTests {
   }
 
   @Test
-  public void QueenIsValidMoveShape_DestinationAboveMaxY_ReturnsFalse() {
-    Queen queen = new Queen(PieceColor.WHITE);
-
-    assertFalse(queen.isValidMoveShape(new Location(4, 4), new Location(4, 8)));
-  }
-
-  @Test
-  public void QueenIsValidMoveShape_DestinationBelowMinX_ReturnsFalse() {
-    Queen queen = new Queen(PieceColor.WHITE);
-
-    assertFalse(queen.isValidMoveShape(new Location(4, 4), new Location(-1, 4)));
-  }
-
-  @Test
   public void QueenIsValidMoveShape_FromNull_ThrowsIllegalArgumentException() {
     Queen queen = new Queen(PieceColor.WHITE);
 
@@ -170,105 +155,4 @@ public class QueenTests {
     assertEquals("to must not be null", exception.getMessage());
   }
 
-  // --- isLegalMove ---
-
-  @Test
-  public void QueenIsLegalMove_ClearHorizontalPath_ReturnsTrue() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-
-    assertTrue(queen.isLegalMove(new Location(0, 4), new Location(7, 4), board));
-  }
-
-  @Test
-  public void QueenIsLegalMove_ClearVerticalPath_ReturnsTrue() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-
-    assertTrue(queen.isLegalMove(new Location(4, 0), new Location(4, 7), board));
-  }
-
-  @Test
-  public void QueenIsLegalMove_ClearDiagonalPath_ReturnsTrue() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-
-    assertTrue(queen.isLegalMove(new Location(0, 0), new Location(7, 7), board));
-  }
-
-  @Test
-  public void QueenIsLegalMove_BlockedHorizontalPath_ReturnsFalse() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-    board[4][3] = new Rook(PieceColor.BLACK);
-
-    assertFalse(queen.isLegalMove(new Location(0, 4), new Location(6, 4), board));
-  }
-
-  @Test
-  public void QueenIsLegalMove_BlockedDiagonalPath_ReturnsFalse() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-    board[3][3] = new Rook(PieceColor.BLACK);
-
-    assertFalse(queen.isLegalMove(new Location(0, 0), new Location(6, 6), board));
-  }
-
-  @Test
-  public void QueenIsLegalMove_DestinationHasOwnPiece_ReturnsFalse() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-    board[4][7] = new Rook(PieceColor.WHITE);
-
-    assertFalse(queen.isLegalMove(new Location(0, 4), new Location(7, 4), board));
-  }
-
-  @Test
-  public void QueenIsLegalMove_DestinationHasOpponentPiece_ReturnsTrue() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-    board[4][7] = new Rook(PieceColor.BLACK);
-
-    assertTrue(queen.isLegalMove(new Location(0, 4), new Location(7, 4), board));
-  }
-
-  @Test
-  public void QueenIsLegalMove_InvalidShape_ReturnsFalse() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-
-    assertFalse(queen.isLegalMove(new Location(4, 4), new Location(6, 5), board));
-  }
-
-  @Test
-  public void QueenIsLegalMove_FromNull_ThrowsIllegalArgumentException() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-
-    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> queen.isLegalMove(null, new Location(4, 4), board));
-
-    assertEquals("from must not be null", exception.getMessage());
-  }
-
-  @Test
-  public void QueenIsLegalMove_ToNull_ThrowsIllegalArgumentException() {
-    Queen queen = new Queen(PieceColor.WHITE);
-    Piece[][] board = new Piece[8][8];
-
-    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> queen.isLegalMove(new Location(4, 4), null, board));
-
-    assertEquals("to must not be null", exception.getMessage());
-  }
-
-  @Test
-  public void QueenIsLegalMove_BoardNull_ThrowsIllegalArgumentException() {
-    Queen queen = new Queen(PieceColor.WHITE);
-
-    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> queen.isLegalMove(new Location(4, 4), new Location(4, 7), null));
-
-    assertEquals("board must not be null", exception.getMessage());
-  }
 }

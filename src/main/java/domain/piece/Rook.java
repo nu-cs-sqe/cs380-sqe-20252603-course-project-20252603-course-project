@@ -13,6 +13,7 @@ public final class Rook extends Piece {
     return new Rook(getColor());
   }
 
+  @Override
   public boolean isValidMoveShape(Location from, Location to) {
     requireLocations(from, to);
     int dx = to.getX() - from.getX();

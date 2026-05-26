@@ -7,12 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+import service.PlayerColor;
 
 public class TerritoryTest {
 
 	@Test
 	void allArgsConstructor_setsAllFields() {
-		Player owner = new Player(1, "Alice", "Red", 5, new ArrayList<>());
+		Player owner = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 		Territory territory = new Territory("Alaska", owner, 3, Continent.NORTH_AMERICA);
 
 		assertEquals("Alaska", territory.getName());
@@ -24,7 +25,7 @@ public class TerritoryTest {
 	@Test
 	void setters_updateValues() {
 		Territory territory = new Territory();
-		Player owner = new Player(2, "Bob", "Blue", 4, new ArrayList<>());
+		Player owner = new Player(2, "Bob", PlayerColor.BLUE, 4, new ArrayList<>());
 
 		territory.setName("Brazil");
 		territory.setOwner(owner);
@@ -59,7 +60,7 @@ public class TerritoryTest {
 
 	@Test
 	void constructor_withInvalidArguments_throwsException() {
-		Player owner = new Player(1, "Alice", "Red", 5, new ArrayList<>());
+		Player owner = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 
 		assertThrows(IllegalArgumentException.class, () -> new Territory("Alaska", owner, -1, Continent.NORTH_AMERICA));
 	}

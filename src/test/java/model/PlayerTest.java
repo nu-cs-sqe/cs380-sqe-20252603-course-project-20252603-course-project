@@ -6,37 +6,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import service.PlayerColor;
 
 public class PlayerTest {
 
 	@Test
 	void allArgsConstructor_setsAllFields() {
-		Player player = new Player(1, "Alice", "Red", 5, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 
 		assertEquals(1, player.getId());
 		assertEquals("Alice", player.getName());
-		assertEquals("Red", player.getColor());
+		assertEquals(PlayerColor.RED, player.getColor());
 		assertEquals(5, player.getRemainingArmiesToPlace());
 	}
 
 	@Test
 	void setters_updateValues() {
-		Player player = new Player(1, "Alice", "Red", 5, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 
 		player.setId(2);
 		player.setName("Bob");
-		player.setColor("Blue");
+		player.setColor(PlayerColor.BLUE);
 		player.setRemainingArmiesToPlace(7);
 
 		assertEquals(2, player.getId());
 		assertEquals("Bob", player.getName());
-		assertEquals("Blue", player.getColor());
+		assertEquals(PlayerColor.BLUE, player.getColor());
 		assertEquals(7, player.getRemainingArmiesToPlace());
 	}
 
 	@Test
 	void setId_withNegativeValue_throwsException() {
-		Player player = new Player(1, "Alice", "Red", 5, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 
 		assertThrows(IllegalArgumentException.class, () -> player.setId(-1));
 	}
@@ -47,16 +48,16 @@ public class PlayerTest {
 
 	@Test
 	void setRemainingArmiesToPlace_withNegativeValue_throwsException() {
-		Player player = new Player(1, "Alice", "Red", 5, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 
 		assertThrows(IllegalArgumentException.class, () -> player.setRemainingArmiesToPlace(-1));
 	}
 
 	@Test
 	void constructor_withInvalidArguments_throwsException() {
-		assertThrows(IllegalArgumentException.class, () -> new Player(-1, "Alice", "Red", 5, new ArrayList<>()));
-		assertThrows(IllegalArgumentException.class, () -> new Player(1, "", "Red", 5, new ArrayList<>()));
-		assertThrows(IllegalArgumentException.class, () -> new Player(1, "Alice", "Red", -1, new ArrayList<>()));
+		assertThrows(IllegalArgumentException.class, () -> new Player(-1, "Alice", PlayerColor.RED, 5, new ArrayList<>()));
+		assertThrows(IllegalArgumentException.class, () -> new Player(1, "", PlayerColor.RED, 5, new ArrayList<>()));
+		assertThrows(IllegalArgumentException.class, () -> new Player(1, "Alice", PlayerColor.RED, -1, new ArrayList<>()));
 	}
 
 	// Controlled Territory Tests
@@ -64,7 +65,7 @@ public class PlayerTest {
 
 	@Test
 	void parameterizedConstructor_initializesEmptyControlledTerritories() {
-		Player player = new Player(1, "Alice", "Red", 10, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 		
 		assertNotNull(player.getControlledTerritories());
 		assertEquals(0, player.getControlledTerritoryCount());
@@ -72,7 +73,7 @@ public class PlayerTest {
 
 	@Test
 	void addControlledTerritory_addsTerritory() {
-		Player player = new Player(1, "Alice", "Red", 10, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 		Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
 		
 		player.addControlledTerritory(territory);
@@ -84,7 +85,7 @@ public class PlayerTest {
 
 	@Test
 	void addControlledTerritory_doesNotAddDuplicates() {
-		Player player = new Player(1, "Alice", "Red", 10, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 		Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
 		
 		player.addControlledTerritory(territory);
@@ -95,7 +96,7 @@ public class PlayerTest {
 
 	@Test
 	void addControlledTerritory_addsMultipleTerritories() {
-		Player player = new Player(1, "Alice", "Red", 10, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
 		Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
 		Territory t3 = new Territory("Japan", player, 1, Continent.ASIA);
@@ -112,7 +113,7 @@ public class PlayerTest {
 
 	@Test
 	void setControlledTerritories_replacesExistingList() {
-		Player player = new Player(1, "Alice", "Red", 10, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
 		Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
 		Territory t3 = new Territory("Japan", player, 1, Continent.ASIA);
@@ -134,7 +135,7 @@ public class PlayerTest {
 
 	@Test
 	void setControlledTerritories_createsDeepCopy() {
-		Player player = new Player(1, "Alice", "Red", 10, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
 		Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
 		
@@ -153,7 +154,7 @@ public class PlayerTest {
 
 	@Test
 	void setControlledTerritories_emptyListCreatesEmpty() {
-		Player player = new Player(1, "Alice", "Red", 10, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
 		player.addControlledTerritory(t1);
 		
@@ -166,7 +167,7 @@ public class PlayerTest {
 
 	@Test
 	void getControlledTerritories_returnsCorrectTerritories() {
-		Player player = new Player(1, "Alice", "Red", 10, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
 		Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
 		
@@ -181,7 +182,7 @@ public class PlayerTest {
 
 	@Test
 	void getControlledTerritoryCount_returnsCorrectCount() {
-		Player player = new Player(1, "Alice", "Red", 10, new ArrayList<>());
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 		assertEquals(0, player.getControlledTerritoryCount());
 		
 		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);

@@ -63,7 +63,7 @@ public class Player {
 	}
 
 	public List<Territory> getControlledTerritories() {
-		return controlledTerritories;
+		return List.copyOf(controlledTerritories);
 	}
 
 	public void setControlledTerritories(List<Territory> territories) {

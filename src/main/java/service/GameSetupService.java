@@ -31,7 +31,7 @@ public class GameSetupService {
     }
 
     public List<Player> getPlayers(){
-        return Players;
+        return List.copyOf(Players);
     }
 
     public void createPlayers(List<String> names, List<PlayerColor> colors) {

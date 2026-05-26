@@ -6,9 +6,6 @@ public final class Rook extends Piece {
 
   public Rook(PieceColor color) {
     super(PieceType.ROOK, color);
-    if (color == null) {
-      throw new IllegalArgumentException("color must not be null");
-    }
   }
 
   @Override

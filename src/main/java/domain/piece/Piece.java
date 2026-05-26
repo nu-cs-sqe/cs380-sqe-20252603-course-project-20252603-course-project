@@ -30,6 +30,10 @@ public abstract class Piece {
         return color + " " + type;
     }
 
+    @Override
+    protected final void finalize() {
+    }
+
     public abstract Piece makeCopy();
 
     public abstract boolean isValidMoveShape(Location from, Location to);

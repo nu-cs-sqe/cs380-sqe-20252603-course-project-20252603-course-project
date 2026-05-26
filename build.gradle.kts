@@ -41,7 +41,7 @@ spotbugs {
     showStackTraces = true
     showProgress = true
     effort = Effort.DEFAULT
-    reportLevel = Confidence.DEFAULT
+    reportLevel = Confidence.HIGH
     //omitVisitors = listOf("FindNonShortCircuit")
     reportsDir = file("spotbugs")
     //onlyAnalyze = listOf("com.foobar.MyClass", "com.foobar.mypkg.*")

@@ -88,6 +88,8 @@ public class ReinforcementServiceTest {
         int remaining_army_count_post_place = player1.getRemainingArmiesToPlace();
         assertEquals(1, remaining_army_count_post_place);
     }
+
+    @Test
     void shouldReturnZeroBonusWhenPlayerControlsNoFullContinent() {
         // player has 5/6 in AFRICA continent, one in Asia, no bonus
         ReinforcementService rs = new ReinforcementService();
@@ -127,6 +129,8 @@ public class ReinforcementServiceTest {
         Territory t5 = new Territory("South Africa", player1, 0, Continent.AFRICA);
         Territory t6 = new Territory("Japan", player1, 0, Continent.ASIA);
     }
+
+    @Test
     void shouldReturnMinimumReinforcementWhenPlayerOwnsFewTerritories() {
         // TC1
         ReinforcementService rs = new ReinforcementService();
@@ -331,6 +335,8 @@ public class ReinforcementServiceTest {
         int new_army_count_post_place = t1.getArmyCount();
         assertEquals(5, new_army_count_post_place);
     }
+
+    @Test
     void shouldNotGrantBonusWhenOneTerritoryInContinentIsOwnedByAnotherPlayer() {
         // one continent, 2 players, all but one go to one player
         ReinforcementService rs = new ReinforcementService();
@@ -393,5 +399,4 @@ public class ReinforcementServiceTest {
         assertEquals(expected, actual_owned_terr);
 
     }
-
 }

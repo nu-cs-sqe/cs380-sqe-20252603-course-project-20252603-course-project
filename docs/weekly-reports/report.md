@@ -125,5 +125,10 @@ YC Qiu
 1. [Done]: Code Reviewing for the JavaFX PR, dice rolling PR.
 2. [in-progress]: integrate Attack phase logic.
 
+Connor King
+1. [Done]: Discussion of checkstyle requirements for implementation
+2. [Done]: Complete BVA and TDD for removeConquered territory method as part of spotbugs implementation
+3. [in-progress]: Finalizing spot-bugs flag repairs (awaiting final revisions of a test class for passing build)
+4. [in-progress]: implementation of checkstyle, jaccoco, pitest into codebase
 
 

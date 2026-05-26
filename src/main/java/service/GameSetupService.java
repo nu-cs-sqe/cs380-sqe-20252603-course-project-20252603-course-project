@@ -1,14 +1,13 @@
 package service;
 
+import model.GamePhase;
+import model.GameState;
 import model.Player;
-import model.Territory;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static domain.GameConstants.TOTAL_TERRITORIES;
 
 public class GameSetupService {
 
@@ -48,4 +47,35 @@ public class GameSetupService {
         }
     }
 
+    public void initializeTurnOrder(GameState gameState){
+        List<Player> players_TO = gameState.getPlayers();
+        gameState.setTurnOrder(players_TO);
+    }
+
+    public void startFirstTurn(GameState gameState){
+        List<Player> players_TO = gameState.getTurnOrder();
+        Player first_pl = players_TO.get(0);
+        gameState.setCurrentPlayer(first_pl);
+    }
+    public GameState createNewGame(List<String> names, List<PlayerColor> colors){
+
+        GameState gameState = new GameState();
+        createPlayers(names, colors);
+        gameState.setPlayers(getPlayers());
+        TerritoryAssignmentService TAS = new TerritoryAssignmentService();
+        TAS.assignTerritories(gameState);
+
+        return gameState;
+    }
+    public GameState setupOrchestration(List<String> pre_names, List<PlayerColor> colors){
+        GameState gameState = createNewGame(pre_names, colors);
+        initializeTurnOrder(gameState);
+        startFirstTurn(gameState);
+        gameState.setCurrentPhase(GamePhase.REINFORCEMENT);
+        return gameState;
+
+    }
 }
+
+
+

@@ -13,6 +13,7 @@ public final class Bishop extends Piece {
     return new Bishop(getColor());
   }
 
+  @Override
   public boolean isValidMoveShape(Location from, Location to) {
     requireLocations(from, to);
     int dx = Math.abs(to.getX() - from.getX());

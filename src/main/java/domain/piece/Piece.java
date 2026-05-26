@@ -32,6 +32,8 @@ public abstract class Piece {
 
     public abstract Piece makeCopy();
 
+    public abstract boolean isValidMoveShape(Location from, Location to);
+
     protected static void requireLocations(Location from, Location to) {
         if (from == null) {
             throw new IllegalArgumentException("from must not be null");

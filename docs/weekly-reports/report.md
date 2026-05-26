@@ -99,3 +99,36 @@ Luke Wejman
 
 Connor King
 1. Nothing to report
+
+
+# Week 8 (05/17/2026-05/24/2026)
+**Planning and Progress Tracking**:
+
+Samuel Grayson
+1. [done] : Complete BVA, TDD, and full implementation for player color initilization. ([Links to PR] https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/pull/57)
+3. [in-progress] : Complete BVA, TDD, and full implementation for dice rolling and comparison rules. ([Links_to_issue] https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/28)
+4. [in-progress] : Complete BVA, TDD, and full implementation for attack validation rules. ([Links_to_issue] https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/27)
+5. [in-progress] : Setup linter(s).
+6. [in-progress] : Write new issues for future tasks.
+
+Luke Wejman
+1. [Done]: Implement army placement validation during reinforcement. (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/26)
+2. [Done]: Implement continent bonus logic. (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/25)
+3. [Done]: Implement reinforcement calculation (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/24)
+4. [Done]: Implement orchestration and finalize gamesetup (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/8)
+5. [Done]: Fortify Phase: Implement connected-territory validation (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/50)
+6. [in-progress]: Fortify Phase: Implement army transfer and phase flow (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/51)
+7. [in-progress]: Elimination Phase: Implement player elimination logic (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/52)
+8. [in-progress]: Win Phase: Implement win condition detection (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/53)
+
+YC Qiu
+1. [Done]: Code Reviewing for the JavaFX PR, dice rolling PR.
+2. [in-progress]: integrate Attack phase logic.
+
+Connor King
+1. [Done]: Discussion of checkstyle requirements for implementation
+2. [Done]: Complete BVA and TDD for removeConquered territory method as part of spotbugs implementation
+3. [in-progress]: Finalizing spot-bugs flag repairs (awaiting final revisions of a test class for passing build)
+4. [in-progress]: implementation of checkstyle, jaccoco, pitest into codebase
+
+

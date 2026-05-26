@@ -193,4 +193,16 @@ public class PlayerTest {
 		player.addControlledTerritory(t2);
 		assertEquals(2, player.getControlledTerritoryCount());
 	}
+
+	@Test
+	void removeControlledTerritory_removesExistingTerritory() {
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+		Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+
+		player.addControlledTerritory(territory);
+		player.removeControlledTerritory(territory);
+
+		assertEquals(0, player.getControlledTerritoryCount());
+		assertFalse(player.getControlledTerritories().contains(territory));
+	}
 }

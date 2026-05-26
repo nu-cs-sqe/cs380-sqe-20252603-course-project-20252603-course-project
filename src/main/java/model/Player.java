@@ -80,5 +80,9 @@ public class Player {
 		}
 	}
 
+	public void removeControlledTerritory(Territory territory) {
+		controlledTerritories.remove(territory);
+	}
+
 	
 }

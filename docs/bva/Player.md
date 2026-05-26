@@ -22,6 +22,6 @@
 | TC11_setControlledTerritories_emptyListCreatesEmpty  | setControlledTerritories(emptyList) | player's list empty | :white_check_mark: |
 | TC12_getControlledTerritories_returnsCorrectList  | after additions | returned list contains expected territories | :white_check_mark: |
 | TC13_getControlledTerritoryCount_correctCount  | after additions | getControlledTerritoryCount returns accurate count | :white_check_mark: |
-| TC14_removeControlledTerritory_removesExistingTerritory  | removeControlledTerritory(existing Territory) | territory removed, count decreases | :x: |
+| TC14_removeControlledTerritory_removesExistingTerritory  | removeControlledTerritory(existing Territory) | territory removed, count decreases | :white_check_mark: |
 | TC15_removeControlledTerritory_missingTerritory  | removeControlledTerritory(Territory not controlled by player) | list unchanged, count unchanged | :x: |
 | TC16_removeControlledTerritory_fromEmptyList  | removeControlledTerritory(valid Territory) when player controls no territories | list remains empty, count remains 0 | :x: |

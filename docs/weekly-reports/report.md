@@ -97,3 +97,5 @@ Luke Wejman
 5. [in-progess] : Fortify Phase: Implement connected-territory validation ([Links to issue] https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/50)
 6. [in-progess] : Fortify Phase: Implement army transfer and phase flow ([Links to issue] https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/51)
 
+Connor King
+1. Nothing to report

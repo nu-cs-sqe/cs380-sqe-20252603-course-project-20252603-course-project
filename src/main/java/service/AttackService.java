@@ -11,6 +11,7 @@ public class AttackService {
     public AttackService(TerritoryAdjacencyService adjacencyService) {
         this.adjacencyService = adjacencyService;
     }
+
     public boolean canAttack(Player attacker, Territory from, Territory to){
         if (from.getOwner() != attacker){
             return false;

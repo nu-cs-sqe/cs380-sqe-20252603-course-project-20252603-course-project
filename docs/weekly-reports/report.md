@@ -87,6 +87,15 @@ Samuel Grayson
 5. [in-progress] : Setup linter(s).
 6. [in-progress] : Write new issues for future tasks.
 
+Luke Wejman
+1. [Done]: Implement army placement validation during reinforcement. (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/26)
+2. [Done]: Implement continent bonus logic. (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/25)
+3. [Done]: Implement reinforcement calculation (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/24)
+4. [Done]: Implement orchestration and finalize gamesetup (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/8)
+5. [Done]: Fortify Phase: Implement connected-territory validation (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/50)
+6. [in-progress]: Fortify Phase: Implement army transfer and phase flow (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/51)
+7. [in-progress]: Elimination Phase: Implement player elimination logic (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/52)
+8. [in-progress]: Win Phase: Implement win condition detection (https://github.com/nu-cs-sqe/course-project-20252603-team-13-20252603/issues/53)
 
 
 

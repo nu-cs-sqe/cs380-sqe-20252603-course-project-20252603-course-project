@@ -13,6 +13,7 @@ public final class Queen extends Piece {
     return new Queen(getColor());
   }
 
+  @Override
   public boolean isValidMoveShape(Location from, Location to) {
     requireLocations(from, to);
     int dx = Math.abs(to.getX() - from.getX());

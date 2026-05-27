@@ -1,5 +1,8 @@
 package ui;
 
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
@@ -31,10 +34,17 @@ public class MainTests {
 
   @Test
   void welcomeViewIsVisible() {
+    Map<Locale, String> supportedLocales = LocaleLoader.getSupportedLocales();
+    final String BUNDLE_BASE_NAME = "MessagesBundle";
+    Locale targetLocale = supportedLocales.isEmpty()
+        ? Locale.getDefault()
+        : supportedLocales.keySet().iterator().next();
+    ResourceBundle messages = ResourceBundle.getBundle(BUNDLE_BASE_NAME, targetLocale);
+
     SwingUtilities.invokeLater(() -> {
       Main.main(new String[]{});
 
-      assertDoesNotThrow(() -> new WelcomeView().setVisible(true));
+      assertDoesNotThrow(() -> new WelcomeView(messages).setVisible(true));
     });
   }
 

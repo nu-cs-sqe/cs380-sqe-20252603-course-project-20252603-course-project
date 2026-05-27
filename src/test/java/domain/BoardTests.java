@@ -172,4 +172,199 @@ public class BoardTests {
 
     assertNotNull(fresh[BLACK_BACK_RANK][COL_A]);
   }
+
+  @Test
+  void movePieceValidMoveUpdatesSourceAndDestination() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK + 1);
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertTrue(result);
+    assertNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+    assertNotNull(snapshot[BLACK_PAWN_RANK + 1][COL_E]);
+  }
+
+  @Test
+  void movePieceInvalidMoveShapeDoesNotModifyBoard() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK + 3);
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertFalse(result);
+    assertNotNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+    assertEquals(PieceType.PAWN, snapshot[BLACK_PAWN_RANK][COL_E].getType());
+  }
+
+  @Test
+  void movePieceBlockedPathReturnsFalseAndNoMutation() {
+    Board board = new Board();
+
+    Location from = new Location(COL_A, BLACK_BACK_RANK);
+    Location to = new Location(COL_A, BLACK_PAWN_RANK + 2);
+
+    Piece[][] before = board.getSnapshot();
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] after = board.getSnapshot();
+
+    assertFalse(result);
+
+    assertEquals(
+        before[BLACK_BACK_RANK][COL_A].getType(),
+        after[BLACK_BACK_RANK][COL_A].getType()
+    );
+
+    assertNotNull(after[BLACK_PAWN_RANK][COL_A]); // blocker still exists
+    assertEquals(
+        before[BLACK_PAWN_RANK][COL_A].getType(),
+        after[BLACK_PAWN_RANK][COL_A].getType()
+    );
+
+    assertNull(after[BLACK_PAWN_RANK + 2][COL_A]); // destination unchanged
+  }
+
+  @Test
+  void movePieceCaptureRemovesOpponentPiece() {
+    Board board = new Board();
+
+    Location whiteFrom = new Location(COL_F, WHITE_PAWN_RANK);
+    Location whiteTo = new Location(COL_F, WHITE_PAWN_RANK - 2);
+    assertTrue(board.movePiece(whiteFrom, whiteTo));
+
+    Location blackFrom = new Location(COL_E, BLACK_PAWN_RANK);
+    Location blackTo = new Location(COL_E, BLACK_PAWN_RANK + 2);
+    assertTrue(board.movePiece(blackFrom, blackTo));
+
+    Location from = blackTo;
+    Location to = whiteTo;
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertTrue(result);
+
+    assertNull(snapshot[BLACK_PAWN_RANK + 2][COL_E]);
+
+    assertNotNull(snapshot[WHITE_PAWN_RANK - 2][COL_F]);
+    assertEquals(PieceColor.BLACK, snapshot[WHITE_PAWN_RANK - 2][COL_F].getColor());
+  }
+
+  @Test
+  void movePieceSameSquareReturnsFalse() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK);
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertFalse(result);
+    assertNotNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+  }
+
+  @Test
+  void movePieceNullFromThrowsException() {
+    Board board = new Board();
+
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> board.movePiece(null, new Location(COL_E, BLACK_PAWN_RANK))
+    );
+  }
+
+  @Test
+  void movePieceNullToThrowsException() {
+    Board board = new Board();
+
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> board.movePiece(new Location(COL_E, BLACK_PAWN_RANK), null)
+    );
+  }
+
+  @Test
+  void movePieceFromOutOfBoundsReturnsFalse() {
+    Board board = new Board();
+
+    Location from = new Location(-1, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK + 1);
+
+    boolean result = board.movePiece(from, to);
+
+    assertFalse(result);
+  }
+
+  @Test
+  void movePieceToOutOfBoundsReturnsFalse() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BOARD_SIZE);
+
+    boolean result = board.movePiece(from, to);
+
+    assertFalse(result);
+  }
+
+  @Test
+  void movePieceSameColorDestinationReturnsFalse() {
+    Board board = new Board();
+
+    Location from = new Location(COL_D, BLACK_BACK_RANK); // queen
+    Location to = new Location(COL_E, BLACK_BACK_RANK);   // king
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertFalse(result);
+    assertNotNull(snapshot[BLACK_BACK_RANK][COL_D]);
+    assertNotNull(snapshot[BLACK_BACK_RANK][COL_E]);
+  }
+
+  @Test
+  void movePieceValidMoveOnlyUpdatesTwoSquares() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK + 1);
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertTrue(result);
+    assertNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+    assertNotNull(snapshot[BLACK_PAWN_RANK + 1][COL_E]);
+  }
+
+  @Test
+  void movePieceInvalidMoveDoesNotMutateBoard() {
+    Board board = new Board();
+
+    Location from = new Location(COL_E, BLACK_PAWN_RANK);
+    Location to = new Location(COL_E, BLACK_PAWN_RANK + 3);
+
+    boolean result = board.movePiece(from, to);
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    assertFalse(result);
+    assertNotNull(snapshot[BLACK_PAWN_RANK][COL_E]);
+    assertEquals(PieceType.PAWN, snapshot[BLACK_PAWN_RANK][COL_E].getType());
+  }
 }

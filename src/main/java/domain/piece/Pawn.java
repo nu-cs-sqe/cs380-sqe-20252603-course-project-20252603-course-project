@@ -2,8 +2,11 @@ package domain.piece;
 
 import domain.Location;
 
-/** Represents a Pawn chess piece. */
+/**
+ * Represents a Pawn chess piece.
+ */
 public final class Pawn extends Piece {
+
   private static final int WHITE_STARTING_ROW = 6;
   private static final int BLACK_STARTING_ROW = 1;
   private static final int WHITE_FORWARD = -1;
@@ -12,7 +15,9 @@ public final class Pawn extends Piece {
   private static final int MAX_DIAGONAL_OFFSET = 1;
   private static final int MAX_BOARD_INDEX = 7;
 
-  /** Constructs a Pawn with the given color. */
+  /**
+   * Constructs a Pawn with the given color.
+   */
   public Pawn(PieceColor color) {
     super(PieceType.PAWN, color);
     if (color == null) {
@@ -25,12 +30,15 @@ public final class Pawn extends Piece {
     return new Pawn(getColor());
   }
 
-  /** Returns true if the move shape from {@code from} to {@code to} is valid for a Pawn. */
+  /**
+   * Returns true if the move shape from {@code from} to {@code to} is valid for a Pawn.
+   */
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null || to == null) {
       throw new IllegalArgumentException(
           from == null ? "from must not be null" : "to must not be null");
     }
+
     if (!isOnBoard(from) || !isOnBoard(to)) {
       return false;
     }

@@ -122,3 +122,20 @@ The BVA below targets the current implementation contract visible in the source.
 | Test Case 20 | snapshot piece copy at `(7,1)` | copied knight preserves `PieceType = KNIGHT` and `PieceColor = WHITE` | :white_check_mark: |
 | Test Case 21 | modify returned snapshot reference at `(0,0)` | original board state remains unchanged on future snapshots | :white_check_mark: |
 | Test Case 22 | two successive calls to `getSnapshot()` | corresponding non-null pieces are distinct object references across snapshots | :white_check_mark: |
+
+## Method under test: `movePiece(Location from, Location to)`
+
+| Test Case | System under test | Expected output | Implemented?       |
+|------------|------------------|----------------|--------------------|
+| 23 | valid move (piece + legal shape) | piece moved from → to, source becomes null | :white_check_mark: |
+| 24 | invalid move shape | board state unchanged | :white_check_mark: |
+| 25 | blocked path (rook/bishop/queen) | board state unchanged | :white_check_mark: |
+| 26 | capture move | opponent piece removed, moved into target | :white_check_mark: |
+| 27 | same-square move | rejected, no mutation | :white_check_mark: |
+| 28 | null from | throws IllegalArgumentException | :white_check_mark: |
+| 29 | null to | throws IllegalArgumentException | :white_check_mark: |
+| 30 | from out-of-bounds | rejected, no mutation | :white_check_mark: |
+| 31 | to out-of-bounds | rejected, no mutation | :white_check_mark: |
+| 32 | same-color destination | rejected, no mutation | :white_check_mark: |
+| 33 | valid move mutation invariant | exactly two squares updated | :white_check_mark: |
+| 34 | invalid move invariant | zero board changes | :white_check_mark: |

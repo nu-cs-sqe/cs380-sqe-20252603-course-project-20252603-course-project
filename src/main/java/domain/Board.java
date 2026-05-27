@@ -104,4 +104,103 @@ public class Board {
 
     return snapshot;
   }
+
+  /**
+   * Moves a piece from one location on the board to a new one.
+   */
+  public boolean movePiece(Location from, Location to) {
+    if (from == null) {
+      throw new IllegalArgumentException("from must not be null");
+    }
+    if (to == null) {
+      throw new IllegalArgumentException("to must not be null");
+    }
+
+    if (from.getX() < 0 || from.getX() >= TOTAL_COLS || from.getY() < 0 || from.getY() >= TOTAL_ROWS ||
+        to.getX() < 0 || to.getX() >= TOTAL_COLS || to.getY() < 0 || to.getY() >= TOTAL_ROWS) {
+      return false;
+    }
+
+    Piece piece = pieces[from.getY()][from.getX()];
+    if (piece == null) {
+      return false;
+    }
+
+    Piece destinationPiece = pieces[to.getY()][to.getX()];
+
+    // reject same-color capture
+    if (destinationPiece != null && destinationPiece.getColor() == piece.getColor()) {
+      return false;
+    }
+
+    boolean valid;
+
+    switch (piece.getType()) {
+      case PAWN:
+        valid = ((Pawn) piece).isValidMoveShape(from, to);
+        if (valid) {
+          int dx = to.getX() - from.getX();
+          int dy = to.getY() - from.getY();
+
+          if (dx == 0) {
+            // Straight moves (1 or 2 steps) require the destination to be empty
+            if (destinationPiece != null) return false;
+
+            // 2-step move requires the skipped square to be empty as well
+            if (Math.abs(dy) == 2 && !isPathClear(from, to)) return false;
+          } else {
+            // Diagonal moves require an enemy piece to be present
+            if (destinationPiece == null) return false;
+          }
+        }
+        break;
+      case ROOK:
+        valid = ((Rook) piece).isValidMoveShape(from, to);
+        if (valid && !isPathClear(from, to)) return false;
+        break;
+      case KNIGHT:
+        valid = ((Knight) piece).isValidMoveShape(from, to);
+        break;
+      case BISHOP:
+        valid = ((Bishop) piece).isValidMoveShape(from, to);
+        if (valid && !isPathClear(from, to)) return false;
+        break;
+      case QUEEN:
+        valid = ((Queen) piece).isValidMoveShape(from, to);
+        if (valid && !isPathClear(from, to)) return false;
+        break;
+      case KING:
+        valid = ((King) piece).isValidMoveShape(from, to);
+        break;
+      default:
+        throw new IllegalStateException("Unknown piece type: " + piece.getType());
+    }
+
+    if (!valid) {
+      return false;
+    }
+
+    pieces[to.getY()][to.getX()] = piece;
+    pieces[from.getY()][from.getX()] = null;
+
+    return true;
+  }
+
+  private boolean isPathClear(Location from, Location to) {
+    int dx = Integer.compare(to.getX(), from.getX());
+    int dy = Integer.compare(to.getY(), from.getY());
+
+    int x = from.getX() + dx;
+    int y = from.getY() + dy;
+
+    while (x != to.getX() || y != to.getY()) {
+      if (pieces[y][x] != null) {
+        return false;
+      }
+      x += dx;
+      y += dy;
+    }
+
+    return true;
+  }
 }

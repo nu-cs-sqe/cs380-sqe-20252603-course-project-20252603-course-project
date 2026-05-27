@@ -3,8 +3,6 @@ package domain.piece;
 import domain.Location;
 
 public abstract class Piece {
-  private static final int MIN_BOARD_COORDINATE = 0;
-  private static final int MAX_BOARD_COORDINATE = 7;
 
   private final PieceType type;
   private final PieceColor color;
@@ -35,6 +33,8 @@ public abstract class Piece {
 
   public abstract Piece makeCopy();
 
+  public abstract boolean isValidMoveShape(Location from, Location to);
+
   public boolean hasMoved() {
     throw new UnsupportedOperationException("not yet implemented");
   }
@@ -56,5 +56,14 @@ public abstract class Piece {
       col += colStep;
     }
     return false;
+  }
+
+  protected static void requireLocations(Location from, Location to) {
+    if (from == null) {
+      throw new IllegalArgumentException("from must not be null");
+    }
+    if (to == null) {
+      throw new IllegalArgumentException("to must not be null");
+    }
   }
 }

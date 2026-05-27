@@ -90,4 +90,10 @@ public class BoardController {
   public Piece[][] getBoardSnapshot() {
     return this.board.getSnapshot();
   }
+
+  protected void repaintBoardView() {
+    if (boardView != null) {
+      boardView.repaint();
+    }
+  }
 }

@@ -82,4 +82,16 @@ public class GameSetupIntegrationTests {
     Piece[][] fresh = board.getSnapshot();
     assertNotNull(fresh[0][0]);
   }
+
+  @Test
+  void SnapshotIsolation_MultipleCalls_IndependentCopiesReturned() {
+    Board board = new Board();
+
+    Piece[][] snapshot1 = board.getSnapshot();
+    Piece[][] snapshot2 = board.getSnapshot();
+
+    snapshot1[0][0] = null;
+
+    assertNotNull(snapshot2[0][0]);
+  }
 }

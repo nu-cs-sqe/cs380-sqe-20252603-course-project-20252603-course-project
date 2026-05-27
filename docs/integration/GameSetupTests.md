@@ -103,4 +103,4 @@ This guarantees encapsulation and prevents external mutation of game state.
 |             | System under test                      | Expected output                                                | Implemented?       |
 |-------------|----------------------------------------|----------------------------------------------------------------|--------------------|
 | Test Case 7 | mutate returned snapshot               | internal board state is NOT modified                           | :white_check_mark: |
-| Test Case 8 | multiple calls to `getSnapshot()`      | each snapshot is an independent copy (no shared references)    | :x:                |
+| Test Case 8 | multiple calls to `getSnapshot()`      | each snapshot is an independent copy (no shared references)    | :white_check_mark: |

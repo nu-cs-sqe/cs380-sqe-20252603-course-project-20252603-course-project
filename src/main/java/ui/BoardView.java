@@ -22,8 +22,8 @@ public class BoardView extends JPanel {
 
   private static final int BOARD_SIZE = 8;
   private static final int TILE_SIZE = 100; // size of each square in pixels
-  private final Color LIGHT_SQUARE_COLOR = new Color(240, 217, 181);
-  private final Color DARK_SQUARE_COLOR = new Color(181, 136, 99);
+  private static final Color LIGHT_SQUARE_COLOR = new Color(240, 217, 181);
+  private static final Color DARK_SQUARE_COLOR = new Color(181, 136, 99);
 
   private final Color SELECTED_SQUARE_COLOR = new Color(164, 149, 195); // NU Purple 40
   private int selectedRow = -1;

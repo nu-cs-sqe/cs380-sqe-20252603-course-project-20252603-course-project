@@ -24,6 +24,15 @@ public class Board {
   private static final int WHITE_PAWN_ROW = 6;
   private static final int WHITE_BACK_RANK = 7;
 
+  private static final int ROOK_LEFT_COL = 0;
+  private static final int KNIGHT_LEFT_COL = 1;
+  private static final int BISHOP_LEFT_COL = 2;
+  private static final int QUEEN_COL = 3;
+  private static final int KING_COL = 4;
+  private static final int BISHOP_RIGHT_COL = 5;
+  private static final int KNIGHT_RIGHT_COL = 6;
+  private static final int ROOK_RIGHT_COL = 7;
+
   private Piece[][] pieces;
 
   public Board() {
@@ -48,35 +57,35 @@ public class Board {
   }
 
   private void initializeRooks() {
-    pieces[BLACK_BACK_RANK][0] = new Rook(BLACK);
-    pieces[BLACK_BACK_RANK][7] = new Rook(BLACK);
+    pieces[BLACK_BACK_RANK][ROOK_LEFT_COL] = new Rook(BLACK);
+    pieces[BLACK_BACK_RANK][ROOK_RIGHT_COL] = new Rook(BLACK);
 
-    pieces[WHITE_BACK_RANK][0] = new Rook(WHITE);
-    pieces[WHITE_BACK_RANK][7] = new Rook(WHITE);
+    pieces[WHITE_BACK_RANK][ROOK_LEFT_COL] = new Rook(WHITE);
+    pieces[WHITE_BACK_RANK][ROOK_RIGHT_COL] = new Rook(WHITE);
   }
 
   private void initializeKnights() {
-    pieces[BLACK_BACK_RANK][1] = new Knight(BLACK);
-    pieces[BLACK_BACK_RANK][6] = new Knight(BLACK);
+    pieces[BLACK_BACK_RANK][KNIGHT_LEFT_COL] = new Knight(BLACK);
+    pieces[BLACK_BACK_RANK][KNIGHT_RIGHT_COL] = new Knight(BLACK);
 
-    pieces[WHITE_BACK_RANK][1] = new Knight(WHITE);
-    pieces[WHITE_BACK_RANK][6] = new Knight(WHITE);
+    pieces[WHITE_BACK_RANK][KNIGHT_LEFT_COL] = new Knight(WHITE);
+    pieces[WHITE_BACK_RANK][KNIGHT_RIGHT_COL] = new Knight(WHITE);
   }
 
   private void initializeBishops() {
-    pieces[BLACK_BACK_RANK][2] = new Bishop(BLACK);
-    pieces[BLACK_BACK_RANK][5] = new Bishop(BLACK);
+    pieces[BLACK_BACK_RANK][BISHOP_LEFT_COL] = new Bishop(BLACK);
+    pieces[BLACK_BACK_RANK][BISHOP_RIGHT_COL] = new Bishop(BLACK);
 
-    pieces[WHITE_BACK_RANK][2] = new Bishop(WHITE);
-    pieces[WHITE_BACK_RANK][5] = new Bishop(WHITE);
+    pieces[WHITE_BACK_RANK][BISHOP_LEFT_COL] = new Bishop(WHITE);
+    pieces[WHITE_BACK_RANK][BISHOP_RIGHT_COL] = new Bishop(WHITE);
   }
 
   private void initializeRoyalPieces() {
-    pieces[BLACK_BACK_RANK][3] = new Queen(BLACK);
-    pieces[BLACK_BACK_RANK][4] = new King(BLACK);
+    pieces[BLACK_BACK_RANK][QUEEN_COL] = new Queen(BLACK);
+    pieces[BLACK_BACK_RANK][KING_COL] = new King(BLACK);
 
-    pieces[WHITE_BACK_RANK][3] = new Queen(WHITE);
-    pieces[WHITE_BACK_RANK][4] = new King(WHITE);
+    pieces[WHITE_BACK_RANK][QUEEN_COL] = new Queen(WHITE);
+    pieces[WHITE_BACK_RANK][KING_COL] = new King(WHITE);
   }
 
   /**

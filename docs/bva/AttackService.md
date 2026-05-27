@@ -1,4 +1,4 @@
-# Game Setup BVA
+# Attack Service BVA
 
 ### Method under test: canAttack
 |                                                                          | State of the System                                                                                             | Expected output       | Implemented?         |
@@ -8,3 +8,8 @@
 | T3_shouldRejectAttackWhenDefendingTerritoryIsOwnedByCurrentPlayer        | Defending territory is owned by the attacker. Otherwise normal state.                                           | Failed Attack (False) | :white_check_mark:   |
 | T4_shouldRejectAttackWhenTerritoriesAreNotAdjacent                       | Attacking and defending territories are not adjacent. Otherwise normal state.                                   | Failed Attack (False) | :white_check_mark:   |
 | T5_shouldRejectAttackWhenAttackingTerritoryHasOnlyOneArmy                | Attacking player has only one army available on the territory they are attacking from. Otherwise normal state.  | Failed Attack (False) | :white_check_mark:   |
+
+### Method under test: resolveBattleRound
+|                                                                        | State of the System                                                                                                                          | Expected output   | Implemented?        |
+|------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-------------------|---------------------|
+|T6_shouldAllowAttackerToRollUpToThreeDiceWhenEnoughArmiesExist| Attacker's territory is adjacent to the defender's. The attacker has 4 or more armies. The defender is a different player than the attacker. | Attack permitted. | :white_check_mark:  |

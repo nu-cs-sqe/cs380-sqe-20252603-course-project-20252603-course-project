@@ -9,21 +9,18 @@
   - Because `PieceColor` is a Java reference type, `null` is an invalid pointer boundary for `color`.
   - `makeCopy()` has no parameters, so its input classes come from the existing valid `Rook` state: `color = BLACK` or `color = WHITE`.
   - A `Rook` with `color = null` is not a valid public state once constructor null handling is corrected.
+  - `isValidMoveShape(from, to)` boundary variables: `from` (null vs. Location), `to` (null vs. Location), rank/file deltas: dx=0 (file move), dy=0 (rank move), dx≠0 and dy≠0 (non-rook shape).
 - Step 1, output equivalence classes:
-  - The constructor creates a `Rook` whose `type` is always `ROOK` and whose `color` is the constructor argument for valid colors.
-  - The constructor throws `IllegalArgumentException` with message `"color must not be null"` when `color = null`.
-  - `makeCopy()` returns a distinct `Rook` instance typed as `Piece`; the copy has `type = ROOK` and the same valid color as the original.
-- Step 2, BVA catalog mapping from the BVA catalog:
-  - `PieceColor` is `Cases`.
-  - The `color` reference also uses the `Pointers` boundary: null pointer vs pointer to a true object.
-  - `Rook` has no generated string output in its own public constructor or `makeCopy()` method, so string-length boundaries do not apply here.
-- Step 3, concrete boundary values selected from the catalog:
-  - `PieceColor`: first `BLACK`, second/last `WHITE`, plus invalid pointer boundary `null`.
-  - Impossible non-enum `PieceColor` values are omitted because they are `CAN'T SET` in Java.
-- Step 4 strategy:
-  - Use each-choice across the `PieceColor` case values and the invalid null pointer boundary.
-  - Repeat valid state boundaries for `makeCopy()` because it derives its output from the original rook's stored color.
-  - Treat the null-color `makeCopy()` state as `CAN'T SET` through the public constructor after the constructor null check is implemented.
+  - Constructor: successful Rook with `type=ROOK` and given `color`; or `IllegalArgumentException` for null.
+  - `makeCopy()`: distinct Rook with same color.
+  - `isValidMoveShape`: `true` for rank/file moves; `false` for diagonal or same square. Bounds checking is Board's responsibility.
+- Step 2, BVA catalog mapping:
+  - `PieceColor`: Cases (BLACK, WHITE) + Pointers (null).
+  - Move deltas dx, dy: Bounded Integer with domain [−7, 7]; key boundary is 0 (rank/file) vs. non-zero.
+- Step 3, concrete boundary values selected:
+  - `PieceColor`: BLACK, WHITE, null.
+  - dx, dy combinations: (dx=0, dy≠0), (dx≠0, dy=0), (dx≠0, dy≠0), (dx=0, dy=0).
+- Step 4 strategy: each-choice across the color enum and null pointer boundaries for constructor/makeCopy; each-choice across dx/dy shape categories for isValidMoveShape.
 
 
 ### Method under test: `Rook(PieceColor color)`
@@ -42,3 +39,21 @@
 | Test Case 4 | rook: `Rook(BLACK)`             | return a distinct `Rook` as a `Piece`; copied piece has `type = ROOK`; copied piece has `color = BLACK` | :white_check_mark: |
 | Test Case 5 | rook: `Rook(WHITE)`             | return a distinct `Rook` as a `Piece`; copied piece has `type = ROOK`; copied piece has `color = WHITE` | :white_check_mark: |
 | Test Case 6 | rook: `Rook(null)`              | null-color rook is `CAN'T SET` through the public constructor; covered by constructor null rejection with message `"color must not be null"` | implemented in `RookConstructor_NullColor_ThrowsIllegalArgumentException` |
+
+
+### Method under test: `isValidMoveShape(Location from, Location to)`
+
+The rook moves along a rank (dy=0, dx≠0) or file (dx=0, dy≠0). Maximum legal delta is 7 (full board). Minimum legal delta is 1 (one square). Same square (dx=0, dy=0) is rejected. Bounds checking is Board's responsibility; `isValidMoveShape` validates shape only. `from` or `to` null throws `IllegalArgumentException`.
+
+|              | System under test                                                         | Expected output | Implemented? |
+|--------------|---------------------------------------------------------------------------|-----------------|--------------|
+| Test Case 7  | `from=(0,4)`, `to=(7,4)` — rank move right, max delta dx=7               | `true`          | :white_check_mark: |
+| Test Case 8  | `from=(7,4)`, `to=(0,4)` — rank move left, max delta dx=7                | `true`          | :white_check_mark: |
+| Test Case 9  | `from=(3,0)`, `to=(3,7)` — file move down, max delta dy=7                | `true`          | :white_check_mark: |
+| Test Case 10 | `from=(3,7)`, `to=(3,0)` — file move up, max delta dy=7                  | `true`          | :white_check_mark: |
+| Test Case 11 | `from=(3,4)`, `to=(4,4)` — rank move, min delta dx=1                     | `true`          | :white_check_mark: |
+| Test Case 12 | `from=(3,4)`, `to=(3,5)` — file move, min delta dy=1                     | `true`          | :white_check_mark: |
+| Test Case 13 | `from=(3,4)`, `to=(5,6)` — diagonal (dx≠0 and dy≠0)                     | `false`         | :white_check_mark: |
+| Test Case 14 | `from=(4,4)`, `to=(4,4)` — same square (dx=0 and dy=0)                  | `false`         | :white_check_mark: |
+| Test Case 15 | `from=null`, `to=(4,4)`                                                   | `IllegalArgumentException("from must not be null")` | :white_check_mark: |
+| Test Case 16 | `from=(4,4)`, `to=null`                                                   | `IllegalArgumentException("to must not be null")`   | :white_check_mark: |

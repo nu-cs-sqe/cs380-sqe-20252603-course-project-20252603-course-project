@@ -1,49 +1,21 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class PawnTests {
 
-  // =========================
-  // Board bounds
-  // =========================
-  private static final int MIN_COORD = 0;
-  private static final int MAX_COORD = 7;
-  private static final int OUT_OF_BOUNDS_POS = 8;
-  private static final int OUT_OF_BOUNDS_NEG = -1;
-
-  // =========================
-  // Common ranks
-  // =========================
-  private static final int WHITE_START_RANK = 6;
-  private static final int BLACK_START_RANK = 1;
-
-  // =========================
-  // Test files / positions
-  // =========================
-  private static final int CENTER_FILE = 4;
-  private static final int EDGE_FILE_LEFT = 0;
-  private static final int EDGE_FILE_RIGHT = 7;
-
-  // =========================
-  // Movement constants
-  // =========================
-  private static final int STEP_1 = 1;
-  private static final int STEP_2 = 2;
-  private static final int STEP_3 = 3;
-
-  // =========================
-  // Constructor tests
-  // =========================
-
   @Test
-  public void pawnConstructorColorBlackCreatesBlackPawnWithPawnType() {
+  public void Constructor_ColorBlack_CreatesBlackPawnWithPawnType() {
     Pawn pawn = new Pawn(PieceColor.BLACK);
 
     assertEquals(PieceType.PAWN, pawn.getType());
@@ -51,7 +23,7 @@ public class PawnTests {
   }
 
   @Test
-  public void pawnConstructorColorWhiteCreatesWhitePawnWithPawnType() {
+  public void Constructor_ColorWhite_CreatesWhitePawnWithPawnType() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
 
     assertEquals(PieceType.PAWN, pawn.getType());
@@ -59,21 +31,43 @@ public class PawnTests {
   }
 
   @Test
-  public void pawnConstructorColorNullThrowsIllegalArgumentException() {
-    IllegalArgumentException exception = assertThrows(
-        IllegalArgumentException.class,
-        () -> new Pawn(null)
-    );
+  public void Constructor_ColorNull_ThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> new Pawn(null));
 
     assertEquals("color must not be null", exception.getMessage());
   }
 
-  // =========================
-  // Copy tests
-  // =========================
+  @Test
+  public void IsValidMoveShape_WhitePawnAtStartingRowTwoSquaresForward_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    assertTrue(pawn.isValidMoveShape(new Location(4, 6), new Location(4, 4)));
+  }
 
   @Test
-  public void pawnMakeCopyBlackPawnReturnsDistinctBlackPawnWithPawnType() {
+  public void IsValidMoveShape_WhitePawnOneSquareForward_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    assertTrue(pawn.isValidMoveShape(new Location(4, 6), new Location(4, 5)));
+  }
+
+  @Test
+  public void IsValidMoveShape_BlackPawnOneSquareForward_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+
+    assertTrue(pawn.isValidMoveShape(new Location(4, 1), new Location(4, 2)));
+  }
+
+  @Test
+  public void IsValidMoveShape_BlackPawnAtStartingRowTwoSquaresForward_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+
+    assertTrue(pawn.isValidMoveShape(new Location(4, 1), new Location(4, 3)));
+  }
+
+  @Test
+  public void MakeCopy_BlackPawn_ReturnsDistinctBlackPawnCopy() {
     Pawn pawn = new Pawn(PieceColor.BLACK);
 
     Piece copy = pawn.makeCopy();
@@ -85,7 +79,7 @@ public class PawnTests {
   }
 
   @Test
-  public void pawnMakeCopyWhitePawnReturnsDistinctWhitePawnWithPawnType() {
+  public void MakeCopy_WhitePawn_ReturnsDistinctWhitePawnCopy() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
 
     Piece copy = pawn.makeCopy();
@@ -97,199 +91,181 @@ public class PawnTests {
   }
 
   @Test
-  public void pawnMakeCopyNullColorPawnThrowsIllegalArgumentException() {
-    IllegalArgumentException exception = assertThrows(
-        IllegalArgumentException.class,
-        () -> new Pawn(null)
-    );
+  public void PawnMakeCopy_NullColorPawn_ThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> new Pawn(null));
 
     assertEquals("color must not be null", exception.getMessage());
   }
 
-  // =========================
-  // Move shape tests
-  // =========================
-
   @Test
-  public void pawnIsValidMoveShapeWhiteAtStartingRowAllowsInitialTwoSquareMove() {
+  public void PawnIsValidMoveShape_WhitePawnOffStartingRow_DoesNotAllowTwoSquaresForward() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
 
-    assertTrue(pawn.isValidMoveShape(
-        new Location(CENTER_FILE, WHITE_START_RANK),
-        new Location(CENTER_FILE, WHITE_START_RANK - STEP_2)
-    ));
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 5), new Location(4, 3)));
   }
 
   @Test
-  public void pawnIsValidMoveShapeWhitePawnOneSquareForwardReturnsTrue() {
-    Pawn pawn = new Pawn(PieceColor.WHITE);
-
-    assertTrue(pawn.isValidMoveShape(
-        new Location(CENTER_FILE, WHITE_START_RANK),
-        new Location(CENTER_FILE, WHITE_START_RANK - STEP_1)
-    ));
-  }
-
-  @Test
-  public void pawnIsValidMoveShapeBlackPawnOneSquareForwardReturnsTrue() {
+  public void PawnIsValidMoveShape_BlackPawnOffStartingRow_DoesNotAllowTwoSquaresForward() {
     Pawn pawn = new Pawn(PieceColor.BLACK);
 
-    assertTrue(pawn.isValidMoveShape(
-        new Location(CENTER_FILE, BLACK_START_RANK),
-        new Location(CENTER_FILE, BLACK_START_RANK + STEP_1)
-    ));
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 2), new Location(4, 4)));
   }
 
   @Test
-  public void pawnIsValidMoveShapeBlackAtStartingRowAllowsInitialTwoSquareMove() {
+  public void PawnIsValidMoveShape_WhitePawnDiagonalForwardLeft_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    assertTrue(pawn.isValidMoveShape(new Location(4, 6), new Location(3, 5)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_WhitePawnDiagonalForwardRight_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    assertTrue(pawn.isValidMoveShape(new Location(4, 6), new Location(5, 5)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_BlackPawnDiagonalForwardLeft_ReturnsTrue() {
     Pawn pawn = new Pawn(PieceColor.BLACK);
 
-    assertTrue(pawn.isValidMoveShape(
-        new Location(CENTER_FILE, BLACK_START_RANK),
-        new Location(CENTER_FILE, BLACK_START_RANK + STEP_2)
-    ));
-  }
-
-  // =========================
-  // Invalid double moves off start
-  // =========================
-
-  @Test
-  public void pawnIsValidMoveShapeWhiteOffStartCannotMoveTwoSquares() {
-    Pawn pawn = new Pawn(PieceColor.WHITE);
-
-    assertFalse(pawn.isValidMoveShape(
-        new Location(CENTER_FILE, WHITE_START_RANK - STEP_1),
-        new Location(CENTER_FILE, WHITE_START_RANK - STEP_3)
-    ));
+    assertTrue(pawn.isValidMoveShape(new Location(4, 1), new Location(3, 2)));
   }
 
   @Test
-  public void pawnIsValidMoveShapeBlackOffStartCannotMoveTwoSquares() {
+  public void PawnIsValidMoveShape_BlackPawnDiagonalForwardRight_ReturnsTrue() {
     Pawn pawn = new Pawn(PieceColor.BLACK);
 
-    assertFalse(pawn.isValidMoveShape(
-        new Location(CENTER_FILE, BLACK_START_RANK + STEP_1),
-        new Location(CENTER_FILE, BLACK_START_RANK + STEP_3)
-    ));
-  }
-
-  // =========================
-  // Diagonal captures
-  // =========================
-
-  @Test
-  public void pawnDiagonalMovesAreValid() {
-    Pawn pawnW = new Pawn(PieceColor.WHITE);
-
-    assertTrue(pawnW.isValidMoveShape(
-        new Location(CENTER_FILE, WHITE_START_RANK),
-        new Location(CENTER_FILE - STEP_1, WHITE_START_RANK - STEP_1)
-    ));
-
-    assertTrue(pawnW.isValidMoveShape(
-        new Location(CENTER_FILE, WHITE_START_RANK),
-        new Location(CENTER_FILE + STEP_1, WHITE_START_RANK - STEP_1)
-    ));
+    assertTrue(pawn.isValidMoveShape(new Location(4, 1), new Location(5, 2)));
   }
 
   @Test
-  public void pawnBlackDiagonalMovesAreValid() {
-    Pawn pawnB = new Pawn(PieceColor.BLACK);
-
-    assertTrue(pawnB.isValidMoveShape(
-        new Location(CENTER_FILE, BLACK_START_RANK),
-        new Location(CENTER_FILE - STEP_1, BLACK_START_RANK + STEP_1)
-    ));
-
-    assertTrue(pawnB.isValidMoveShape(
-        new Location(CENTER_FILE, BLACK_START_RANK),
-        new Location(CENTER_FILE + STEP_1, BLACK_START_RANK + STEP_1)
-    ));
-  }
-
-  // =========================
-  // Invalid movement types
-  // =========================
-
-  @Test
-  public void pawnHorizontalMoveReturnsFalse() {
+  public void PawnIsValidMoveShape_WhitePawnBackwardMove_ReturnsFalse() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
 
-    assertFalse(pawn.isValidMoveShape(
-        new Location(CENTER_FILE, WHITE_START_RANK),
-        new Location(CENTER_FILE + STEP_1, WHITE_START_RANK)
-    ));
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 6), new Location(4, 7)));
   }
 
   @Test
-  public void pawnBackwardMoveReturnsFalse() {
+  public void PawnIsValidMoveShape_BlackPawnBackwardMove_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 1), new Location(4, 0)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_WhitePawnHorizontalMove_ReturnsFalse() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
 
-    assertFalse(pawn.isValidMoveShape(
-        new Location(CENTER_FILE, WHITE_START_RANK),
-        new Location(CENTER_FILE, WHITE_START_RANK + STEP_1)
-    ));
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 6), new Location(5, 6)));
   }
 
   @Test
-  public void pawnSameSquareReturnsFalse() {
+  public void PawnIsValidMoveShape_BlackPawnHorizontalMove_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 1), new Location(5, 1)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_WhitePawnForwardOverreach_ReturnsFalse() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
 
-    assertFalse(pawn.isValidMoveShape(
-        new Location(CENTER_FILE, WHITE_START_RANK),
-        new Location(CENTER_FILE, WHITE_START_RANK)
-    ));
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 6), new Location(4, 3)));
   }
 
-  // =========================
-  // Edge / boundary tests
-  // =========================
+  @Test
+  public void PawnIsValidMoveShape_BlackPawnForwardOverreach_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 1), new Location(4, 4)));
+  }
 
   @Test
-  public void pawnEdgeFileMoveIsValid() {
+  public void PawnIsValidMoveShape_WhitePawnAtLeftEdge_OneSquareForward_ReturnsTrue() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
 
-    assertTrue(pawn.isValidMoveShape(
-        new Location(EDGE_FILE_LEFT, WHITE_START_RANK),
-        new Location(EDGE_FILE_LEFT, WHITE_START_RANK - STEP_1)
-    ));
+    assertTrue(pawn.isValidMoveShape(new Location(0, 6), new Location(0, 5)));
   }
 
   @Test
-  public void pawnOffBoardMovesAreInvalid() {
-    Pawn pawnW = new Pawn(PieceColor.WHITE);
-
-    assertFalse(pawnW.isValidMoveShape(
-        new Location(EDGE_FILE_LEFT, WHITE_START_RANK),
-        new Location(OUT_OF_BOUNDS_NEG, WHITE_START_RANK - STEP_1)
-    ));
-
-    Pawn pawnB = new Pawn(PieceColor.BLACK);
-
-    assertFalse(pawnB.isValidMoveShape(
-        new Location(EDGE_FILE_RIGHT, BLACK_START_RANK),
-        new Location(OUT_OF_BOUNDS_POS, BLACK_START_RANK + STEP_1)
-    ));
-  }
-
-  // =========================
-  // Null handling
-  // =========================
-
-  @Test
-  public void pawnNullFromThrowsException() {
+  public void PawnIsValidMoveShape_WhitePawnAtLeftEdge_OffBoardLeft_ReturnsFalse() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
 
-    assertThrows(IllegalArgumentException.class,
-        () -> pawn.isValidMoveShape(null, new Location(CENTER_FILE, WHITE_START_RANK - STEP_1)));
+    assertEquals(false, pawn.isValidMoveShape(new Location(0, 6), new Location(-1, 5)));
   }
 
   @Test
-  public void pawnNullToThrowsException() {
+  public void PawnIsValidMoveShape_BlackPawnAtRightEdge_OffBoardRight_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+
+    assertEquals(false, pawn.isValidMoveShape(new Location(7, 1), new Location(8, 2)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_WhitePawnSameSquare_ReturnsFalse() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
 
-    assertThrows(IllegalArgumentException.class,
-        () -> pawn.isValidMoveShape(new Location(CENTER_FILE, WHITE_START_RANK), null));
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 6), new Location(4, 6)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_DestinationAboveMaxY_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 1), new Location(4, 8)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_DestinationBelowMinY_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 6), new Location(4, -1)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_WhitePawnDoubleStepWithNonZeroDx_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 6), new Location(5, 4)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_WhitePawnSingleStepDxExceedsMaxDiagonalOffset_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    assertEquals(false, pawn.isValidMoveShape(new Location(4, 6), new Location(6, 5)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_FromXBelowMinimum_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    assertEquals(false, pawn.isValidMoveShape(new Location(-1, 6), new Location(0, 5)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_NullFrom_ThrowsIllegalArgumentException() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> pawn.isValidMoveShape(null, new Location(4, 5))
+    );
+
+    assertEquals("from must not be null", exception.getMessage());
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_NullTo_ThrowsIllegalArgumentException() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> pawn.isValidMoveShape(new Location(4, 6), null)
+    );
+
+    assertEquals("to must not be null", exception.getMessage());
   }
 }

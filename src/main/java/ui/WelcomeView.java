@@ -16,27 +16,26 @@ public class WelcomeView extends JFrame {
   private JTextField player2NameField;
   private final ResourceBundle messages;
 
-  public WelcomeView(ResourceBundle messages) {
-    this.messages = messages;
-    createWelcomeScreenUI();
+  public WelcomeView() {
+    initWelcomeScreen();
   }
 
-  private void createWelcomeScreenUI() {
-    setTitle(messages.getString("welcome.title"));
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setResizable(IS_WINDOW_RESIZABLE);
+  private void initWelcomeScreen() {
+    setTitle("Chess — Welcome");
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setResizable(false);
 
     JPanel panel = new JPanel(new GridBagLayout());
     panel.setBorder(BorderFactory.createEmptyBorder(
-        PADDING_TOP_BOTTOM, PADDING_LEFT_RIGHT, PADDING_TOP_BOTTOM, PADDING_LEFT_RIGHT
-    ));
+        PADDING_TOP_BOTTOM, PADDING_LEFT_RIGHT,
+        PADDING_TOP_BOTTOM, PADDING_LEFT_RIGHT));
 
     GridBagConstraints gbc = new GridBagConstraints();
-    gbc.insets = new Insets(INSET_SPACING, INSET_SPACING, INSET_SPACING, INSET_SPACING);
+    gbc.insets = new Insets(INSET_SIZE, INSET_SIZE, INSET_SIZE, INSET_SIZE);
     gbc.fill = GridBagConstraints.HORIZONTAL;
 
-    player1NameField = new JTextField(TEXT_FIELD_COLUMNS);
-    player2NameField = new JTextField(TEXT_FIELD_COLUMNS);
+    player1NameField = new JTextField(FIELD_COLUMNS);
+    player2NameField = new JTextField(FIELD_COLUMNS);
 
     gbc.gridx = 0; gbc.gridy = 0;
     panel.add(new JLabel(messages.getString("welcome.player1Label")), gbc);
@@ -52,30 +51,32 @@ public class WelcomeView extends JFrame {
     gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
     gbc.fill = GridBagConstraints.NONE;
     gbc.anchor = GridBagConstraints.CENTER;
+
+    JButton startButton = new JButton("Start Game");
     panel.add(startButton, gbc);
-
-    startButton.addActionListener(e -> {
-      String p1 = player1NameField.getText().trim();
-      String p2 = player2NameField.getText().trim();
-
-      if (p1.isEmpty() || p2.isEmpty()) {
-        JOptionPane.showMessageDialog(this,
-            messages.getString("welcome.missingNameMessage"),
-            messages.getString("welcome.missingNameTitle"),
-            JOptionPane.WARNING_MESSAGE);
-        return;
-      }
-
-      MainView mainView = new MainView(p1, p2, messages);
-      mainView.pack();
-      mainView.setLocationRelativeTo(null);
-      mainView.setVisible(true);
-      dispose();
-    });
+    startButton.addActionListener(e -> handleStartGame());
 
     add(panel);
     pack();
     setLocationRelativeTo(null);
     setVisible(true);
+  }
+
+  private void handleStartGame() {
+    String p1 = player1NameField.getText().trim();
+    String p2 = player2NameField.getText().trim();
+
+    if (p1.isEmpty() || p2.isEmpty()) {
+      JOptionPane.showMessageDialog(this,
+          "Please enter a name for both players.",
+          "Missing Name", JOptionPane.WARNING_MESSAGE);
+      return;
+    }
+
+    MainView mainView = new MainView(p1, p2);
+    mainView.pack();
+    mainView.setLocationRelativeTo(null);
+    mainView.setVisible(true);
+    dispose();
   }
 }

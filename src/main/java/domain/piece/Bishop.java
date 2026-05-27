@@ -2,20 +2,22 @@ package domain.piece;
 
 import domain.Location;
 
-public class Bishop extends Piece {
-    public Bishop(PieceColor color) {
-        super(PieceType.BISHOP, color);
-        if (color == null) {
-            throw new IllegalArgumentException("color must not be null");
-        }
-    }
+public final class Bishop extends Piece {
 
-    @Override
-    public Piece makeCopy() {
-        return new Bishop(getColor());
-    }
+  public Bishop(PieceColor color) {
+    super(PieceType.BISHOP, color);
+  }
 
+  @Override
+  public Piece makeCopy() {
+    return new Bishop(getColor());
+  }
+
+  @Override
   public boolean isValidMoveShape(Location from, Location to) {
-      return true;
+    requireLocations(from, to);
+    int dx = Math.abs(to.getX() - from.getX());
+    int dy = Math.abs(to.getY() - from.getY());
+    return dx == dy && dx != 0;
   }
 }

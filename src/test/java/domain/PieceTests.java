@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import domain.Location;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class PieceTests {
 
   @Test
-  public void pieceConstructorPawnTypeAndBlackColorStoresTypeAndColor() {
+  public void PieceConstructor_PawnTypeAndBlackColor_StoresTypeAndColor() {
     TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
 
     assertEquals(PieceType.PAWN, piece.getType());
@@ -20,7 +21,7 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceConstructorRookTypeAndWhiteColorStoresTypeAndColor() {
+  public void PieceConstructor_RookTypeAndWhiteColor_StoresTypeAndColor() {
     TestPiece piece = new TestPiece(PieceType.ROOK, PieceColor.WHITE);
 
     assertEquals(PieceType.ROOK, piece.getType());
@@ -28,7 +29,7 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceConstructorKnightTypeAndBlackColorStoresTypeAndColor() {
+  public void PieceConstructor_KnightTypeAndBlackColor_StoresTypeAndColor() {
     TestPiece piece = new TestPiece(PieceType.KNIGHT, PieceColor.BLACK);
 
     assertEquals(PieceType.KNIGHT, piece.getType());
@@ -36,7 +37,7 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceConstructorBishopTypeAndWhiteColorStoresTypeAndColor() {
+  public void PieceConstructor_BishopTypeAndWhiteColor_StoresTypeAndColor() {
     TestPiece piece = new TestPiece(PieceType.BISHOP, PieceColor.WHITE);
 
     assertEquals(PieceType.BISHOP, piece.getType());
@@ -44,7 +45,7 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceConstructorQueenTypeAndBlackColorStoresTypeAndColor() {
+  public void PieceConstructor_QueenTypeAndBlackColorStores_TypeAndColor() {
     TestPiece piece = new TestPiece(PieceType.QUEEN, PieceColor.BLACK);
 
     assertEquals(PieceType.QUEEN, piece.getType());
@@ -52,7 +53,7 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceConstructorKingTypeAndWhiteColorStoresTypeAndColor() {
+  public void PieceConstructor_KingTypeAndWhiteColor_StoresTypeAndColor() {
     TestPiece piece = new TestPiece(PieceType.KING, PieceColor.WHITE);
 
     assertEquals(PieceType.KING, piece.getType());
@@ -60,7 +61,7 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceConstructorNullTypeThrowsIllegalArgumentException() {
+  public void PieceConstructor_NullType_ThrowsIllegalArgumentException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> new TestPiece(null, PieceColor.BLACK));
@@ -69,7 +70,7 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceConstructorNullColorThrowsIllegalArgumentException() {
+  public void PieceConstructor_NullColor_ThrowsIllegalArgumentException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> new TestPiece(PieceType.PAWN, null));
@@ -78,49 +79,49 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceGetTypePawnTypeAndBlackColorReturnsPawn() {
+  public void PieceGetType_PawnTypeAndBlackColor_ReturnsPawn() {
     TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
 
     assertEquals(PieceType.PAWN, piece.getType());
   }
 
   @Test
-  public void pieceGetTypeRookTypeAndWhiteColorReturnsRook() {
+  public void PieceGetType_RookTypeAndWhiteColor_ReturnsRook() {
     TestPiece piece = new TestPiece(PieceType.ROOK, PieceColor.WHITE);
 
     assertEquals(PieceType.ROOK, piece.getType());
   }
 
   @Test
-  public void pieceGetTypeKnightTypeAndBlackColorReturnsKnight() {
+  public void PieceGetType_KnightTypeAndBlackColor_ReturnsKnight() {
     TestPiece piece = new TestPiece(PieceType.KNIGHT, PieceColor.BLACK);
 
     assertEquals(PieceType.KNIGHT, piece.getType());
   }
 
   @Test
-  public void pieceGetTypeBishopTypeAndWhiteColorReturnsBishop() {
+  public void PieceGetType_BishopTypeAndWhiteColor_ReturnsBishop() {
     TestPiece piece = new TestPiece(PieceType.BISHOP, PieceColor.WHITE);
 
     assertEquals(PieceType.BISHOP, piece.getType());
   }
 
   @Test
-  public void pieceGetTypeQueenTypeAndBlackColorReturnsQueen() {
+  public void PieceGetType_QueenTypeAndBlackColor_ReturnsQueen() {
     TestPiece piece = new TestPiece(PieceType.QUEEN, PieceColor.BLACK);
 
     assertEquals(PieceType.QUEEN, piece.getType());
   }
 
   @Test
-  public void pieceGetTypeKingTypeAndWhiteColorReturnsKing() {
+  public void PieceGetType_KingTypeAndWhiteColor_ReturnsKing() {
     TestPiece piece = new TestPiece(PieceType.KING, PieceColor.WHITE);
 
     assertEquals(PieceType.KING, piece.getType());
   }
 
   @Test
-  public void pieceGetTypeNullTypeThrowsIllegalArgumentException() {
+  public void PieceGetType_NullType_ThrowsIllegalArgumentException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> new TestPiece(null, PieceColor.BLACK));
@@ -129,21 +130,21 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceGetColorPawnTypeAndBlackColorReturnsBlack() {
+  public void PieceGetColor_PawnTypeAndBlackColor_ReturnsBlack() {
     TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
 
     assertEquals(PieceColor.BLACK, piece.getColor());
   }
 
   @Test
-  public void pieceGetColorRookTypeAndWhiteColorReturnsWhite() {
+  public void PieceGetColor_RookTypeAndWhiteColor_ReturnsWhite() {
     TestPiece piece = new TestPiece(PieceType.ROOK, PieceColor.WHITE);
 
     assertEquals(PieceColor.WHITE, piece.getColor());
   }
 
   @Test
-  public void pieceMakeCopyPawnTypeAndBlackColorReturnsDistinctCopy() {
+  public void PieceMakeCopy_PawnTypeAndBlackColor_ReturnsDistinctCopy() {
     TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
 
     Piece copy = piece.makeCopy();
@@ -154,7 +155,7 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceMakeCopyKingTypeAndWhiteColorReturnsDistinctCopy() {
+  public void PieceMakeCopy_KingTypeAndWhiteColor_ReturnsDistinctCopy() {
     TestPiece piece = new TestPiece(PieceType.KING, PieceColor.WHITE);
 
     Piece copy = piece.makeCopy();
@@ -165,42 +166,42 @@ public class PieceTests {
   }
 
   @Test
-  public void pieceToStringPawnTypeAndBlackColorReturnsBlackPawn() {
+  public void PieceToString_PawnTypeAndBlackColor_ReturnsBlackPawn() {
     TestPiece piece = new TestPiece(PieceType.PAWN, PieceColor.BLACK);
 
     assertEquals("BLACK PAWN", piece.toString());
   }
 
   @Test
-  public void pieceToStringRookTypeAndWhiteColorReturnsWhiteRook() {
+  public void PieceToString_RookTypeAndWhiteColor_ReturnsWhiteRook() {
     TestPiece piece = new TestPiece(PieceType.ROOK, PieceColor.WHITE);
 
     assertEquals("WHITE ROOK", piece.toString());
   }
 
   @Test
-  public void pieceToStringKnightTypeAndBlackColorReturnsBlackKnight() {
+  public void PieceToString_KnightTypeAndBlackColor_ReturnsBlackKnight() {
     TestPiece piece = new TestPiece(PieceType.KNIGHT, PieceColor.BLACK);
 
     assertEquals("BLACK KNIGHT", piece.toString());
   }
 
   @Test
-  public void pieceToStringBishopTypeAndWhiteColorReturnsWhiteBishop() {
+  public void PieceToString_BishopTypeAndWhiteColor_ReturnsWhiteBishop() {
     TestPiece piece = new TestPiece(PieceType.BISHOP, PieceColor.WHITE);
 
     assertEquals("WHITE BISHOP", piece.toString());
   }
 
   @Test
-  public void pieceToStringQueenTypeAndBlackColorReturnsBlackQueen() {
+  public void PieceToString_QueenTypeAndBlackColor_ReturnsBlackQueen() {
     TestPiece piece = new TestPiece(PieceType.QUEEN, PieceColor.BLACK);
 
     assertEquals("BLACK QUEEN", piece.toString());
   }
 
   @Test
-  public void pieceToStringKingTypeAndWhiteColorReturnsWhiteKing() {
+  public void PieceToString_KingTypeAndWhiteColor_ReturnsWhiteKing() {
     TestPiece piece = new TestPiece(PieceType.KING, PieceColor.WHITE);
 
     assertEquals("WHITE KING", piece.toString());
@@ -215,6 +216,11 @@ public class PieceTests {
     @Override
     public Piece makeCopy() {
       return new TestPiece(getType(), getColor());
+    }
+
+    @Override
+    public boolean isValidMoveShape(Location from, Location to) {
+      return false;
     }
   }
 }

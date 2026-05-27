@@ -1,16 +1,16 @@
 package domain;
 
+import domain.piece.PieceColor;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import domain.piece.PieceColor;
-import org.junit.jupiter.api.Test;
-
 public class PieceColorTests {
 
   @Test
-  public void pieceColorBlackConstantAccessReturnsBlackSingletonWithName() {
+  public void PieceColorBlack_ConstantAccess_ReturnsBlackSingletonWithName() {
     PieceColor color = PieceColor.BLACK;
 
     assertEquals(PieceColor.BLACK, color);
@@ -18,7 +18,7 @@ public class PieceColorTests {
   }
 
   @Test
-  public void pieceColorWhiteConstantAccessReturnsWhiteSingletonWithName() {
+  public void PieceColorWhite_ConstantAccess_ReturnsWhiteSingletonWithName() {
     PieceColor color = PieceColor.WHITE;
 
     assertEquals(PieceColor.WHITE, color);
@@ -26,7 +26,7 @@ public class PieceColorTests {
   }
 
   @Test
-  public void pieceColorValuesNoInputReturnsBlackThenWhite() {
+  public void PieceColorValues_NoInput_ReturnsBlackThenWhite() {
     PieceColor[] colors = PieceColor.values();
 
     assertEquals(2, colors.length);
@@ -35,7 +35,7 @@ public class PieceColorTests {
   }
 
   @Test
-  public void pieceColorValuesCalledTwiceReturnsDistinctArraysWithBlackThenWhite() {
+  public void PieceColorValues_CalledTwice_ReturnsDistinctArraysWithBlackThenWhite() {
     PieceColor[] first = PieceColor.values();
     PieceColor[] second = PieceColor.values();
 
@@ -49,21 +49,21 @@ public class PieceColorTests {
   }
 
   @Test
-  public void pieceColorValueOfBlackNameReturnsBlack() {
+  public void PieceColorValueOf_BlackName_ReturnsBlack() {
     PieceColor color = PieceColor.valueOf("BLACK");
 
     assertEquals(PieceColor.BLACK, color);
   }
 
   @Test
-  public void pieceColorValueOfWhiteNameReturnsWhite() {
+  public void PieceColorValueOf_WhiteName_ReturnsWhite() {
     PieceColor color = PieceColor.valueOf("WHITE");
 
     assertEquals(PieceColor.WHITE, color);
   }
 
   @Test
-  public void pieceColorValueOfNullNameThrowsNullPointerExceptionWithNameIsNullMessage() {
+  public void PieceColorValueOf_NullName_ThrowsNullPointerExceptionWithNameIsNullMessage() {
     NullPointerException exception = assertThrows(NullPointerException.class,
         () -> PieceColor.valueOf(null));
 
@@ -71,7 +71,7 @@ public class PieceColorTests {
   }
 
   @Test
-  public void pieceColorValueOfLowercaseBlackNameThrowsIllegalArgumentExceptionWithEnumConstantMessage() {
+  public void PieceColorValueOf_LowercaseBlackName_ThrowsIllegalArgumentExceptionWithEnumConstantMessage() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> PieceColor.valueOf("black"));
 
@@ -79,7 +79,7 @@ public class PieceColorTests {
   }
 
   @Test
-  public void pieceColorValueOfBlackNameWithWhitespaceThrowsIllegalArgumentExceptionWithEnumConstantMessage() {
+  public void PieceColorValueOf_BlackNameWithWhitespace_ThrowsIllegalArgumentExceptionWithEnumConstantMessage() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> PieceColor.valueOf(" BLACK "));
 
@@ -87,7 +87,7 @@ public class PieceColorTests {
   }
 
   @Test
-  public void pieceColorValueOfRedNameThrowsIllegalArgumentExceptionWithEnumConstantMessage() {
+  public void PieceColorValueOf_RedName_ThrowsIllegalArgumentExceptionWithEnumConstantMessage() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> PieceColor.valueOf("RED"));
 

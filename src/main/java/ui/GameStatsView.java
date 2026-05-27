@@ -49,7 +49,6 @@ public class GameStatsView extends JPanel {
         new JLabel("Player 2: " + player2Name + " (Team: Black)");
     styleBodyLabel(player2Label);
 
-    // Initialize current player properly (Player 1 starts)
     currentPlayerLabel = new JLabel("Current Player: " + player1Name);
     currentPlayerLabel.setFont(HEADER_FONT);
     currentPlayerLabel.setForeground(LABEL_FOREGROUND);
@@ -62,9 +61,6 @@ public class GameStatsView extends JPanel {
     add(currentPlayerLabel);
   }
 
-  /**
-   * Applies standard styling to body labels.
-   */
   private void styleBodyLabel(JLabel label) {
     label.setFont(BODY_FONT);
     label.setForeground(LABEL_FOREGROUND);

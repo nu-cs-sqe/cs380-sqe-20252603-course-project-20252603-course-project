@@ -1,3 +1,18 @@
+# Week 8 (5/18/2026-5/24/2026) 
+**Planning and Progress Tracking**:
+1. [done] Tallie: Create draft team task split, user stories, use cases, and requirements for One Win Condition (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/50, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/51, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/52, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/53)
+2. [done] Tallie: Create draft team task split for week 2 of i18n testing (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/57, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/58, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/59)
+3. [done] Tallie: Create draft team task split for week 2 of integration testing (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/61, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/62, https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/issues/63)
+4. [95% done] Tallie: Fix checkstyle method naming convention (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/72)
+5. [95% done] Tallie: Feature pitest setup multiple turns of the game (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/67)
+6. [done] Tallie: Review PR 27 (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/27)
+7. [in-progress] Tallie: update Checkstyle script to have test case naming use Prof. Zhang-introduced rather than Google scheme
+8. [in-progress] Reed: Feature piece moves one turn of the game (PR 70)
+9. [in-progress] Reed: Feature language selector i18n (PR 69)
+10. [in-progress] Reed: Feature piece api integration (PR 68)
+11. [in-progress] Trenton: Feature turn validation one turn of the game (PR 73)
+12. [in-progress] Trenton: Feature locale metadata i18n (PR 74)
+
 # Week 7 (5/11/2026-5/17/2026)
 **Planning and Progress Tracking**:
 1. [95% done] Tallie: Multiple Turns of the Game: Google Style Guide Review Against Clean Code (https://github.com/nu-cs-sqe/course-project-20252603-team-22-20252603/pull/44)

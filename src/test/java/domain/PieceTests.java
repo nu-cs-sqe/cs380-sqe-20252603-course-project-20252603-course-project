@@ -1,13 +1,14 @@
 package domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import domain.Location;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PieceTests {
 
@@ -212,9 +213,15 @@ public class PieceTests {
       super(type, color);
     }
 
-    @Override
-    public Piece makeCopy() {
-      return new TestPiece(getType(), getColor());
+        @Override
+        public Piece makeCopy() {
+            return new TestPiece(getType(), getColor());
+        }
+
+        @Override
+        public boolean isValidMoveShape(Location from, Location to) {
+            return false;
+        }
     }
   }
 }

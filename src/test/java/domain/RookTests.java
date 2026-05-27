@@ -7,12 +7,13 @@ import domain.piece.Rook;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RookTests {
-
   @Test
   public void RookConstructor_BlackColor_SetsTypeAndColor() {
     Rook rook = new Rook(PieceColor.BLACK);
@@ -59,6 +60,84 @@ public class RookTests {
     assertInstanceOf(Rook.class, copy);
     assertEquals(PieceType.ROOK, copy.getType());
     assertEquals(PieceColor.WHITE, copy.getColor());
+  }
+
+  // --- isValidMoveShape ---
+
+  @Test
+  public void RookIsValidMoveShape_HorizontalRight_ReturnsTrue() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    assertTrue(rook.isValidMoveShape(new Location(0, 4), new Location(7, 4)));
+  }
+
+  @Test
+  public void RookIsValidMoveShape_HorizontalLeft_ReturnsTrue() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    assertTrue(rook.isValidMoveShape(new Location(7, 4), new Location(0, 4)));
+  }
+
+  @Test
+  public void RookIsValidMoveShape_VerticalDown_ReturnsTrue() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    assertTrue(rook.isValidMoveShape(new Location(3, 0), new Location(3, 7)));
+  }
+
+  @Test
+  public void RookIsValidMoveShape_VerticalUp_ReturnsTrue() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    assertTrue(rook.isValidMoveShape(new Location(3, 7), new Location(3, 0)));
+  }
+
+  @Test
+  public void RookIsValidMoveShape_MinHorizontalDelta_ReturnsTrue() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    assertTrue(rook.isValidMoveShape(new Location(3, 4), new Location(4, 4)));
+  }
+
+  @Test
+  public void RookIsValidMoveShape_MinVerticalDelta_ReturnsTrue() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    assertTrue(rook.isValidMoveShape(new Location(3, 4), new Location(3, 5)));
+  }
+
+  @Test
+  public void RookIsValidMoveShape_Diagonal_ReturnsFalse() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    assertFalse(rook.isValidMoveShape(new Location(3, 4), new Location(5, 6)));
+  }
+
+  @Test
+  public void RookIsValidMoveShape_SameSquare_ReturnsFalse() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    assertFalse(rook.isValidMoveShape(new Location(4, 4), new Location(4, 4)));
+  }
+
+  @Test
+  public void RookIsValidMoveShape_FromNull_ThrowsIllegalArgumentException() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> rook.isValidMoveShape(null, new Location(4, 4)));
+
+    assertEquals("from must not be null", exception.getMessage());
+  }
+
+  @Test
+  public void RookIsValidMoveShape_ToNull_ThrowsIllegalArgumentException() {
+    Rook rook = new Rook(PieceColor.WHITE);
+
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> rook.isValidMoveShape(new Location(4, 4), null));
+
+    assertEquals("to must not be null", exception.getMessage());
   }
 
 }

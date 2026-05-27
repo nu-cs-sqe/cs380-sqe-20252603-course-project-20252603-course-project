@@ -1,5 +1,6 @@
 package integration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import domain.Board;
@@ -22,4 +23,15 @@ public class GameSetupIntegrationTests {
     assertNotNull(board);
   }
 
+  @Test
+  void InitialGameState_WHITE_TURN_GameStartsWithWhiteTurn() {
+    Board board = new Board();
+    assertEquals(GameState.WHITE_TURN, board.getGameState());
+  }
+
+  @Test
+  void GetSnapshot_NotNull_ReturnsSnapshot() {
+    Board board = new Board();
+    assertNotNull(board.getSnapshot());
+  }
 }

@@ -232,21 +232,7 @@ public class Board {
   }
 
   private boolean isPathClear(Location from, Location to) {
-    int dx = Integer.compare(to.getX(), from.getX());
-    int dy = Integer.compare(to.getY(), from.getY());
-
-    int x = from.getX() + dx;
-    int y = from.getY() + dy;
-
-    while (x != to.getX() || y != to.getY()) {
-      if (pieces[y][x] != null) {
-        return false;
-      }
-      x += dx;
-      y += dy;
-    }
-
-    return true;
+    return !Piece.hasPieceBetween(from, to, pieces);
   }
 
   public boolean applyMoveIfKingSafe(Location from, Location to) {

@@ -12,7 +12,14 @@ import domain.piece.Queen;
 import domain.piece.Rook;
 
 /**
- * Represents an 8x8 chess board and initializes the starting position.
+ * Represents an 8x8 chess board.
+ *
+ * Coordinate convention:
+ * - board[row][column]
+ * - row 0 = black back rank
+ * - row 7 = white back rank
+ * - col 3 = D file (where queen starts)
+ * - col 4 = E file (where king starts)
  */
 public class Board {
 
@@ -25,12 +32,14 @@ public class Board {
   private static final int WHITE_BACK_RANK = 7;
 
   private Piece[][] pieces;
+  private GameState gameState;
 
   /**
    * Constructs a board and initializes pieces.
    */
   public Board() {
     initializeBoard();
+    gameState = GameState.WHITE_TURN;
   }
 
   /**
@@ -115,6 +124,10 @@ public class Board {
     }
 
     return snapshot;
+  }
+
+  public GameState getGameState() {
+    return gameState;
   }
 
   /**

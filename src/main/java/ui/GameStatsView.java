@@ -1,5 +1,6 @@
 package ui;
 
+import domain.GameState;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
@@ -53,6 +54,8 @@ public class GameStatsView extends JPanel {
     currentPlayerLabel.setFont(HEADER_FONT);
     currentPlayerLabel.setForeground(LABEL_FOREGROUND);
 
+    updateGameState(GameState.WHITE_TURN, player1Name, player2Name);
+
     add(playerInfoLabel);
     add(player1Label);
     add(player2Label);
@@ -71,7 +74,35 @@ public class GameStatsView extends JPanel {
   /**
    * Updates the displayed current player.
    */
-  public void setCurrentPlayer(String name) {
-    currentPlayerLabel.setText("Current Player: " + name);
+  public void updateGameState(GameState gameState, String player1Name, String player2Name) {
+    switch (gameState) {
+      case WHITE_TURN:
+        currentPlayerLabel.setText(
+            "Current Player: " + player1Name);
+        break;
+
+      case BLACK_TURN:
+        currentPlayerLabel.setText(
+            "Current Player: " + player2Name);
+        break;
+
+      case WHITE_WIN:
+        currentPlayerLabel.setText(
+            "Winner: " + player1Name);
+        break;
+
+      case BLACK_WIN:
+        currentPlayerLabel.setText(
+            "Winner: " + player2Name);
+        break;
+
+      case DRAW:
+        currentPlayerLabel.setText("Game ended in a draw");
+        break;
+
+      default:
+        throw new IllegalStateException(
+            "Unexpected game state: " + gameState);
+    }
   }
 }

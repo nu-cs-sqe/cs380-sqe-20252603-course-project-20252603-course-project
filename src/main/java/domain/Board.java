@@ -10,9 +10,6 @@ import domain.piece.PieceType;
 import domain.piece.Queen;
 import domain.piece.Rook;
 
-/**
- * Represents an 8x8 chess board and initializes the starting position.
- */
 public class Board {
 
   private static final int TOTAL_ROWS = 8;
@@ -153,9 +150,6 @@ public class Board {
     }
   }
 
-  /**
-   * Moves a piece from one location on the board to a new one.
-   */
   public boolean movePiece(Location from, Location to) {
     requireLocations(from, to);
     if (isOutOfBounds(from) || isOutOfBounds(to)) {

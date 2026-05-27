@@ -16,7 +16,8 @@ public class WelcomeView extends JFrame {
   private JTextField player2NameField;
   private final ResourceBundle messages;
 
-  public WelcomeView() {
+  public WelcomeView(ResourceBundle messages) {
+    this.messages = messages;
     initWelcomeScreen();
   }
 
@@ -31,11 +32,11 @@ public class WelcomeView extends JFrame {
         PADDING_TOP_BOTTOM, PADDING_LEFT_RIGHT));
 
     GridBagConstraints gbc = new GridBagConstraints();
-    gbc.insets = new Insets(INSET_SIZE, INSET_SIZE, INSET_SIZE, INSET_SIZE);
+    gbc.insets = new Insets(INSET_SPACING, INSET_SPACING, INSET_SPACING, INSET_SPACING);
     gbc.fill = GridBagConstraints.HORIZONTAL;
 
-    player1NameField = new JTextField(FIELD_COLUMNS);
-    player2NameField = new JTextField(FIELD_COLUMNS);
+    player1NameField = new JTextField(TEXT_FIELD_COLUMNS);
+    player2NameField = new JTextField(TEXT_FIELD_COLUMNS);
 
     gbc.gridx = 0; gbc.gridy = 0;
     panel.add(new JLabel(messages.getString("welcome.player1Label")), gbc);
@@ -51,8 +52,6 @@ public class WelcomeView extends JFrame {
     gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
     gbc.fill = GridBagConstraints.NONE;
     gbc.anchor = GridBagConstraints.CENTER;
-
-    JButton startButton = new JButton("Start Game");
     panel.add(startButton, gbc);
     startButton.addActionListener(e -> handleStartGame());
 
@@ -73,7 +72,7 @@ public class WelcomeView extends JFrame {
       return;
     }
 
-    MainView mainView = new MainView(p1, p2);
+    MainView mainView = new MainView(p1, p2, messages);
     mainView.pack();
     mainView.setLocationRelativeTo(null);
     mainView.setVisible(true);

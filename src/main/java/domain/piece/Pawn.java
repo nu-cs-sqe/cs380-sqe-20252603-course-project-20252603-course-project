@@ -51,7 +51,7 @@ public final class Pawn extends Piece {
     boolean singleStep = dy == forward && Math.abs(dx) <= MAX_DIAGONAL_OFFSET;
     boolean doubleStep = from.getY() == startingRow && dy == DOUBLE_STEP * forward && dx == 0;
 
-    return singleStep || doubleStep || capture;
+    return singleStep || doubleStep;
   }
 
   private boolean isOnBoard(Location location) {

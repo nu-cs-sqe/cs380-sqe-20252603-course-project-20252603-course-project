@@ -41,4 +41,21 @@ public class GameSetupIntegrationTests {
     Piece[][] snapshot = board.getSnapshot();
     assertEquals(8, snapshot.length);
   }
+
+  @Test
+  void GetSnapshot_RowStructure_EachRowHas8Columns() {
+    Board board = new Board();
+    Piece[][] snapshot = board.getSnapshot();
+
+    for (int i = 0; i < 8; i++) {
+      assertNotNull(snapshot[i]);
+      assertEquals(8, snapshot[i].length);
+    }
+  }
+
+  @Test
+  void BoardInitialization_GameState_WHITE_TURN_InitialTurnIsWhite() {
+    Board board = new Board();
+    assertEquals(GameState.WHITE_TURN, board.getGameState());
+  }
 }

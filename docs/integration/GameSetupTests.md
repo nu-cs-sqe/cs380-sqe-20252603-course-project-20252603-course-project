@@ -91,10 +91,10 @@ This guarantees encapsulation and prevents external mutation of game state.
 
 ## Method under test: `Board()` initialization
 
-|             | System under test                      | Expected output      | Implemented? |
-|-------------|----------------------------------------|--------------------------------------|--------------|
-| Test Case 5 | `new Board()`                          | initial game state is `GameState.WHITE_TURN`     | :x:          |
-| Test Case 6 | `new Board()`                          | board initializes into a valid consistent 8x8 starting configuration | :x:          |
+|             | System under test                      | Expected output      | Implemented?       |
+|-------------|----------------------------------------|--------------------------------------|--------------------|
+| Test Case 5 | `new Board()`                          | initial game state is `GameState.WHITE_TURN`     | :white_check_mark: |
+| Test Case 6 | `new Board()`                          | board initializes into a valid consistent 8x8 starting configuration | :x:                |
 
 ---
 

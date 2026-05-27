@@ -157,15 +157,8 @@ public class Board {
    * Moves a piece from one location on the board to a new one.
    */
   public boolean movePiece(Location from, Location to) {
-    if (from == null) {
-      throw new IllegalArgumentException("from must not be null");
-    }
-    if (to == null) {
-      throw new IllegalArgumentException("to must not be null");
-    }
-
-    if (from.getX() < 0 || from.getX() >= TOTAL_COLS || from.getY() < 0 || from.getY() >= TOTAL_ROWS ||
-        to.getX() < 0 || to.getX() >= TOTAL_COLS || to.getY() < 0 || to.getY() >= TOTAL_ROWS) {
+    requireLocations(from, to);
+    if (isOutOfBounds(from) || isOutOfBounds(to)) {
       return false;
     }
 
@@ -175,58 +168,67 @@ public class Board {
     }
 
     Piece destinationPiece = pieces[to.getY()][to.getX()];
-
-    if (destinationPiece != null && destinationPiece.getColor() == piece.getColor()) {
+    if (isFriendlyOccupied(piece, destinationPiece)) {
       return false;
     }
 
-    boolean valid;
+    if (!isLegalMoveForPiece(piece, from, to, destinationPiece)) {
+      return false;
+    }
 
+    placePiece(piece, from, to);
+    return true;
+  }
+
+  private void requireLocations(Location from, Location to) {
+    if (from == null) {
+      throw new IllegalArgumentException("from must not be null");
+    }
+    if (to == null) {
+      throw new IllegalArgumentException("to must not be null");
+    }
+  }
+
+  private boolean isOutOfBounds(Location location) {
+    return location.getX() < 0 || location.getX() >= TOTAL_COLS
+        || location.getY() < 0 || location.getY() >= TOTAL_ROWS;
+  }
+
+  private boolean isFriendlyOccupied(Piece moving, Piece destination) {
+    return destination != null && destination.getColor() == moving.getColor();
+  }
+
+  private boolean isLegalMoveForPiece(Piece piece, Location from, Location to, Piece destinationPiece) {
     switch (piece.getType()) {
       case PAWN:
-        valid = ((Pawn) piece).isValidMoveShape(from, to);
-        if (valid) {
-          int dx = to.getX() - from.getX();
-          int dy = to.getY() - from.getY();
-
-          if (dx == 0) {
-            if (destinationPiece != null) return false;
-            if (Math.abs(dy) == 2 && !isPathClear(from, to)) return false;
-          } else {
-            if (destinationPiece == null) return false;
-          }
-        }
-        break;
+        return isLegalPawnMove(piece, from, to, destinationPiece);
       case ROOK:
-        valid = ((Rook) piece).isValidMoveShape(from, to);
-        if (valid && !isPathClear(from, to)) return false;
-        break;
-      case KNIGHT:
-        valid = ((Knight) piece).isValidMoveShape(from, to);
-        break;
       case BISHOP:
-        valid = ((Bishop) piece).isValidMoveShape(from, to);
-        if (valid && !isPathClear(from, to)) return false;
-        break;
       case QUEEN:
-        valid = ((Queen) piece).isValidMoveShape(from, to);
-        if (valid && !isPathClear(from, to)) return false;
-        break;
+        return piece.isValidMoveShape(from, to) && isPathClear(from, to);
+      case KNIGHT:
       case KING:
-        valid = ((King) piece).isValidMoveShape(from, to);
-        break;
+        return piece.isValidMoveShape(from, to);
       default:
         throw new IllegalStateException("Unknown piece type: " + piece.getType());
     }
+  }
 
-    if (!valid) {
+  private boolean isLegalPawnMove(Piece piece, Location from, Location to, Piece destinationPiece) {
+    if (!piece.isValidMoveShape(from, to)) {
       return false;
     }
+    int dx = to.getX() - from.getX();
+    int dy = to.getY() - from.getY();
+    if (dx == 0) {
+      return destinationPiece == null && (Math.abs(dy) != 2 || isPathClear(from, to));
+    }
+    return destinationPiece != null;
+  }
 
+  private void placePiece(Piece piece, Location from, Location to) {
     pieces[to.getY()][to.getX()] = piece;
     pieces[from.getY()][from.getX()] = null;
-
-    return true;
   }
 
   private boolean isPathClear(Location from, Location to) {
@@ -248,12 +250,7 @@ public class Board {
   }
 
   public boolean applyMoveIfKingSafe(Location from, Location to) {
-    if (from == null) {
-      throw new IllegalArgumentException("from must not be null");
-    }
-    if (to == null) {
-      throw new IllegalArgumentException("to must not be null");
-    }
+    requireLocations(from, to);
 
     Piece movingPiece = pieces[from.getY()][from.getX()];
     Piece capturedPiece = pieces[to.getY()][to.getX()];

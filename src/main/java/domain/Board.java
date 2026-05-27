@@ -88,19 +88,19 @@ public class Board {
     pieces[WHITE_BACK_RANK][KING_COL] = new King(PieceColor.WHITE);
   }
 
-  public Piece getPiece(int row, int col) {
+  Piece getPiece(int row, int col) {
     return pieces[row][col];
   }
 
-  public void setPiece(int row, int col, Piece piece) {
+  void setPiece(int row, int col, Piece piece) {
     pieces[row][col] = piece;
   }
 
-  public Location getWhiteKingLocation() {
+  Location getWhiteKingLocation() {
     return whiteKingLocation;
   }
 
-  public Location getBlackKingLocation() {
+  Location getBlackKingLocation() {
     return blackKingLocation;
   }
 
@@ -131,11 +131,11 @@ public class Board {
         : GameState.WHITE_TURN;
   }
 
-  public void updateWhiteKingLocation(Location location) {
+  void updateWhiteKingLocation(Location location) {
     updateKingLocation(location, PieceColor.WHITE);
   }
 
-  public void updateBlackKingLocation(Location location) {
+  void updateBlackKingLocation(Location location) {
     updateKingLocation(location, PieceColor.BLACK);
   }
 
@@ -229,7 +229,7 @@ public class Board {
     return !Piece.hasPieceBetween(from, to, pieces);
   }
 
-  public boolean applyMoveIfKingSafe(Location from, Location to) {
+  boolean applyMoveIfKingSafe(Location from, Location to) {
     requireLocations(from, to);
 
     Piece movingPiece = pieces[from.getY()][from.getX()];

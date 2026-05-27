@@ -19,12 +19,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class BoardView extends JPanel {
-  private static final int BOARD_SIZE = 8;
-  private static final int TILE_SIZE = 100;
-  private final Color lightSquareColor = new Color(240, 217, 181);
-  private final Color darkSquareColor = new Color(181, 136, 99);
-  private final Color selectedSquareColor = new Color(164, 149, 195);
 
+  private static final int BOARD_SIZE = 8;
+  private static final int TILE_SIZE = 100; // size of each square in pixels
+  private static final Color LIGHT_SQUARE_COLOR = new Color(240, 217, 181);
+  private static final Color DARK_SQUARE_COLOR = new Color(181, 136, 99);
+
+  private final Color SELECTED_SQUARE_COLOR = new Color(164, 149, 195); // NU Purple 40
   private int selectedRow = -1;
   private int selectedCol = -1;
 
@@ -46,13 +47,13 @@ public class BoardView extends JPanel {
     super.paintComponent(g);
     drawBoard(g);
     drawSelectedSquare(g);
-    drawPieces(g);
+    drawPieces(g); // draw piece after draw selected square to ensure piece image is on top
   }
 
   private void drawBoard(Graphics g) {
     for (int row = 0; row < BOARD_SIZE; row++) {
       for (int col = 0; col < BOARD_SIZE; col++) {
-        Color squareColor = (row + col) % 2 == 0 ? lightSquareColor : darkSquareColor;
+        Color squareColor = (row + col) % 2 == 0 ? LIGHT_SQUARE_COLOR : DARK_SQUARE_COLOR;
         g.setColor(squareColor);
         g.fillRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
       }
@@ -60,6 +61,7 @@ public class BoardView extends JPanel {
   }
 
   private void loadPieceImages() {
+
     whitePieceImages = new HashMap<>();
     blackPieceImages = new HashMap<>();
 
@@ -83,28 +85,27 @@ public class BoardView extends JPanel {
     BufferedImage image = null;
     try {
       image = ImageIO.read(imageInputStream);
-    } catch (IOException ex) {
-      throw new RuntimeException(ex);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
     if (color.equals(PieceColor.BLACK)) {
       blackPieceImages.put(type, image);
     } else {
-      whitePieceImages.put(type, image);
+      this.whitePieceImages.put(type, image);
     }
   }
 
   private void drawPieces(Graphics g) {
+
     Piece[][] boardSnapshot = boardController.getBoardSnapshot();
-    if (boardSnapshot == null) {
-      return;
-    }
+
     for (int row = 0; row < BOARD_SIZE; row++) {
       for (int col = 0; col < BOARD_SIZE; col++) {
         Piece piece = boardSnapshot[row][col];
         if (piece != null) {
-          Image pieceImage = piece.getColor() == PieceColor.WHITE
-              ? whitePieceImages.get(piece.getType())
-              : blackPieceImages.get(piece.getType());
+          Image pieceImage = piece.getColor() == PieceColor.WHITE ?
+              whitePieceImages.get(piece.getType()) :
+              blackPieceImages.get(piece.getType());
           g.drawImage(pieceImage, col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE, this);
         }
       }
@@ -112,25 +113,25 @@ public class BoardView extends JPanel {
   }
 
   private void drawSelectedSquare(Graphics g) {
-    if (selectedRow < 0 || selectedCol < 0) {
-      return;
-    }
-    g.setColor(selectedSquareColor);
+    g.setColor(SELECTED_SQUARE_COLOR);
     g.fillRect(selectedCol * TILE_SIZE, selectedRow * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }
 
+
   private class BoardMouseListener extends MouseAdapter {
+
     @Override
-    public void mouseClicked(MouseEvent ev) {
-      int col = ev.getX() / TILE_SIZE;
-      int row = ev.getY() / TILE_SIZE;
-      if (col < 0 || col >= BOARD_SIZE || row < 0 || row >= BOARD_SIZE) {
-        return;
-      }
-      selectedCol = col;
-      selectedRow = row;
-      boardController.handleSquareClick(new Location(selectedCol, selectedRow));
+    public void mouseClicked(MouseEvent e) {
+
+      selectedCol = e.getX() / TILE_SIZE;
+      selectedRow = e.getY() / TILE_SIZE;
+
+      // FIXME: perform input validation
+
       repaint();
+
+      boardController.handleSquareClick(new Location(selectedCol, selectedRow));
     }
   }
+
 }

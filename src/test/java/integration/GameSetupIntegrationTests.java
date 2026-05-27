@@ -34,4 +34,11 @@ public class GameSetupIntegrationTests {
     Board board = new Board();
     assertNotNull(board.getSnapshot());
   }
+
+  @Test
+  void GetSnapshot_RowCount_8RowsReturned() {
+    Board board = new Board();
+    Piece[][] snapshot = board.getSnapshot();
+    assertEquals(8, snapshot.length);
+  }
 }

@@ -85,7 +85,7 @@ This guarantees encapsulation and prevents external mutation of game state.
 | Test Case 1 | `getSnapshot()`                        | returns a non-null array            | :white_check_mark: |
 | Test Case 2 | `getSnapshot()`                        | returned array has exactly 8 rows   | :white_check_mark: |
 | Test Case 3 | `getSnapshot()`                        | each row has exactly 8 columns      | :white_check_mark: |
-| Test Case 4 | `getSnapshot()`                        | no row in returned snapshot is null | :x:                |
+| Test Case 4 | `getSnapshot()`                        | no row in returned snapshot is null | :white_check_mark: |
 
 ---
 

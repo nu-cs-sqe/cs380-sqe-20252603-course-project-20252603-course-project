@@ -35,6 +35,29 @@ public abstract class Piece {
 
   public abstract boolean isValidMoveShape(Location from, Location to);
 
+  public boolean hasMoved() {
+    throw new UnsupportedOperationException("not yet implemented");
+  }
+
+  public boolean canAttack(Location from, Location to, Piece[][] board) {
+    throw new UnsupportedOperationException("not yet implemented");
+  }
+
+  public static boolean hasPieceBetween(Location from, Location to, Piece[][] board) {
+    int rowStep = Integer.signum(to.getY() - from.getY());
+    int colStep = Integer.signum(to.getX() - from.getX());
+    int row = from.getY() + rowStep;
+    int col = from.getX() + colStep;
+    while (row != to.getY() || col != to.getX()) {
+      if (board[row][col] != null) {
+        return true;
+      }
+      row += rowStep;
+      col += colStep;
+    }
+    return false;
+  }
+
   protected static void requireLocations(Location from, Location to) {
     if (from == null) {
       throw new IllegalArgumentException("from must not be null");

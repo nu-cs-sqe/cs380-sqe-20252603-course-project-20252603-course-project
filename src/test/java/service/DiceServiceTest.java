@@ -19,4 +19,14 @@ public class DiceServiceTest {
         assertEquals(6, dice.rollDice());
     }
 
+    @Test
+    public void T2_expectReturnMin(){
+        Random rand = EasyMock.createMock(Random.class);
+        EasyMock.expect(rand.nextInt(6)).andStubReturn(0);
+        EasyMock.replay(rand);
+
+        DiceService dice = new DiceService(rand);
+        assertEquals(1, dice.rollDice());
+    }
+
 }

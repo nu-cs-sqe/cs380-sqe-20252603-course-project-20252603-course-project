@@ -17,6 +17,9 @@ public class DiceService {
     }
 
     public List<Integer> multiRollDice(int numberOfRolls){
+        if(numberOfRolls < 1){
+            throw new IllegalArgumentException("Number of Rolls must be at least 1. Received a request to roll: " + numberOfRolls + " times.");
+        }
         List<Integer> rollResults = new ArrayList<>();
         for(int i = 0; i < numberOfRolls; i++){
             rollResults.add(rollDice());

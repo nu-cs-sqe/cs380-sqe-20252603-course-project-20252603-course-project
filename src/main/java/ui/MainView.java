@@ -2,39 +2,46 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ResourceBundle;
 
 public class MainView extends JFrame {
 
-    private BoardView boardView;
-    private BoardController boardController;
-    private GameStatsView gameStatsView;
-    private String player1Name;
-    private String player2Name;
+  private static final boolean IS_WINDOW_RESIZABLE = false;
 
-    public MainView(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
-        configureMainView();
-        addGameStatsView();
-        addBoardView();
-    }
+  private BoardView boardView;
+  private BoardController boardController;
+  private GameStatsView gameStatsView;
+  private final String player1Name;
+  private final String player2Name;
+  private final ResourceBundle messages;
 
-    private void configureMainView() {
-        setTitle("Chess");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
-        setResizable(false);
-    }
+  public MainView(String player1Name, String player2Name, ResourceBundle messages) {
+    this.player1Name = player1Name;
+    this.player2Name = player2Name;
+    this.messages = messages;
 
-    private void addGameStatsView() {
-        gameStatsView = new GameStatsView(player1Name, player2Name);
-        add(gameStatsView, BorderLayout.SOUTH);
-    }
+    configureMainView();
+    addGameStatsView();
+    addBoardView();
+  }
 
-    private void addBoardView() {
-        boardController = new BoardController();
-        boardView = new BoardView(boardController);
-        boardController.setBoardView(boardView);
-        add(boardView, BorderLayout.CENTER);
-    }
+  private void configureMainView() {
+    setTitle(messages.getString("window.title"));
+
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setLayout(new BorderLayout());
+    setResizable(IS_WINDOW_RESIZABLE);
+  }
+
+  private void addGameStatsView() {
+    gameStatsView = new GameStatsView(player1Name, player2Name);
+    add(gameStatsView, BorderLayout.SOUTH);
+  }
+
+  private void addBoardView() {
+    boardController = new BoardController();
+    boardView = new BoardView(boardController);
+    boardController.setBoardView(boardView);
+    add(boardView, BorderLayout.CENTER);
+  }
 }

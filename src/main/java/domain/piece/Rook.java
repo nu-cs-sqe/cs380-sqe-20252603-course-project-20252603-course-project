@@ -1,15 +1,26 @@
 package domain.piece;
 
-public class Rook extends Piece {
-    public Rook(PieceColor color) {
-        super(PieceType.ROOK, color);
-        if (color == null) {
-            throw new IllegalArgumentException("color must not be null");
-        }
-    }
+import domain.Location;
 
-    @Override
-    public Piece makeCopy() {
-        return new Rook(getColor());
+public final class Rook extends Piece {
+
+  public Rook(PieceColor color) {
+    super(PieceType.ROOK, color);
+  }
+
+  @Override
+  public Piece makeCopy() {
+    return new Rook(getColor());
+  }
+
+  @Override
+  public boolean isValidMoveShape(Location from, Location to) {
+    requireLocations(from, to);
+    int dx = to.getX() - from.getX();
+    int dy = to.getY() - from.getY();
+    if (dx == 0 && dy == 0) {
+      return false;
     }
+    return dx == 0 || dy == 0;
+  }
 }

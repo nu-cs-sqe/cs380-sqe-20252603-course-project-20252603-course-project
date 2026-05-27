@@ -185,5 +185,32 @@ public class AttackServiceTest {
         assertThrows(IllegalArgumentException.class, () -> attackService.resolveBattleRound(attacker, atackingTerritory, defendingTerritory, 2, 3));
     }
 
+    @Test
+    void T9_shouldCompareHighestDiceFirst(){
+        TerritoryAdjacencyService adjacencyService = new TerritoryAdjacencyService();
+        Random rand = EasyMock.createMock(Random.class);
+        // Executes such that all attacker rolls occur first followed by all defender rolls
+        EasyMock.expect(rand.nextInt(6)).andReturn(0);
+        EasyMock.expect(rand.nextInt(6)).andReturn(2);
+        EasyMock.expect(rand.nextInt(6)).andReturn(5);
+        EasyMock.expect(rand.nextInt(6)).andReturn(3);
+        EasyMock.expect(rand.nextInt(6)).andReturn(4);
+        EasyMock.replay(rand);
+        DiceService diceService = new DiceService(rand);
+        AttackService attackService = new AttackService(adjacencyService,diceService);
+        List<Territory> controlled_territories1 = new ArrayList<>();
+        List<Territory> controlled_territories2 = new ArrayList<>();
+        Player attacker = new Player(1, "A", PlayerColor.RED, 1, controlled_territories1);
+        Player defender = new Player(2, "B", PlayerColor.BLUE, 1, controlled_territories2);
+        Territory atackingTerritory = new Territory("Western United States", attacker, 4, Continent.NORTH_AMERICA);
+        Territory defendingTerritory = new Territory("Eastern United States", defender, 1, Continent.NORTH_AMERICA);
+        controlled_territories1.add(atackingTerritory);
+        controlled_territories2.add(defendingTerritory);
+        attacker.setControlledTerritories(controlled_territories1);
+        defender.setControlledTerritories(controlled_territories2);
+        BattleResult result =  attackService.resolveBattleRound(attacker, atackingTerritory, defendingTerritory, 3, 2);
+        assertEquals(1, result.getAttackerLosses());
+        assertEquals(1, result.getDefenderLosses());
+    }
 
 }

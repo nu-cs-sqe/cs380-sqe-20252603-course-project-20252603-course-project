@@ -71,4 +71,15 @@ public class GameSetupIntegrationTests {
       assertEquals(8, snapshot[row].length);
     }
   }
+
+  @Test
+  void SnapshotIsolation_MutateSnapshot_InternalBoardStateUnchanged() {
+    Board board = new Board();
+
+    Piece[][] snapshot = board.getSnapshot();
+    snapshot[0][0] = null;
+
+    Piece[][] fresh = board.getSnapshot();
+    assertNotNull(fresh[0][0]);
+  }
 }

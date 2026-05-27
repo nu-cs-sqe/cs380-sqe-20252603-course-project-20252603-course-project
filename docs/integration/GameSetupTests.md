@@ -94,7 +94,7 @@ This guarantees encapsulation and prevents external mutation of game state.
 |             | System under test                      | Expected output      | Implemented?       |
 |-------------|----------------------------------------|--------------------------------------|--------------------|
 | Test Case 5 | `new Board()`                          | initial game state is `GameState.WHITE_TURN`     | :white_check_mark: |
-| Test Case 6 | `new Board()`                          | board initializes into a valid consistent 8x8 starting configuration | :x:                |
+| Test Case 6 | `new Board()`                          | board initializes into a valid consistent 8x8 starting configuration | :white_check_mark: |
 
 ---
 

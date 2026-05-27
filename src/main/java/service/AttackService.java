@@ -40,13 +40,13 @@ public class AttackService {
         if(!canAttack(attacker, from, to)){
             throw new IllegalArgumentException("Cannot proceed with the attack!");
         }
-        if(attackerDice > from.getArmyCount() + 1){
+        if(attackerDice > from.getArmyCount() - 1){
             throw new IllegalArgumentException("The attacker has attempted to roll more dice than permitted.");
         }
         if(attackerDice > 3){
             throw new IllegalArgumentException("The attacker may role at most 3 dice. " + attackerDice + " dice requested.");
         }
-        if(defenderDice > to.getArmyCount()){
+        if(defenderDice < to.getArmyCount()){
             throw new IllegalArgumentException("The defender has attempted to roll more dice than permitted.");
         }
         if(defenderDice > 2){

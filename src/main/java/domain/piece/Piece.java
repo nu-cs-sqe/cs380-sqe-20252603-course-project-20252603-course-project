@@ -44,11 +44,11 @@ public abstract class Piece {
   }
 
   public static boolean hasPieceBetween(Location from, Location to, Piece[][] board) {
-    int rowStep = Integer.signum(to.getX() - from.getX());
-    int colStep = Integer.signum(to.getY() - from.getY());
-    int row = from.getX() + rowStep;
-    int col = from.getY() + colStep;
-    while (row != to.getX() || col != to.getY()) {
+    int rowStep = Integer.signum(to.getY() - from.getY());
+    int colStep = Integer.signum(to.getX() - from.getX());
+    int row = from.getY() + rowStep;
+    int col = from.getX() + colStep;
+    while (row != to.getY() || col != to.getX()) {
       if (board[row][col] != null) {
         return true;
       }

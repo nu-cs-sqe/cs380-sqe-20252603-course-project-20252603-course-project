@@ -436,11 +436,11 @@ class BoardTests {
     final Piece whiteKing = mockAttacker(PieceColor.WHITE, false);
     board.setPiece(CENTER_COORDINATE, CENTER_COORDINATE, whiteRook);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, whiteKing);
-    board.updateWhiteKingLocation(new Location(WHITE_HOME_ROW, KING_START_COLUMN));
+    board.updateWhiteKingLocation(new Location(KING_START_COLUMN, WHITE_HOME_ROW));
 
     final boolean result = board.applyMoveIfKingSafe(
         new Location(CENTER_COORDINATE, CENTER_COORDINATE),
-        new Location(CENTER_COORDINATE, KINGSIDE_ROOK_TARGET_COLUMN));
+        new Location(KINGSIDE_ROOK_TARGET_COLUMN, CENTER_COORDINATE));
 
     assertTrue(result);
     assertNull(board.getPiece(CENTER_COORDINATE, CENTER_COORDINATE));
@@ -456,11 +456,11 @@ class BoardTests {
     board.setPiece(WHITE_HOME_ROW, 0, blackRook);
     board.setPiece(WHITE_HOME_ROW, 2, whiteBlocker);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, whiteKing);
-    board.updateWhiteKingLocation(new Location(WHITE_HOME_ROW, KING_START_COLUMN));
+    board.updateWhiteKingLocation(new Location(KING_START_COLUMN, WHITE_HOME_ROW));
 
     final boolean result = board.applyMoveIfKingSafe(
-        new Location(WHITE_HOME_ROW, 2),
-        new Location(PINNED_ROOK_TARGET_ROW, 2));
+        new Location(2, WHITE_HOME_ROW),
+        new Location(2, PINNED_ROOK_TARGET_ROW));
 
     assertFalse(result);
     assertEquals(whiteBlocker, board.getPiece(WHITE_HOME_ROW, 2));
@@ -476,14 +476,14 @@ class BoardTests {
 
     final boolean result = board.applyMoveIfKingSafe(
         new Location(CENTER_COORDINATE, CENTER_COORDINATE),
-        new Location(CENTER_COORDINATE, KINGSIDE_ROOK_TARGET_COLUMN));
+        new Location(KINGSIDE_ROOK_TARGET_COLUMN, CENTER_COORDINATE));
 
     assertTrue(result);
     assertEquals(
-        new Location(CENTER_COORDINATE, KINGSIDE_ROOK_TARGET_COLUMN).getX(),
+        new Location(KINGSIDE_ROOK_TARGET_COLUMN, CENTER_COORDINATE).getX(),
         board.getWhiteKingLocation().getX());
     assertEquals(
-        new Location(CENTER_COORDINATE, KINGSIDE_ROOK_TARGET_COLUMN).getY(),
+        new Location(KINGSIDE_ROOK_TARGET_COLUMN, CENTER_COORDINATE).getY(),
         board.getWhiteKingLocation().getY());
     EasyMock.verify(whiteKing);
   }
@@ -498,7 +498,7 @@ class BoardTests {
 
     final boolean result = board.applyMoveIfKingSafe(
         new Location(CENTER_COORDINATE, CENTER_COORDINATE),
-        new Location(CENTER_COORDINATE, KINGSIDE_ROOK_TARGET_COLUMN));
+        new Location(KINGSIDE_ROOK_TARGET_COLUMN, CENTER_COORDINATE));
 
     assertFalse(result);
     assertEquals(CENTER_COORDINATE, board.getWhiteKingLocation().getX());
@@ -511,7 +511,7 @@ class BoardTests {
   void applyMoveIfKingSafe_EmptySource_ReturnsTrueAndLeavesDestinationEmpty() {
     final Location from = new Location(0, 0);
     final Location to = new Location(0, 1);
-    board.updateWhiteKingLocation(new Location(WHITE_HOME_ROW, KING_START_COLUMN));
+    board.updateWhiteKingLocation(new Location(KING_START_COLUMN, WHITE_HOME_ROW));
 
     assertTrue(board.applyMoveIfKingSafe(from, to));
     assertNull(board.getPiece(to.getX(), to.getY()));
@@ -521,7 +521,7 @@ class BoardTests {
   void applyMoveIfKingSafe_BlackKingMovesToSafeSquare_UpdatesBlackKingLocation() {
     final Piece blackKing = mockKing(PieceColor.BLACK);
     final Location from = new Location(CENTER_COORDINATE, CENTER_COORDINATE);
-    final Location to = new Location(CENTER_COORDINATE, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location to = new Location(KINGSIDE_ROOK_TARGET_COLUMN, CENTER_COORDINATE);
     board.setPiece(from.getX(), from.getY(), blackKing);
     board.updateBlackKingLocation(from);
     board.switchTurn();
@@ -538,7 +538,7 @@ class BoardTests {
     final Piece blackQueen = mockAttacker(PieceColor.BLACK, true);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, whiteKing);
     board.setPiece(WHITE_HOME_ROW, 0, blackQueen);
-    board.updateWhiteKingLocation(new Location(WHITE_HOME_ROW, KING_START_COLUMN));
+    board.updateWhiteKingLocation(new Location(KING_START_COLUMN, WHITE_HOME_ROW));
 
     assertFalse(board.applyMoveIfKingSafe(new Location(0, 0), new Location(0, 1)));
     EasyMock.verify(whiteKing, blackQueen);
@@ -564,7 +564,7 @@ class BoardTests {
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, whiteKing);
     board.setPiece(WHITE_HOME_ROW, 0, blackRook);
     board.setPiece(WHITE_HOME_ROW, 2, whiteBishop);
-    board.updateWhiteKingLocation(new Location(WHITE_HOME_ROW, KING_START_COLUMN));
+    board.updateWhiteKingLocation(new Location(KING_START_COLUMN, WHITE_HOME_ROW));
 
     assertTrue(board.applyMoveIfKingSafe(new Location(0, 0), new Location(0, 1)));
     EasyMock.verify(whiteKing, blackRook, whiteBishop);
@@ -598,9 +598,9 @@ class BoardTests {
 
   @Test
   void castle_NullKingFrom_ThrowsIllegalArgumentException() {
-    final Location to = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location to = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.castle(null, to, rookFrom, rookTo));
     assertEquals("kingFrom must not be null", exception.getMessage());
@@ -608,9 +608,9 @@ class BoardTests {
 
   @Test
   void castle_NullKingTo_ThrowsIllegalArgumentException() {
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.castle(kingFrom, null, rookFrom, rookTo));
     assertEquals("kingTo must not be null", exception.getMessage());
@@ -618,9 +618,9 @@ class BoardTests {
 
   @Test
   void castle_NullRookFrom_ThrowsIllegalArgumentException() {
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.castle(kingFrom, kingTo, null, rookTo));
     assertEquals("rookFrom must not be null", exception.getMessage());
@@ -628,9 +628,9 @@ class BoardTests {
 
   @Test
   void castle_NullRookTo_ThrowsIllegalArgumentException() {
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> board.castle(kingFrom, kingTo, rookFrom, null));
     assertEquals("rookTo must not be null", exception.getMessage());
@@ -638,10 +638,10 @@ class BoardTests {
 
   @Test
   void castle_NoKingAtStart_ReturnsFalse() {
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
 
     assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
   }
@@ -652,10 +652,10 @@ class BoardTests {
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.replay(mockKing);
 
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, mockKing);
 
     assertFalse(board.castle(kingFrom, kingTo, rookFrom, rookTo));
@@ -669,10 +669,10 @@ class BoardTests {
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(true);
     EasyMock.replay(mockKing, mockRook);
 
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, mockKing);
     board.setPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN, mockRook);
     board.updateWhiteKingLocation(kingFrom);
@@ -691,10 +691,10 @@ class BoardTests {
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(true);
     EasyMock.replay(mockKing, mockRook);
 
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, mockKing);
     board.setPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN, mockRook);
     board.updateWhiteKingLocation(kingFrom);
@@ -714,10 +714,10 @@ class BoardTests {
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
     EasyMock.replay(mockKing, mockRook);
 
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, mockKing);
     board.setPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN, blocker);
     board.setPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN, mockRook);
@@ -741,10 +741,10 @@ class BoardTests {
     EasyMock.expect(mockRook.getColor()).andStubReturn(PieceColor.WHITE);
     EasyMock.replay(mockKing, mockRook);
 
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, mockKing);
     board.setPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN, mockRook);
     board.setPiece(0, KING_START_COLUMN, blackAttacker);
@@ -775,10 +775,10 @@ class BoardTests {
       .andReturn(true);
     EasyMock.replay(mockKing, mockRook, blackAttacker);
 
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, mockKing);
     board.setPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN, mockRook);
     board.setPiece(0, KINGSIDE_ROOK_TARGET_COLUMN, blackAttacker);
@@ -810,10 +810,10 @@ class BoardTests {
       .andReturn(true);
     EasyMock.replay(mockKing, mockRook, blackAttacker);
 
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, mockKing);
     board.setPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN, mockRook);
     board.setPiece(0, KINGSIDE_KING_TARGET_COLUMN, blackAttacker);
@@ -835,10 +835,10 @@ class BoardTests {
     EasyMock.expect(mockRook.getColor()).andStubReturn(PieceColor.WHITE);
     EasyMock.replay(mockKing, mockRook);
 
-    final Location kingFrom = new Location(WHITE_HOME_ROW, KING_START_COLUMN);
-    final Location kingTo = new Location(WHITE_HOME_ROW, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, WHITE_HOME_ROW);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, WHITE_HOME_ROW);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, WHITE_HOME_ROW);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, WHITE_HOME_ROW);
     board.setPiece(WHITE_HOME_ROW, KING_START_COLUMN, mockKing);
     board.setPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN, mockRook);
     board.updateWhiteKingLocation(kingFrom);
@@ -848,8 +848,8 @@ class BoardTests {
     assertEquals(mockRook, board.getPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_TARGET_COLUMN));
     assertNull(board.getPiece(WHITE_HOME_ROW, KING_START_COLUMN));
     assertNull(board.getPiece(WHITE_HOME_ROW, KINGSIDE_ROOK_START_COLUMN));
-    assertEquals(WHITE_HOME_ROW, board.getWhiteKingLocation().getX());
-    assertEquals(KINGSIDE_KING_TARGET_COLUMN, board.getWhiteKingLocation().getY());
+    assertEquals(KINGSIDE_KING_TARGET_COLUMN, board.getWhiteKingLocation().getX());
+    assertEquals(WHITE_HOME_ROW, board.getWhiteKingLocation().getY());
     EasyMock.verify(mockKing, mockRook);
   }
 
@@ -864,10 +864,10 @@ class BoardTests {
     EasyMock.replay(mockKing, mockRook);
 
     final int blackHomeRow = 0;
-    final Location kingFrom = new Location(blackHomeRow, KING_START_COLUMN);
-    final Location kingTo = new Location(blackHomeRow, KINGSIDE_KING_TARGET_COLUMN);
-    final Location rookFrom = new Location(blackHomeRow, KINGSIDE_ROOK_START_COLUMN);
-    final Location rookTo = new Location(blackHomeRow, KINGSIDE_ROOK_TARGET_COLUMN);
+    final Location kingFrom = new Location(KING_START_COLUMN, blackHomeRow);
+    final Location kingTo = new Location(KINGSIDE_KING_TARGET_COLUMN, blackHomeRow);
+    final Location rookFrom = new Location(KINGSIDE_ROOK_START_COLUMN, blackHomeRow);
+    final Location rookTo = new Location(KINGSIDE_ROOK_TARGET_COLUMN, blackHomeRow);
     board.setPiece(blackHomeRow, KING_START_COLUMN, mockKing);
     board.setPiece(blackHomeRow, KINGSIDE_ROOK_START_COLUMN, mockRook);
     board.updateBlackKingLocation(kingFrom);
@@ -875,8 +875,8 @@ class BoardTests {
     assertTrue(board.castle(kingFrom, kingTo, rookFrom, rookTo));
     assertEquals(mockKing, board.getPiece(blackHomeRow, KINGSIDE_KING_TARGET_COLUMN));
     assertEquals(mockRook, board.getPiece(blackHomeRow, KINGSIDE_ROOK_TARGET_COLUMN));
-    assertEquals(blackHomeRow, board.getBlackKingLocation().getX());
-    assertEquals(KINGSIDE_KING_TARGET_COLUMN, board.getBlackKingLocation().getY());
+    assertEquals(KINGSIDE_KING_TARGET_COLUMN, board.getBlackKingLocation().getX());
+    assertEquals(blackHomeRow, board.getBlackKingLocation().getY());
     EasyMock.verify(mockKing, mockRook);
   }
 }

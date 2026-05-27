@@ -255,11 +255,11 @@ public class Board {
       throw new IllegalArgumentException("to must not be null");
     }
 
-    Piece movingPiece = pieces[from.getX()][from.getY()];
-    Piece capturedPiece = pieces[to.getX()][to.getY()];
+    Piece movingPiece = pieces[from.getY()][from.getX()];
+    Piece capturedPiece = pieces[to.getY()][to.getX()];
 
-    pieces[to.getX()][to.getY()] = movingPiece;
-    pieces[from.getX()][from.getY()] = null;
+    pieces[to.getY()][to.getX()] = movingPiece;
+    pieces[from.getY()][from.getX()] = null;
 
     Location prevWhiteKingLoc = whiteKingLocation;
     Location prevBlackKingLoc = blackKingLocation;
@@ -268,8 +268,8 @@ public class Board {
     boolean inCheck = isCurrentKingInCheck();
 
     if (inCheck) {
-      pieces[from.getX()][from.getY()] = movingPiece;
-      pieces[to.getX()][to.getY()] = capturedPiece;
+      pieces[from.getY()][from.getX()] = movingPiece;
+      pieces[to.getY()][to.getX()] = capturedPiece;
       whiteKingLocation = prevWhiteKingLoc;
       blackKingLocation = prevBlackKingLoc;
       return false;
@@ -312,8 +312,8 @@ public class Board {
   public boolean castle(Location kingFrom, Location kingTo, Location rookFrom, Location rookTo) {
     CastleMove castleMove = new CastleMove(kingFrom, kingTo, rookFrom, rookTo);
 
-    Piece king = pieces[castleMove.kingFrom.getX()][castleMove.kingFrom.getY()];
-    Piece rook = pieces[castleMove.rookFrom.getX()][castleMove.rookFrom.getY()];
+    Piece king = pieces[castleMove.kingFrom.getY()][castleMove.kingFrom.getX()];
+    Piece rook = pieces[castleMove.rookFrom.getY()][castleMove.rookFrom.getX()];
 
     if (king == null || king.hasMoved()) {
       return false;
@@ -352,10 +352,10 @@ public class Board {
       return false;
     }
 
-    int colStep = Integer.signum(castleMove.kingTo.getY() - castleMove.kingFrom.getY());
+    int colStep = Integer.signum(castleMove.kingTo.getX() - castleMove.kingFrom.getX());
     Location transitSquare = new Location(
-        castleMove.kingFrom.getX(),
-        castleMove.kingFrom.getY() + colStep);
+        castleMove.kingFrom.getX() + colStep,
+        castleMove.kingFrom.getY());
     if (isKingInCheck(kingColor, transitSquare)) {
       return false;
     }
@@ -374,10 +374,10 @@ public class Board {
   }
 
   private void moveCastlePieces(CastleMove castleMove, Piece king, Piece rook) {
-    pieces[castleMove.kingTo.getX()][castleMove.kingTo.getY()] = king;
-    pieces[castleMove.kingFrom.getX()][castleMove.kingFrom.getY()] = null;
-    pieces[castleMove.rookTo.getX()][castleMove.rookTo.getY()] = rook;
-    pieces[castleMove.rookFrom.getX()][castleMove.rookFrom.getY()] = null;
+    pieces[castleMove.kingTo.getY()][castleMove.kingTo.getX()] = king;
+    pieces[castleMove.kingFrom.getY()][castleMove.kingFrom.getX()] = null;
+    pieces[castleMove.rookTo.getY()][castleMove.rookTo.getX()] = rook;
+    pieces[castleMove.rookFrom.getY()][castleMove.rookFrom.getX()] = null;
   }
 
   private final class CastleMove {

@@ -80,12 +80,12 @@ This guarantees encapsulation and prevents external mutation of game state.
 
 ## Method under test: `Board.getSnapshot()`
 
-|             | System under test                      | Expected output                     | Implemented? |
-|-------------|----------------------------------------|-------------------------------------|--------------|
-| Test Case 1 | `getSnapshot()`                        | returns a non-null array            | :x:          |
-| Test Case 2 | `getSnapshot()`                        | returned array has exactly 8 rows   | :x:          |
-| Test Case 3 | `getSnapshot()`                        | each row has exactly 8 columns      | :x:          |
-| Test Case 4 | `getSnapshot()`                        | no row in returned snapshot is null | :x:          |
+|             | System under test                      | Expected output                     | Implemented?       |
+|-------------|----------------------------------------|-------------------------------------|--------------------|
+| Test Case 1 | `getSnapshot()`                        | returns a non-null array            | :white_check_mark: |
+| Test Case 2 | `getSnapshot()`                        | returned array has exactly 8 rows   | :x:                |
+| Test Case 3 | `getSnapshot()`                        | each row has exactly 8 columns      | :x:                |
+| Test Case 4 | `getSnapshot()`                        | no row in returned snapshot is null | :x:                |
 
 ---
 

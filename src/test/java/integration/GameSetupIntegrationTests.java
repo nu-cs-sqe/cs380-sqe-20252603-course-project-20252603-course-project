@@ -1,5 +1,12 @@
 package integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import domain.Board;
+import domain.GameState;
+import domain.piece.Piece;
+import org.junit.jupiter.api.Test;
+
 /*
 * Coordinate convention:
     * - board[row][column]
@@ -9,5 +16,10 @@ package integration;
  * - col 4 = E file (where king starts)
  */
 public class GameSetupIntegrationTests {
+  @Test
+  void BoardConstructor_NotNull_BoardExists() {
+    Board board = new Board();
+    assertNotNull(board);
+  }
 
 }

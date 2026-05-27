@@ -202,7 +202,7 @@ class BoardTests {
   // movePiece() — TC 23–34
 
   @Test
-  void movePieceValidMoveUpdatesSourceAndDestination() {
+  void movePiece_ValidMove_UpdatesSourceAndDestination() {
     Board b = new Board();
     Location from = new Location(COL_E, BLACK_PAWN_RANK);
     Location to = new Location(COL_E, BLACK_PAWN_RANK + 1);
@@ -214,7 +214,7 @@ class BoardTests {
   }
 
   @Test
-  void movePieceInvalidMoveShapeDoesNotModifyBoard() {
+  void movePiece_InvalidMoveShape_DoesNotModifyBoard() {
     Board b = new Board();
     Location from = new Location(COL_E, BLACK_PAWN_RANK);
     Location to = new Location(COL_E, BLACK_PAWN_RANK + 3);
@@ -226,7 +226,7 @@ class BoardTests {
   }
 
   @Test
-  void movePieceBlockedPathReturnsFalseAndNoMutation() {
+  void movePiece_BlockedPath_ReturnsFalseAndNoMutation() {
     Board b = new Board();
     Location from = new Location(COL_A, BLACK_BACK_RANK);
     Location to = new Location(COL_A, BLACK_PAWN_RANK + 2);
@@ -241,7 +241,7 @@ class BoardTests {
   }
 
   @Test
-  void movePieceCaptureRemovesOpponentPiece() {
+  void movePiece_Capture_RemovesOpponentPiece() {
     Board b = new Board();
     Location whiteFrom = new Location(COL_F, WHITE_PAWN_RANK);
     Location whiteTo = new Location(COL_F, WHITE_PAWN_RANK - 2);
@@ -258,7 +258,7 @@ class BoardTests {
   }
 
   @Test
-  void movePieceSameSquareReturnsFalse() {
+  void movePiece_SameSquare_ReturnsFalse() {
     Board b = new Board();
     Location from = new Location(COL_E, BLACK_PAWN_RANK);
     Location to = new Location(COL_E, BLACK_PAWN_RANK);
@@ -269,33 +269,33 @@ class BoardTests {
   }
 
   @Test
-  void movePieceNullFromThrowsException() {
+  void movePiece_NullFrom_ThrowsException() {
     Board b = new Board();
     assertThrows(IllegalArgumentException.class,
         () -> b.movePiece(null, new Location(COL_E, BLACK_PAWN_RANK)));
   }
 
   @Test
-  void movePieceNullToThrowsException() {
+  void movePiece_NullTo_ThrowsException() {
     Board b = new Board();
     assertThrows(IllegalArgumentException.class,
         () -> b.movePiece(new Location(COL_E, BLACK_PAWN_RANK), null));
   }
 
   @Test
-  void movePieceFromOutOfBoundsReturnsFalse() {
+  void movePiece_FromOutOfBounds_ReturnsFalse() {
     Board b = new Board();
     assertFalse(b.movePiece(new Location(-1, BLACK_PAWN_RANK), new Location(COL_E, BLACK_PAWN_RANK + 1)));
   }
 
   @Test
-  void movePieceToOutOfBoundsReturnsFalse() {
+  void movePiece_ToOutOfBounds_ReturnsFalse() {
     Board b = new Board();
     assertFalse(b.movePiece(new Location(COL_E, BLACK_PAWN_RANK), new Location(COL_E, BOARD_SIZE)));
   }
 
   @Test
-  void movePieceSameColorDestinationReturnsFalse() {
+  void movePiece_SameColorDestination_ReturnsFalse() {
     Board b = new Board();
     Location from = new Location(COL_D, BLACK_BACK_RANK);
     Location to = new Location(COL_E, BLACK_BACK_RANK);
@@ -307,7 +307,7 @@ class BoardTests {
   }
 
   @Test
-  void movePieceValidMoveOnlyUpdatesTwoSquares() {
+  void movePiece_ValidMove_OnlyUpdatesTwoSquares() {
     Board b = new Board();
     Location from = new Location(COL_E, BLACK_PAWN_RANK);
     Location to = new Location(COL_E, BLACK_PAWN_RANK + 1);
@@ -319,7 +319,7 @@ class BoardTests {
   }
 
   @Test
-  void movePieceInvalidMoveDoesNotMutateBoard() {
+  void movePiece_InvalidMove_DoesNotMutateBoard() {
     Board b = new Board();
     Location from = new Location(COL_E, BLACK_PAWN_RANK);
     Location to = new Location(COL_E, BLACK_PAWN_RANK + 3);

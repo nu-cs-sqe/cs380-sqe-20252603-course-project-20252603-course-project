@@ -1,7 +1,7 @@
 package ui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
 
 public class MainView extends JFrame {
 

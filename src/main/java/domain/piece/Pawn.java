@@ -28,7 +28,8 @@ public final class Pawn extends Piece {
   /** Returns true if the move shape from {@code from} to {@code to} is valid for a Pawn. */
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null || to == null) {
-      throw new IllegalArgumentException(from == null ? "from must not be null" : "to must not be null");
+      throw new IllegalArgumentException(
+          from == null ? "from must not be null" : "to must not be null");
     }
     if (!isOnBoard(from) || !isOnBoard(to)) {
       return false;

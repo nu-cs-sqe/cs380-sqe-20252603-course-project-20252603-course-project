@@ -213,15 +213,14 @@ public class PieceTests {
       super(type, color);
     }
 
-        @Override
-        public Piece makeCopy() {
-            return new TestPiece(getType(), getColor());
-        }
+    @Override
+    public Piece makeCopy() {
+      return new TestPiece(getType(), getColor());
+    }
 
-        @Override
-        public boolean isValidMoveShape(Location from, Location to) {
-            return false;
-        }
+    @Override
+    public boolean isValidMoveShape(Location from, Location to) {
+      return false;
     }
   }
 }

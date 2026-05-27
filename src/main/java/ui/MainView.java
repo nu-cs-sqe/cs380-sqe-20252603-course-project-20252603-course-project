@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 
 public class MainView extends JFrame {
 
-  private static final String BUNDLE_NAME = "MessagesBundle";
-
   private BoardView boardView;
   private BoardController boardController;
   private GameStatsView gameStatsView;
@@ -26,7 +24,7 @@ public class MainView extends JFrame {
   }
 
   private void configureMainView() {
-    ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
+    ResourceBundle bundle = ResourceBundle.getBundle(UiConstants.BUNDLE_NAME, locale);
     setTitle(bundle.getString("mainWindow.title"));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new BorderLayout());
@@ -34,7 +32,7 @@ public class MainView extends JFrame {
   }
 
   private void addGameStatsView() {
-    gameStatsView = new GameStatsView(player1Name, player2Name, locale);
+    gameStatsView = new GameStatsView(player1Name, player2Name);
     add(gameStatsView, BorderLayout.SOUTH);
   }
 

@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import java.awt.GraphicsEnvironment;
 import java.util.Locale;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -25,10 +24,10 @@ class WelcomeViewTest {
   }
 
   @Test
-  void welcomeView_ConstructWithEsUsLocale_BundleLocaleMatchesRequested() {
+  void welcomeView_ConstructWithEsUsLocale_TitleIsLocalised() {
     Locale esUs = new Locale("es", "US");
     WelcomeView view = new WelcomeView(esUs);
-    assertEquals(esUs, view.getBundle().getLocale());
+    assertEquals("Ajedrez — Bienvenido", view.getTitle());
   }
 
   @Test
@@ -37,9 +36,9 @@ class WelcomeViewTest {
   }
 
   @Test
-  void welcomeView_ConstructWithUnsupportedLocale_BundleFallsBackToDefault() {
+  void welcomeView_ConstructWithUnsupportedLocale_TitleUsesDefaultBundle() {
     WelcomeView view = new WelcomeView(new Locale("fr", "FR"));
-    assertEquals(Locale.ROOT, view.getBundle().getLocale());
+    assertEquals("Chess — Welcome", view.getTitle());
   }
 
   @Test

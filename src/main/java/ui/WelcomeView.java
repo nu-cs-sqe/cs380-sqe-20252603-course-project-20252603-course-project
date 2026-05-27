@@ -19,7 +19,6 @@ public class WelcomeView extends JFrame {
   private static final int PANEL_PADDING_V = 20;
   private static final int PANEL_PADDING_H = 30;
   private static final int COMPONENT_INSET = 6;
-  private static final String BUNDLE_NAME = "MessagesBundle";
 
   private JTextField player1NameField;
   private JTextField player2NameField;
@@ -28,12 +27,8 @@ public class WelcomeView extends JFrame {
 
   public WelcomeView(Locale locale) {
     this.selectedLocale = locale;
-    this.bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
+    this.bundle = ResourceBundle.getBundle(UiConstants.BUNDLE_NAME, locale);
     buildWelcomeUi();
-  }
-
-  ResourceBundle getBundle() {
-    return bundle;
   }
 
   private void buildWelcomeUi() {

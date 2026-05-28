@@ -3,6 +3,7 @@ import com.github.spotbugs.snom.Effort
 
 plugins {
     id("java")
+    checkstyle
     id("com.github.spotbugs") version "6.5.4"
 }
 
@@ -34,6 +35,20 @@ tasks.compileJava {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.withType<Checkstyle>().configureEach {
+    reports {
+        xml.required = false
+        html.required = true
+        html.stylesheet = resources.text.fromFile("config/xsl/checkstyle-noframes-severity-sorted.xsl")
+    }
+}
+
+checkstyle {
+    toolVersion = "10.23.0"
+    configFile = file("config/checkstyle/sun_checks.xml")
+    isIgnoreFailures = false
 }
 
 spotbugs {

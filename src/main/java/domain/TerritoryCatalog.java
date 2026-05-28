@@ -7,7 +7,8 @@ import model.Continent;
 
 public final class TerritoryCatalog {
 
-    public static final Map<Continent, List<String>> TERRITORIES_BY_CONTINENT = Map.of(
+    public static final Map<Continent,
+            List<String>> TERRITORIES_BY_CONTINENT = Map.of(
             Continent.NORTH_AMERICA, List.of(
                     "Alaska",
                     "Northwest Territory",

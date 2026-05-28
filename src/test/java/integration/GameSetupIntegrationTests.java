@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import domain.Board;
 import domain.GameState;
 import domain.piece.Piece;
+import domain.piece.PieceColor;
+import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
 
 public class GameSetupIntegrationTests {
@@ -73,5 +75,49 @@ public class GameSetupIntegrationTests {
     Piece[][] second = board.getSnapshot();
 
     assertNotSame(first, second);
+  }
+
+  @Test
+  void boardSetup_InitialBoard_SnapshotRow7Col0IsWhiteRook() {
+    Piece p = new Board().getSnapshot()[7][0];
+
+    assertEquals(PieceType.ROOK, p.getType());
+    assertEquals(PieceColor.WHITE, p.getColor());
+  }
+
+  @Test
+  void boardSetup_InitialBoard_SnapshotRow7Col1IsWhiteKnight() {
+    Piece p = new Board().getSnapshot()[7][1];
+
+    assertEquals(PieceType.KNIGHT, p.getType());
+    assertEquals(PieceColor.WHITE, p.getColor());
+  }
+
+  @Test
+  void boardSetup_InitialBoard_SnapshotRow7Col2IsWhiteBishop() {
+    Piece p = new Board().getSnapshot()[7][2];
+
+    assertEquals(PieceType.BISHOP, p.getType());
+    assertEquals(PieceColor.WHITE, p.getColor());
+  }
+
+  @Test
+  void boardSetup_InitialBoard_WhitePawnRowIsAllWhitePawns() {
+    Piece[][] snapshot = new Board().getSnapshot();
+
+    for (int col = 0; col < BOARD_SIZE; col++) {
+      Piece p = snapshot[6][col];
+      assertEquals(PieceType.PAWN, p.getType(), "Expected PAWN at [6][" + col + "]");
+      assertEquals(PieceColor.WHITE, p.getColor(), "Expected WHITE at [6][" + col + "]");
+    }
+  }
+
+  @Test
+  void pieceColor_EnumDefinition_HasExactlyTwoValues() {
+    PieceColor[] values = PieceColor.values();
+
+    assertEquals(2, values.length);
+    assertEquals(PieceColor.BLACK, values[0]);
+    assertEquals(PieceColor.WHITE, values[1]);
   }
 }

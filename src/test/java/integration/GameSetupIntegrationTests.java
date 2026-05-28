@@ -59,6 +59,12 @@ public class GameSetupIntegrationTests {
         assertNull(snapshot[row][col]);
       }
     }
+  }
+
+  @Test
+  void boardSetup_InitialBoard_PieceRowsArePopulated() {
+    Board board = new Board();
+    Piece[][] snapshot = board.getSnapshot();
 
     for (int row : PIECE_ROWS) {
       for (int col = 0; col < BOARD_SIZE; col++) {

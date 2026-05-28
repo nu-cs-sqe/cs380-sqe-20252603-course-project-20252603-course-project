@@ -61,6 +61,7 @@ tasks.register<Exec>("jlink") {
         "--no-header-files",
         "--no-man-pages"
     )
+}
 spotbugs {
     ignoreFailures = false
     showStackTraces = true

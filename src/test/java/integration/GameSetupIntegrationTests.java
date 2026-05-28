@@ -29,7 +29,9 @@ public class GameSetupIntegrationTests {
 
   @Test
   void gameSetup_InitialGameState_IsWhiteTurn() {
-    assertEquals(GameState.WHITE_TURN, GameState.values()[0]);
+    Board board = new Board();
+
+    assertEquals(GameState.WHITE_TURN, board.getCurrentGameState());
   }
 
   @Test

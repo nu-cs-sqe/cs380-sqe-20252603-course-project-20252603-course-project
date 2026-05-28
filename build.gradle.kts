@@ -19,6 +19,7 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.easymock:easymock:5.4.0")
 }
 
 java {
@@ -71,6 +72,11 @@ tasks.spotbugsMain {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    classDirectories.setFrom(files(classDirectories.files.map {
+        fileTree(it) {
+            include("domain/Board*.class", "domain/GameState*.class")
+        }
+    }))
     reports {
         xml.required = false
         csv.required = false

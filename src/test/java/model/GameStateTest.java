@@ -29,15 +29,13 @@ public class GameStateTest {
 		GameState gameState = new GameState();
 
 		Player currentPlayer = EasyMock.createMock(Player.class);
-		List<Player> players = EasyMock.createMock(List.class);
-		List<Territory> territories = EasyMock.createMock(List.class);
-		List<Player> turnOrder = EasyMock.createMock(List.class);
+		Player playerTwo = EasyMock.createMock(Player.class);
+		Territory territory = EasyMock.createMock(Territory.class);
+		List<Player> players = List.of(currentPlayer, playerTwo);
+		List<Territory> territories = List.of(territory);
+		List<Player> turnOrder = List.of(playerTwo, currentPlayer);
 
-		EasyMock.expect(players.size()).andStubReturn(2);
-		EasyMock.expect(territories.size()).andStubReturn(1);
-		EasyMock.expect(turnOrder.size()).andStubReturn(2);
-
-		EasyMock.replay(currentPlayer, players, territories, turnOrder);
+		EasyMock.replay(currentPlayer, playerTwo, territory);
 
 		gameState.setPlayers(players);
 		gameState.setTerritories(territories);
@@ -48,12 +46,12 @@ public class GameStateTest {
 		assertEquals(2, gameState.getPlayers().size());
 		assertEquals(1, gameState.getTerritories().size());
 		assertEquals(2, gameState.getTurnOrder().size());
-		assertSame(players, gameState.getPlayers());
-		assertSame(territories, gameState.getTerritories());
-		assertSame(turnOrder, gameState.getTurnOrder());
+		assertEquals(players, gameState.getPlayers());
+		assertEquals(territories, gameState.getTerritories());
+		assertEquals(turnOrder, gameState.getTurnOrder());
 		assertSame(currentPlayer, gameState.getCurrentPlayer());
 		assertEquals(GamePhase.ATTACK, gameState.getCurrentPhase());
 
-		EasyMock.verify(currentPlayer, players, territories, turnOrder);
+		EasyMock.verify(currentPlayer, playerTwo, territory);
 	}
 }

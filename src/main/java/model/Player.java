@@ -63,7 +63,7 @@ public class Player {
 	}
 
 	public List<Territory> getControlledTerritories() {
-		return controlledTerritories;
+		return List.copyOf(controlledTerritories);
 	}
 
 	public void setControlledTerritories(List<Territory> territories) {
@@ -78,6 +78,10 @@ public class Player {
 		if (!controlledTerritories.contains(territory)) {
 			controlledTerritories.add(territory);
 		}
+	}
+
+	public void removeControlledTerritory(Territory territory) {
+		controlledTerritories.remove(territory);
 	}
 
 	

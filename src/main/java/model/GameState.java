@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameState {
@@ -17,28 +18,27 @@ public class GameState {
 		this.turnOrder = new ArrayList<>();
 	}
 
-	public List<Player> getPlayers() {
-		return players;
+	public List<Player> getPlayers() {return List.copyOf(players);
 	}
 
 	public void setPlayers(List<Player> players) {
-		this.players = players;
+		this.players = List.copyOf(players);
 	}
 
 	public List<Territory> getTerritories() {
-		return territories;
+		return List.copyOf(territories);
 	}
 
 	public void setTerritories(List<Territory> territories) {
-		this.territories = territories;
+		this.territories = List.copyOf(territories);
 	}
 
 	public List<Player> getTurnOrder() {
-		return turnOrder;
+		return List.copyOf(turnOrder);
 	}
 
 	public void setTurnOrder(List<Player> turnOrder) {
-		this.turnOrder = turnOrder;
+		this.turnOrder = List.copyOf(turnOrder);
 	}
 
 	public Player getCurrentPlayer() {

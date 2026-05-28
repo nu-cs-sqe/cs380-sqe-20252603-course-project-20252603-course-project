@@ -8,15 +8,18 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public void start(Stage stage){
+    private final int windowWidth = 480;
+    private final int windowHeight = 640;
+
+    public final void start(final Stage stage) {
         StackPane root = new StackPane();
-        Scene scene = new Scene(root, 640, 480);
+        Scene scene = new Scene(root, windowWidth, windowHeight);
         stage.setTitle("Risk");
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         launch(args);
     }
 }

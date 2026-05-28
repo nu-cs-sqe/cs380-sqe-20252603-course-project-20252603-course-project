@@ -7,21 +7,27 @@ import java.util.Random;
 public class DiceService {
 
     private final Random rand;
+    private final int maxRoll = 6;
 
-    DiceService(Random rand){
-        this.rand = rand;
+    DiceService(final Random inRand) {
+        this.rand = inRand;
     }
 
-    public int rollDice(){
-        return rand.nextInt(6) + 1;
+    public final int rollDice() {
+        return rand.nextInt(maxRoll) + 1;
     }
 
-    public List<Integer> multiRollDice(int numberOfRolls){
-        if(numberOfRolls < 1){
-            throw new IllegalArgumentException("Number of Rolls must be at least 1. Received a request to roll: " + numberOfRolls + " times.");
+    public final List<Integer> multiRollDice(
+            final int numberOfRolls
+    ) {
+        if (numberOfRolls < 1) {
+            throw new IllegalArgumentException(
+                    "Number of Rolls must be at least 1. "
+                    + "Received a request to roll: " + numberOfRolls
+                    + " times.");
         }
         List<Integer> rollResults = new ArrayList<>();
-        for(int i = 0; i < numberOfRolls; i++){
+        for (int i = 0; i < numberOfRolls; i++) {
             rollResults.add(rollDice());
         }
         return rollResults;

@@ -31,6 +31,10 @@
   - Null-derived getter, copy, and `toString()` rows are not separate public states; mark them `CAN'T SET` through the public constructor and cover them by constructor null rejection.
 
 
+## BoardView Consumption of PieceType and PieceColor
+
+As part of Issue #31 responsibilities, a review of `BoardView` was conducted to understand how it consumes `PieceType` and `PieceColor` from the board snapshot. The review found that `BoardView` directly utilizes these values from the board snapshot without any complex transformations or intermediate logic. It maps `PieceType` and `PieceColor` to their corresponding visual representations for rendering the chess board.
+
 ### Method under test: `Piece(PieceType type, PieceColor color)`
 
 |             | System under test                             | Expected output                                                  | Implemented? |

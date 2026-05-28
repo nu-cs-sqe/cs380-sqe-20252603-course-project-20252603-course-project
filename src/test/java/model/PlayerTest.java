@@ -1,233 +1,228 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
 import service.PlayerColor;
 
 public class PlayerTest {
 
-	@Test
-	void allArgsConstructor_setsAllFields() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
+    @Test
+    void allArgsConstructor_setsAllFields() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 
-		assertEquals(1, player.getId());
-		assertEquals("Alice", player.getName());
-		assertEquals(PlayerColor.RED, player.getColor());
-		assertEquals(5, player.getRemainingArmiesToPlace());
-	}
+        assertEquals(1, player.getId());
+        assertEquals("Alice", player.getName());
+        assertEquals(PlayerColor.RED, player.getColor());
+        assertEquals(5, player.getRemainingArmiesToPlace());
+    }
 
-	@Test
-	void setters_updateValues() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
+    @Test
+    void setters_updateValues() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 
-		player.setId(2);
-		player.setName("Bob");
-		player.setColor(PlayerColor.BLUE);
-		player.setRemainingArmiesToPlace(7);
+        player.setId(2);
+        player.setName("Bob");
+        player.setColor(PlayerColor.BLUE);
+        player.setRemainingArmiesToPlace(7);
 
-		assertEquals(2, player.getId());
-		assertEquals("Bob", player.getName());
-		assertEquals(PlayerColor.BLUE, player.getColor());
-		assertEquals(7, player.getRemainingArmiesToPlace());
-	}
+        assertEquals(2, player.getId());
+        assertEquals("Bob", player.getName());
+        assertEquals(PlayerColor.BLUE, player.getColor());
+        assertEquals(7, player.getRemainingArmiesToPlace());
+    }
 
-	@Test
-	void setId_withNegativeValue_throwsException() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
+    @Test
+    void setId_withNegativeValue_throwsException() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 
-		assertThrows(IllegalArgumentException.class, () -> player.setId(-1));
-	}
+        assertThrows(IllegalArgumentException.class, () -> player.setId(-1));
+    }
 
+    @Test
+    void setRemainingArmiesToPlace_withNegativeValue_throwsException() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
 
+        assertThrows(IllegalArgumentException.class, () -> player.setRemainingArmiesToPlace(-1));
+    }
 
+    @Test
+    void constructor_withInvalidArguments_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> new Player(-1, "Alice", PlayerColor.RED, 5, new ArrayList<>()));
+        assertThrows(IllegalArgumentException.class, () -> new Player(1, "", PlayerColor.RED, 5, new ArrayList<>()));
+        assertThrows(IllegalArgumentException.class, () -> new Player(1, "Alice", PlayerColor.RED, -1, new ArrayList<>()));
+    }
 
+    // Controlled Territory Tests
+    @Test
+    void parameterizedConstructor_initializesEmptyControlledTerritories() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
 
-	@Test
-	void setRemainingArmiesToPlace_withNegativeValue_throwsException() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
+        assertNotNull(player.getControlledTerritories());
+        assertEquals(0, player.getControlledTerritoryCount());
+    }
 
-		assertThrows(IllegalArgumentException.class, () -> player.setRemainingArmiesToPlace(-1));
-	}
+    @Test
+    void addControlledTerritory_addsTerritory() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
 
-	@Test
-	void constructor_withInvalidArguments_throwsException() {
-		assertThrows(IllegalArgumentException.class, () -> new Player(-1, "Alice", PlayerColor.RED, 5, new ArrayList<>()));
-		assertThrows(IllegalArgumentException.class, () -> new Player(1, "", PlayerColor.RED, 5, new ArrayList<>()));
-		assertThrows(IllegalArgumentException.class, () -> new Player(1, "Alice", PlayerColor.RED, -1, new ArrayList<>()));
-	}
+        player.addControlledTerritory(territory);
 
-	// Controlled Territory Tests
+        assertEquals(1, player.getControlledTerritoryCount());
+        assertTrue(player.getControlledTerritories().contains(territory));
+    }
 
+    @Test
+    void addControlledTerritory_doesNotAddDuplicates() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
 
-	@Test
-	void parameterizedConstructor_initializesEmptyControlledTerritories() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		
-		assertNotNull(player.getControlledTerritories());
-		assertEquals(0, player.getControlledTerritoryCount());
-	}
+        player.addControlledTerritory(territory);
+        player.addControlledTerritory(territory);
 
-	@Test
-	void addControlledTerritory_addsTerritory() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
-		
-		player.addControlledTerritory(territory);
-		
-		assertEquals(1, player.getControlledTerritoryCount());
-		assertTrue(player.getControlledTerritories().contains(territory));
-	}
+        assertEquals(1, player.getControlledTerritoryCount());
+    }
 
+    @Test
+    void addControlledTerritory_addsMultipleTerritories() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+        Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
+        Territory t3 = new Territory("Japan", player, 1, Continent.ASIA);
 
-	@Test
-	void addControlledTerritory_doesNotAddDuplicates() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
-		
-		player.addControlledTerritory(territory);
-		player.addControlledTerritory(territory);
-		
-		assertEquals(1, player.getControlledTerritoryCount());
-	}
+        player.addControlledTerritory(t1);
+        player.addControlledTerritory(t2);
+        player.addControlledTerritory(t3);
 
-	@Test
-	void addControlledTerritory_addsMultipleTerritories() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
-		Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
-		Territory t3 = new Territory("Japan", player, 1, Continent.ASIA);
-		
-		player.addControlledTerritory(t1);
-		player.addControlledTerritory(t2);
-		player.addControlledTerritory(t3);
-		
-		assertEquals(3, player.getControlledTerritoryCount());
-		assertTrue(player.getControlledTerritories().contains(t1));
-		assertTrue(player.getControlledTerritories().contains(t2));
-		assertTrue(player.getControlledTerritories().contains(t3));
-	}
+        assertEquals(3, player.getControlledTerritoryCount());
+        assertTrue(player.getControlledTerritories().contains(t1));
+        assertTrue(player.getControlledTerritories().contains(t2));
+        assertTrue(player.getControlledTerritories().contains(t3));
+    }
 
-	@Test
-	void setControlledTerritories_replacesExistingList() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
-		Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
-		Territory t3 = new Territory("Japan", player, 1, Continent.ASIA);
-		
-		List<Territory> newTerritories = new ArrayList<>();
-		newTerritories.add(t1);
-		newTerritories.add(t2);
-		newTerritories.add(t3);
-		
-		player.setControlledTerritories(newTerritories);
-		
-		assertEquals(3, player.getControlledTerritoryCount());
-		assertEquals(t1, player.getControlledTerritories().get(0));
-		assertEquals(t2, player.getControlledTerritories().get(1));
-		assertEquals(t3, player.getControlledTerritories().get(2));
-	}
+    @Test
+    void setControlledTerritories_replacesExistingList() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+        Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
+        Territory t3 = new Territory("Japan", player, 1, Continent.ASIA);
 
+        List<Territory> newTerritories = new ArrayList<>();
+        newTerritories.add(t1);
+        newTerritories.add(t2);
+        newTerritories.add(t3);
 
+        player.setControlledTerritories(newTerritories);
 
-	@Test
-	void setControlledTerritories_createsDeepCopy() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
-		Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
-		
-		List<Territory> originalList = new ArrayList<>();
-		originalList.add(t1);
-		originalList.add(t2);
-		
-		player.setControlledTerritories(originalList);
-		
-		// Modify original list
-		originalList.add(new Territory("Japan", player, 1, Continent.ASIA));
-		
-		// Player's list should not be affected
-		assertEquals(2, player.getControlledTerritoryCount());
-	}
+        assertEquals(3, player.getControlledTerritoryCount());
+        assertEquals(t1, player.getControlledTerritories().get(0));
+        assertEquals(t2, player.getControlledTerritories().get(1));
+        assertEquals(t3, player.getControlledTerritories().get(2));
+    }
 
-	@Test
-	void setControlledTerritories_emptyListCreatesEmpty() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
-		player.addControlledTerritory(t1);
-		
-		assertEquals(1, player.getControlledTerritoryCount());
-		
-		player.setControlledTerritories(new ArrayList<>());
-		
-		assertEquals(0, player.getControlledTerritoryCount());
-	}
+    @Test
+    void setControlledTerritories_createsDeepCopy() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+        Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
 
-	@Test
-	void getControlledTerritories_returnsCorrectTerritories() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
-		Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
-		
-		player.addControlledTerritory(t1);
-		player.addControlledTerritory(t2);
-		
-		List<Territory> controlled = player.getControlledTerritories();
-		assertEquals(2, controlled.size());
-		assertTrue(controlled.contains(t1));
-		assertTrue(controlled.contains(t2));
-	}
+        List<Territory> originalList = new ArrayList<>();
+        originalList.add(t1);
+        originalList.add(t2);
 
-	@Test
-	void getControlledTerritoryCount_returnsCorrectCount() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		assertEquals(0, player.getControlledTerritoryCount());
-		
-		Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
-		player.addControlledTerritory(t1);
-		assertEquals(1, player.getControlledTerritoryCount());
-		
-		Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
-		player.addControlledTerritory(t2);
-		assertEquals(2, player.getControlledTerritoryCount());
-	}
+        player.setControlledTerritories(originalList);
 
-	@Test
-	void removeControlledTerritory_removesExistingTerritory() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+        // Modify original list
+        originalList.add(new Territory("Japan", player, 1, Continent.ASIA));
 
-		player.addControlledTerritory(territory);
-		player.removeControlledTerritory(territory);
+        // Player's list should not be affected
+        assertEquals(2, player.getControlledTerritoryCount());
+    }
 
-		assertEquals(0, player.getControlledTerritoryCount());
-		assertFalse(player.getControlledTerritories().contains(territory));
-	}
+    @Test
+    void setControlledTerritories_emptyListCreatesEmpty() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+        player.addControlledTerritory(t1);
 
-	@Test
-	void removeControlledTerritory_missingTerritory() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory controlledTerritory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
-		Territory missingTerritory = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
+        assertEquals(1, player.getControlledTerritoryCount());
 
-		player.addControlledTerritory(controlledTerritory);
-		player.removeControlledTerritory(missingTerritory);
+        player.setControlledTerritories(new ArrayList<>());
 
-		assertEquals(1, player.getControlledTerritoryCount());
-		assertTrue(player.getControlledTerritories().contains(controlledTerritory));
-		assertFalse(player.getControlledTerritories().contains(missingTerritory));
-	}
+        assertEquals(0, player.getControlledTerritoryCount());
+    }
 
-	@Test
-	void removeControlledTerritory_fromEmptyList() {
-		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
-		Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+    @Test
+    void getControlledTerritories_returnsCorrectTerritories() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+        Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
 
-		player.removeControlledTerritory(territory);
+        player.addControlledTerritory(t1);
+        player.addControlledTerritory(t2);
 
-		assertEquals(0, player.getControlledTerritoryCount());
-		assertTrue(player.getControlledTerritories().isEmpty());
-	}
+        List<Territory> controlled = player.getControlledTerritories();
+        assertEquals(2, controlled.size());
+        assertTrue(controlled.contains(t1));
+        assertTrue(controlled.contains(t2));
+    }
+
+    @Test
+    void getControlledTerritoryCount_returnsCorrectCount() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        assertEquals(0, player.getControlledTerritoryCount());
+
+        Territory t1 = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+        player.addControlledTerritory(t1);
+        assertEquals(1, player.getControlledTerritoryCount());
+
+        Territory t2 = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
+        player.addControlledTerritory(t2);
+        assertEquals(2, player.getControlledTerritoryCount());
+    }
+
+    @Test
+    void removeControlledTerritory_removesExistingTerritory() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+
+        player.addControlledTerritory(territory);
+        player.removeControlledTerritory(territory);
+
+        assertEquals(0, player.getControlledTerritoryCount());
+        assertFalse(player.getControlledTerritories().contains(territory));
+    }
+
+    @Test
+    void removeControlledTerritory_missingTerritory() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory controlledTerritory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+        Territory missingTerritory = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
+
+        player.addControlledTerritory(controlledTerritory);
+        player.removeControlledTerritory(missingTerritory);
+
+        assertEquals(1, player.getControlledTerritoryCount());
+        assertTrue(player.getControlledTerritories().contains(controlledTerritory));
+        assertFalse(player.getControlledTerritories().contains(missingTerritory));
+    }
+
+    @Test
+    void removeControlledTerritory_fromEmptyList() {
+        Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+        Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+
+        player.removeControlledTerritory(territory);
+
+        assertEquals(0, player.getControlledTerritoryCount());
+        assertTrue(player.getControlledTerritories().isEmpty());
+    }
 }

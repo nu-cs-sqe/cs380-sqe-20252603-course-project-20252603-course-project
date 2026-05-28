@@ -1,6 +1,7 @@
 package model;
 
 public class Territory {
+
     private String name;
     private Player owner;
     private int armyCount;

@@ -38,9 +38,10 @@ public class TerritoryAssignmentService {
     }
 
     /**
-     * Randomly assign all {@value domain.GameConstants#TOTAL_TERRITORIES} territories to players in game state.
-     * Each territory gets 1 army and is assigned to a player.
-     * Territories are distributed as evenly as possible among players.
+     * Randomly assign all {@value domain.GameConstants#TOTAL_TERRITORIES}
+     * territories to players in game state. Each territory gets 1 army and is
+     * assigned to a player. Territories are distributed as evenly as possible
+     * among players.
      */
     // TODO: This method will be changed to assign territories based on player preferences in the future. For now, it just does a random assignment.
     public void assignTerritories(GameState gameState) {

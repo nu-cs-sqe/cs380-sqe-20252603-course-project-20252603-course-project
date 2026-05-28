@@ -1,6 +1,7 @@
 package model;
 
 public class BattleResult {
+
     private int attackerLosses;
     private int defenderLosses;
 

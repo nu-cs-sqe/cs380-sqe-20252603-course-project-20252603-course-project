@@ -1,18 +1,16 @@
 package service;
 
-
-import model.GamePhase;
-import model.GameState;
-import model.Player;
-import model.Continent;
 import java.util.ArrayList;
 import java.util.List;
-import service.PlayerColor;
-import model.Territory;
-import org.easymock.EasyMock;
-import service.FortifyService;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import model.Continent;
+import model.GameState;
+import model.Player;
+import model.Territory;
 
 public class FortifyServiceTest {
 
@@ -50,7 +48,7 @@ public class FortifyServiceTest {
     }
 
     @Test
-    void T3_shouldRejectFortifyWhenDestinationIsNotOwnedByPlayer(){
+    void T3_shouldRejectFortifyWhenDestinationIsNotOwnedByPlayer() {
         FortifyService FS = new FortifyService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
@@ -68,7 +66,7 @@ public class FortifyServiceTest {
     }
 
     @Test
-    void T4_shouldRejectFortifyWhenTerritoriesAreNotConnected(){
+    void T4_shouldRejectFortifyWhenTerritoriesAreNotConnected() {
         FortifyService FS = new FortifyService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories1 = new ArrayList<>();
@@ -85,7 +83,7 @@ public class FortifyServiceTest {
     }
 
     @Test
-    void T5_shouldRejectFortifyWhenSourceHasOnlyOneArmy(){
+    void T5_shouldRejectFortifyWhenSourceHasOnlyOneArmy() {
         FortifyService FS = new FortifyService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories = new ArrayList<>();
@@ -99,7 +97,7 @@ public class FortifyServiceTest {
     }
 
     @Test
-    void T6_shouldRejectFortifyWhenMoveWouldLeaveSourceEmpty(){
+    void T6_shouldRejectFortifyWhenMoveWouldLeaveSourceEmpty() {
         FortifyService FS = new FortifyService();
         GameState gameState = new GameState();
         List<Territory> controlled_territories = new ArrayList<>();

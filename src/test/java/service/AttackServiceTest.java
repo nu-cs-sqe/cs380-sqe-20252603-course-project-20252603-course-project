@@ -1,21 +1,20 @@
 package service;
 
-import model.Continent;
-import model.GameState;
-import model.Player;
-import model.Territory;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import model.Continent;
+import model.Player;
+import model.Territory;
 
 public class AttackServiceTest {
 
     @Test
-    void T1_shouldAllowAttackWhenTerritoriesAreAdjacentAndOwnedByDifferentPlayers(){
+    void T1_shouldAllowAttackWhenTerritoriesAreAdjacentAndOwnedByDifferentPlayers() {
         TerritoryAdjacencyService adjacencyService = new TerritoryAdjacencyService();
         AttackService attackService = new AttackService(adjacencyService);
         List<Territory> controlled_territories1 = new ArrayList<>();
@@ -32,7 +31,7 @@ public class AttackServiceTest {
     }
 
     @Test
-    void T2_shouldRejectAttackWhenAttackingTerritoryIsNotOwnedByCurrentPlayer(){
+    void T2_shouldRejectAttackWhenAttackingTerritoryIsNotOwnedByCurrentPlayer() {
         TerritoryAdjacencyService adjacencyService = new TerritoryAdjacencyService();
         AttackService attackService = new AttackService(adjacencyService);
         List<Territory> controlled_territories1 = new ArrayList<>();
@@ -52,7 +51,7 @@ public class AttackServiceTest {
     }
 
     @Test
-    void T3_shouldRejectAttackWhenDefendingTerritoryIsOwnedByCurrentPlayer(){
+    void T3_shouldRejectAttackWhenDefendingTerritoryIsOwnedByCurrentPlayer() {
         TerritoryAdjacencyService adjacencyService = new TerritoryAdjacencyService();
         AttackService attackService = new AttackService(adjacencyService);
         List<Territory> controlled_territories1 = new ArrayList<>();
@@ -66,7 +65,7 @@ public class AttackServiceTest {
     }
 
     @Test
-    void T4_shouldRejectAttackWhenTerritoriesAreNotAdjacent(){
+    void T4_shouldRejectAttackWhenTerritoriesAreNotAdjacent() {
         TerritoryAdjacencyService adjacencyService = new TerritoryAdjacencyService();
         AttackService attackService = new AttackService(adjacencyService);
         List<Territory> controlled_territories1 = new ArrayList<>();
@@ -83,7 +82,7 @@ public class AttackServiceTest {
     }
 
     @Test
-    void T5_shouldRejectAttackWhenAttackingTerritoryHasOnlyOneArmy(){
+    void T5_shouldRejectAttackWhenAttackingTerritoryHasOnlyOneArmy() {
         TerritoryAdjacencyService adjacencyService = new TerritoryAdjacencyService();
         AttackService attackService = new AttackService(adjacencyService);
         List<Territory> controlled_territories1 = new ArrayList<>();

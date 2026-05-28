@@ -1,20 +1,19 @@
 package service;
 
-
-import model.GamePhase;
-import model.GameState;
-import model.Player;
-import model.Continent;
-import service.ReinforcementService;
 import java.util.ArrayList;
 import java.util.List;
-import model.Territory;
-import org.easymock.EasyMock;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import model.Continent;
+import model.GameState;
+import model.Player;
+import model.Territory;
 
 public class ReinforcementServiceTest {
 
@@ -186,7 +185,6 @@ public class ReinforcementServiceTest {
         assertEquals(0, actual_bonus);
 
         // Australia
-
         List<Territory> controlled_territories2 = new ArrayList<>();
         Player player2 = new Player(1, "A", PlayerColor.RED, 0, controlled_territories2);
         Territory t21 = new Territory("Western Australia", player1, 0, Continent.AUSTRALIA);
@@ -369,31 +367,32 @@ public class ReinforcementServiceTest {
         int actual_bonus2 = rs.calculateContinentBonus(player1, gameState);
         assertEquals(0, actual_bonus2);
     }
+
     @ParameterizedTest
     @CsvSource({"1,3",
-            "9,3",
-            "11,3",
-            "12,4",
-            "14,4",
-            "15,5",
-            "17,5",
-            "18,6",
-            "20,6",
-            "21,7",
-            "23,7",
-            "24,8",
-            "26,8",
-            "27,9",
-            "29,9",
-            "30,10",
-            "32,10",
-            "33,11",
-            "35,11",
-            "36,12",
-            "38,12",
-            "39,13",
-            "41,13",
-            "42,14"})
+        "9,3",
+        "11,3",
+        "12,4",
+        "14,4",
+        "15,5",
+        "17,5",
+        "18,6",
+        "20,6",
+        "21,7",
+        "23,7",
+        "24,8",
+        "26,8",
+        "27,9",
+        "29,9",
+        "30,10",
+        "32,10",
+        "33,11",
+        "35,11",
+        "36,12",
+        "38,12",
+        "39,13",
+        "41,13",
+        "42,14"})
     void shouldCalculateCorrectReinforcementAtBoundaryValues(int len, int expected) {
         ReinforcementService rs = new ReinforcementService();
 

@@ -5,15 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.jupiter.api.Test;
-
-import domain.GameConstants;
-import model.BattleResult;
-import model.Continent;
-import model.GameState;
-import model.Player;
-import model.Territory;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -24,7 +15,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-
+import domain.GameConstants;
+import model.BattleResult;
+import model.Continent;
+import model.GameState;
+import model.Player;
+import model.Territory;
 
 public class TerritoryAssignmentServiceTest {
 
@@ -125,15 +121,12 @@ public class TerritoryAssignmentServiceTest {
         assertSame(player, territory.getOwner());
     }
 
-
-
-
     // assignTerritories() tests
     @Test
     public void assignTerritories_distributes42TerritoriesToPlayers() {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
-        
+
         Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
         Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
         Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
@@ -144,7 +137,7 @@ public class TerritoryAssignmentServiceTest {
 
         // Verify 42 territories are assigned
         assertEquals(GameConstants.TOTAL_TERRITORIES, state.getTerritories().size());
-        
+
         // Verify all territories have exactly 1 army
         for (Territory t : state.getTerritories()) {
             assertEquals(1, t.getArmyCount(), "Territory " + t.getName() + " should have 1 army");
@@ -155,7 +148,7 @@ public class TerritoryAssignmentServiceTest {
     public void assignTerritories_noDuplicateTerritories() {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
-        
+
         Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
         Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
         state.setPlayers(List.of(p1, p2));
@@ -165,19 +158,19 @@ public class TerritoryAssignmentServiceTest {
         // Verify no duplicate territory names
         Set<String> territoryNames = new HashSet<>();
         for (Territory t : state.getTerritories()) {
-            assertFalse(territoryNames.contains(t.getName()), 
-                "Territory " + t.getName() + " is assigned multiple times");
+            assertFalse(territoryNames.contains(t.getName()),
+                    "Territory " + t.getName() + " is assigned multiple times");
             territoryNames.add(t.getName());
         }
         assertEquals(GameConstants.TOTAL_TERRITORIES, territoryNames.size(),
-            "Should have exactly the expected number of unique territories");
+                "Should have exactly the expected number of unique territories");
     }
 
     @Test
     public void assignTerritories_noPlayerHasSameTerritory() {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
-        
+
         Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
         Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
         Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
@@ -191,39 +184,39 @@ public class TerritoryAssignmentServiceTest {
         for (Player p : state.getPlayers()) {
             for (Territory t : p.getControlledTerritories()) {
                 assertFalse(allAssignedTerritories.contains(t.getName()),
-                    "Territory " + t.getName() + " is controlled by multiple players");
+                        "Territory " + t.getName() + " is controlled by multiple players");
                 allAssignedTerritories.add(t.getName());
-                
+
                 // Also verify the territory's owner matches the player
                 assertEquals(p.getId(), t.getOwner().getId(),
-                    "Territory " + t.getName() + " owner doesn't match player's controlled list");
+                        "Territory " + t.getName() + " owner doesn't match player's controlled list");
             }
         }
         assertEquals(GameConstants.TOTAL_TERRITORIES, allAssignedTerritories.size(),
-            "All territories should be assigned");
+                "All territories should be assigned");
     }
 
     @Test
-        public void assignTerritories_correctDistributionFor2Players() {
-            TerritoryAssignmentService service = new TerritoryAssignmentService();
-            GameState state = new GameState();
-        
-            Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
-            Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
-            state.setPlayers(List.of(p1, p2));
+    public void assignTerritories_correctDistributionFor2Players() {
+        TerritoryAssignmentService service = new TerritoryAssignmentService();
+        GameState state = new GameState();
 
-            service.assignTerritories(state);
+        Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+        Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+        state.setPlayers(List.of(p1, p2));
 
-            // 42 territories / 2 players = 21 each
-            assertEquals(21, p1.getControlledTerritoryCount(), "Player 1 should have 21 territories");
-            assertEquals(21, p2.getControlledTerritoryCount(), "Player 2 should have 21 territories");
-        }
+        service.assignTerritories(state);
+
+        // 42 territories / 2 players = 21 each
+        assertEquals(21, p1.getControlledTerritoryCount(), "Player 1 should have 21 territories");
+        assertEquals(21, p2.getControlledTerritoryCount(), "Player 2 should have 21 territories");
+    }
 
     @Test
     public void assignTerritories_correctDistributionFor3Players() {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
-        
+
         Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
         Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
         Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
@@ -237,75 +230,73 @@ public class TerritoryAssignmentServiceTest {
         assertEquals(14, p3.getControlledTerritoryCount(), "Player 3 should have 14 territories");
     }
 
-	@Test
-	public void assignTerritories_correctDistributionFor4Players() {
-		TerritoryAssignmentService service = new TerritoryAssignmentService();
-		GameState state = new GameState();
+    @Test
+    public void assignTerritories_correctDistributionFor4Players() {
+        TerritoryAssignmentService service = new TerritoryAssignmentService();
+        GameState state = new GameState();
 
-		Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
-		Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
-		Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
-		Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
-		state.setPlayers(List.of(p1, p2, p3, p4));
+        Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+        Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+        Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
+        Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
+        state.setPlayers(List.of(p1, p2, p3, p4));
 
-		service.assignTerritories(state);
+        service.assignTerritories(state);
 
-		// 42 territories / 4 players = 10 with remainder 2
-		// So players 1 and 2 should have 11, players 3 and 4 should have 10
-		assertEquals(11, p1.getControlledTerritoryCount(), "Player 1 should have 11 territories");
-		assertEquals(11, p2.getControlledTerritoryCount(), "Player 2 should have 11 territories");
-		assertEquals(10, p3.getControlledTerritoryCount(), "Player 3 should have 10 territories");
-		assertEquals(10, p4.getControlledTerritoryCount(), "Player 4 should have 10 territories");
-	}
+        // 42 territories / 4 players = 10 with remainder 2
+        // So players 1 and 2 should have 11, players 3 and 4 should have 10
+        assertEquals(11, p1.getControlledTerritoryCount(), "Player 1 should have 11 territories");
+        assertEquals(11, p2.getControlledTerritoryCount(), "Player 2 should have 11 territories");
+        assertEquals(10, p3.getControlledTerritoryCount(), "Player 3 should have 10 territories");
+        assertEquals(10, p4.getControlledTerritoryCount(), "Player 4 should have 10 territories");
+    }
 
-        @Test
-        public void assignTerritories_correctDistributionFor5Players() {
-            TerritoryAssignmentService service = new TerritoryAssignmentService();
-            GameState state = new GameState();
-        
-            Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
-            Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
-            Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
-            Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
-            Player p5 = new Player(5, "Eve", PlayerColor.BLACK, 20, new ArrayList<>());
-            state.setPlayers(List.of(p1, p2, p3, p4, p5));
+    @Test
+    public void assignTerritories_correctDistributionFor5Players() {
+        TerritoryAssignmentService service = new TerritoryAssignmentService();
+        GameState state = new GameState();
 
-            service.assignTerritories(state);
+        Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+        Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+        Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
+        Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
+        Player p5 = new Player(5, "Eve", PlayerColor.BLACK, 20, new ArrayList<>());
+        state.setPlayers(List.of(p1, p2, p3, p4, p5));
 
-            // 42 territories / 5 players = 8 remainder 2
-            // Round-robin: players 1 and 2 get 9, players 3, 4, 5 get 8
-            assertEquals(9, p1.getControlledTerritoryCount(), "Player 1 should have 9 territories");
-            assertEquals(9, p2.getControlledTerritoryCount(), "Player 2 should have 9 territories");
-            assertEquals(8, p3.getControlledTerritoryCount(), "Player 3 should have 8 territories");
-            assertEquals(8, p4.getControlledTerritoryCount(), "Player 4 should have 8 territories");
-            assertEquals(8, p5.getControlledTerritoryCount(), "Player 5 should have 8 territories");
-        }
+        service.assignTerritories(state);
 
-        @Test
-        public void assignTerritories_correctDistributionFor6Players() {
-            TerritoryAssignmentService service = new TerritoryAssignmentService();
-            GameState state = new GameState();
-        
-            Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
-            Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
-            Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
-            Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
-            Player p5 = new Player(5, "Eve", PlayerColor.BLACK, 20, new ArrayList<>());
-            Player p6 = new Player(6, "Frank", PlayerColor.WHITE, 20, new ArrayList<>());
-            state.setPlayers(List.of(p1, p2, p3, p4, p5, p6));
+        // 42 territories / 5 players = 8 remainder 2
+        // Round-robin: players 1 and 2 get 9, players 3, 4, 5 get 8
+        assertEquals(9, p1.getControlledTerritoryCount(), "Player 1 should have 9 territories");
+        assertEquals(9, p2.getControlledTerritoryCount(), "Player 2 should have 9 territories");
+        assertEquals(8, p3.getControlledTerritoryCount(), "Player 3 should have 8 territories");
+        assertEquals(8, p4.getControlledTerritoryCount(), "Player 4 should have 8 territories");
+        assertEquals(8, p5.getControlledTerritoryCount(), "Player 5 should have 8 territories");
+    }
 
-            service.assignTerritories(state);
+    @Test
+    public void assignTerritories_correctDistributionFor6Players() {
+        TerritoryAssignmentService service = new TerritoryAssignmentService();
+        GameState state = new GameState();
 
-            // 42 territories / 6 players = 7 each
-            assertEquals(7, p1.getControlledTerritoryCount(), "Player 1 should have 7 territories");
-            assertEquals(7, p2.getControlledTerritoryCount(), "Player 2 should have 7 territories");
-            assertEquals(7, p3.getControlledTerritoryCount(), "Player 3 should have 7 territories");
-            assertEquals(7, p4.getControlledTerritoryCount(), "Player 4 should have 7 territories");
-            assertEquals(7, p5.getControlledTerritoryCount(), "Player 5 should have 7 territories");
-            assertEquals(7, p6.getControlledTerritoryCount(), "Player 6 should have 7 territories");
-        }
+        Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
+        Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
+        Player p3 = new Player(3, "Charlie", PlayerColor.GREEN, 20, new ArrayList<>());
+        Player p4 = new Player(4, "David", PlayerColor.YELLOW, 20, new ArrayList<>());
+        Player p5 = new Player(5, "Eve", PlayerColor.BLACK, 20, new ArrayList<>());
+        Player p6 = new Player(6, "Frank", PlayerColor.WHITE, 20, new ArrayList<>());
+        state.setPlayers(List.of(p1, p2, p3, p4, p5, p6));
 
+        service.assignTerritories(state);
 
+        // 42 territories / 6 players = 7 each
+        assertEquals(7, p1.getControlledTerritoryCount(), "Player 1 should have 7 territories");
+        assertEquals(7, p2.getControlledTerritoryCount(), "Player 2 should have 7 territories");
+        assertEquals(7, p3.getControlledTerritoryCount(), "Player 3 should have 7 territories");
+        assertEquals(7, p4.getControlledTerritoryCount(), "Player 4 should have 7 territories");
+        assertEquals(7, p5.getControlledTerritoryCount(), "Player 5 should have 7 territories");
+        assertEquals(7, p6.getControlledTerritoryCount(), "Player 6 should have 7 territories");
+    }
 
     @Test
     public void assignTerritories_throwsWhenNoPlayers() {
@@ -320,7 +311,7 @@ public class TerritoryAssignmentServiceTest {
     public void assignTerritories_eachTerritoryHasOwnerSet() {
         TerritoryAssignmentService service = new TerritoryAssignmentService();
         GameState state = new GameState();
-        
+
         Player p1 = new Player(1, "Alice", PlayerColor.RED, 20, new ArrayList<>());
         Player p2 = new Player(2, "Bob", PlayerColor.BLUE, 20, new ArrayList<>());
         state.setPlayers(List.of(p1, p2));
@@ -331,7 +322,7 @@ public class TerritoryAssignmentServiceTest {
         for (Territory t : state.getTerritories()) {
             assertNotNull(t.getOwner(), "Territory " + t.getName() + " should have an owner");
             assertTrue(t.getOwner().getId() == 1 || t.getOwner().getId() == 2,
-                "Territory " + t.getName() + " owner should be one of the players");
+                    "Territory " + t.getName() + " owner should be one of the players");
         }
     }
 
@@ -456,7 +447,6 @@ public class TerritoryAssignmentServiceTest {
 
         assertThrows(IllegalArgumentException.class, () -> TerritoryService.conquerTerritory(attacker, from, to, armiesToMove, state));
     }
-
 
     @Test
     public void conquerTerritory_throwsWhenAttackerDoesNotOwnFromTerritory() {

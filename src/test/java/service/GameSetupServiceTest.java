@@ -1,14 +1,17 @@
 package service;
 
-import model.GamePhase;
-import model.GameState;
-import model.Player;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import model.GamePhase;
+import model.GameState;
+import model.Player;
 
 public class GameSetupServiceTest {
 
@@ -66,7 +69,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC1_CreatePlayersBasic(){
+    void TC1_CreatePlayersBasic() {
         GameSetupService service = new GameSetupService();
         List<String> names = new ArrayList<>(List.of("P1", "P2", "P3"));
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW));
@@ -82,7 +85,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC2_CreatePlayersUnequalListLengthSmallerNames(){
+    void TC2_CreatePlayersUnequalListLengthSmallerNames() {
         GameSetupService service = new GameSetupService();
         List<String> names = new ArrayList<>(List.of("P1", "P2"));
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW));
@@ -91,7 +94,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC3_CreatePlayersUnequalListLengthSmallerColors(){
+    void TC3_CreatePlayersUnequalListLengthSmallerColors() {
         GameSetupService service = new GameSetupService();
         List<String> names = new ArrayList<>(List.of("P1", "P2", "P3"));
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
@@ -100,7 +103,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC4_CreatePlayersBothListsEmpty(){
+    void TC4_CreatePlayersBothListsEmpty() {
         GameSetupService service = new GameSetupService();
         List<String> names = new ArrayList<>(List.of());
         List<PlayerColor> colors = new ArrayList<>(List.of());
@@ -109,7 +112,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC5_CreatePlayersBothListsOversized(){
+    void TC5_CreatePlayersBothListsOversized() {
         GameSetupService service = new GameSetupService();
         List<String> names = new ArrayList<>(List.of("P1", "P2", "P3", "P4", "P5", "P6", "P7"));
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.BLACK, PlayerColor.GREEN, PlayerColor.RED, PlayerColor.GREEN));
@@ -118,7 +121,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC6_CreatePlayersBasicRepeatNames(){
+    void TC6_CreatePlayersBasicRepeatNames() {
         GameSetupService service = new GameSetupService();
         List<String> names = new ArrayList<>(List.of("P1", "P1", "P3"));
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW));
@@ -134,7 +137,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC7_CreatePlayersBasicRepeatColors(){
+    void TC7_CreatePlayersBasicRepeatColors() {
         GameSetupService service = new GameSetupService();
         List<String> names = new ArrayList<>(List.of("P1", "P1", "P3"));
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.BLUE, PlayerColor.YELLOW));
@@ -143,7 +146,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC8_CreatePlayersBasicMaxLen(){
+    void TC8_CreatePlayersBasicMaxLen() {
         GameSetupService service = new GameSetupService();
         List<String> names = new ArrayList<>(List.of("John", "Mike", "Tom", "rus", "321", "SAM!"));
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.RED, PlayerColor.BLACK, PlayerColor.WHITE));
@@ -165,7 +168,7 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC9_CreatePlayersBasicMinLen(){
+    void TC9_CreatePlayersBasicMinLen() {
         GameSetupService service = new GameSetupService();
         List<String> names = new ArrayList<>(List.of("John", "Mike"));
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
@@ -179,28 +182,28 @@ public class GameSetupServiceTest {
     }
 
     @Test
-    void TC1_ValidateUniqueColorsNoRepeats(){
+    void TC1_ValidateUniqueColorsNoRepeats() {
         GameSetupService service = new GameSetupService();
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN));
         assertDoesNotThrow(() -> service.validateUniqueColors(colors));
     }
 
     @Test
-    void TC2_ValidateUniqueColorsRepeats(){
+    void TC2_ValidateUniqueColorsRepeats() {
         GameSetupService service = new GameSetupService();
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.BLUE));
         assertThrows(IllegalArgumentException.class, () -> service.validateUniqueColors(colors));
     }
 
     @Test
-    void TC3_ValidateUniqueColorsEmpty(){
+    void TC3_ValidateUniqueColorsEmpty() {
         GameSetupService service = new GameSetupService();
         List<PlayerColor> colors = new ArrayList<>(List.of());
         assertDoesNotThrow(() -> service.validateUniqueColors(colors));
     }
 
     @Test
-    void TC4_ValidateUniqueColorsManyRepeats(){
+    void TC4_ValidateUniqueColorsManyRepeats() {
         GameSetupService service = new GameSetupService();
         List<PlayerColor> colors = new ArrayList<>(List.of(PlayerColor.BLUE, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.BLACK, PlayerColor.GREEN, PlayerColor.RED, PlayerColor.GREEN));
         assertThrows(IllegalArgumentException.class, () -> service.validateUniqueColors(colors));
@@ -262,6 +265,5 @@ public class GameSetupServiceTest {
         assertEquals("John", gameState.getPlayers().get(0).getName());
         assertEquals("Mike", gameState.getPlayers().get(1).getName());
     }
-
 
 }

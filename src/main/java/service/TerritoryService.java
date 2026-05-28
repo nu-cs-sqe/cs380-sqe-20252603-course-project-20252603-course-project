@@ -2,10 +2,10 @@ package service;
 
 import java.util.List;
 
+import model.BattleResult;
 import model.GameState;
 import model.Player;
 import model.Territory;
-import model.BattleResult;
 
 public final class TerritoryService {
 
@@ -66,11 +66,10 @@ public final class TerritoryService {
 
         // Update controlled territories
         attacker.addControlledTerritory(to);
-        
+
         // If defender is null, the territory was unoccupied, so we don't need to remove it from the defender's controlled territories
         if (defender != null) {
             defender.removeControlledTerritory(to);
         }
     }
 }
-

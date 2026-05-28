@@ -22,7 +22,8 @@ public class ReinforcementService {
     );
 
     /**
-     * Validates and performs placement of reinforcements, throws Illegal Argument Exception is placement is invalid
+     * Validates and performs placement of reinforcements, throws Illegal
+     * Argument Exception is placement is invalid
      */
     void placeReinforcements(Player player, Territory territory, int armies, GameState gameState) {
         boolean result = canPlaceReinforcements(player, territory, armies, gameState);
@@ -43,7 +44,8 @@ public class ReinforcementService {
     }
 
     /**
-     * Determines if placement is valid: must not exceed remaining armies and territory is owned by player
+     * Determines if placement is valid: must not exceed remaining armies and
+     * territory is owned by player
      */
     boolean canPlaceReinforcements(Player player, Territory territory, int armies, GameState gameState) {
         // get all territories owned by player
@@ -61,11 +63,9 @@ public class ReinforcementService {
         return true;
     }
 
-
-
-
     /**
-     * Calculates Continent Bonus: accumulates bonus for every continent a player controls entirety
+     * Calculates Continent Bonus: accumulates bonus for every continent a
+     * player controls entirety
      */
     int calculateContinentBonus(Player player, GameState gameState) {
         int totalBonuses = 0;
@@ -94,11 +94,9 @@ public class ReinforcementService {
         }
     }
 
-
-
-
     /**
-     * calculates reinforcements a player received based on current territories owned
+     * calculates reinforcements a player received based on current territories
+     * owned
      */
     int calculateBaseReinforcements(Player player, GameState gameState) {
         // get controlled territories
@@ -108,8 +106,4 @@ public class ReinforcementService {
         return base_reinforcements;
     }
 
-
-
-
 }
-

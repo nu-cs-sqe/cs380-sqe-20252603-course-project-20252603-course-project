@@ -15,6 +15,7 @@ public class GameSetupIntegrationTests {
   private static final int BOARD_SIZE = 8;
   private static final int MIDDLE_ROW_START = 2;
   private static final int MIDDLE_ROW_END = 5;
+  private static final int[] PIECE_ROWS = {0, 1, 6, 7};
 
   @Test
   void boardSetup_InitialBoard_SnapshotIsNonNull() {
@@ -54,6 +55,12 @@ public class GameSetupIntegrationTests {
     for (int row = MIDDLE_ROW_START; row <= MIDDLE_ROW_END; row++) {
       for (int col = 0; col < BOARD_SIZE; col++) {
         assertNull(snapshot[row][col]);
+      }
+    }
+
+    for (int row : PIECE_ROWS) {
+      for (int col = 0; col < BOARD_SIZE; col++) {
+        assertNotNull(snapshot[row][col]);
       }
     }
   }

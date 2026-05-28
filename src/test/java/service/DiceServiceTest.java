@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DiceServiceTest {
 
     @Test
-    public void T1_expectReturnMax(){
+    public void T1_expectReturnMax() {
         Random rand = EasyMock.createMock(Random.class);
         EasyMock.expect(rand.nextInt(6)).andStubReturn(5);
         EasyMock.replay(rand);
@@ -22,7 +23,7 @@ public class DiceServiceTest {
     }
 
     @Test
-    public void T2_expectReturnMin(){
+    public void T2_expectReturnMin() {
         Random rand = EasyMock.createMock(Random.class);
         EasyMock.expect(rand.nextInt(6)).andStubReturn(0);
         EasyMock.replay(rand);
@@ -32,7 +33,7 @@ public class DiceServiceTest {
     }
 
     @Test
-    public void T3_multiRoll2Rolls(){
+    public void T3_multiRoll2Rolls() {
         Random rand = EasyMock.createMock(Random.class);
         EasyMock.expect(rand.nextInt(6)).andReturn(0);
         EasyMock.expect(rand.nextInt(6)).andReturn(2);
@@ -48,15 +49,16 @@ public class DiceServiceTest {
     }
 
     @Test
-    public void T4_multiRollLessThan1(){
+    public void T4_multiRollLessThan1() {
         Random rand = EasyMock.createMock(Random.class);
 
         DiceService dice = new DiceService(rand);
-        assertThrows(IllegalArgumentException.class, () -> dice.multiRollDice(0));
+        assertThrows(IllegalArgumentException.class,
+                () -> dice.multiRollDice(0));
     }
 
     @Test
-    public void T5_multiRollSingleRoll(){
+    public void T5_multiRollSingleRoll() {
         Random rand = EasyMock.createMock(Random.class);
         EasyMock.expect(rand.nextInt(6)).andReturn(0);
         EasyMock.replay(rand);

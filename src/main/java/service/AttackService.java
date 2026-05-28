@@ -14,6 +14,8 @@ public class AttackService {
 
     private final TerritoryAdjacencyService adjacencyService;
     private final DiceService diceService;
+    private final Integer MaxNumAttack = 3;
+    private final Integer MaxNumDefend = 2;
 
     public AttackService(TerritoryAdjacencyService adjacencyService, DiceService diceService) {
         this.adjacencyService = adjacencyService;
@@ -41,16 +43,16 @@ public class AttackService {
             throw new IllegalArgumentException("Cannot proceed with the attack!");
         }
         if(attackerDice > from.getArmyCount() - 1){
-            throw new IllegalArgumentException("The attacker has attempted to roll more dice than permitted.");
+            throw new IllegalArgumentException("The attacker has attempted to roll more dice than permitted based on territory holdings.");
         }
-        if(attackerDice > 3){
-            throw new IllegalArgumentException("The attacker may role at most 3 dice. " + attackerDice + " dice requested.");
+        if(attackerDice > MaxNumAttack){
+            throw new IllegalArgumentException("The attacker may role at most " + MaxNumAttack + " dice. " + attackerDice + " dice requested.");
         }
         if(defenderDice > to.getArmyCount()){
-            throw new IllegalArgumentException("The defender has attempted to roll more dice than permitted.");
+            throw new IllegalArgumentException("The defender has attempted to roll more dice than permitted based on territory holdings.");
         }
-        if(defenderDice > 2){
-            throw new IllegalArgumentException("The defender may role at most 2 dice. " + defenderDice + " dice requested.");
+        if(defenderDice > MaxNumDefend){
+            throw new IllegalArgumentException("The defender may role at most " + MaxNumDefend + " dice. " + defenderDice + " dice requested.");
         }
         List<Integer> attackerRolls = new ArrayList<>(sortDescending(diceService.multiRollDice(attackerDice)));
         List<Integer> defenderRolls = new ArrayList<>(sortDescending(diceService.multiRollDice(defenderDice)));

@@ -14,7 +14,7 @@ import model.Territory;
 public class AttackServiceTest {
 
     @Test
-    void T1_shouldAllowAttackIfTerritoriesAreAdjacentAndOwnedByDifferentPlayers() {
+    void T1_shouldAllowAttackIfTerritoriesAdjacentAndOwnedByDifferentPlayers() {
         TerritoryAdjacencyService adjacencyService =
         new TerritoryAdjacencyService();
         AttackService attackService = new AttackService(adjacencyService);

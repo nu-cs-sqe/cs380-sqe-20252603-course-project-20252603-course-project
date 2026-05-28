@@ -18,6 +18,11 @@ public class GameSetupIntegrationTests {
   private static final int MIDDLE_ROW_START = 2;
   private static final int MIDDLE_ROW_END = 5;
   private static final int[] PIECE_ROWS = {0, 1, 6, 7};
+  private static final int WHITE_BACK_RANK_ROW = 7;
+  private static final int WHITE_PAWN_ROW = 6;
+  private static final int ROOK_COL = 0;
+  private static final int KNIGHT_COL = 1;
+  private static final int BISHOP_COL = 2;
 
   @Test
   void boardSetup_InitialBoard_SnapshotIsNonNull() {
@@ -85,21 +90,21 @@ public class GameSetupIntegrationTests {
 
   @Test
   void boardSetup_InitialBoard_SnapshotRow7Col0IsWhiteRook() {
-    assertWhiteBackRankPiece(0, PieceType.ROOK);
+    assertWhiteBackRankPiece(ROOK_COL, PieceType.ROOK);
   }
 
   @Test
   void boardSetup_InitialBoard_SnapshotRow7Col1IsWhiteKnight() {
-    assertWhiteBackRankPiece(1, PieceType.KNIGHT);
+    assertWhiteBackRankPiece(KNIGHT_COL, PieceType.KNIGHT);
   }
 
   @Test
   void boardSetup_InitialBoard_SnapshotRow7Col2IsWhiteBishop() {
-    assertWhiteBackRankPiece(2, PieceType.BISHOP);
+    assertWhiteBackRankPiece(BISHOP_COL, PieceType.BISHOP);
   }
 
   private void assertWhiteBackRankPiece(int col, PieceType expectedType) {
-    Piece p = new Board().getSnapshot()[7][col];
+    Piece p = new Board().getSnapshot()[WHITE_BACK_RANK_ROW][col];
     assertEquals(expectedType, p.getType());
     assertEquals(PieceColor.WHITE, p.getColor());
   }
@@ -109,9 +114,9 @@ public class GameSetupIntegrationTests {
     Piece[][] snapshot = new Board().getSnapshot();
 
     for (int col = 0; col < BOARD_SIZE; col++) {
-      Piece p = snapshot[6][col];
-      assertEquals(PieceType.PAWN, p.getType(), "Expected PAWN at [6][" + col + "]");
-      assertEquals(PieceColor.WHITE, p.getColor(), "Expected WHITE at [6][" + col + "]");
+      Piece p = snapshot[WHITE_PAWN_ROW][col];
+      assertEquals(PieceType.PAWN, p.getType(), "Expected PAWN at [" + WHITE_PAWN_ROW + "][" + col + "]");
+      assertEquals(PieceColor.WHITE, p.getColor(), "Expected WHITE at [" + WHITE_PAWN_ROW + "][" + col + "]");
     }
   }
 

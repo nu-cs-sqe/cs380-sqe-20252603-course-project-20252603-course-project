@@ -69,7 +69,7 @@ public final class TerritoryService {
         
         // If defender is null, the territory was unoccupied, so we don't need to remove it from the defender's controlled territories
         if (defender != null) {
-            defender.getControlledTerritories().remove(to);
+            defender.removeControlledTerritory(to);
         }
     }
 }

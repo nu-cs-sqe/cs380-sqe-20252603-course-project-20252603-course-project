@@ -193,4 +193,41 @@ public class PlayerTest {
 		player.addControlledTerritory(t2);
 		assertEquals(2, player.getControlledTerritoryCount());
 	}
+
+	@Test
+	void removeControlledTerritory_removesExistingTerritory() {
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+		Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+
+		player.addControlledTerritory(territory);
+		player.removeControlledTerritory(territory);
+
+		assertEquals(0, player.getControlledTerritoryCount());
+		assertFalse(player.getControlledTerritories().contains(territory));
+	}
+
+	@Test
+	void removeControlledTerritory_missingTerritory() {
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+		Territory controlledTerritory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+		Territory missingTerritory = new Territory("Brazil", player, 1, Continent.SOUTH_AMERICA);
+
+		player.addControlledTerritory(controlledTerritory);
+		player.removeControlledTerritory(missingTerritory);
+
+		assertEquals(1, player.getControlledTerritoryCount());
+		assertTrue(player.getControlledTerritories().contains(controlledTerritory));
+		assertFalse(player.getControlledTerritories().contains(missingTerritory));
+	}
+
+	@Test
+	void removeControlledTerritory_fromEmptyList() {
+		Player player = new Player(1, "Alice", PlayerColor.RED, 10, new ArrayList<>());
+		Territory territory = new Territory("Alaska", player, 1, Continent.NORTH_AMERICA);
+
+		player.removeControlledTerritory(territory);
+
+		assertEquals(0, player.getControlledTerritoryCount());
+		assertTrue(player.getControlledTerritories().isEmpty());
+	}
 }

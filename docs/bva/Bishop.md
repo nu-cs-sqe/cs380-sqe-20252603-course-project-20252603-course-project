@@ -1,6 +1,6 @@
 # BVA Analysis for Bishop
 
-`Bishop` is concrete. This file covers the public API declared in `Bishop.java`: the constructor and `makeCopy()`. Inherited methods are covered in `docs/bva/Piece.md`.
+`Bishop` is concrete. This file covers the public API declared in `Bishop.java`: the constructor, `makeCopy()`, and `isValidMoveShape()`. Inherited methods are covered in `docs/bva/Piece.md`.
 
 ## Step 1-3 Summary
 

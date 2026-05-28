@@ -1,6 +1,5 @@
 package domain;
 
-import domain.Location;
 import domain.piece.Knight;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
@@ -15,196 +14,199 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class KnightTests {
-    @Test
-    public void KnightConstructor_BlackColor_SetsTypeAndColor() {
-        Knight knight = new Knight(PieceColor.BLACK);
 
-        assertEquals(PieceType.KNIGHT, knight.getType());
-        assertEquals(PieceColor.BLACK, knight.getColor());
-    }
+  @Test
+  public void KnightConstructor_BlackColor_SetsTypeAndColor() {
+    Knight knight = new Knight(PieceColor.BLACK);
 
-    @Test
-    public void KnightConstructor_WhiteColor_SetsTypeAndColor() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertEquals(PieceType.KNIGHT, knight.getType());
+    assertEquals(PieceColor.BLACK, knight.getColor());
+  }
 
-        assertEquals(PieceType.KNIGHT, knight.getType());
-        assertEquals(PieceColor.WHITE, knight.getColor());
-    }
+  @Test
+  public void KnightConstructor_WhiteColor_SetsTypeAndColor() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void KnightConstructor_NullColor_ThrowsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Knight(null));
+    assertEquals(PieceType.KNIGHT, knight.getType());
+    assertEquals(PieceColor.WHITE, knight.getColor());
+  }
 
-        assertEquals("color must not be null", exception.getMessage());
-    }
+  @Test
+  public void KnightConstructor_NullColor_ThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> new Knight(null));
 
-    @Test
-    public void KnightMakeCopy_BlackKnight_ReturnsDistinctKnightWithSameTypeAndColor() {
-        Knight knight = new Knight(PieceColor.BLACK);
+    assertEquals("color must not be null", exception.getMessage());
+  }
 
-        Piece copy = knight.makeCopy();
+  @Test
+  public void KnightMakeCopy_BlackKnight_ReturnsDistinctKnightWithSameTypeAndColor() {
+    Knight knight = new Knight(PieceColor.BLACK);
 
-        assertNotSame(knight, copy);
-        assertInstanceOf(Knight.class, copy);
-        assertEquals(PieceType.KNIGHT, copy.getType());
-        assertEquals(PieceColor.BLACK, copy.getColor());
-    }
+    Piece copy = knight.makeCopy();
 
-    @Test
-    public void KnightMakeCopy_WhiteKnight_ReturnsDistinctKnightWithSameTypeAndColor() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertNotSame(knight, copy);
+    assertInstanceOf(Knight.class, copy);
+    assertEquals(PieceType.KNIGHT, copy.getType());
+    assertEquals(PieceColor.BLACK, copy.getColor());
+  }
 
-        Piece copy = knight.makeCopy();
+  @Test
+  public void KnightMakeCopy_WhiteKnight_ReturnsDistinctKnightWithSameTypeAndColor() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-        assertNotSame(knight, copy);
-        assertInstanceOf(Knight.class, copy);
-        assertEquals(PieceType.KNIGHT, copy.getType());
-        assertEquals(PieceColor.WHITE, copy.getColor());
-    }
+    Piece copy = knight.makeCopy();
 
-    @Test
-    public void KnightMakeCopy_NullColorKnight_ThrowsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Knight(null));
+    assertNotSame(knight, copy);
+    assertInstanceOf(Knight.class, copy);
+    assertEquals(PieceType.KNIGHT, copy.getType());
+    assertEquals(PieceColor.WHITE, copy.getColor());
+  }
 
-        assertEquals("color must not be null", exception.getMessage());
-    }
+  @Test
+  public void KnightMakeCopy_NullColorKnight_ThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> new Knight(null));
 
-    @Test
-    public void IsValidMoveShape_LShapeDx1Dy2_ReturnsTrue() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertEquals("color must not be null", exception.getMessage());
+  }
 
-        assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(5, 6)));
-    }
+  @Test
+  public void IsValidMoveShape_LShapeDx1Dy2_ReturnsTrue() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_LShapeDx1Dy2OppositeHorizontal_ReturnsTrue() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(5, 6)));
+  }
 
-        assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(3, 6)));
-    }
+  @Test
+  public void IsValidMoveShape_LShapeDx1Dy2OppositeHorizontal_ReturnsTrue() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_LShapeDx1Dy2OppositeVertical_ReturnsTrue() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(3, 6)));
+  }
 
-        assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(5, 2)));
-    }
+  @Test
+  public void IsValidMoveShape_LShapeDx1Dy2OppositeVertical_ReturnsTrue() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_LShapeDx2Dy1_ReturnsTrue() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(5, 2)));
+  }
 
-        assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(6, 5)));
-    }
+  @Test
+  public void IsValidMoveShape_LShapeDx2Dy1_ReturnsTrue() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_LShapeDx2Dy1OppositeHorizontal_ReturnsTrue() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(6, 5)));
+  }
 
-        assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(2, 5)));
-    }
+  @Test
+  public void IsValidMoveShapeLShape_Dx2Dy1OppositeHorizontal_ReturnsTrue() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_LShapeDx2Dy1OppositeVertical_ReturnsTrue() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(2, 5)));
+  }
 
-        assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(6, 3)));
-    }
+  @Test
+  public void IsValidMoveShape_LShapeDx2Dy1OppositeVertical_ReturnsTrue() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_SameSquare_ReturnsFalse() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(6, 3)));
+  }
 
-        assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(4, 4)));
-    }
+  @Test
+  public void IsValidMoveShape_SameSquare_ReturnsFalse() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_StraightVertical_ReturnsFalse() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(4, 4)));
+  }
 
-        assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(4, 6)));
-    }
+  @Test
+  public void IsValidMoveShape_StraightVertical_ReturnsFalse() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_OneSquareDiagonal_ReturnsFalse() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(4, 6)));
+  }
 
-        assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(5, 5)));
-    }
+  @Test
+  public void IsValidMoveShape_OneSquareDiagonal_ReturnsFalse() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_TwoByTwoSquare_ReturnsFalse() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(5, 5)));
+  }
 
-        assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(6, 6)));
-    }
+  @Test
+  public void IsValidMoveShape_TwoByTwoSquare_ReturnsFalse() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_Dx3Dy1Overreach_ReturnsFalse() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(6, 6)));
+  }
 
-        assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(7, 5)));
-    }
+  @Test
+  public void IsValidMoveShape_Dx3Dy1Overreach_ReturnsFalse() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_LShapeFromMinimumCorner_ReturnsTrue() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertFalse(knight.isValidMoveShape(new Location(4, 4), new Location(7, 5)));
+  }
 
-        assertTrue(knight.isValidMoveShape(new Location(0, 0), new Location(1, 2)));
-    }
+  @Test
+  public void IsValidMoveShape_LShapeFromMinimumCorner_ReturnsTrue() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_DestinationXBelowMinimum_ReturnsFalse() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertTrue(knight.isValidMoveShape(new Location(0, 0), new Location(1, 2)));
+  }
 
-        assertFalse(knight.isValidMoveShape(new Location(0, 0), new Location(-1, 2)));
-    }
+  @Test
+  public void IsValidMoveShape_DestinationXBelowMinimum_ReturnsFalse() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_DestinationYBelowMinimum_ReturnsFalse() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertFalse(knight.isValidMoveShape(new Location(0, 0), new Location(-1, 2)));
+  }
 
-        assertFalse(knight.isValidMoveShape(new Location(0, 0), new Location(2, -1)));
-    }
+  @Test
+  public void IsValidMoveShape_DestinationYBelowMinimum_ReturnsFalse() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_DestinationXAboveMaximum_ReturnsFalse() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertFalse(knight.isValidMoveShape(new Location(0, 0), new Location(2, -1)));
+  }
 
-        assertFalse(knight.isValidMoveShape(new Location(7, 7), new Location(8, 5)));
-    }
+  @Test
+  public void IsValidMoveShape_DestinationXAboveMaximum_ReturnsFalse() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_DestinationYAboveMaximum_ReturnsFalse() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertFalse(knight.isValidMoveShape(new Location(7, 7), new Location(8, 5)));
+  }
 
-        assertFalse(knight.isValidMoveShape(new Location(7, 7), new Location(5, 8)));
-    }
+  @Test
+  public void IsValidMoveShape_DestinationYAboveMaximum_ReturnsFalse() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-    @Test
-    public void IsValidMoveShape_FromNull_ThrowsIllegalArgumentException() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertFalse(knight.isValidMoveShape(new Location(7, 7), new Location(5, 8)));
+  }
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> knight.isValidMoveShape(null, new Location(5, 6)));
+  @Test
+  public void IsValidMoveShape_FromNull_ThrowsIllegalArgumentException() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-        assertEquals("from must not be null", exception.getMessage());
-    }
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> knight.isValidMoveShape(null, new Location(5, 6)));
 
-    @Test
-    public void IsValidMoveShape_ToNull_ThrowsIllegalArgumentException() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertEquals("from must not be null", exception.getMessage());
+  }
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> knight.isValidMoveShape(new Location(4, 4), null));
+  @Test
+  public void IsValidMoveShape_ToNull_ThrowsIllegalArgumentException() {
+    Knight knight = new Knight(PieceColor.WHITE);
 
-        assertEquals("to must not be null", exception.getMessage());
-    }
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> knight.isValidMoveShape(new Location(4, 4), null));
 
-    @Test
-    public void KnightCanJump_ReturnsTrue() {
-        Knight knight = new Knight(PieceColor.WHITE);
+    assertEquals("to must not be null", exception.getMessage());
+  }
 
-        assertTrue(knight.canJump());
-    }
+  @Test
+  public void KnightCanJump_ReturnsTrue() {
+    Knight knight = new Knight(PieceColor.WHITE);
+
+    assertTrue(knight.canJump());
+  }
 }

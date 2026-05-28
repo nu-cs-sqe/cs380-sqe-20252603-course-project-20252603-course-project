@@ -8,131 +8,132 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PieceTypeTests {
-    @Test
-    void PieceType_PawnReference_EvaluatesToPawnSingleton() {
-        PieceType actual = PieceType.PAWN;
 
-        assertEquals(PieceType.PAWN, actual);
-    }
+  @Test
+  void PieceType_PawnReference_EvaluatesToPawnSingleton() {
+    PieceType actual = PieceType.PAWN;
 
-    @Test
-    void PieceType_RookReference_EvaluatesToRookSingleton() {
-        PieceType actual = PieceType.ROOK;
+    assertEquals(PieceType.PAWN, actual);
+  }
 
-        assertEquals(PieceType.ROOK, actual);
-    }
+  @Test
+  void PieceType_RookReference_EvaluatesToRookSingleton() {
+    PieceType actual = PieceType.ROOK;
 
-    @Test
-    void PieceType_KnightReference_EvaluatesToKnightSingleton() {
-        PieceType actual = PieceType.KNIGHT;
+    assertEquals(PieceType.ROOK, actual);
+  }
 
-        assertEquals(PieceType.KNIGHT, actual);
-    }
+  @Test
+  void PieceType_KnightReference_EvaluatesToKnightSingleton() {
+    PieceType actual = PieceType.KNIGHT;
 
-    @Test
-    void PieceType_BishopReference_EvaluatesToBishopSingleton() {
-        PieceType actual = PieceType.BISHOP;
+    assertEquals(PieceType.KNIGHT, actual);
+  }
 
-        assertEquals(PieceType.BISHOP, actual);
-    }
+  @Test
+  void PieceType_BishopReference_EvaluatesToBishopSingleton() {
+    PieceType actual = PieceType.BISHOP;
 
-    @Test
-    void PieceType_QueenReference_EvaluatesToQueenSingleton() {
-        PieceType actual = PieceType.QUEEN;
+    assertEquals(PieceType.BISHOP, actual);
+  }
 
-        assertEquals(PieceType.QUEEN, actual);
-    }
+  @Test
+  void PieceType_QueenReference_EvaluatesToQueenSingleton() {
+    PieceType actual = PieceType.QUEEN;
 
-    @Test
-    void PieceType_KingReference_EvaluatesToKingSingleton() {
-        PieceType actual = PieceType.KING;
+    assertEquals(PieceType.QUEEN, actual);
+  }
 
-        assertEquals(PieceType.KING, actual);
-    }
+  @Test
+  void PieceType_KingReference_EvaluatesToKingSingleton() {
+    PieceType actual = PieceType.KING;
 
-    @Test
-    void PieceTypeValues_NoArguments_ReturnsConstantsInDeclarationOrder() {
-        PieceType[] actual = PieceType.values();
+    assertEquals(PieceType.KING, actual);
+  }
 
-        assertArrayEquals(new PieceType[] {
-                PieceType.PAWN,
-                PieceType.ROOK,
-                PieceType.KNIGHT,
-                PieceType.BISHOP,
-                PieceType.QUEEN,
-                PieceType.KING
-        }, actual);
-    }
+  @Test
+  void PieceTypeValues_NoArguments_ReturnsConstantsInDeclarationOrder() {
+    PieceType[] actual = PieceType.values();
 
-    @Test
-    void PieceTypeValueOf_PawnIdentifier_ReturnsPawnSingleton() {
-        PieceType actual = PieceType.valueOf("PAWN");
+    assertArrayEquals(new PieceType[]{
+        PieceType.PAWN,
+        PieceType.ROOK,
+        PieceType.KNIGHT,
+        PieceType.BISHOP,
+        PieceType.QUEEN,
+        PieceType.KING
+    }, actual);
+  }
 
-        assertEquals(PieceType.PAWN, actual);
-    }
+  @Test
+  void PieceTypeValueOf_PawnIdentifier_ReturnsPawnSingleton() {
+    PieceType actual = PieceType.valueOf("PAWN");
 
-    @Test
-    void PieceTypeValueOf_RookIdentifier_ReturnsRookSingleton() {
-        PieceType actual = PieceType.valueOf("ROOK");
+    assertEquals(PieceType.PAWN, actual);
+  }
 
-        assertEquals(PieceType.ROOK, actual);
-    }
+  @Test
+  void PieceTypeValueOf_RookIdentifier_ReturnsRookSingleton() {
+    PieceType actual = PieceType.valueOf("ROOK");
 
-    @Test
-    void PieceTypeValueOf_KnightIdentifier_ReturnsKnightSingleton() {
-        PieceType actual = PieceType.valueOf("KNIGHT");
+    assertEquals(PieceType.ROOK, actual);
+  }
 
-        assertEquals(PieceType.KNIGHT, actual);
-    }
+  @Test
+  void PieceTypeValueOf_KnightIdentifier_ReturnsKnightSingleton() {
+    PieceType actual = PieceType.valueOf("KNIGHT");
 
-    @Test
-    void PieceTypeValueOf_BishopIdentifier_ReturnsBishopSingleton() {
-        PieceType actual = PieceType.valueOf("BISHOP");
+    assertEquals(PieceType.KNIGHT, actual);
+  }
 
-        assertEquals(PieceType.BISHOP, actual);
-    }
+  @Test
+  void PieceTypeValueOf_BishopIdentifier_ReturnsBishopSingleton() {
+    PieceType actual = PieceType.valueOf("BISHOP");
 
-    @Test
-    void PieceTypeValueOf_QueenIdentifier_ReturnsQueenSingleton() {
-        PieceType actual = PieceType.valueOf("QUEEN");
+    assertEquals(PieceType.BISHOP, actual);
+  }
 
-        assertEquals(PieceType.QUEEN, actual);
-    }
+  @Test
+  void PieceTypeValueOf_QueenIdentifier_ReturnsQueenSingleton() {
+    PieceType actual = PieceType.valueOf("QUEEN");
 
-    @Test
-    void PieceTypeValueOf_KingIdentifier_ReturnsKingSingleton() {
-        PieceType actual = PieceType.valueOf("KING");
+    assertEquals(PieceType.QUEEN, actual);
+  }
 
-        assertEquals(PieceType.KING, actual);
-    }
+  @Test
+  void PieceTypeValueOf_KingIdentifier_ReturnsKingSingleton() {
+    PieceType actual = PieceType.valueOf("KING");
 
-    @Test
-    void PieceTypeValueOf_PawnDisplayName_ThrowsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> PieceType.valueOf("Pawn")
-        );
+    assertEquals(PieceType.KING, actual);
+  }
 
-        assertEquals("No enum constant domain.piece.PieceType.Pawn", exception.getMessage());
-    }
+  @Test
+  void PieceTypeValueOf_PawnDisplayName_ThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> PieceType.valueOf("Pawn")
+    );
 
-    @Test
-    void PieceTypeValueOf_LowercasePawnIdentifier_ThrowsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> PieceType.valueOf("pawn")
-        );
+    assertEquals("No enum constant domain.piece.PieceType.Pawn", exception.getMessage());
+  }
 
-        assertEquals("No enum constant domain.piece.PieceType.pawn", exception.getMessage());
-    }
+  @Test
+  void PieceTypeValueOf_LowercasePawnIdentifier_ThrowsIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> PieceType.valueOf("pawn")
+    );
 
-    @Test
-    void PieceTypeValueOf_NullName_ThrowsNullPointerException() {
-        NullPointerException exception = assertThrows(
-                NullPointerException.class,
-                () -> PieceType.valueOf(null)
-        );
+    assertEquals("No enum constant domain.piece.PieceType.pawn", exception.getMessage());
+  }
 
-        assertEquals("Name is null", exception.getMessage());
-    }
+  @Test
+  void PieceTypeValueOf_NullName_ThrowsNullPointerException() {
+    NullPointerException exception = assertThrows(
+        NullPointerException.class,
+        () -> PieceType.valueOf(null)
+    );
+
+    assertEquals("Name is null", exception.getMessage());
+  }
 }

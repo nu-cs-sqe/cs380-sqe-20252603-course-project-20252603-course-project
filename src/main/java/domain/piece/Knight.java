@@ -22,12 +22,7 @@ public final class Knight extends Piece {
 
   @Override
   public boolean isValidMoveShape(Location from, Location to) {
-    if (from == null) {
-      throw new IllegalArgumentException("from must not be null");
-    }
-    if (to == null) {
-      throw new IllegalArgumentException("to must not be null");
-    }
+    requireLocations(from, to);
     if (!isOnBoard(to)) {
       return false;
     }

@@ -7,11 +7,14 @@ public class AttackService {
 
     private final TerritoryAdjacencyService adjacencyService;
 
-    public AttackService(TerritoryAdjacencyService adjacencyService) {
-        this.adjacencyService = adjacencyService;
+    public AttackService(final TerritoryAdjacencyService inAdjacencyService) {
+        this.adjacencyService = inAdjacencyService;
     }
 
-    public boolean canAttack(Player attacker, Territory from, Territory to) {
+    public final boolean canAttack(
+            final Player attacker,
+            final Territory from,
+            final Territory to) {
         if (from.getOwner() != attacker) {
             return false;
         }

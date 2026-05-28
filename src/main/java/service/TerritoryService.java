@@ -12,7 +12,10 @@ public final class TerritoryService {
     private TerritoryService() {
     }
 
-    public static Territory findTerritoryByName(GameState state, String name) {
+    public static Territory findTerritoryByName(
+            final GameState state,
+            final String name
+    ) {
 
         List<Territory> territories = state.getTerritories();
 
@@ -24,7 +27,11 @@ public final class TerritoryService {
         throw new IllegalArgumentException("territory not found: " + name);
     }
 
-    public static boolean playerOwnsTerritory(Player player, GameState state, String territoryName) {
+    public static boolean playerOwnsTerritory(
+            final Player player,
+            final GameState state,
+            final String territoryName
+    ) {
 
         Territory territory = findTerritoryByName(state, territoryName);
         if (territory.getOwner() == null) {
@@ -33,7 +40,10 @@ public final class TerritoryService {
         return territory.getOwner().getId() == player.getId();
     }
 
-    public static void applyBattleResult(Territory from, Territory to, BattleResult result) {
+    public static void applyBattleResult(
+            final Territory from,
+            final Territory to,
+            final BattleResult result) {
         int attackerLosses = result.getAttackerLosses();
         int defenderLosses = result.getDefenderLosses();
 
@@ -42,18 +52,29 @@ public final class TerritoryService {
 
     }
 
-    public static void conquerTerritory(Player attacker, Territory from, Territory to, int armiesToMove, GameState gameState) {
+    public static void conquerTerritory(
+            final Player attacker,
+            final Territory from,
+            final Territory to,
+            final int armiesToMove,
+            final GameState gameState) {
         // Validate input
         if (armiesToMove <= 0) {
-            throw new IllegalArgumentException("armiesToMove must be greater than 0");
+            throw new IllegalArgumentException(
+                    "armiesToMove must be greater than 0"
+            );
         }
 
         if (from.getArmyCount() < armiesToMove + 1) {
-            throw new IllegalArgumentException("attacking territory must keep at least 1 army behind");
+            throw new IllegalArgumentException(
+                    "attacking territory must keep at least 1 army behind"
+            );
         }
 
         if (from.getOwner().getId() != attacker.getId()) {
-            throw new IllegalArgumentException("attacker does not own the attacking territory");
+            throw new IllegalArgumentException(
+                    "attacker does not own the attacking territory"
+            );
         }
 
         // Transfer ownership to the attacker
@@ -67,7 +88,9 @@ public final class TerritoryService {
         // Update controlled territories
         attacker.addControlledTerritory(to);
 
-        // If defender is null, the territory was unoccupied, so we don't need to remove it from the defender's controlled territories
+        // If defender is null, the territory was unoccupied,
+        // so we don't need to remove it
+        // from the defender's controlled territories
         if (defender != null) {
             defender.removeControlledTerritory(to);
         }

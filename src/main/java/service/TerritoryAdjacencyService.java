@@ -14,28 +14,40 @@ public class TerritoryAdjacencyService {
 
     private final Map<String, Territory> territoryByName = new HashMap<>();
 
-    public void initializeTerritoryAdjacency(List<Territory> territories) {
+    public final void initializeTerritoryAdjacency(
+            final List<Territory> territories
+    ) {
 
         territoryByName.clear();
         for (Territory territory : territories) {
 
             String name = territory.getName();
             if (territoryByName.containsKey(name)) {
-                throw new IllegalArgumentException("duplicate territory name: " + name);
+                throw new IllegalArgumentException(
+                        "duplicate territory name: " + name
+                );
             }
             territoryByName.put(name, territory);
         }
     }
 
-    public boolean areAdjacent(Territory territoryA, Territory territoryB) {
-
-        List<String> adjacentNames = TerritoryAdjacencyCatalog.ADJACENT_MAP.get(territoryA.getName());
+    public final boolean areAdjacent(
+            final Territory territoryA,
+            final Territory territoryB) {
+        List<String> adjacentNames
+                = TerritoryAdjacencyCatalog.ADJACENT_MAP.get(
+                        territoryA.getName()
+                );
         return adjacentNames.contains(territoryB.getName());
     }
 
-    public List<Territory> getAdjacentTerritories(Territory territory) {
-
-        List<String> adjacentNames = TerritoryAdjacencyCatalog.ADJACENT_MAP.get(territory.getName());
+    public final List<Territory> getAdjacentTerritories(
+            final Territory territory
+    ) {
+        List<String> adjacentNames
+                = TerritoryAdjacencyCatalog.ADJACENT_MAP.get(
+                        territory.getName()
+                );
 
         List<Territory> adjacentTerritories = new ArrayList<>();
         for (String adjacentName : adjacentNames) {
@@ -45,9 +57,10 @@ public class TerritoryAdjacencyService {
         return List.copyOf(adjacentTerritories);
     }
 
-    public List<Territory> createAllTerritories() {
+    public final List<Territory> createAllTerritories() {
         List<Territory> territories = new ArrayList<>();
-        for (Map.Entry<Continent, List<String>> entry : TerritoryCatalog.TERRITORIES_BY_CONTINENT.entrySet()) {
+        for (Map.Entry<Continent, List<String>> entry
+                : TerritoryCatalog.TERRITORIES_BY_CONTINENT.entrySet()) {
             Continent continent = entry.getKey();
             for (String name : entry.getValue()) {
                 territories.add(new Territory(name, null, 0, continent));
@@ -56,7 +69,10 @@ public class TerritoryAdjacencyService {
         return List.copyOf(territories);
     }
 
-    public Territory findByName(List<Territory> territories, String name) {
+    public final Territory findByName(
+            final List<Territory> territories,
+            final String name
+    ) {
 
         for (Territory territory : territories) {
             if (territory.getName().equals(name)) {

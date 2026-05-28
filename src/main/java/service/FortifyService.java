@@ -6,8 +6,15 @@ import model.Territory;
 
 public class FortifyService {
 
-    public boolean canFortify(Player player, Territory source, Territory destination, int armiesToMove, GameState gameState) {
-        if (source.getArmyCount() < armiesToMove || source.getArmyCount() <= 1 || source.getArmyCount() == armiesToMove) {
+    public final boolean canFortify(
+            final Player player,
+            final Territory source,
+            final Territory destination,
+            final int armiesToMove,
+            final GameState gameState) {
+        if (source.getArmyCount() < armiesToMove
+                || source.getArmyCount() <= 1
+                || source.getArmyCount() == armiesToMove) {
             return false;
         }
         if (!source.getOwner().equals(player)) {
@@ -19,8 +26,12 @@ public class FortifyService {
         return true;
     }
 
-    public boolean areConnectedThroughOwnedTerritories(Player player, Territory source, Territory destination, GameState gameState) {
-        TerritoryAdjacencyService TAS = new TerritoryAdjacencyService();
-        return TAS.areAdjacent(source, destination);
+    public final boolean areConnectedThroughOwnedTerritories(
+            final Player player,
+            final Territory source,
+            final Territory destination,
+            final GameState gameState) {
+        TerritoryAdjacencyService tas = new TerritoryAdjacencyService();
+        return tas.areAdjacent(source, destination);
     }
 }

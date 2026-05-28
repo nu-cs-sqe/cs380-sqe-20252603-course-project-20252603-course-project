@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import java.awt.GraphicsEnvironment;
 import java.util.Locale;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +44,6 @@ class WelcomeViewTest {
 
   @Test
   void welcomeView_ConstructWithNullLocale_ThrowsNullPointerException() {
-    assertThrows(NullPointerException.class, () -> new WelcomeView(null));
+    assertThrows(NullPointerException.class, () -> new WelcomeView((Locale) null));
   }
 }

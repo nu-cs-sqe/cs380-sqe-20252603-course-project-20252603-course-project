@@ -1,19 +1,20 @@
 package domain;
 
 public class Location {
-    private final int x;
-    private final int y;
 
-    public Location(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
+  private final int col;
+  private final int row;
 
-    public int getX() {
-        return x;
-    }
+  public Location(int x, int y) {
+    this.col = x;
+    this.row = y;
+  }
 
-    public int getY() {
-        return y;
-    }
+  public int getX() {
+    return col;
+  }
+
+  public int getY() {
+    return row;
+  }
 }

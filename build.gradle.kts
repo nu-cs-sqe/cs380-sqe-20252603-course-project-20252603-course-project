@@ -6,6 +6,7 @@ plugins {
     checkstyle
     id("com.github.spotbugs") version "6.0.25"
     jacoco
+    id("info.solidsoft.pitest") version "1.15.0"
 }
 
 group = "nu.csse.sqe"
@@ -18,6 +19,7 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.easymock:easymock:5.4.0")
 }
 
 java {
@@ -33,6 +35,7 @@ tasks.compileJava {
 tasks.test {
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
+    finalizedBy("pitest")
 }
 
 tasks.withType<Checkstyle>().configureEach {
@@ -69,9 +72,33 @@ tasks.spotbugsMain {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    classDirectories.setFrom(files(classDirectories.files.map {
+        fileTree(it) {
+            include("domain/Board*.class", "domain/GameState*.class")
+        }
+    }))
     reports {
         xml.required = false
         csv.required = false
         html.outputLocation = layout.buildDirectory.dir("reports/jacoco")
     }
+}
+
+pitest {
+    targetClasses = setOf("ui.*", "domain.*")
+    targetTests = setOf("domain.*")
+    junit5PluginVersion = "1.2.1"
+    pitestVersion = "1.15.0"
+    threads = 4
+    outputFormats = setOf("HTML")
+    timestampedReports = false
+    testSourceSets.set(listOf(sourceSets.test.get()))
+    mainSourceSets.set(listOf(sourceSets.main.get()))
+    jvmArgs.set(listOf("-Xmx1024m"))
+    useClasspathFile.set(true)
+    exportLineCoverage = true
+}
+
+tasks.build {
+    dependsOn("pitest")
 }

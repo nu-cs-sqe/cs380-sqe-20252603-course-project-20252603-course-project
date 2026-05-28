@@ -4,15 +4,10 @@ import domain.Location;
 
 /** Represents a Knight chess piece. */
 public final class Knight extends Piece {
-  private static final int MIN_BOARD_COORDINATE = 0;
-  private static final int MAX_BOARD_COORDINATE = 7;
 
   /** Constructs a Knight with the given color. */
   public Knight(PieceColor color) {
     super(PieceType.KNIGHT, color);
-    if (color == null) {
-      throw new IllegalArgumentException("color must not be null");
-    }
   }
 
   @Override
@@ -25,7 +20,7 @@ public final class Knight extends Piece {
     return true;
   }
 
-  /** Returns true if the move shape from {@code from} to {@code to} is valid for a Knight. */
+  @Override
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null) {
       throw new IllegalArgumentException("from must not be null");
@@ -39,10 +34,5 @@ public final class Knight extends Piece {
     int dx = Math.abs(to.getX() - from.getX());
     int dy = Math.abs(to.getY() - from.getY());
     return (dx == 1 && dy == 2) || (dx == 2 && dy == 1);
-  }
-
-  private boolean isOnBoard(Location location) {
-    return location.getX() >= MIN_BOARD_COORDINATE && location.getX() <= MAX_BOARD_COORDINATE
-        && location.getY() >= MIN_BOARD_COORDINATE && location.getY() <= MAX_BOARD_COORDINATE;
   }
 }

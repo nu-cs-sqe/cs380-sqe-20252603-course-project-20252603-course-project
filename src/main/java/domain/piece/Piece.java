@@ -1,43 +1,55 @@
 package domain.piece;
 
+import domain.Location;
+
 public abstract class Piece {
-    private final PieceType type;
-    private final PieceColor color;
+  protected static final int MIN_BOARD_COORDINATE = 0;
+  protected static final int MAX_BOARD_COORDINATE = 7;
 
-    public Piece(PieceType type, PieceColor color) {
-        if (type == null) {
-            throw new IllegalArgumentException("type must not be null");
-        }
-        if (color == null) {
-            throw new IllegalArgumentException("color must not be null");
-        }
-        this.type = type;
-        this.color = color;
+  private final PieceType type;
+  private final PieceColor color;
+
+  public Piece(PieceType type, PieceColor color) {
+    if (type == null) {
+      throw new IllegalArgumentException("type must not be null");
     }
-
-    public PieceType getType() {
-        return type;
+    if (color == null) {
+      throw new IllegalArgumentException("color must not be null");
     }
+    this.type = type;
+    this.color = color;
+  }
 
-    public PieceColor getColor() {
-        return color;
+  public PieceType getType() {
+    return type;
+  }
+
+  public PieceColor getColor() {
+    return color;
+  }
+
+  public boolean canJump() {
+    return false;
+  }
+
+  public boolean isSameColor(Piece other) {
+    if (other == null) {
+      throw new IllegalArgumentException("other must not be null");
     }
+    return this.color == other.color;
+  }
 
-    public boolean canJump() {
-        return false;
-    }
+  @Override
+  public String toString() {
+    return color + " " + type;
+  }
 
-    public boolean isSameColor(Piece other) {
-        if (other == null) {
-            throw new IllegalArgumentException("other must not be null");
-        }
-        return this.color == other.color;
-    }
+  public abstract Piece makeCopy();
 
-    @Override
-    public String toString() {
-        return color + " " + type;
-    }
+  public abstract boolean isValidMoveShape(Location from, Location to);
 
-    public abstract Piece makeCopy();
+  protected boolean isOnBoard(Location location) {
+    return location.getX() >= MIN_BOARD_COORDINATE && location.getX() <= MAX_BOARD_COORDINATE
+        && location.getY() >= MIN_BOARD_COORDINATE && location.getY() <= MAX_BOARD_COORDINATE;
+  }
 }

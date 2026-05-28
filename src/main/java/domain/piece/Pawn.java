@@ -14,9 +14,6 @@ public final class Pawn extends Piece {
   /** Constructs a Pawn with the given color. */
   public Pawn(PieceColor color) {
     super(PieceType.PAWN, color);
-    if (color == null) {
-      throw new IllegalArgumentException("color must not be null");
-    }
   }
 
   @Override
@@ -24,7 +21,7 @@ public final class Pawn extends Piece {
     return new Pawn(getColor());
   }
 
-  /** Returns true if the move shape from {@code from} to {@code to} is valid for a Pawn. */
+  @Override
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null) {
       throw new IllegalArgumentException("from must not be null");
@@ -52,10 +49,5 @@ public final class Pawn extends Piece {
     boolean doubleStep = from.getY() == startingRow && dy == DOUBLE_STEP * forward && dx == 0;
 
     return singleStep || doubleStep;
-  }
-
-  private boolean isOnBoard(Location location) {
-    return location.getX() >= 0 && location.getX() <= 7
-        && location.getY() >= 0 && location.getY() <= 7;
   }
 }

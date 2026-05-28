@@ -31,9 +31,11 @@
   - Null-derived getter, copy, and `toString()` rows are not separate public states; mark them `CAN'T SET` through the public constructor and cover them by constructor null rejection.
 
 
-## BoardView Consumption of PieceType and PieceColor
+## BoardView Consumption and Coordinate Convention Review
 
-As part of Issue #31 responsibilities, a review of `BoardView` was conducted to understand how it consumes `PieceType` and `PieceColor` from the board snapshot. The review found that `BoardView` directly utilizes these values from the board snapshot without any complex transformations or intermediate logic. It maps `PieceType` and `PieceColor` to their corresponding visual representations for rendering the chess board.
+As part of Issue #31 responsibilities, a review of `BoardView` was conducted to understand:
+1. How it consumes `PieceType` and `PieceColor` from the board snapshot. The review found that `BoardView` directly utilizes these values from the board snapshot to map them to their corresponding visual representations (images) for rendering.
+2. The coordinate convention used in the UI. The review confirmed that `BoardView` uses a `(col, row)` convention where `col` maps to `x` and `row` maps to `y`. This is consistent with the `Location(x, y)` domain object. The `boardSnapshot` is accessed as `boardSnapshot[y][x]` (or `boardSnapshot[row][col]`), which matches the internal representation.
 
 ### Method under test: `Piece(PieceType type, PieceColor color)`
 

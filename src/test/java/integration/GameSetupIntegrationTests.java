@@ -145,9 +145,13 @@ public class GameSetupIntegrationTests {
 
   @Test
   void pieceColor_EnumDefinition_HasExactlyTwoValues() {
+    assertEquals(2, PieceColor.values().length);
+  }
+
+  @Test
+  void pieceColor_EnumOrdinals_BlackPrecedesWhite() {
     PieceColor[] values = PieceColor.values();
 
-    assertEquals(2, values.length);
     assertEquals(PieceColor.BLACK, values[0]);
     assertEquals(PieceColor.WHITE, values[1]);
   }

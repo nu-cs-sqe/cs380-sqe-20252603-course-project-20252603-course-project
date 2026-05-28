@@ -51,6 +51,11 @@ checkstyle {
     isIgnoreFailures = false
 }
 
+// Use a relaxed Checkstyle config for test sources (allow underscores and magic numbers)
+tasks.named<Checkstyle>("checkstyleTest") {
+    configFile = file("config/checkstyle/sun_checks_test.xml")
+}
+
 spotbugs {
     ignoreFailures = false
     showStackTraces = true

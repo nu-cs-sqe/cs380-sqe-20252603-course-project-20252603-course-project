@@ -46,7 +46,7 @@ public class AttackService {
         if(attackerDice > 3){
             throw new IllegalArgumentException("The attacker may role at most 3 dice. " + attackerDice + " dice requested.");
         }
-        if(defenderDice < to.getArmyCount()){
+        if(defenderDice > to.getArmyCount()){
             throw new IllegalArgumentException("The defender has attempted to roll more dice than permitted.");
         }
         if(defenderDice > 2){

@@ -52,7 +52,6 @@ public class DiceServiceTest {
         Random rand = EasyMock.createMock(Random.class);
 
         DiceService dice = new DiceService(rand);
-        List<Integer> rollResults = new ArrayList<>();
         assertThrows(IllegalArgumentException.class, () -> dice.multiRollDice(0));
     }
 

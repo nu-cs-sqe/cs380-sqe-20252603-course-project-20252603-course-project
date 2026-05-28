@@ -13,75 +13,88 @@ public class Player {
     private int remainingArmiesToPlace;
     private List<Territory> controlledTerritories;
 
-    public Player(int id, String name, PlayerColor color, int remainingArmiesToPlace, List<Territory> controlledTerritories) {
-        setId(id);
-        setName(name);
-        setColor(color);
-        setRemainingArmiesToPlace(remainingArmiesToPlace);
-        setControlledTerritories(controlledTerritories);
+    public Player(
+            final int inId,
+            final String inName,
+            final PlayerColor inColor,
+            final int inRemainingArmiesToPlace,
+            final List<Territory> inControlledTerritories
+    ) {
+        setId(inId);
+        setName(inName);
+        setColor(inColor);
+        setRemainingArmiesToPlace(inRemainingArmiesToPlace);
+        setControlledTerritories(inControlledTerritories);
     }
 
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        if (id < 0) {
+    public final void setId(final int newId) {
+        if (newId < 0) {
             throw new IllegalArgumentException("id cannot be negative");
         }
-        this.id = id;
+        this.id = newId;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        if (name.trim().isEmpty()) {
+    public final void setName(final String newName) {
+        if (newName.trim().isEmpty()) {
             throw new IllegalArgumentException("name cannot be null or blank");
         }
-        this.name = name;
+        this.name = newName;
     }
 
-    public PlayerColor getColor() {
+    public final PlayerColor getColor() {
         return color;
     }
 
-    public void setColor(PlayerColor color) {
-        this.color = color;
+    public final void setColor(final PlayerColor newColor) {
+        this.color = newColor;
     }
 
-    public int getRemainingArmiesToPlace() {
+    public final int getRemainingArmiesToPlace() {
         return remainingArmiesToPlace;
     }
 
-    public void setRemainingArmiesToPlace(int remainingArmiesToPlace) {
-        if (remainingArmiesToPlace < 0) {
-            throw new IllegalArgumentException("remainingArmiesToPlace cannot be negative");
+    public final void setRemainingArmiesToPlace(
+            final int newRemainingArmiesToPlace) {
+        if (newRemainingArmiesToPlace < 0) {
+            throw new IllegalArgumentException(
+                    "remainingArmiesToPlace cannot be negative"
+            );
         }
-        this.remainingArmiesToPlace = remainingArmiesToPlace;
+        this.remainingArmiesToPlace = newRemainingArmiesToPlace;
     }
 
-    public List<Territory> getControlledTerritories() {
+    public final List<Territory> getControlledTerritories() {
         return List.copyOf(controlledTerritories);
     }
 
-    public void setControlledTerritories(List<Territory> territories) {
-        this.controlledTerritories = new ArrayList<>(territories);
+    public final void setControlledTerritories(
+            final List<Territory> newTrritories
+    ) {
+        this.controlledTerritories = new ArrayList<>(newTrritories);
     }
 
-    public int getControlledTerritoryCount() {
+    public final int getControlledTerritoryCount() {
         return controlledTerritories.size();
     }
 
-    public void addControlledTerritory(Territory territory) {
-        if (!controlledTerritories.contains(territory)) {
-            controlledTerritories.add(territory);
+    public final void addControlledTerritory(final Territory newTerritory) {
+        if (!controlledTerritories.contains(newTerritory)) {
+            controlledTerritories.add(newTerritory);
         }
     }
 
-    public void removeControlledTerritory(Territory territory) {
-        controlledTerritories.remove(territory);
+    public final void removeControlledTerritory(
+            final Territory newTerritory
+    ) {
+        controlledTerritories.remove(newTerritory);
     }
 
 }

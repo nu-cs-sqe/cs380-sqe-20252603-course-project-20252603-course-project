@@ -2,22 +2,25 @@ package model;
 
 public class BattleResult {
 
-    private int attackerLosses;
-    private int defenderLosses;
+    private final int attackerLosses;
+    private final int defenderLosses;
 
-    public BattleResult(int attackerLosses, int defenderLosses) {
-        if (attackerLosses < 0 || defenderLosses < 0) {
+    public BattleResult(
+            final int newAttackerLosses,
+            final int newDefenderLosses
+    ) {
+        if (newAttackerLosses < 0 || newDefenderLosses < 0) {
             throw new IllegalArgumentException("Losses cannot be negative");
         }
-        this.attackerLosses = attackerLosses;
-        this.defenderLosses = defenderLosses;
+        this.attackerLosses = newAttackerLosses;
+        this.defenderLosses = newDefenderLosses;
     }
 
-    public int getAttackerLosses() {
+    public final int getAttackerLosses() {
         return attackerLosses;
     }
 
-    public int getDefenderLosses() {
+    public final int getDefenderLosses() {
         return defenderLosses;
     }
 }

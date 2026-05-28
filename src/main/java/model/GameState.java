@@ -17,43 +17,43 @@ public class GameState {
         this.turnOrder = new ArrayList<>();
     }
 
-    public List<Player> getPlayers() {
+    public final List<Player> getPlayers() {
         return List.copyOf(players);
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = List.copyOf(players);
+    public final void setPlayers(final List<Player> newPlayers) {
+        this.players = List.copyOf(newPlayers);
     }
 
-    public List<Territory> getTerritories() {
+    public final List<Territory> getTerritories() {
         return List.copyOf(territories);
     }
 
-    public void setTerritories(List<Territory> territories) {
-        this.territories = List.copyOf(territories);
+    public final void setTerritories(final List<Territory> newTerritories) {
+        this.territories = List.copyOf(newTerritories);
     }
 
-    public List<Player> getTurnOrder() {
+    public final List<Player> getTurnOrder() {
         return List.copyOf(turnOrder);
     }
 
-    public void setTurnOrder(List<Player> turnOrder) {
-        this.turnOrder = List.copyOf(turnOrder);
+    public final void setTurnOrder(final List<Player> newTurnOrder) {
+        this.turnOrder = List.copyOf(newTurnOrder);
     }
 
-    public Player getCurrentPlayer() {
+    public final Player getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public final void setCurrentPlayer(final Player newCurrentPlayer) {
+        this.currentPlayer = newCurrentPlayer;
     }
 
-    public GamePhase getCurrentPhase() {
+    public final GamePhase getCurrentPhase() {
         return currentPhase;
     }
 
-    public void setCurrentPhase(GamePhase currentPhase) {
-        this.currentPhase = currentPhase;
+    public final void setCurrentPhase(final GamePhase newCurrentPhase) {
+        this.currentPhase = newCurrentPhase;
     }
 }

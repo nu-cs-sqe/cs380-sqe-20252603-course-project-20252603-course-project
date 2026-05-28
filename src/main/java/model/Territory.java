@@ -10,46 +10,51 @@ public class Territory {
     public Territory() {
     }
 
-    public Territory(String name, Player owner, int armyCount, Continent continent) {
-        setName(name);
-        setOwner(owner);
-        setArmyCount(armyCount);
-        setContinent(continent);
+    public Territory(
+            final String inName,
+            final Player inOwner,
+            final int inArmyCount,
+            final Continent inContinent
+    ) {
+        setName(inName);
+        setOwner(inOwner);
+        setArmyCount(inArmyCount);
+        setContinent(inContinent);
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public final void setName(final String newName) {
 
-        this.name = name;
+        this.name = newName;
     }
 
-    public Player getOwner() {
+    public final Player getOwner() {
         return owner;
     }
 
-    public void setOwner(Player owner) {
-        this.owner = owner;
+    public final void setOwner(final Player newOwner) {
+        this.owner = newOwner;
     }
 
-    public int getArmyCount() {
+    public final int getArmyCount() {
         return armyCount;
     }
 
-    public void setArmyCount(int armyCount) {
-        if (armyCount < 0) {
+    public final void setArmyCount(final int newArmyCount) {
+        if (newArmyCount < 0) {
             throw new IllegalArgumentException("armyCount cannot be negative");
         }
-        this.armyCount = armyCount;
+        this.armyCount = newArmyCount;
     }
 
-    public Continent getContinent() {
+    public final Continent getContinent() {
         return continent;
     }
 
-    public void setContinent(Continent continent) {
-        this.continent = continent;
+    public final void setContinent(final Continent newContinent) {
+        this.continent = newContinent;
     }
 }

@@ -10,16 +10,24 @@ public class TerritoryAdjacencyCatalogTest {
 
     @Test
     void adjacentMap_containsAllTerritories() {
-        assertEquals(GameConstants.TOTAL_TERRITORIES, TerritoryAdjacencyCatalog.ADJACENT_MAP.size());
+        assertEquals(
+                GameConstants.TOTAL_TERRITORIES,
+                TerritoryAdjacencyCatalog.ADJACENT_MAP.size()
+        );
     }
 
     @Test
     void adjacentMap_containsExpectedNeighborsForKeyTerritories() {
-        assertEquals(List.of("Northwest Territory", "Alberta", "Kamchatka"),
-                TerritoryAdjacencyCatalog.ADJACENT_MAP.get("Alaska"));
-        assertEquals(List.of("Siam", "New Guinea", "Western Australia"),
-                TerritoryAdjacencyCatalog.ADJACENT_MAP.get("Indonesia"));
-        assertTrue(TerritoryAdjacencyCatalog.ADJACENT_MAP.get("Brazil").contains("North Africa"));
+        assertEquals(
+                List.of("Northwest Territory", "Alberta", "Kamchatka"),
+                TerritoryAdjacencyCatalog.ADJACENT_MAP.get("Alaska")
+        );
+        assertEquals(
+                List.of("Siam", "New Guinea", "Western Australia"),
+                TerritoryAdjacencyCatalog.ADJACENT_MAP.get("Indonesia")
+        );
+        assertTrue(TerritoryAdjacencyCatalog.ADJACENT_MAP.
+        get("Brazil").contains("North Africa"));
     }
 
 }

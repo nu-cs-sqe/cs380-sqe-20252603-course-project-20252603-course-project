@@ -1,14 +1,14 @@
 package service;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import domain.TerritoryCatalog;
+import model.Continent;
 import model.GameState;
 import model.Player;
-import model.GameState;
 import model.Territory;
-import model.Continent;
-import domain.TerritoryCatalog;
-import java.util.Map;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReinforcementService {
 
@@ -20,11 +20,11 @@ public class ReinforcementService {
             Continent.AUSTRALIA, 2,
             Continent.AFRICA, 3
     );
-  
+
     /**
      * Validates and performs placement of reinforcements, throws Illegal Argument Exception is placement is invalid
      */
-    void placeReinforcements(Player player, Territory territory, int armies, GameState gameState){
+    void placeReinforcements(Player player, Territory territory, int armies, GameState gameState) {
         boolean result = canPlaceReinforcements(player, territory, armies, gameState);
         if (result) {
             List<Territory> territories = player.getControlledTerritories();
@@ -36,8 +36,7 @@ public class ReinforcementService {
             int new_territory_army = armies + current_territories_placed;
             tr_found.setArmyCount(new_territory_army);
             player.setRemainingArmiesToPlace(new_remaining_armies);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Your army value or territory is not valid, please try again.");
         }
 
@@ -46,13 +45,13 @@ public class ReinforcementService {
     /**
      * Determines if placement is valid: must not exceed remaining armies and territory is owned by player
      */
-    boolean canPlaceReinforcements(Player player, Territory territory, int armies, GameState gameState){
+    boolean canPlaceReinforcements(Player player, Territory territory, int armies, GameState gameState) {
         // get all territories owned by player
         List<Territory> territories = player.getControlledTerritories();
         int territory_index = territories.indexOf(territory);
 
         // if the territory is not found (index is -1)
-        if (territory_index == -1){
+        if (territory_index == -1) {
             return false;
         }
         // if the armies we want to place is greater than the remaining armies of the player
@@ -64,11 +63,11 @@ public class ReinforcementService {
 
 
 
-    
+
     /**
      * Calculates Continent Bonus: accumulates bonus for every continent a player controls entirety
      */
-    int calculateContinentBonus(Player player, GameState gameState){
+    int calculateContinentBonus(Player player, GameState gameState) {
         int totalBonuses = 0;
         for (Continent continent : Continent.values()) {
             if (controlsContinent(player, continent, gameState)) {
@@ -81,7 +80,7 @@ public class ReinforcementService {
     /**
      * Determines if a player controls territories of an entire continent
      */
-    boolean controlsContinent(Player player, Continent continent, GameState gameState){
+    boolean controlsContinent(Player player, Continent continent, GameState gameState) {
         // get all controlled territories
         List<Territory> territories = player.getControlledTerritories();
         // filter controlled territories by the input continent, and convert stream to a list
@@ -90,8 +89,7 @@ public class ReinforcementService {
         List<String> continent_territories = TerritoryCatalog.TERRITORIES_BY_CONTINENT.get(continent);
         if (new_territories.size() == continent_territories.size()) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -112,4 +110,6 @@ public class ReinforcementService {
 
 
 
+
 }
+

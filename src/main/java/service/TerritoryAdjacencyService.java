@@ -12,57 +12,57 @@ import model.Territory;
 
 public class TerritoryAdjacencyService {
 
-	private final Map<String, Territory> territoryByName = new HashMap<>();
+    private final Map<String, Territory> territoryByName = new HashMap<>();
 
-	public void initializeTerritoryAdjacency(List<Territory> territories) {
+    public void initializeTerritoryAdjacency(List<Territory> territories) {
 
-		territoryByName.clear();
-		for (Territory territory : territories) {
+        territoryByName.clear();
+        for (Territory territory : territories) {
 
-			String name = territory.getName();
-			if (territoryByName.containsKey(name)) {
-				throw new IllegalArgumentException("duplicate territory name: " + name);
-			}
-			territoryByName.put(name, territory);
-		}
-	}
+            String name = territory.getName();
+            if (territoryByName.containsKey(name)) {
+                throw new IllegalArgumentException("duplicate territory name: " + name);
+            }
+            territoryByName.put(name, territory);
+        }
+    }
 
-	public boolean areAdjacent(Territory territoryA, Territory territoryB) {
+    public boolean areAdjacent(Territory territoryA, Territory territoryB) {
 
-		List<String> adjacentNames = TerritoryAdjacencyCatalog.ADJACENT_MAP.get(territoryA.getName());
-		return adjacentNames.contains(territoryB.getName());
-	}
+        List<String> adjacentNames = TerritoryAdjacencyCatalog.ADJACENT_MAP.get(territoryA.getName());
+        return adjacentNames.contains(territoryB.getName());
+    }
 
-	public List<Territory> getAdjacentTerritories(Territory territory) {
+    public List<Territory> getAdjacentTerritories(Territory territory) {
 
-		List<String> adjacentNames = TerritoryAdjacencyCatalog.ADJACENT_MAP.get(territory.getName());
+        List<String> adjacentNames = TerritoryAdjacencyCatalog.ADJACENT_MAP.get(territory.getName());
 
-		List<Territory> adjacentTerritories = new ArrayList<>();
-		for (String adjacentName : adjacentNames) {
-			Territory adjacentTerritory = territoryByName.get(adjacentName);
-			adjacentTerritories.add(adjacentTerritory);
-		}
-		return List.copyOf(adjacentTerritories);
-	}
+        List<Territory> adjacentTerritories = new ArrayList<>();
+        for (String adjacentName : adjacentNames) {
+            Territory adjacentTerritory = territoryByName.get(adjacentName);
+            adjacentTerritories.add(adjacentTerritory);
+        }
+        return List.copyOf(adjacentTerritories);
+    }
 
-	public List<Territory> createAllTerritories() {
-		List<Territory> territories = new ArrayList<>();
-		for (Map.Entry<Continent, List<String>> entry : TerritoryCatalog.TERRITORIES_BY_CONTINENT.entrySet()) {
-			Continent continent = entry.getKey();
-			for (String name : entry.getValue()) {
-				territories.add(new Territory(name, null, 0, continent));
-			}
-		}
-		return List.copyOf(territories);
-	}
+    public List<Territory> createAllTerritories() {
+        List<Territory> territories = new ArrayList<>();
+        for (Map.Entry<Continent, List<String>> entry : TerritoryCatalog.TERRITORIES_BY_CONTINENT.entrySet()) {
+            Continent continent = entry.getKey();
+            for (String name : entry.getValue()) {
+                territories.add(new Territory(name, null, 0, continent));
+            }
+        }
+        return List.copyOf(territories);
+    }
 
-	public Territory findByName(List<Territory> territories, String name) {
+    public Territory findByName(List<Territory> territories, String name) {
 
-		for (Territory territory : territories) {
-			if (territory.getName().equals(name)) {
-				return territory;
-			}
-		}
-		throw new IllegalArgumentException("territory not found: " + name);
-	}
+        for (Territory territory : territories) {
+            if (territory.getName().equals(name)) {
+                return territory;
+            }
+        }
+        throw new IllegalArgumentException("territory not found: " + name);
+    }
 }

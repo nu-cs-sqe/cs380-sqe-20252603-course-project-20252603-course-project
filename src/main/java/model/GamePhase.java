@@ -1,8 +1,8 @@
 package model;
 
 public enum GamePhase {
-	SETUP,
-	REINFORCEMENT,
-	ATTACK,
-	FORTIFY
+    SETUP,
+    REINFORCEMENT,
+    ATTACK,
+    FORTIFY
 }

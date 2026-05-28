@@ -8,76 +8,76 @@ import model.Territory;
 
 public class TerritoryAssignmentService {
 
-	private TerritoryAdjacencyService territoryAdjacencyService;
+    private TerritoryAdjacencyService territoryAdjacencyService;
 
-	public TerritoryAssignmentService() {
-		this.territoryAdjacencyService = new TerritoryAdjacencyService();
-	}
+    public TerritoryAssignmentService() {
+        this.territoryAdjacencyService = new TerritoryAdjacencyService();
+    }
 
-	public void assignTerritoryToPlayer(Territory territory, Player player) {
+    public void assignTerritoryToPlayer(Territory territory, Player player) {
 
-		territory.setOwner(player);
-	}
+        territory.setOwner(player);
+    }
 
-	/**
-	 * Assign armies to a named territory in the given game state.
-	 */
-	public static void assignArmyToTerritory(GameState state, Player player, String territoryName, int armyCount) {
+    /**
+     * Assign armies to a named territory in the given game state.
+     */
+    public static void assignArmyToTerritory(GameState state, Player player, String territoryName, int armyCount) {
 
-		if (player.getRemainingArmiesToPlace() < armyCount) {
-			throw new IllegalArgumentException("Player does not have enough armies to place");
-		}
+        if (player.getRemainingArmiesToPlace() < armyCount) {
+            throw new IllegalArgumentException("Player does not have enough armies to place");
+        }
 
-		if (!TerritoryService.playerOwnsTerritory(player, state, territoryName)) {
-			throw new IllegalArgumentException("Player does not own the specified territory");
-		}
+        if (!TerritoryService.playerOwnsTerritory(player, state, territoryName)) {
+            throw new IllegalArgumentException("Player does not own the specified territory");
+        }
 
-		model.Territory territory = TerritoryService.findTerritoryByName(state, territoryName);
-		territory.setArmyCount(territory.getArmyCount() + armyCount);
-		player.setRemainingArmiesToPlace(player.getRemainingArmiesToPlace() - armyCount);
-	}
+        model.Territory territory = TerritoryService.findTerritoryByName(state, territoryName);
+        territory.setArmyCount(territory.getArmyCount() + armyCount);
+        player.setRemainingArmiesToPlace(player.getRemainingArmiesToPlace() - armyCount);
+    }
 
-	/**
-	 * Randomly assign all {@value domain.GameConstants#TOTAL_TERRITORIES} territories to players in game state.
-	 * Each territory gets 1 army and is assigned to a player.
-	 * Territories are distributed as evenly as possible among players.
-	 */
-	// TODO: This method will be changed to assign territories based on player preferences in the future. For now, it just does a random assignment.
-	public void assignTerritories(GameState gameState) {
-		
-		List<Player> players = gameState.getPlayers();
-		if (players.isEmpty()) {
-			throw new IllegalArgumentException("gameState must have at least one player");
-		}
+    /**
+     * Randomly assign all {@value domain.GameConstants#TOTAL_TERRITORIES} territories to players in game state.
+     * Each territory gets 1 army and is assigned to a player.
+     * Territories are distributed as evenly as possible among players.
+     */
+    // TODO: This method will be changed to assign territories based on player preferences in the future. For now, it just does a random assignment.
+    public void assignTerritories(GameState gameState) {
 
-		// Create all territories
-		List<Territory> allTerritories = territoryAdjacencyService.createAllTerritories();
+        List<Player> players = gameState.getPlayers();
+        if (players.isEmpty()) {
+            throw new IllegalArgumentException("gameState must have at least one player");
+        }
 
-		// Assign territories to players in round-robin fashion
-		int playerCount = players.size();
-		for (int i = 0; i < allTerritories.size(); i++) {
-			Territory territory = allTerritories.get(i);
-			Player assignedPlayer = players.get(i % playerCount);
-			
-			// Set territory owner and place 1 army
-			territory.setOwner(assignedPlayer);
-			territory.setArmyCount(1);
-			
-			// Add territory to player's controlled territories
-			assignedPlayer.addControlledTerritory(territory);
-		}
+        // Create all territories
+        List<Territory> allTerritories = territoryAdjacencyService.createAllTerritories();
 
-		// Update game state with territories
-		gameState.setTerritories(allTerritories);
-	}
+        // Assign territories to players in round-robin fashion
+        int playerCount = players.size();
+        for (int i = 0; i < allTerritories.size(); i++) {
+            Territory territory = allTerritories.get(i);
+            Player assignedPlayer = players.get(i % playerCount);
 
-	public void placeInitialOneArmyPerTerritory(GameState state){
+            // Set territory owner and place 1 army
+            territory.setOwner(assignedPlayer);
+            territory.setArmyCount(1);
 
-		List<Territory> AllTeritories = state.getTerritories();
+            // Add territory to player's controlled territories
+            assignedPlayer.addControlledTerritory(territory);
+        }
 
-		for (int i =0; i < AllTeritories.size(); i++) {
-			Territory territory = state.getTerritories().get(i);
-			territory.setArmyCount(1);
-		}
-	}
+        // Update game state with territories
+        gameState.setTerritories(allTerritories);
+    }
+
+    public void placeInitialOneArmyPerTerritory(GameState state) {
+
+        List<Territory> AllTeritories = state.getTerritories();
+
+        for (int i = 0; i < AllTeritories.size(); i++) {
+            Territory territory = state.getTerritories().get(i);
+            territory.setArmyCount(1);
+        }
+    }
 }

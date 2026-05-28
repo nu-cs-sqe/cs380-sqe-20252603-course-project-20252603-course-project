@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class GameState {
@@ -18,7 +17,8 @@ public class GameState {
 		this.turnOrder = new ArrayList<>();
 	}
 
-	public List<Player> getPlayers() {return List.copyOf(players);
+	public List<Player> getPlayers() {
+		return List.copyOf(players);
 	}
 
 	public void setPlayers(List<Player> players) {

@@ -88,6 +88,8 @@ public class ReinforcementServiceTest {
         int remaining_army_count_post_place = player1.getRemainingArmiesToPlace();
         assertEquals(1, remaining_army_count_post_place);
     }
+
+    @Test
     void shouldReturnZeroBonusWhenPlayerControlsNoFullContinent() {
         // player has 5/6 in AFRICA continent, one in Asia, no bonus
         ReinforcementService rs = new ReinforcementService();
@@ -125,8 +127,21 @@ public class ReinforcementServiceTest {
         Territory t3 = new Territory("Madagascar", player1, 0, Continent.AFRICA);
         Territory t4 = new Territory("East Africa", player1, 0, Continent.AFRICA);
         Territory t5 = new Territory("South Africa", player1, 0, Continent.AFRICA);
-        Territory t6 = new Territory("Japan", player1, 0, Continent.ASIA);
+        Territory t6 = new Territory("North Africa", player1, 0, Continent.AFRICA);
+        Territory t7 = new Territory("Japan", player1, 0, Continent.ASIA);
+        controlled_territories.add(t1);
+        controlled_territories.add(t2);
+        controlled_territories.add(t3);
+        controlled_territories.add(t4);
+        controlled_territories.add(t5);
+        controlled_territories.add(t6);
+        controlled_territories.add(t7);
+        player1.setControlledTerritories(controlled_territories);
+        int actual_bonus = rs.calculateContinentBonus(player1, gameState);
+        assertEquals(3, actual_bonus);
     }
+
+    @Test
     void shouldReturnMinimumReinforcementWhenPlayerOwnsFewTerritories() {
         // TC1
         ReinforcementService rs = new ReinforcementService();
@@ -157,9 +172,9 @@ public class ReinforcementServiceTest {
         Territory t4 = new Territory("Western United States", player1, 0, Continent.NORTH_AMERICA);
         Territory t5 = new Territory("Southern United States", player1, 0, Continent.NORTH_AMERICA);
         Territory t6 = new Territory("Quebec", player1, 0, Continent.NORTH_AMERICA);
-        Territory t7 = new Territory("Ontario", player1, 0, Continent.NORTH_AMERICA);
-        Territory t8 = new Territory("Greenland", player1, 0, Continent.NORTH_AMERICA);
-        Territory t9 = new Territory("Peru", player1, 0, Continent.SOUTH_AMERICA);
+        //Territory t7 = new Territory("Ontario", player1, 0, Continent.NORTH_AMERICA);
+        //Territory t8 = new Territory("Greenland", player1, 0, Continent.NORTH_AMERICA);
+        //Territory t9 = new Territory("Peru", player1, 0, Continent.SOUTH_AMERICA);
         controlled_territories.add(t1);
         controlled_territories.add(t2);
         controlled_territories.add(t3);
@@ -262,7 +277,7 @@ public class ReinforcementServiceTest {
         Territory t610 = new Territory("Middle East", player1, 0, Continent.ASIA);
         Territory t611 = new Territory("Japan", player1, 0, Continent.ASIA);
         Territory t612 = new Territory("India", player1, 0, Continent.ASIA);
-        Territory t613 = new Territory("China", player1, 0, Continent.ASIA);
+        //Territory t613 = new Territory("China", player1, 0, Continent.ASIA);
         controlled_territories6.add(t61);
         controlled_territories6.add(t62);
         controlled_territories6.add(t63);
@@ -331,6 +346,8 @@ public class ReinforcementServiceTest {
         int new_army_count_post_place = t1.getArmyCount();
         assertEquals(5, new_army_count_post_place);
     }
+
+    @Test
     void shouldNotGrantBonusWhenOneTerritoryInContinentIsOwnedByAnotherPlayer() {
         // one continent, 2 players, all but one go to one player
         ReinforcementService rs = new ReinforcementService();
@@ -393,5 +410,4 @@ public class ReinforcementServiceTest {
         assertEquals(expected, actual_owned_terr);
 
     }
-
 }

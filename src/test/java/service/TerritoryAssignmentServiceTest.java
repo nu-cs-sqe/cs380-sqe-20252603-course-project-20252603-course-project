@@ -60,10 +60,11 @@ public class TerritoryAssignmentServiceTest {
     @Test
     public void playerOwnsTerritory_falseWhenOwnerNull() {
         GameState state = new GameState();
-        Player p = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
+        //Player p = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
         Territory t = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
         state.setTerritories(List.of(t));
 
+        assertFalse(TerritoryService.playerOwnsTerritory(null, state, "Alaska"));
     }
 
     @Test

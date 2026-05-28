@@ -85,25 +85,22 @@ public class GameSetupIntegrationTests {
 
   @Test
   void boardSetup_InitialBoard_SnapshotRow7Col0IsWhiteRook() {
-    Piece p = new Board().getSnapshot()[7][0];
-
-    assertEquals(PieceType.ROOK, p.getType());
-    assertEquals(PieceColor.WHITE, p.getColor());
+    assertWhiteBackRankPiece(0, PieceType.ROOK);
   }
 
   @Test
   void boardSetup_InitialBoard_SnapshotRow7Col1IsWhiteKnight() {
-    Piece p = new Board().getSnapshot()[7][1];
-
-    assertEquals(PieceType.KNIGHT, p.getType());
-    assertEquals(PieceColor.WHITE, p.getColor());
+    assertWhiteBackRankPiece(1, PieceType.KNIGHT);
   }
 
   @Test
   void boardSetup_InitialBoard_SnapshotRow7Col2IsWhiteBishop() {
-    Piece p = new Board().getSnapshot()[7][2];
+    assertWhiteBackRankPiece(2, PieceType.BISHOP);
+  }
 
-    assertEquals(PieceType.BISHOP, p.getType());
+  private void assertWhiteBackRankPiece(int col, PieceType expectedType) {
+    Piece p = new Board().getSnapshot()[7][col];
+    assertEquals(expectedType, p.getType());
     assertEquals(PieceColor.WHITE, p.getColor());
   }
 

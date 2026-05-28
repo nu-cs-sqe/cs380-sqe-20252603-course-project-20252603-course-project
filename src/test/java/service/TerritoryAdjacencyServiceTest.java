@@ -20,8 +20,18 @@ public class TerritoryAdjacencyServiceTest {
     @Test
     void areAdjacent_returnsTrueForKnownAdjacentTerritories() {
         TerritoryAdjacencyService service = new TerritoryAdjacencyService();
-        Territory alaska = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
-        Territory alberta = new Territory("Alberta", null, 0, Continent.NORTH_AMERICA);
+        Territory alaska = new Territory(
+                "Alaska",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory alberta = new Territory(
+                "Alberta",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
 
         assertTrue(service.areAdjacent(alaska, alberta));
     }
@@ -29,8 +39,18 @@ public class TerritoryAdjacencyServiceTest {
     @Test
     void areAdjacent_isBidirectionalForKnownNeighborPair() {
         TerritoryAdjacencyService service = new TerritoryAdjacencyService();
-        Territory alaska = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
-        Territory alberta = new Territory("Alberta", null, 0, Continent.NORTH_AMERICA);
+        Territory alaska = new Territory(
+                "Alaska",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory alberta = new Territory(
+                "Alberta",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
 
         assertTrue(service.areAdjacent(alaska, alberta));
         assertTrue(service.areAdjacent(alberta, alaska));
@@ -39,39 +59,92 @@ public class TerritoryAdjacencyServiceTest {
     @Test
     void areAdjacent_returnsFalseForNonAdjacentTerritories() {
         TerritoryAdjacencyService service = new TerritoryAdjacencyService();
-        Territory alaska = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
-        Territory brazil = new Territory("Brazil", null, 0, Continent.SOUTH_AMERICA);
+        Territory alaska = new Territory(
+                "Alaska",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory brazil = new Territory(
+                "Brazil",
+                null,
+                0,
+                Continent.SOUTH_AMERICA
+        );
 
         assertFalse(service.areAdjacent(alaska, brazil));
     }
 
     @Test
-    void areAdjacent_returnsFalseWhenComparingSameTerritory() {
+    void areAdjacent_returnsFalseIfComparingSameTerritory() {
         TerritoryAdjacencyService service = new TerritoryAdjacencyService();
-        Territory alaska = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
+        Territory alaska = new Territory(
+                "Alaska",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
 
         assertFalse(service.areAdjacent(alaska, alaska));
     }
 
     @Test
-    void initializeTerritoryAdjacency_withDuplicateTerritoryName_throwsException() {
+    void initializeTerritoryAdjacency_DuplicateTerritoryName_throwsException() {
         TerritoryAdjacencyService service = new TerritoryAdjacencyService();
-        Territory alaskaOne = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
-        Territory alaskaTwo = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
+        Territory alaskaOne = new Territory(
+                "Alaska",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory alaskaTwo = new Territory(
+                "Alaska",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
 
         assertThrows(IllegalArgumentException.class,
-                () -> service.initializeTerritoryAdjacency(List.of(alaskaOne, alaskaTwo)));
+                () -> service.initializeTerritoryAdjacency(List.of(
+                        alaskaOne,
+                        alaskaTwo
+                )));
     }
 
     @Test
     void getAdjacentTerritories_returnsInitializedNeighborsOnly() {
         TerritoryAdjacencyService service = new TerritoryAdjacencyService();
-        Territory alaska = new Territory("Alaska", null, 0, Continent.NORTH_AMERICA);
-        Territory northwestTerritory = new Territory("Northwest Territory", null, 0, Continent.NORTH_AMERICA);
-        Territory alberta = new Territory("Alberta", null, 0, Continent.NORTH_AMERICA);
-        Territory kamchatka = new Territory("Kamchatka", null, 0, Continent.ASIA);
+        Territory alaska = new Territory(
+                "Alaska",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory northwestTerritory = new Territory(
+                "Northwest Territory",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory alberta = new Territory(
+                "Alberta",
+                null,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory kamchatka = new Territory(
+                "Kamchatka",
+                null,
+                0,
+                Continent.ASIA
+        );
 
-        service.initializeTerritoryAdjacency(List.of(alaska, northwestTerritory, alberta, kamchatka));
+        service.initializeTerritoryAdjacency(List.of(
+                alaska,
+                northwestTerritory,
+                alberta,
+                kamchatka)
+        );
 
         List<Territory> adjacent = service.getAdjacentTerritories(alaska);
         assertEquals(3, adjacent.size());
@@ -101,8 +174,10 @@ public class TerritoryAdjacencyServiceTest {
 
         assertEquals(GameConstants.TOTAL_TERRITORIES, allTerritories.size());
         for (Territory territory : allTerritories) {
-            List<Territory> adjacent = service.getAdjacentTerritories(territory);
-            List<String> expectedNames = TerritoryAdjacencyCatalog.ADJACENT_MAP.get(territory.getName());
+            List<Territory> adjacent =
+            service.getAdjacentTerritories(territory);
+            List<String> expectedNames =
+            TerritoryAdjacencyCatalog.ADJACENT_MAP.get(territory.getName());
 
             assertTrue(expectedNames != null && !expectedNames.isEmpty());
             assertEquals(expectedNames.size(), adjacent.size());
@@ -114,12 +189,30 @@ public class TerritoryAdjacencyServiceTest {
         TerritoryAdjacencyService service = new TerritoryAdjacencyService();
         List<Territory> allTerritories = service.createAllTerritories();
 
-        assertEquals(Continent.NORTH_AMERICA, service.findByName(allTerritories, "Alaska").getContinent());
-        assertEquals(Continent.SOUTH_AMERICA, service.findByName(allTerritories, "Brazil").getContinent());
-        assertEquals(Continent.EUROPE, service.findByName(allTerritories, "Ukraine").getContinent());
-        assertEquals(Continent.AFRICA, service.findByName(allTerritories, "Egypt").getContinent());
-        assertEquals(Continent.ASIA, service.findByName(allTerritories, "India").getContinent());
-        assertEquals(Continent.AUSTRALIA, service.findByName(allTerritories, "Indonesia").getContinent());
+        assertEquals(
+                Continent.NORTH_AMERICA,
+                service.findByName(allTerritories, "Alaska").getContinent()
+        );
+        assertEquals(
+                Continent.SOUTH_AMERICA,
+                service.findByName(allTerritories, "Brazil").getContinent()
+        );
+        assertEquals(
+                Continent.EUROPE,
+                service.findByName(allTerritories, "Ukraine").getContinent()
+        );
+        assertEquals(
+                Continent.AFRICA,
+                service.findByName(allTerritories, "Egypt").getContinent()
+        );
+        assertEquals(
+                Continent.ASIA,
+                service.findByName(allTerritories, "India").getContinent()
+        );
+        assertEquals(
+                Continent.AUSTRALIA,
+                service.findByName(allTerritories, "Indonesia").getContinent()
+        );
     }
 
     @Test
@@ -152,7 +245,8 @@ public class TerritoryAdjacencyServiceTest {
         TerritoryAdjacencyService service = new TerritoryAdjacencyService();
         List<Territory> allTerritories = service.createAllTerritories();
 
-        assertThrows(IllegalArgumentException.class, () -> service.findByName(allTerritories, "Atlantis"));
+        assertThrows(IllegalArgumentException.class,
+                () -> service.findByName(allTerritories, "Atlantis"));
     }
 
 }

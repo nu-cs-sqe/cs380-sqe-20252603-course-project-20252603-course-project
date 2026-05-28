@@ -27,7 +27,7 @@ public class TerritoryAdjacencyCatalogTest {
                 TerritoryAdjacencyCatalog.ADJACENT_MAP.get("Indonesia")
         );
         assertTrue(TerritoryAdjacencyCatalog.ADJACENT_MAP.
-        get("Brazil").contains("North Africa"));
+                get("Brazil").contains("North Africa"));
     }
 
 }

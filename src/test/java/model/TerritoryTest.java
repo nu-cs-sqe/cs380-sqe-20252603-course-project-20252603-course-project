@@ -13,8 +13,19 @@ public class TerritoryTest {
 
     @Test
     void allArgsConstructor_setsAllFields() {
-        Player owner = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
-        Territory territory = new Territory("Alaska", owner, 3, Continent.NORTH_AMERICA);
+        Player owner = new Player(
+                1,
+                "Alice",
+                PlayerColor.RED,
+                5,
+                new ArrayList<>()
+        );
+        Territory territory = new Territory(
+                "Alaska",
+                owner,
+                3,
+                Continent.NORTH_AMERICA
+        );
 
         assertEquals("Alaska", territory.getName());
         assertEquals(owner, territory.getOwner());
@@ -25,7 +36,13 @@ public class TerritoryTest {
     @Test
     void setters_updateValues() {
         Territory territory = new Territory();
-        Player owner = new Player(2, "Bob", PlayerColor.BLUE, 4, new ArrayList<>());
+        Player owner = new Player(
+                2,
+                "Bob",
+                PlayerColor.BLUE,
+                4,
+                new ArrayList<>()
+        );
 
         territory.setName("Brazil");
         territory.setOwner(owner);
@@ -51,13 +68,25 @@ public class TerritoryTest {
     void setArmyCount_withNegativeValue_throwsException() {
         Territory territory = new Territory();
 
-        assertThrows(IllegalArgumentException.class, () -> territory.setArmyCount(-1));
+        assertThrows(IllegalArgumentException.class,
+                () -> territory.setArmyCount(-1));
     }
 
     @Test
     void constructor_withInvalidArguments_throwsException() {
-        Player owner = new Player(1, "Alice", PlayerColor.RED, 5, new ArrayList<>());
+        Player owner = new Player(
+                1,
+                "Alice",
+                PlayerColor.RED,
+                5,
+                new ArrayList<>()
+        );
 
-        assertThrows(IllegalArgumentException.class, () -> new Territory("Alaska", owner, -1, Continent.NORTH_AMERICA));
+        assertThrows(IllegalArgumentException.class, () -> new Territory(
+                "Alaska",
+                owner,
+                -1,
+                Continent.NORTH_AMERICA
+        ));
     }
 }

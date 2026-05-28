@@ -1,17 +1,18 @@
 package domain;
 
-import domain.piece.Piece;
-import domain.piece.PieceColor;
-import domain.piece.PieceType;
-import domain.piece.Rook;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import domain.Location;
+import domain.piece.Piece;
+import domain.piece.PieceColor;
+import domain.piece.PieceType;
+import domain.piece.Rook;
+import org.junit.jupiter.api.Test;
 
 public class RookTests {
   @Test
@@ -141,7 +142,7 @@ public class RookTests {
   }
 
   @Test
-  public void RookIsValidMoveShape_LShapeMove_ReturnsFalse() {
+  public void RookIsValidMoveShape_LshapeMove_ReturnsFalse() {
     Rook rook = new Rook(PieceColor.WHITE);
 
     assertFalse(rook.isValidMoveShape(new Location(4, 4), new Location(5, 6)));

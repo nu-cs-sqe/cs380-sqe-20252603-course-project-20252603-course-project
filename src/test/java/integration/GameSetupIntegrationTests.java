@@ -104,14 +104,18 @@ public class GameSetupIntegrationTests {
   }
 
   private void assertWhiteBackRankPiece(int col, PieceType expectedType) {
-    Piece p = new Board().getSnapshot()[WHITE_BACK_RANK_ROW][col];
+    Board board = new Board();
+    Piece[][] snapshot = board.getSnapshot();
+
+    Piece p = snapshot[WHITE_BACK_RANK_ROW][col];
     assertEquals(expectedType, p.getType());
     assertEquals(PieceColor.WHITE, p.getColor());
   }
 
   @Test
   void boardSetup_InitialBoard_WhitePawnRowIsAllWhitePawns() {
-    Piece[][] snapshot = new Board().getSnapshot();
+    Board board = new Board();
+    Piece[][] snapshot = board.getSnapshot();
 
     for (int col = 0; col < BOARD_SIZE; col++) {
       Piece p = snapshot[WHITE_PAWN_ROW][col];

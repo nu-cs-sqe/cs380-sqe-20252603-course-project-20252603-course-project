@@ -23,8 +23,8 @@ public class ReinforcementServiceTest {
         GameState gameState = new GameState();
         List<Territory> controlledTerritories1 = new ArrayList<>();
         Player player1 = new Player(
-                1, 
-                "A", 
+                1,
+                "A",
                 PlayerColor.RED,
                 4,
                 controlledTerritories1
@@ -50,7 +50,7 @@ public class ReinforcementServiceTest {
                 t1,
                 armiesToPlace,
                 gameState
-                )
+        )
         );
     }
 
@@ -185,46 +185,46 @@ public class ReinforcementServiceTest {
         GameState gameState = new GameState();
         List<Territory> controlledTerritories = new ArrayList<>();
         Player player1 = new Player(
-                1, 
-                "A", 
-                PlayerColor.RED, 
+                1,
+                "A",
+                PlayerColor.RED,
                 0,
                 controlledTerritories
         );
         Territory t1 = new Territory(
-                "Egypt", 
-                player1, 
-                0, 
+                "Egypt",
+                player1,
+                0,
                 Continent.AFRICA
         );
         Territory t2 = new Territory(
-                "Congo", 
-                player1, 
-                0, 
+                "Congo",
+                player1,
+                0,
                 Continent.AFRICA
         );
         Territory t3 = new Territory(
                 "Madagascar",
-                player1, 
+                player1,
                 0,
                 Continent.AFRICA
         );
         Territory t4 = new Territory(
                 "East Africa",
-                player1, 
+                player1,
                 0,
                 Continent.AFRICA
         );
         Territory t5 = new Territory(
                 "South Africa",
-                player1, 
-                0, 
+                player1,
+                0,
                 Continent.AFRICA
         );
         Territory t6 = new Territory(
                 "Japan",
-                player1, 
-                0, 
+                player1,
+                0,
                 Continent.ASIA
         );
         controlledTerritories.add(t1);
@@ -235,7 +235,7 @@ public class ReinforcementServiceTest {
         controlledTerritories.add(t6);
         player1.setControlledTerritories(controlledTerritories);
         int actualBonus = rs.calculateContinentBonus(
-                player1, 
+                player1,
                 gameState
         );
         assertEquals(0, actualBonus);
@@ -346,10 +346,9 @@ public class ReinforcementServiceTest {
     }
 
     @Test
-    void shouldCalculateBaseReinforcementFromTerritoryCount() {
-        // TC1
+    void shouldReturnZeroBonusForPartialNorthAmericaSet() {
         ReinforcementService rs = new ReinforcementService();
-        // include 9 territories
+        // include 6 of 9 territories (partial ownership)
 
         List<Territory> controlledTerritories = new ArrayList<>();
         GameState gameState = new GameState();
@@ -396,9 +395,27 @@ public class ReinforcementServiceTest {
                 0,
                 Continent.NORTH_AMERICA
         );
-        //Territory t7 = new Territory("Ontario", player1, 0, Continent.NORTH_AMERICA);
-        //Territory t8 = new Territory("Greenland", player1, 0, Continent.NORTH_AMERICA);
-        //Territory t9 = new Territory("Peru", player1, 0, Continent.SOUTH_AMERICA);
+        // other territories in continent not owned by player1,
+        // so no bonus should be granted
+//        Territory t7 = new Territory(
+//                "Ontario",
+//                player1,
+//                0,
+//                Continent.NORTH_AMERICA
+//        );
+//        Territory t8 = new Territory(
+//                "Greenland",
+//                player1,
+//                0,
+//                Continent.NORTH_AMERICA
+//        );
+//        Territory t9 = new Territory(
+//                "Peru",
+//                player1, 
+//                0,
+//                Continent.SOUTH_AMERICA
+//        );
+
         controlledTerritories.add(t1);
         controlledTerritories.add(t2);
         controlledTerritories.add(t3);
@@ -406,10 +423,15 @@ public class ReinforcementServiceTest {
         controlledTerritories.add(t5);
         controlledTerritories.add(t6);
         player1.setControlledTerritories(controlledTerritories);
+
         int actualBonus = rs.calculateContinentBonus(player1, gameState);
         assertEquals(0, actualBonus);
+    }
 
-        // Australia
+    @Test
+    void shouldReturnAustraliaBonusWhenPlayerControlsAustralia() {
+        ReinforcementService rs = new ReinforcementService();
+        GameState gameState = new GameState();
         List<Territory> controlledTerritories2 = new ArrayList<>();
         Player player2 = new Player(
                 1,
@@ -420,25 +442,25 @@ public class ReinforcementServiceTest {
         );
         Territory t21 = new Territory(
                 "Western Australia",
-                player1,
+                player2,
                 0,
                 Continent.AUSTRALIA
         );
         Territory t22 = new Territory(
                 "Eastern Australia",
-                player1,
+                player2,
                 0,
                 Continent.AUSTRALIA
         );
         Territory t23 = new Territory(
                 "Indonesia",
-                player1,
+                player2,
                 0,
                 Continent.AUSTRALIA
         );
         Territory t24 = new Territory(
                 "New Guinea",
-                player1,
+                player2,
                 0,
                 Continent.AUSTRALIA
         );
@@ -449,14 +471,44 @@ public class ReinforcementServiceTest {
         player2.setControlledTerritories(controlledTerritories2);
         int actualBonus2 = rs.calculateContinentBonus(player2, gameState);
         assertEquals(2, actualBonus2);
+    }
 
-        // South America
+    @Test
+    void shouldReturnSouthAmericaBonusWhenPlayerControlsSouthAmerica() {
+        ReinforcementService rs = new ReinforcementService();
+        GameState gameState = new GameState();
         List<Territory> controlledTerritories3 = new ArrayList<>();
-        Player player3 = new Player(1, "A", PlayerColor.RED, 0, controlledTerritories3);
-        Territory t31 = new Territory("Peru", player1, 0, Continent.SOUTH_AMERICA);
-        Territory t32 = new Territory("Argentina", player1, 0, Continent.SOUTH_AMERICA);
-        Territory t33 = new Territory("Venezuela", player1, 0, Continent.SOUTH_AMERICA);
-        Territory t34 = new Territory("Brazil", player1, 0, Continent.SOUTH_AMERICA);
+        Player player3 = new Player(
+                1,
+                "A",
+                PlayerColor.RED,
+                0,
+                controlledTerritories3
+        );
+        Territory t31 = new Territory(
+                "Peru",
+                player3,
+                0,
+                Continent.SOUTH_AMERICA
+        );
+        Territory t32 = new Territory(
+                "Argentina",
+                player3,
+                0,
+                Continent.SOUTH_AMERICA
+        );
+        Territory t33 = new Territory(
+                "Venezuela",
+                player3,
+                0,
+                Continent.SOUTH_AMERICA
+        );
+        Territory t34 = new Territory(
+                "Brazil",
+                player3,
+                0,
+                Continent.SOUTH_AMERICA
+        );
         controlledTerritories3.add(t31);
         controlledTerritories3.add(t32);
         controlledTerritories3.add(t33);
@@ -464,19 +516,74 @@ public class ReinforcementServiceTest {
         player3.setControlledTerritories(controlledTerritories3);
         int actualBonus3 = rs.calculateContinentBonus(player3, gameState);
         assertEquals(2, actualBonus3);
+    }
 
-        // North America
+    @Test
+    void shouldReturnNorthAmericaBonusWhenPlayerControlsNorthAmerica() {
+        ReinforcementService rs = new ReinforcementService();
+        GameState gameState = new GameState();
         List<Territory> controlledTerritories4 = new ArrayList<>();
-        Player player4 = new Player(1, "A", PlayerColor.RED, 0, controlledTerritories4);
-        Territory t41 = new Territory("Alaska", player1, 0, Continent.NORTH_AMERICA);
-        Territory t42 = new Territory("Northwest Territory", player1, 0, Continent.NORTH_AMERICA);
-        Territory t43 = new Territory("Greenland", player1, 0, Continent.NORTH_AMERICA);
-        Territory t44 = new Territory("Alberta", player1, 0, Continent.NORTH_AMERICA);
-        Territory t45 = new Territory("Ontario", player1, 0, Continent.NORTH_AMERICA);
-        Territory t46 = new Territory("Quebec", player1, 0, Continent.NORTH_AMERICA);
-        Territory t47 = new Territory("Western United States", player1, 0, Continent.NORTH_AMERICA);
-        Territory t48 = new Territory("Eastern United States", player1, 0, Continent.NORTH_AMERICA);
-        Territory t49 = new Territory("Central America", player1, 0, Continent.NORTH_AMERICA);
+        Player player4 = new Player(
+                1,
+                "A",
+                PlayerColor.RED,
+                0,
+                controlledTerritories4
+        );
+        Territory t41 = new Territory(
+                "Alaska",
+                player4,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory t42 = new Territory(
+                "Northwest Territory",
+                player4,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory t43 = new Territory(
+                "Greenland",
+                player4,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory t44 = new Territory(
+                "Alberta",
+                player4,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory t45 = new Territory(
+                "Ontario",
+                player4,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory t46 = new Territory(
+                "Quebec",
+                player4,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory t47 = new Territory(
+                "Western United States",
+                player4,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory t48 = new Territory(
+                "Eastern United States",
+                player4,
+                0,
+                Continent.NORTH_AMERICA
+        );
+        Territory t49 = new Territory(
+                "Central America",
+                player4,
+                0,
+                Continent.NORTH_AMERICA
+        );
         controlledTerritories4.add(t41);
         controlledTerritories4.add(t42);
         controlledTerritories4.add(t43);
@@ -489,17 +596,62 @@ public class ReinforcementServiceTest {
         player4.setControlledTerritories(controlledTerritories4);
         int actualBonus4 = rs.calculateContinentBonus(player4, gameState);
         assertEquals(5, actualBonus4);
+    }
 
-        // Europe
+    @Test
+    void shouldReturnEuropeBonusWhenPlayerControlsEurope() {
+        ReinforcementService rs = new ReinforcementService();
+        GameState gameState = new GameState();
         List<Territory> controlledTerritories5 = new ArrayList<>();
-        Player player5 = new Player(1, "A", PlayerColor.RED, 0, controlledTerritories5);
-        Territory t51 = new Territory("Iceland", player1, 0, Continent.EUROPE);
-        Territory t52 = new Territory("Great Britain", player1, 0, Continent.EUROPE);
-        Territory t53 = new Territory("Western Europe", player1, 0, Continent.EUROPE);
-        Territory t54 = new Territory("Eastern Europe", player1, 0, Continent.EUROPE);
-        Territory t55 = new Territory("Ukraine", player1, 0, Continent.EUROPE);
-        Territory t56 = new Territory("Southern Europe", player1, 0, Continent.EUROPE);
-        Territory t57 = new Territory("Scandinavia", player1, 0, Continent.EUROPE);
+        Player player5 = new Player(
+                1,
+                "A",
+                PlayerColor.RED,
+                0,
+                controlledTerritories5
+        );
+        Territory t51 = new Territory(
+                "Iceland",
+                player5,
+                0,
+                Continent.EUROPE
+        );
+        Territory t52 = new Territory(
+                "Great Britain",
+                player5,
+                0,
+                Continent.EUROPE
+        );
+        Territory t53 = new Territory(
+                "Western Europe",
+                player5,
+                0,
+                Continent.EUROPE
+        );
+        Territory t54 = new Territory(
+                "Eastern Europe",
+                player5,
+                0,
+                Continent.EUROPE
+        );
+        Territory t55 = new Territory(
+                "Ukraine",
+                player5,
+                0,
+                Continent.EUROPE
+        );
+        Territory t56 = new Territory(
+                "Southern Europe",
+                player5,
+                0,
+                Continent.EUROPE
+        );
+        Territory t57 = new Territory(
+                "Scandinavia",
+                player5,
+                0,
+                Continent.EUROPE
+        );
         controlledTerritories5.add(t51);
         controlledTerritories5.add(t52);
         controlledTerritories5.add(t53);
@@ -510,23 +662,92 @@ public class ReinforcementServiceTest {
         player5.setControlledTerritories(controlledTerritories5);
         int actualBonus5 = rs.calculateContinentBonus(player5, gameState);
         assertEquals(5, actualBonus5);
+    }
 
-        // Asia
+    @Test
+    void shouldReturnAsiaBonusWhenPlayerControlsAsia() {
+        ReinforcementService rs = new ReinforcementService();
+        GameState gameState = new GameState();
         List<Territory> controlledTerritories6 = new ArrayList<>();
-        Player player6 = new Player(1, "A", PlayerColor.RED, 0, controlledTerritories6);
-        Territory t61 = new Territory("Ural", player1, 0, Continent.ASIA);
-        Territory t62 = new Territory("Siberia", player1, 0, Continent.ASIA);
-        Territory t63 = new Territory("Yakutsk", player1, 0, Continent.ASIA);
-        Territory t64 = new Territory("Kamchatka", player1, 0, Continent.ASIA);
-        Territory t65 = new Territory("Irkutsk", player1, 0, Continent.ASIA);
-        Territory t66 = new Territory("Afghanistan", player1, 0, Continent.ASIA);
-        Territory t67 = new Territory("Mongolia", player1, 0, Continent.ASIA);
-        Territory t68 = new Territory("Siam", player1, 0, Continent.ASIA);
-        Territory t69 = new Territory("Western Europe", player1, 0, Continent.ASIA);
-        Territory t610 = new Territory("Middle East", player1, 0, Continent.ASIA);
-        Territory t611 = new Territory("Japan", player1, 0, Continent.ASIA);
-        Territory t612 = new Territory("India", player1, 0, Continent.ASIA);
-        //Territory t613 = new Territory("China", player1, 0, Continent.ASIA);
+        Player player6 = new Player(
+                1,
+                "A",
+                PlayerColor.RED,
+                0,
+                controlledTerritories6
+        );
+        Territory t61 = new Territory(
+                "Ural",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t62 = new Territory(
+                "Siberia",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t63 = new Territory(
+                "Yakutsk",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t64 = new Territory(
+                "Kamchatka",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t65 = new Territory(
+                "Irkutsk",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t66 = new Territory(
+                "Afghanistan",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t67 = new Territory(
+                "Mongolia",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t68 = new Territory(
+                "Siam",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t69 = new Territory(
+                "China",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t610 = new Territory(
+                "Middle East",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t611 = new Territory(
+                "Japan",
+                player6,
+                0,
+                Continent.ASIA
+        );
+        Territory t612 = new Territory(
+                "India",
+                player6,
+                0,
+                Continent.ASIA
+        );
         controlledTerritories6.add(t61);
         controlledTerritories6.add(t62);
         controlledTerritories6.add(t63);
@@ -542,7 +763,6 @@ public class ReinforcementServiceTest {
         player6.setControlledTerritories(controlledTerritories6);
         int actualBonus6 = rs.calculateContinentBonus(player6, gameState);
         assertEquals(7, actualBonus6);
-
     }
 
     @Test
@@ -589,10 +809,10 @@ public class ReinforcementServiceTest {
                 Continent.AFRICA
         );
         Territory t6 = new Territory(
-                "Japan",
+                "NorthAfrica",
                 player1,
                 0,
-                Continent.ASIA
+                Continent.AFRICA
         );
         Territory t21 = new Territory(
                 "Western Australia",
@@ -669,7 +889,7 @@ public class ReinforcementServiceTest {
     }
 
     @Test
-    void shouldNotGrantBonusWhenOneTerritoryInContinentIsOwnedByAnotherPlayer() {
+    void shouldNotGrantBonusWhenOneTerritoryInContinentOwnedByAnotherPlayer() {
         // one continent, 2 players, all but one go to one player
         ReinforcementService rs = new ReinforcementService();
         GameState gameState = new GameState();

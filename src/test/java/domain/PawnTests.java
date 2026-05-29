@@ -286,9 +286,32 @@ public class PawnTests {
   }
 
   @Test
-  public void PawnCanJump_ReturnsFalse() {
+  public void PawnCanAttack_WhitePawnDiagonal_ReturnsTrue() {
     Pawn pawn = new Pawn(PieceColor.WHITE);
+    Piece[][] board = new Piece[8][8];
+    assertTrue(pawn.canAttack(new Location(4, 6), new Location(3, 5), board));
+    assertTrue(pawn.canAttack(new Location(4, 6), new Location(5, 5), board));
+  }
 
-    assertFalse(pawn.canJump());
+  @Test
+  public void PawnCanAttack_WhitePawnForward_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+    Piece[][] board = new Piece[8][8];
+    assertFalse(pawn.canAttack(new Location(4, 6), new Location(4, 5), board));
+  }
+
+  @Test
+  public void PawnCanAttack_BlackPawnDiagonal_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+    Piece[][] board = new Piece[8][8];
+    assertTrue(pawn.canAttack(new Location(4, 1), new Location(3, 2), board));
+    assertTrue(pawn.canAttack(new Location(4, 1), new Location(5, 2), board));
+  }
+
+  @Test
+  public void PawnCanAttack_BlackPawnForward_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+    Piece[][] board = new Piece[8][8];
+    assertFalse(pawn.canAttack(new Location(4, 1), new Location(4, 2), board));
   }
 }

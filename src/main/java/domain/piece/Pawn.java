@@ -48,4 +48,17 @@ public final class Pawn extends Piece {
 
     return singleStep || doubleStep;
   }
+
+  @Override
+  public boolean canAttack(Location from, Location to, Piece[][] board) {
+    requireLocations(from, to);
+    if (!isOnBoard(from) || !isOnBoard(to)) {
+      return false;
+    }
+    int dx = Math.abs(to.getX() - from.getX());
+    int dy = to.getY() - from.getY();
+    int forward = getColor() == PieceColor.WHITE ? WHITE_FORWARD : BLACK_FORWARD;
+
+    return dy == forward && dx == MAX_DIAGONAL_OFFSET;
+  }
 }

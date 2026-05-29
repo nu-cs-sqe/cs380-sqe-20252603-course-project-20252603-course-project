@@ -48,12 +48,25 @@ public abstract class Piece {
 
   public abstract boolean isValidMoveShape(Location from, Location to);
 
+  private boolean hasMoved = false;
+  
   public boolean hasMoved() {
-    throw new UnsupportedOperationException("not yet implemented");
+    return hasMoved;
+  }
+
+  public void setHasMoved(boolean hasMoved) {
+    this.hasMoved = hasMoved;
   }
 
   public boolean canAttack(Location from, Location to, Piece[][] board) {
-    throw new UnsupportedOperationException("not yet implemented");
+    requireLocations(from, to);
+    if (!isValidMoveShape(from, to)) {
+      return false;
+    }
+    if (canJump()) {
+      return true;
+    }
+    return !hasPieceBetween(from, to, board);
   }
 
   public static boolean hasPieceBetween(Location from, Location to, Piece[][] board) {

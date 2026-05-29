@@ -79,3 +79,12 @@
 | Test Case 22 | knight at maximum corner; `from = Location(7, 7)`, `to = Location(5, 8)` | return `false`; destination just above maximum `y` is off-board | :white_check_mark: |
 | Test Case 23 | knight; `from = null`, `to = Location(5, 6)` | throws `IllegalArgumentException` with message `"from must not be null"` | :white_check_mark: |
 | Test Case 24 | knight; `from = Location(4, 4)`, `to = null` | throws `IllegalArgumentException` with message `"to must not be null"` | :white_check_mark: |
+
+
+### Method under test: `canJump()`
+
+Knight is the only piece that can leap over other pieces on the board.
+
+|              | System under test                   | Expected output   | Implemented? |
+|--------------|-------------------------------------|-------------------|--------------|
+| Test Case 25 | knight: `Knight(WHITE)`             | return `true`     | :white_check_mark: |

@@ -1,11 +1,11 @@
 package domain;
 
-import domain.piece.PieceType;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import domain.piece.PieceType;
+import org.junit.jupiter.api.Test;
 
 class PieceTypeTests {
 

@@ -7,33 +7,37 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class GameStatsViewTests {
 
+  private final ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", Locale.US);
+
   @Test
   void panelIsCreated() {
-    GameStatsView view = new GameStatsView("Alice", "Bob");
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     assertNotNull(view);
   }
 
   @Test
   void layoutIsBoxLayoutYAxis() {
-    GameStatsView view = new GameStatsView("Alice", "Bob");
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     assertTrue(view.getLayout() instanceof BoxLayout);
   }
 
   @Test
   void hasFourComponents() {
-    GameStatsView view = new GameStatsView("Alice", "Bob");
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     assertEquals(4, view.getComponentCount());
   }
 
   @Test
   void player1LabelCorrect() {
-    GameStatsView view = new GameStatsView("Alice", "Bob");
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     JLabel label = (JLabel) view.getComponent(1);
 
@@ -43,7 +47,7 @@ public class GameStatsViewTests {
 
   @Test
   void player2LabelCorrect() {
-    GameStatsView view = new GameStatsView("Alice", "Bob");
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     JLabel label = (JLabel) view.getComponent(2);
 
@@ -53,7 +57,7 @@ public class GameStatsViewTests {
 
   @Test
   void currentPlayerStartsAsPlayer1() {
-    GameStatsView view = new GameStatsView("Alice", "Bob");
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     JLabel label = (JLabel) view.getComponent(3);
 
@@ -62,7 +66,7 @@ public class GameStatsViewTests {
 
   @Test
   void labelsHaveStyling() {
-    GameStatsView view = new GameStatsView("Alice", "Bob");
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     JLabel label = (JLabel) view.getComponent(0);
 
@@ -71,21 +75,21 @@ public class GameStatsViewTests {
 
   @Test
   void backgroundColorCorrect() {
-    GameStatsView view = new GameStatsView("Alice", "Bob");
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     assertEquals(new Color(104, 76, 150), view.getBackground());
   }
 
   @Test
   void labelsAreInCorrectOrder() {
-    GameStatsView view = new GameStatsView("Alice", "Bob");
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     assertEquals("Player Information", ((JLabel) view.getComponent(0)).getText());
   }
 
   @Test
   void nullNamesDoNotCrash() {
-    GameStatsView view = new GameStatsView(null, "Bob");
+    GameStatsView view = new GameStatsView(null, "Bob", messages);
 
     assertNotNull(view);
   }

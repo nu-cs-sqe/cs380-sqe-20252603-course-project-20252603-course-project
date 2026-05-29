@@ -223,6 +223,7 @@ public class Board {
   private void placePiece(Piece piece, Location from, Location to) {
     pieces[to.getY()][to.getX()] = piece;
     pieces[from.getY()][from.getX()] = null;
+    piece.setHasMoved(true);
   }
 
   private boolean isPathClear(Location from, Location to) {
@@ -355,6 +356,8 @@ public class Board {
     pieces[castleMove.kingFrom.getY()][castleMove.kingFrom.getX()] = null;
     pieces[castleMove.rookTo.getY()][castleMove.rookTo.getX()] = rook;
     pieces[castleMove.rookFrom.getY()][castleMove.rookFrom.getX()] = null;
+    king.setHasMoved(true);
+    rook.setHasMoved(true);
   }
 
   private final class CastleMove {

@@ -46,4 +46,15 @@ class WelcomeViewTest {
   void welcomeView_ConstructWithNullLocale_ThrowsNullPointerException() {
     assertThrows(NullPointerException.class, () -> new WelcomeView((Locale) null));
   }
+
+  @Test
+  void welcomeView_SwitchLanguage_UpdatesTitle() {
+    WelcomeView view = new WelcomeView(Locale.US);
+    assertEquals("Chess — Welcome", view.getTitle());
+
+    // Switch to Spanish
+    Locale esUs = new Locale("es", "US");
+    view.updateLocale(esUs);
+    assertEquals("Ajedrez — Bienvenido", view.getTitle());
+  }
 }

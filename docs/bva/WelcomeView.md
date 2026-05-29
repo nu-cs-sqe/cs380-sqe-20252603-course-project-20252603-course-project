@@ -9,34 +9,29 @@ same `Locale` to `MainView`.
 
 ## Language-Selector Placement Contract
 
-**Which screen:** The language is selected before or at the moment `WelcomeView` is constructed.
-The `Locale` is supplied as a constructor argument, so the UI is already rendered in the chosen
-language when the welcome screen first appears.
+**Which screen:** The language selector is a `JComboBox` located *within* `WelcomeView`.
 
-**Timing relative to player-name entry:** The language choice is resolved *before* the player-name
-fields are shown. In the current implementation `Main.main()` passes `Locale.getDefault()` to
-`WelcomeView`. A future language-selector widget would collect the locale and then construct
-`WelcomeView(selectedLocale)`, ensuring the name-entry fields are labelled in the right language
-from the first paint.
+**Timing relative to player-name entry:** The language selector is displayed at the top of the 
+`WelcomeView` panel, above the player-name input fields. This allows the player to choose their 
+preferred language before entering their names. When a new language is selected, all UI labels 
+and buttons are immediately updated.
 
-**If no selection is made:** The application defaults to `Locale.getDefault()` (the JVM system
-locale). If no `MessagesBundle_<lang>_<country>.properties` file matches that locale, Java's
-`ResourceBundle` walks the fallback chain and ultimately loads the root bundle
-(`MessagesBundle.properties`), which contains English strings.
+**If no selection is made:** The application defaults to the locale passed to the constructor 
+(which is determined in `Main.java` based on supported locales or system defaults).
 
 ---
 
 ## Locale-Passing Contract
 
-The selected `Locale` travels through the UI layer as an explicit constructor parameter — no
-global or static state is used:
+The selected `Locale` travels through the UI layer via its associated `ResourceBundle` as an 
+explicit constructor parameter:
 
-1. `WelcomeView(Locale locale)` — receives the locale on construction; loads the bundle; stores
-   the locale for forwarding.
-2. On "Start Game" → `new MainView(player1Name, player2Name, locale)` — locale forwarded.
-3. `MainView` constructor → `new GameStatsView(player1Name, player2Name, locale)` — locale
-   forwarded to the stats panel.
-4. `GameStatsView` stores the locale for use when it renders live game statistics.
+1. `WelcomeView(Locale locale)` — receives the initial locale; loads the bundle.
+2. `WelcomeView` contains a language selector that can update its `ResourceBundle` dynamically.
+3. On "Start Game" → `new MainView(player1Name, player2Name, messages)` — the current `ResourceBundle` 
+   is passed to `MainView`.
+4. `MainView` constructor → `new GameStatsView(player1Name, player2Name, messages)` — the same 
+   `ResourceBundle` is forwarded to the stats panel.
 
 ---
 

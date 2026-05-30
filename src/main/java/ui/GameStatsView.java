@@ -36,8 +36,6 @@ public class GameStatsView extends JPanel {
    * Creates the game stats panel showing player information.
    */
   public GameStatsView(String player1Name, String player2Name, ResourceBundle messages) {
-    this.messages = messages;
-
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setOpaque(true);
     setBackground(PANEL_BACKGROUND);

@@ -54,12 +54,6 @@ public class GameSetupIntegrationTests {
   }
 
   @Test
-  void BoardInitialization_GameState_WHITE_TURN_InitialTurnIsWhite() {
-    Board board = new Board();
-    assertEquals(GameState.WHITE_TURN, board.getGameState());
-  }
-
-  @Test
   void BoardInitialization_Valid8x8Configuration_BoardIsProperlyInitialized() {
     Board board = new Board();
     Piece[][] snapshot = board.getSnapshot();

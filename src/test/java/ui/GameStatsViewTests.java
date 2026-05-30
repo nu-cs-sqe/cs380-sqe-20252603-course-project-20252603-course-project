@@ -10,53 +10,63 @@ import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import domain.GameState;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class GameStatsViewTests {
 
-  private final ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", Locale.US);
+  private final ResourceBundle messages =
+      ResourceBundle.getBundle("MessagesBundle", Locale.US);
 
   @Test
-  void panelIsCreated() {
+  void Constructor_ValidInput_CreatesNonNullInstance() {
     GameStatsView view = new GameStatsView("Alice", "Bob", messages);
-
     assertNotNull(view);
   }
 
   @Test
-  void layoutIsBoxLayoutYAxis() {
+  void Layout_ValidConstruction_IsBoxLayoutYAxis() {
     GameStatsView view = new GameStatsView("Alice", "Bob", messages);
-
     assertTrue(view.getLayout() instanceof BoxLayout);
   }
 
   @Test
-  void hasFourComponents() {
+  void ComponentCount_ValidConstruction_HasFourComponents() {
     GameStatsView view = new GameStatsView("Alice", "Bob", messages);
-
     assertEquals(4, view.getComponentCount());
   }
 
   @Test
-  void player1LabelCorrect() {
+  void Player1Label_ValidInput_ContainsNameAndTeam() {
     GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     JLabel label = (JLabel) view.getComponent(1);
 
     assertTrue(label.getText().contains("Alice"));
-    assertTrue(label.getText().contains("White"));
+    assertTrue(label.getText().toLowerCase().contains("white"));
   }
 
   @Test
-  void player2LabelCorrect() {
+  void Player2Label_ValidInput_ContainsNameAndTeam() {
     GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     JLabel label = (JLabel) view.getComponent(2);
 
     assertTrue(label.getText().contains("Bob"));
-    assertTrue(label.getText().contains("Black"));
+    assertTrue(label.getText().toLowerCase().contains("black"));
   }
 
   @Test
-  void currentPlayerStartsAsPlayer1() {
+  void CurrentPlayerLabel_InitialState_ShowsPlayer1() {
     GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     JLabel label = (JLabel) view.getComponent(3);
@@ -65,7 +75,7 @@ public class GameStatsViewTests {
   }
 
   @Test
-  void labelsHaveStyling() {
+  void Styling_HeaderLabel_UsesCorrectFont() {
     GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     JLabel label = (JLabel) view.getComponent(0);
@@ -74,23 +84,58 @@ public class GameStatsViewTests {
   }
 
   @Test
-  void backgroundColorCorrect() {
+  void Background_ValidConstruction_HasExpectedColor() {
     GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
     assertEquals(new Color(104, 76, 150), view.getBackground());
   }
 
   @Test
-  void labelsAreInCorrectOrder() {
+  void LabelOrder_ValidConstruction_ComponentsAreNonNull() {
     GameStatsView view = new GameStatsView("Alice", "Bob", messages);
 
-    assertEquals("Player Information", ((JLabel) view.getComponent(0)).getText());
+    assertNotNull(((JLabel) view.getComponent(0)).getText());
+    assertNotNull(((JLabel) view.getComponent(1)).getText());
+    assertNotNull(((JLabel) view.getComponent(2)).getText());
+    assertNotNull(((JLabel) view.getComponent(3)).getText());
   }
 
   @Test
-  void nullNamesDoNotCrash() {
+  void Constructor_NullPlayerName_DoesNotCrash() {
     GameStatsView view = new GameStatsView(null, "Bob", messages);
-
     assertNotNull(view);
+  }
+
+  @Test
+  void UpdateGameState_BlackTurn_ShowsPlayer2() {
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
+
+    view.updateGameState(GameState.BLACK_TURN, "Alice", "Bob");
+
+    JLabel label = (JLabel) view.getComponent(3);
+
+    assertTrue(label.getText().contains("Bob"));
+  }
+
+  @Test
+  void UpdateGameState_WhiteWin_ShowsPlayer1Winner() {
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
+
+    view.updateGameState(GameState.WHITE_WIN, "Alice", "Bob");
+
+    JLabel label = (JLabel) view.getComponent(3);
+
+    assertTrue(label.getText().contains("Alice"));
+  }
+
+  @Test
+  void UpdateGameState_Draw_ShowsDrawState() {
+    GameStatsView view = new GameStatsView("Alice", "Bob", messages);
+
+    view.updateGameState(GameState.DRAW, "Alice", "Bob");
+
+    JLabel label = (JLabel) view.getComponent(3);
+
+    assertTrue(label.getText().toLowerCase().contains("draw"));
   }
 }

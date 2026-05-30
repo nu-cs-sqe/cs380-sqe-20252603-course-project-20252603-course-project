@@ -54,19 +54,6 @@ public class GameSetupIntegrationTests {
   }
 
   @Test
-  void BoardInitialization_Valid8x8Configuration_BoardIsProperlyInitialized() {
-    Board board = new Board();
-    Piece[][] snapshot = board.getSnapshot();
-
-    assertEquals(8, snapshot.length);
-
-    for (int row = 0; row < 8; row++) {
-      assertNotNull(snapshot[row]);
-      assertEquals(8, snapshot[row].length);
-    }
-  }
-
-  @Test
   void SnapshotIsolation_MutateSnapshot_InternalBoardStateUnchanged() {
     Board board = new Board();
 

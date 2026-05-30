@@ -1,17 +1,18 @@
 package domain;
 
-import domain.piece.Piece;
-import domain.piece.PieceColor;
-import domain.piece.PieceType;
-import domain.piece.Queen;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import domain.Location;
+import domain.piece.Piece;
+import domain.piece.PieceColor;
+import domain.piece.PieceType;
+import domain.piece.Queen;
+import org.junit.jupiter.api.Test;
 
 public class QueenTests {
 
@@ -130,7 +131,7 @@ public class QueenTests {
   }
 
   @Test
-  public void QueenIsValidMoveShape_LShapeMove_ReturnsFalse() {
+  public void QueenIsValidMoveShape_LshapeMove_ReturnsFalse() {
     Queen queen = new Queen(PieceColor.WHITE);
 
     assertFalse(queen.isValidMoveShape(new Location(4, 4), new Location(6, 5)));

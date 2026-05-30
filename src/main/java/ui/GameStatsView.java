@@ -3,11 +3,13 @@ package ui;
 import domain.GameState;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import java.text.MessageFormat;
 
 /**
  * Displays player and game status information.
@@ -25,6 +27,8 @@ public class GameStatsView extends JPanel {
 
   private static final Border LEFT_INDENT =
       BorderFactory.createEmptyBorder(0, 20, 0, 0);
+
+  private final ResourceBundle messages = ResourceBundle.getBundle("messages");
 
   private JLabel currentPlayerLabel;
 
@@ -78,26 +82,35 @@ public class GameStatsView extends JPanel {
     switch (gameState) {
       case WHITE_TURN:
         currentPlayerLabel.setText(
-            "Current Player: " + player1Name);
+            MessageFormat.format(
+                messages.getString("game.currentPlayer"),
+                player1Name));
         break;
 
       case BLACK_TURN:
         currentPlayerLabel.setText(
-            "Current Player: " + player2Name);
+            MessageFormat.format(
+                messages.getString("game.currentPlayer"),
+                player2Name));
         break;
 
       case WHITE_WIN:
         currentPlayerLabel.setText(
-            "Winner: " + player1Name);
+            MessageFormat.format(
+                messages.getString("game.winner"),
+                player1Name));
         break;
 
       case BLACK_WIN:
         currentPlayerLabel.setText(
-            "Winner: " + player2Name);
+            MessageFormat.format(
+                messages.getString("game.winner"),
+                player2Name));
         break;
 
       case DRAW:
-        currentPlayerLabel.setText("Game ended in a draw");
+        currentPlayerLabel.setText(
+            messages.getString("game.draw"));
         break;
 
       default:

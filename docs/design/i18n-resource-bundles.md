@@ -25,6 +25,9 @@ New keys must use an existing screen prefix or introduce a new prefix agreed on 
 | `welcome.player2Label` | `Player 2 name:` | `WelcomeView` |
 | `welcome.startButton` | `Start Game` | `WelcomeView` |
 | `welcome.title` | `Chess — Welcome` | `WelcomeView` |
+| `welcome.languageLabel` | `Select Language:` | `WelcomeView` |
+| `language.english` | `English` | `WelcomeView` |
+| `language.spanish` | `Spanish` | `WelcomeView` |
 
 All three bundle files (`MessagesBundle.properties`, `MessagesBundle_en_US.properties`,
 `MessagesBundle_es_US.properties`) contain every key in this table.

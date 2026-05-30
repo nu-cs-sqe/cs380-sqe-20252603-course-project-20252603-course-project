@@ -1,13 +1,12 @@
 package domain;
 
-import static domain.piece.PieceColor.BLACK;
-import static domain.piece.PieceColor.WHITE;
-
 import domain.piece.Bishop;
 import domain.piece.King;
 import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Piece;
+import domain.piece.PieceColor;
+import domain.piece.PieceType;
 import domain.piece.Queen;
 import domain.piece.Rook;
 
@@ -41,11 +40,13 @@ public class Board {
   private static final int ROOK_RIGHT_COL = 7;
 
   private Piece[][] pieces;
-  private GameState gameState;
+  private GameState currentGameState;
+  private Location whiteKingLocation;
+  private Location blackKingLocation;
 
   public Board() {
     initializeBoard();
-    gameState = GameState.WHITE_TURN;
+    currentGameState = GameState.WHITE_TURN;
   }
 
   private void initializeBoard() {
@@ -60,41 +61,57 @@ public class Board {
 
   private void initializePawns() {
     for (int col = 0; col < TOTAL_COLS; col++) {
-      pieces[BLACK_PAWN_ROW][col] = new Pawn(BLACK);
-      pieces[WHITE_PAWN_ROW][col] = new Pawn(WHITE);
+      pieces[BLACK_PAWN_ROW][col] = new Pawn(PieceColor.BLACK);
+      pieces[WHITE_PAWN_ROW][col] = new Pawn(PieceColor.WHITE);
     }
   }
 
   private void initializeRooks() {
-    pieces[BLACK_BACK_RANK][ROOK_LEFT_COL] = new Rook(BLACK);
-    pieces[BLACK_BACK_RANK][ROOK_RIGHT_COL] = new Rook(BLACK);
+    pieces[BLACK_BACK_RANK][ROOK_LEFT_COL] = new Rook(PieceColor.BLACK);
+    pieces[BLACK_BACK_RANK][ROOK_RIGHT_COL] = new Rook(PieceColor.BLACK);
 
-    pieces[WHITE_BACK_RANK][ROOK_LEFT_COL] = new Rook(WHITE);
-    pieces[WHITE_BACK_RANK][ROOK_RIGHT_COL] = new Rook(WHITE);
+    pieces[WHITE_BACK_RANK][ROOK_LEFT_COL] = new Rook(PieceColor.WHITE);
+    pieces[WHITE_BACK_RANK][ROOK_RIGHT_COL] = new Rook(PieceColor.WHITE);
   }
 
   private void initializeKnights() {
-    pieces[BLACK_BACK_RANK][KNIGHT_LEFT_COL] = new Knight(BLACK);
-    pieces[BLACK_BACK_RANK][KNIGHT_RIGHT_COL] = new Knight(BLACK);
+    pieces[BLACK_BACK_RANK][KNIGHT_LEFT_COL] = new Knight(PieceColor.BLACK);
+    pieces[BLACK_BACK_RANK][KNIGHT_RIGHT_COL] = new Knight(PieceColor.BLACK);
 
-    pieces[WHITE_BACK_RANK][KNIGHT_LEFT_COL] = new Knight(WHITE);
-    pieces[WHITE_BACK_RANK][KNIGHT_RIGHT_COL] = new Knight(WHITE);
+    pieces[WHITE_BACK_RANK][KNIGHT_LEFT_COL] = new Knight(PieceColor.WHITE);
+    pieces[WHITE_BACK_RANK][KNIGHT_RIGHT_COL] = new Knight(PieceColor.WHITE);
   }
 
   private void initializeBishops() {
-    pieces[BLACK_BACK_RANK][BISHOP_LEFT_COL] = new Bishop(BLACK);
-    pieces[BLACK_BACK_RANK][BISHOP_RIGHT_COL] = new Bishop(BLACK);
+    pieces[BLACK_BACK_RANK][BISHOP_LEFT_COL] = new Bishop(PieceColor.BLACK);
+    pieces[BLACK_BACK_RANK][BISHOP_RIGHT_COL] = new Bishop(PieceColor.BLACK);
 
-    pieces[WHITE_BACK_RANK][BISHOP_LEFT_COL] = new Bishop(WHITE);
-    pieces[WHITE_BACK_RANK][BISHOP_RIGHT_COL] = new Bishop(WHITE);
+    pieces[WHITE_BACK_RANK][BISHOP_LEFT_COL] = new Bishop(PieceColor.WHITE);
+    pieces[WHITE_BACK_RANK][BISHOP_RIGHT_COL] = new Bishop(PieceColor.WHITE);
   }
 
   private void initializeRoyalPieces() {
-    pieces[BLACK_BACK_RANK][QUEEN_COL] = new Queen(BLACK);
-    pieces[BLACK_BACK_RANK][KING_COL] = new King(BLACK);
+    pieces[BLACK_BACK_RANK][QUEEN_COL] = new Queen(PieceColor.BLACK);
+    pieces[BLACK_BACK_RANK][KING_COL] = new King(PieceColor.BLACK);
 
-    pieces[WHITE_BACK_RANK][QUEEN_COL] = new Queen(WHITE);
-    pieces[WHITE_BACK_RANK][KING_COL] = new King(WHITE);
+    pieces[WHITE_BACK_RANK][QUEEN_COL] = new Queen(PieceColor.WHITE);
+    pieces[WHITE_BACK_RANK][KING_COL] = new King(PieceColor.WHITE);
+  }
+
+  Piece getPiece(int row, int col) {
+    return pieces[row][col];
+  }
+
+  void setPiece(int row, int col, Piece piece) {
+    pieces[row][col] = piece;
+  }
+
+  Location getWhiteKingLocation() {
+    return whiteKingLocation;
+  }
+
+  Location getBlackKingLocation() {
+    return blackKingLocation;
   }
 
   /**
@@ -115,22 +132,37 @@ public class Board {
   }
 
   public GameState getCurrentGameState() {
-    return gameState;
+    return currentGameState;
   }
 
-  /**
-   * Moves a piece from one location on the board to a new one.
-   */
-  public boolean movePiece(Location from, Location to) {
-    if (from == null) {
-      throw new IllegalArgumentException("from must not be null");
-    }
-    if (to == null) {
-      throw new IllegalArgumentException("to must not be null");
-    }
+  public void switchTurn() {
+    currentGameState = (currentGameState == GameState.WHITE_TURN)
+        ? GameState.BLACK_TURN
+        : GameState.WHITE_TURN;
+  }
 
-    if (from.getX() < 0 || from.getX() >= TOTAL_COLS || from.getY() < 0 || from.getY() >= TOTAL_ROWS ||
-        to.getX() < 0 || to.getX() >= TOTAL_COLS || to.getY() < 0 || to.getY() >= TOTAL_ROWS) {
+  void updateWhiteKingLocation(Location location) {
+    updateKingLocation(location, PieceColor.WHITE);
+  }
+
+  void updateBlackKingLocation(Location location) {
+    updateKingLocation(location, PieceColor.BLACK);
+  }
+
+  private void updateKingLocation(Location location, PieceColor color) {
+    if (location == null) {
+      throw new IllegalArgumentException("location must not be null");
+    }
+    if (color == PieceColor.WHITE) {
+      whiteKingLocation = location;
+    } else {
+      blackKingLocation = location;
+    }
+  }
+
+  public boolean movePiece(Location from, Location to) {
+    requireLocations(from, to);
+    if (isOutOfBounds(from) || isOutOfBounds(to)) {
       return false;
     }
 
@@ -140,80 +172,217 @@ public class Board {
     }
 
     Piece destinationPiece = pieces[to.getY()][to.getX()];
-
-    // reject same-color capture
-    if (destinationPiece != null && destinationPiece.getColor() == piece.getColor()) {
+    if (isFriendlyOccupied(piece, destinationPiece)) {
       return false;
     }
 
-    boolean valid;
-
-    switch (piece.getType()) {
-      case PAWN:
-        valid = ((Pawn) piece).isValidMoveShape(from, to);
-        if (valid) {
-          int dx = to.getX() - from.getX();
-          int dy = to.getY() - from.getY();
-
-          if (dx == 0) {
-            // Straight moves (1 or 2 steps) require the destination to be empty
-            if (destinationPiece != null) return false;
-
-            // 2-step move requires the skipped square to be empty as well
-            if (Math.abs(dy) == 2 && !isPathClear(from, to)) return false;
-          } else {
-            // Diagonal moves require an enemy piece to be present
-            if (destinationPiece == null) return false;
-          }
-        }
-        break;
-      case ROOK:
-        valid = ((Rook) piece).isValidMoveShape(from, to);
-        if (valid && !isPathClear(from, to)) return false;
-        break;
-      case KNIGHT:
-        valid = ((Knight) piece).isValidMoveShape(from, to);
-        break;
-      case BISHOP:
-        valid = ((Bishop) piece).isValidMoveShape(from, to);
-        if (valid && !isPathClear(from, to)) return false;
-        break;
-      case QUEEN:
-        valid = ((Queen) piece).isValidMoveShape(from, to);
-        if (valid && !isPathClear(from, to)) return false;
-        break;
-      case KING:
-        valid = ((King) piece).isValidMoveShape(from, to);
-        break;
-      default:
-        throw new IllegalStateException("Unknown piece type: " + piece.getType());
-    }
-
-    if (!valid) {
+    if (!isLegalMoveForPiece(piece, from, to, destinationPiece)) {
       return false;
     }
 
-    pieces[to.getY()][to.getX()] = piece;
-    pieces[from.getY()][from.getX()] = null;
-
+    placePiece(piece, from, to);
     return true;
   }
 
+  private void requireLocations(Location from, Location to) {
+    if (from == null) {
+      throw new IllegalArgumentException("from must not be null");
+    }
+    if (to == null) {
+      throw new IllegalArgumentException("to must not be null");
+    }
+  }
+
+  private boolean isOutOfBounds(Location location) {
+    return location.getX() < 0 || location.getX() >= TOTAL_COLS
+        || location.getY() < 0 || location.getY() >= TOTAL_ROWS;
+  }
+
+  private boolean isFriendlyOccupied(Piece moving, Piece destination) {
+    return destination != null && destination.getColor() == moving.getColor();
+  }
+
+  private boolean isLegalMoveForPiece(Piece piece, Location from, Location to, Piece destinationPiece) {
+    switch (piece.getType()) {
+      case PAWN:
+        return isLegalPawnMove(piece, from, to, destinationPiece);
+      case ROOK:
+      case BISHOP:
+      case QUEEN:
+        return piece.isValidMoveShape(from, to) && isPathClear(from, to);
+      case KNIGHT:
+      case KING:
+        return piece.isValidMoveShape(from, to);
+      default:
+        throw new IllegalStateException("Unknown piece type: " + piece.getType());
+    }
+  }
+
+  private boolean isLegalPawnMove(Piece piece, Location from, Location to, Piece destinationPiece) {
+    if (!piece.isValidMoveShape(from, to)) {
+      return false;
+    }
+    int dx = to.getX() - from.getX();
+    int dy = to.getY() - from.getY();
+    if (dx == 0) {
+      return destinationPiece == null && (Math.abs(dy) != 2 || isPathClear(from, to));
+    }
+    return destinationPiece != null;
+  }
+
+  private void placePiece(Piece piece, Location from, Location to) {
+    pieces[to.getY()][to.getX()] = piece;
+    pieces[from.getY()][from.getX()] = null;
+    piece.setHasMoved(true);
+  }
+
   private boolean isPathClear(Location from, Location to) {
-    int dx = Integer.compare(to.getX(), from.getX());
-    int dy = Integer.compare(to.getY(), from.getY());
+    return !Piece.hasPieceBetween(from, to, pieces);
+  }
 
-    int x = from.getX() + dx;
-    int y = from.getY() + dy;
+  boolean applyMoveIfKingSafe(Location from, Location to) {
+    requireLocations(from, to);
 
-    while (x != to.getX() || y != to.getY()) {
-      if (pieces[y][x] != null) {
-        return false;
+    Piece movingPiece = pieces[from.getY()][from.getX()];
+    Piece capturedPiece = pieces[to.getY()][to.getX()];
+
+    pieces[to.getY()][to.getX()] = movingPiece;
+    pieces[from.getY()][from.getX()] = null;
+
+    Location prevWhiteKingLoc = whiteKingLocation;
+    Location prevBlackKingLoc = blackKingLocation;
+    updateKingLocationForMove(movingPiece, to);
+
+    boolean inCheck = isCurrentKingInCheck();
+
+    if (inCheck) {
+      pieces[from.getY()][from.getX()] = movingPiece;
+      pieces[to.getY()][to.getX()] = capturedPiece;
+      whiteKingLocation = prevWhiteKingLoc;
+      blackKingLocation = prevBlackKingLoc;
+      return false;
+    }
+    return true;
+  }
+
+  private void updateKingLocationForMove(Piece movingPiece, Location to) {
+    if (movingPiece != null && movingPiece.getType() == PieceType.KING) {
+      if (movingPiece.getColor() == PieceColor.WHITE) {
+        whiteKingLocation = to;
+      } else {
+        blackKingLocation = to;
       }
-      x += dx;
-      y += dy;
+    }
+  }
+
+  private boolean isCurrentKingInCheck() {
+    PieceColor currentColor = (currentGameState == GameState.WHITE_TURN)
+        ? PieceColor.WHITE : PieceColor.BLACK;
+    Location kingLoc = (currentColor == PieceColor.WHITE)
+        ? whiteKingLocation : blackKingLocation;
+    return isKingInCheck(currentColor, kingLoc);
+  }
+
+  private boolean isKingInCheck(PieceColor kingColor, Location kingLoc) {
+    for (int row = 0; row < TOTAL_ROWS; row++) {
+      for (int col = 0; col < TOTAL_COLS; col++) {
+        Piece attacker = pieces[row][col];
+        if (attacker != null && attacker.getColor() != kingColor) {
+          if (attacker.canAttack(new Location(row, col), kingLoc, pieces)) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  public boolean castle(Location kingFrom, Location kingTo, Location rookFrom, Location rookTo) {
+    CastleMove castleMove = new CastleMove(kingFrom, kingTo, rookFrom, rookTo);
+
+    Piece king = pieces[castleMove.kingFrom.getY()][castleMove.kingFrom.getX()];
+    Piece rook = pieces[castleMove.rookFrom.getY()][castleMove.rookFrom.getX()];
+
+    if (king == null || king.hasMoved()) {
+      return false;
+    }
+    if (rook == null || rook.hasMoved()) {
+      return false;
+    }
+    if (Piece.hasPieceBetween(castleMove.kingFrom, castleMove.rookFrom, pieces)) {
+      return false;
     }
 
+    return performCastleIfSafe(castleMove, king, rook);
+  }
+
+  private void validateCastleLocations(Location kingFrom, Location kingTo,
+      Location rookFrom, Location rookTo) {
+    if (kingFrom == null) {
+      throw new IllegalArgumentException("kingFrom must not be null");
+    }
+    if (kingTo == null) {
+      throw new IllegalArgumentException("kingTo must not be null");
+    }
+    if (rookFrom == null) {
+      throw new IllegalArgumentException("rookFrom must not be null");
+    }
+    if (rookTo == null) {
+      throw new IllegalArgumentException("rookTo must not be null");
+    }
+  }
+
+  private boolean performCastleIfSafe(CastleMove castleMove, Piece king, Piece rook) {
+    PieceColor kingColor = king.getColor();
+    Location kingCheckLoc = (kingColor == PieceColor.WHITE)
+        ? whiteKingLocation : blackKingLocation;
+    if (isKingInCheck(kingColor, kingCheckLoc)) {
+      return false;
+    }
+
+    int colStep = Integer.signum(castleMove.kingTo.getX() - castleMove.kingFrom.getX());
+    Location transitSquare = new Location(
+        castleMove.kingFrom.getX() + colStep,
+        castleMove.kingFrom.getY());
+    if (isKingInCheck(kingColor, transitSquare)) {
+      return false;
+    }
+    if (isKingInCheck(kingColor, castleMove.kingTo)) {
+      return false;
+    }
+
+    moveCastlePieces(castleMove, king, rook);
+
+    if (kingColor == PieceColor.WHITE) {
+      whiteKingLocation = castleMove.kingTo;
+    } else {
+      blackKingLocation = castleMove.kingTo;
+    }
     return true;
+  }
+
+  private void moveCastlePieces(CastleMove castleMove, Piece king, Piece rook) {
+    pieces[castleMove.kingTo.getY()][castleMove.kingTo.getX()] = king;
+    pieces[castleMove.kingFrom.getY()][castleMove.kingFrom.getX()] = null;
+    pieces[castleMove.rookTo.getY()][castleMove.rookTo.getX()] = rook;
+    pieces[castleMove.rookFrom.getY()][castleMove.rookFrom.getX()] = null;
+    king.setHasMoved(true);
+    rook.setHasMoved(true);
+  }
+
+  private final class CastleMove {
+    private final Location kingFrom;
+    private final Location kingTo;
+    private final Location rookFrom;
+    private final Location rookTo;
+
+    private CastleMove(Location kingFrom, Location kingTo, Location rookFrom, Location rookTo) {
+      validateCastleLocations(kingFrom, kingTo, rookFrom, rookTo);
+
+      this.kingFrom = kingFrom;
+      this.kingTo = kingTo;
+      this.rookFrom = rookFrom;
+      this.rookTo = rookTo;
+    }
   }
 }

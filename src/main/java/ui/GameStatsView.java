@@ -31,26 +31,30 @@ public class GameStatsView extends JPanel {
   private final ResourceBundle messages = ResourceBundle.getBundle("messages");
 
   private JLabel currentPlayerLabel;
+  private final ResourceBundle messages;
 
   /**
    * Creates the game stats panel showing player information.
    */
-  public GameStatsView(String player1Name, String player2Name) {
+  public GameStatsView(String player1Name, String player2Name, ResourceBundle messages) {
+    this.messages = messages;
 
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setOpaque(true);
     setBackground(PANEL_BACKGROUND);
 
-    JLabel playerInfoLabel = new JLabel("Player Information");
+    JLabel playerInfoLabel = new JLabel(messages.getString("game.playerInfo"));
     playerInfoLabel.setFont(HEADER_FONT);
     playerInfoLabel.setForeground(LABEL_FOREGROUND);
 
     JLabel player1Label =
-        new JLabel("Player 1: " + player1Name + " (Team: White)");
+        new JLabel(messages.getString("game.player1") + ": " + player1Name + " ("
+            + messages.getString("game.teamWhite") + ")");
     styleBodyLabel(player1Label);
 
     JLabel player2Label =
-        new JLabel("Player 2: " + player2Name + " (Team: Black)");
+        new JLabel(messages.getString("game.player2") + ": " + player2Name + " ("
+            + messages.getString("game.teamBlack") + ")");
     styleBodyLabel(player2Label);
 
     // Initialize current player properly
@@ -66,9 +70,10 @@ public class GameStatsView extends JPanel {
     add(currentPlayerLabel);
   }
 
-  /**
-   * Applies standard styling to body labels.
-   */
+  public GameStatsView(String player1Name, String player2Name, GameState initialState) {
+    this(player1Name, player2Name, ResourceBundle.getBundle("MessagesBundle"));
+  }
+
   private void styleBodyLabel(JLabel label) {
     label.setFont(BODY_FONT);
     label.setForeground(LABEL_FOREGROUND);

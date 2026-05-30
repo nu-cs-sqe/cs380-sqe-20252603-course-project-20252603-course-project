@@ -8,9 +8,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
-/**
- * Utility helper responsible for reading the supported application locales from properties configuration.
- */
+  /**
+   * Utility helper responsible for reading the supported application locales from
+   * properties configuration.
+   */
 public class LocaleLoader {
 
   private LocaleLoader() {}
@@ -31,9 +32,11 @@ public class LocaleLoader {
     Map<Locale, String> workingMap = new LinkedHashMap<>();
     Properties properties = new Properties();
 
-    try (InputStream input = LocaleLoader.class.getClassLoader().getResourceAsStream(resourcePath)) {
+    try (InputStream input =
+        LocaleLoader.class.getClassLoader().getResourceAsStream(resourcePath)) {
       if (input == null) {
-        throw new IllegalStateException("Critical Configuration Error: " + resourcePath + " not found on classpath.");
+        throw new IllegalStateException("Critical Configuration Error: "
+            + resourcePath + " not found on classpath.");
       }
 
       properties.load(input);
@@ -45,7 +48,8 @@ public class LocaleLoader {
       }
 
     } catch (IOException e) {
-      throw new RuntimeException("Failed to initialize system locales from configuration properties.", e);
+      throw new RuntimeException(
+          "Failed to initialize system locales from configuration properties.", e);
     }
 
     return workingMap;
@@ -53,6 +57,7 @@ public class LocaleLoader {
 
   /**
    * Returns the parsed system locales mapped to their UI string resource keys.
+   *
    * @return Immutable Map containing Locale references and translation bundle keys.
    */
   public static Map<Locale, String> getSupportedLocales() {

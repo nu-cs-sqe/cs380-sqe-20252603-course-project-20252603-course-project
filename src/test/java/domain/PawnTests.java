@@ -1,16 +1,18 @@
 package domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import domain.Location;
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PawnTests {
 
@@ -267,5 +269,49 @@ public class PawnTests {
     );
 
     assertEquals("to must not be null", exception.getMessage());
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_WhitePawnNotAtStartingRow_SingleSquareForward_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+
+    assertTrue(pawn.isValidMoveShape(new Location(4, 5), new Location(4, 4)));
+  }
+
+  @Test
+  public void PawnIsValidMoveShape_BlackPawnNotAtStartingRow_SingleSquareForward_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+
+    assertTrue(pawn.isValidMoveShape(new Location(4, 3), new Location(4, 4)));
+  }
+
+  @Test
+  public void PawnCanAttack_WhitePawnDiagonal_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+    Piece[][] board = new Piece[8][8];
+    assertTrue(pawn.canAttack(new Location(4, 6), new Location(3, 5), board));
+    assertTrue(pawn.canAttack(new Location(4, 6), new Location(5, 5), board));
+  }
+
+  @Test
+  public void PawnCanAttack_WhitePawnForward_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.WHITE);
+    Piece[][] board = new Piece[8][8];
+    assertFalse(pawn.canAttack(new Location(4, 6), new Location(4, 5), board));
+  }
+
+  @Test
+  public void PawnCanAttack_BlackPawnDiagonal_ReturnsTrue() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+    Piece[][] board = new Piece[8][8];
+    assertTrue(pawn.canAttack(new Location(4, 1), new Location(3, 2), board));
+    assertTrue(pawn.canAttack(new Location(4, 1), new Location(5, 2), board));
+  }
+
+  @Test
+  public void PawnCanAttack_BlackPawnForward_ReturnsFalse() {
+    Pawn pawn = new Pawn(PieceColor.BLACK);
+    Piece[][] board = new Piece[8][8];
+    assertFalse(pawn.canAttack(new Location(4, 1), new Location(4, 2), board));
   }
 }

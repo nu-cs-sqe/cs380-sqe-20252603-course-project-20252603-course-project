@@ -1,8 +1,9 @@
 package ui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.util.ResourceBundle;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 public class MainView extends JFrame {
 
@@ -34,7 +35,7 @@ public class MainView extends JFrame {
   }
 
   private void addGameStatsView() {
-    gameStatsView = new GameStatsView(player1Name, player2Name);
+    gameStatsView = new GameStatsView(player1Name, player2Name, messages);
     add(gameStatsView, BorderLayout.SOUTH);
   }
 

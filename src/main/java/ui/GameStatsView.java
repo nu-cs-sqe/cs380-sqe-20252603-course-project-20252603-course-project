@@ -31,7 +31,6 @@ public class GameStatsView extends JPanel {
   private final ResourceBundle messages = ResourceBundle.getBundle("messages");
 
   private JLabel currentPlayerLabel;
-  private final ResourceBundle messages;
 
   /**
    * Creates the game stats panel showing player information.

@@ -65,7 +65,7 @@ public class GameStatsView extends JPanel {
   }
 
   public GameStatsView(String player1Name, String player2Name, GameState initialState) {
-    this(player1Name, player2Name);
+    this(player1Name, player2Name, ResourceBundle.getBundle("MessagesBundle"));
   }
 
   private void styleBodyLabel(JLabel label) {

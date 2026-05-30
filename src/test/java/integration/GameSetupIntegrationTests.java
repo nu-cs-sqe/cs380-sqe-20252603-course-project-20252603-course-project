@@ -32,6 +32,13 @@ public class GameSetupIntegrationTests {
   private static final int MIDDLE_ROW_START = 2;
   private static final int MIDDLE_ROW_END = 5;
   private static final int[] PIECE_ROWS = {0, 1, 6, 7};
+  private static final int BLACK_BACK_RANK_ROW = 0;
+  private static final int BLACK_PAWN_ROW = 1;
+  private static final int WHITE_PAWN_ROW = 6;
+  private static final int WHITE_BACK_RANK_ROW = 7;
+  private static final int ROOK_COL = 0;
+  private static final int KNIGHT_COL = 1;
+  private static final int BISHOP_COL = 2;
 
   // --- Black back rank (row 0) ---
 
@@ -177,6 +184,12 @@ public class GameSetupIntegrationTests {
         assertNull(snapshot[row][col]);
       }
     }
+  }
+
+  @Test
+  void boardSetup_InitialBoard_PieceRowsArePopulated() {
+    Board board = new Board();
+    Piece[][] snapshot = board.getSnapshot();
 
     for (int row : PIECE_ROWS) {
       for (int col = 0; col < BOARD_SIZE; col++) {
@@ -193,5 +206,71 @@ public class GameSetupIntegrationTests {
     Piece[][] second = board.getSnapshot();
 
     assertNotSame(first, second);
+  }
+
+  @Test
+  void boardSetup_InitialBoard_SnapshotRow7Col0IsWhiteRook() {
+    assertBackRankPiece(WHITE_BACK_RANK_ROW, ROOK_COL, PieceType.ROOK, PieceColor.WHITE);
+  }
+
+  @Test
+  void boardSetup_InitialBoard_SnapshotRow7Col1IsWhiteKnight() {
+    assertBackRankPiece(WHITE_BACK_RANK_ROW, KNIGHT_COL, PieceType.KNIGHT, PieceColor.WHITE);
+  }
+
+  @Test
+  void boardSetup_InitialBoard_SnapshotRow7Col2IsWhiteBishop() {
+    assertBackRankPiece(WHITE_BACK_RANK_ROW, BISHOP_COL, PieceType.BISHOP, PieceColor.WHITE);
+  }
+
+  @Test
+  void boardSetup_InitialBoard_SnapshotRow0Col0IsBlackRook() {
+    assertBackRankPiece(BLACK_BACK_RANK_ROW, ROOK_COL, PieceType.ROOK, PieceColor.BLACK);
+  }
+
+  private void assertBackRankPiece(int row, int col, PieceType expectedType, PieceColor expectedColor) {
+    Board board = new Board();
+    Piece[][] snapshot = board.getSnapshot();
+
+    Piece p = snapshot[row][col];
+    assertEquals(expectedType, p.getType());
+    assertEquals(expectedColor, p.getColor());
+  }
+
+  @Test
+  void boardSetup_InitialBoard_WhitePawnRowIsAllWhitePawns() {
+    Board board = new Board();
+    Piece[][] snapshot = board.getSnapshot();
+
+    for (int col = 0; col < BOARD_SIZE; col++) {
+      Piece p = snapshot[WHITE_PAWN_ROW][col];
+      assertEquals(PieceType.PAWN, p.getType(), "Expected PAWN at [" + WHITE_PAWN_ROW + "][" + col + "]");
+      assertEquals(PieceColor.WHITE, p.getColor(), "Expected WHITE at [" + WHITE_PAWN_ROW + "][" + col + "]");
+    }
+  }
+
+  @Test
+  void boardSetup_InitialBoard_BlackPawnRowIsAllBlackPawns() {
+    Board board = new Board();
+    Piece[][] snapshot = board.getSnapshot();
+
+    for (int col = 0; col < BOARD_SIZE; col++) {
+      Piece p = snapshot[BLACK_PAWN_ROW][col];
+      assertEquals(PieceType.PAWN, p.getType(), "Expected PAWN at [" + BLACK_PAWN_ROW + "][" + col + "]");
+      assertEquals(PieceColor.BLACK, p.getColor(), "Expected BLACK at [" + BLACK_PAWN_ROW + "][" + col + "]");
+    }
+  }
+
+  @Test
+  void pieceColor_EnumDefinition_HasExactlyTwoValues() {
+    assertEquals(2, PieceColor.values().length);
+  }
+
+  @Test
+  void pieceColor_EnumOrdinals_BlackPrecedesWhite() {
+    PieceColor[] values = PieceColor.values();
+
+    assertEquals(PieceColor.BLACK, values[0]);
+    assertEquals(PieceColor.WHITE, values[1]);
   }
 }

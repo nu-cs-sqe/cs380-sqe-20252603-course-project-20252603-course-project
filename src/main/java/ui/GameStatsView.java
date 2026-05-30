@@ -72,7 +72,7 @@ public class GameStatsView extends JPanel {
   }
 
   /**
-   * Updates the displayed current player.
+   * Updates the label for the current player's turn, a win, or a draw
    */
   public void updateGameState(GameState gameState, String player1Name, String player2Name) {
     switch (gameState) {

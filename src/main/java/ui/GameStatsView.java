@@ -28,7 +28,7 @@ public class GameStatsView extends JPanel {
   private static final Border LEFT_INDENT =
       BorderFactory.createEmptyBorder(0, 20, 0, 0);
 
-  private final ResourceBundle messages = ResourceBundle.getBundle("messages");
+  private final ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle");
 
   private JLabel currentPlayerLabel;
 

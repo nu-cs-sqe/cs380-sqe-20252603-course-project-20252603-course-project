@@ -4,15 +4,10 @@ import domain.Location;
 
 /** Represents a King chess piece. */
 public final class King extends Piece {
-  private static final int MIN_BOARD_COORDINATE = 0;
-  private static final int MAX_BOARD_COORDINATE = 7;
 
   /** Constructs a King with the given color. */
   public King(PieceColor color) {
     super(PieceType.KING, color);
-    if (color == null) {
-      throw new IllegalArgumentException("color must not be null");
-    }
   }
 
   @Override
@@ -20,7 +15,7 @@ public final class King extends Piece {
     return new King(getColor());
   }
 
-  /** Returns true if the move shape from {@code from} to {@code to} is valid for a King. */
+  @Override
   public boolean isValidMoveShape(Location from, Location to) {
     if (from == null) {
       throw new IllegalArgumentException("from must not be null");
@@ -43,10 +38,5 @@ public final class King extends Piece {
       return false;
     }
     return true;
-  }
-
-  private boolean isOnBoard(Location location) {
-    return location.getX() >= MIN_BOARD_COORDINATE && location.getX() <= MAX_BOARD_COORDINATE
-        && location.getY() >= MIN_BOARD_COORDINATE && location.getY() <= MAX_BOARD_COORDINATE;
   }
 }

@@ -1,11 +1,11 @@
 package domain;
 
-import domain.piece.PieceColor;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import domain.piece.PieceColor;
+import org.junit.jupiter.api.Test;
 
 public class PieceColorTests {
 

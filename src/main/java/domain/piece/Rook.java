@@ -16,6 +16,9 @@ public final class Rook extends Piece {
   @Override
   public boolean isValidMoveShape(Location from, Location to) {
     requireLocations(from, to);
+    if (!isOnBoard(to)) {
+      return false;
+    }
     int dx = to.getX() - from.getX();
     int dy = to.getY() - from.getY();
     if (dx == 0 && dy == 0) {

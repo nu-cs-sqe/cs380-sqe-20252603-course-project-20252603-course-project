@@ -31,6 +31,12 @@
   - Null-derived getter, copy, and `toString()` rows are not separate public states; mark them `CAN'T SET` through the public constructor and cover them by constructor null rejection.
 
 
+## BoardView Consumption and Coordinate Convention Review
+
+As part of Issue #31 responsibilities, a review of `BoardView` was conducted to understand:
+1. How it consumes `PieceType` and `PieceColor` from the board snapshot. The review found that `BoardView` directly utilizes these values from the board snapshot to map them to their corresponding visual representations (images) for rendering.
+2. The coordinate convention used in the UI. The review confirmed that `BoardView` uses a `(col, row)` convention where `col` maps to `x` and `row` maps to `y`. This is consistent with the `Location(x, y)` domain object. The `boardSnapshot` is accessed as `boardSnapshot[y][x]` (or `boardSnapshot[row][col]`), which matches the internal representation.
+
 ### Method under test: `Piece(PieceType type, PieceColor color)`
 
 |             | System under test                             | Expected output                                                  | Implemented? |
@@ -89,3 +95,23 @@
 | Test Case 28 | piece: `TestPiece(KING, WHITE)`                  | return `"WHITE KING"`            | :white_check_mark: |
 | Test Case 29 | attempted piece: `TestPiece(null, BLACK)`        | `CAN'T SET` through the public constructor; this null-type `toString()` receiver state is covered by Test Case 7's constructor null rejection (`IllegalArgumentException` with message `"type must not be null"`) | :white_check_mark: |
 | Test Case 30 | attempted piece: `TestPiece(PAWN, null)`         | `CAN'T SET` through the public constructor; this null-color `toString()` receiver state is covered by Test Case 8's constructor null rejection (`IllegalArgumentException` with message `"color must not be null"`) | :white_check_mark: |
+
+
+### Method under test: `canJump()`
+
+The default implementation in `Piece` returns `false`. Only `Knight` overrides it to return `true`. All other concrete subclasses inherit the `false` default.
+
+|              | System under test                                | Expected output              | Implemented? |
+|--------------|--------------------------------------------------|------------------------------|--------------|
+| Test Case 31 | piece: `TestPiece(PAWN, BLACK)`                  | return `false`               | :white_check_mark: |
+
+
+### Method under test: `isSameColor(Piece other)`
+
+|              | System under test                                                      | Expected output                                                            | Implemented? |
+|--------------|------------------------------------------------------------------------|----------------------------------------------------------------------------|--------------|
+| Test Case 32 | piece: `TestPiece(PAWN, BLACK)`; other: `TestPiece(ROOK, BLACK)`       | return `true`; both pieces share color `BLACK`                             | :white_check_mark: |
+| Test Case 33 | piece: `TestPiece(KING, WHITE)`; other: `TestPiece(QUEEN, WHITE)`      | return `true`; both pieces share color `WHITE`                             | :white_check_mark: |
+| Test Case 34 | piece: `TestPiece(PAWN, BLACK)`; other: `TestPiece(PAWN, WHITE)`       | return `false`; colors differ (`BLACK` vs `WHITE`)                         | :white_check_mark: |
+| Test Case 35 | piece: `TestPiece(PAWN, WHITE)`; other: `TestPiece(PAWN, BLACK)`       | return `false`; colors differ (`WHITE` vs `BLACK`)                         | :white_check_mark: |
+| Test Case 36 | piece: `TestPiece(PAWN, BLACK)`; other: `null`                         | throws `IllegalArgumentException` with message `"other must not be null"`  | :white_check_mark: |

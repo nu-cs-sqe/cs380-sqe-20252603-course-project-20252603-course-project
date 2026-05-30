@@ -16,6 +16,9 @@ public final class Bishop extends Piece {
   @Override
   public boolean isValidMoveShape(Location from, Location to) {
     requireLocations(from, to);
+    if (!isOnBoard(to)) {
+      return false;
+    }
     int dx = Math.abs(to.getX() - from.getX());
     int dy = Math.abs(to.getY() - from.getY());
     return dx == dy && dx != 0;

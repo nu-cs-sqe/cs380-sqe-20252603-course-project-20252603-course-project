@@ -27,7 +27,7 @@ public class KingTests {
   private static final int TWO_STEP = 2;
 
   @Test
-  public void kingConstructorColorBlackCreatesBlackKingWithKingType() {
+  public void Constructor_ColorBlack_CreatesBlackKingWithKingType() {
     King king = new King(PieceColor.BLACK);
 
     assertEquals(PieceType.KING, king.getType());
@@ -35,7 +35,7 @@ public class KingTests {
   }
 
   @Test
-  public void kingConstructorColorWhiteCreatesWhiteKingWithKingType() {
+  public void Constructor_ColorWhite_CreatesWhiteKingWithKingType() {
     King king = new King(PieceColor.WHITE);
 
     assertEquals(PieceType.KING, king.getType());
@@ -43,7 +43,7 @@ public class KingTests {
   }
 
   @Test
-  public void kingConstructorColorNullThrowsIllegalArgumentException() {
+  public void Constructor_ColorNull_ThrowsIllegalArgumentException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> new King(null)
@@ -53,7 +53,7 @@ public class KingTests {
   }
 
   @Test
-  public void makeCopyBlackKingReturnsDistinctBlackKingCopy() {
+  public void MakeCopy_BlackKing_ReturnsDistinctBlackKingCopy() {
     King king = new King(PieceColor.BLACK);
 
     Piece copy = king.makeCopy();
@@ -65,7 +65,7 @@ public class KingTests {
   }
 
   @Test
-  public void makeCopyWhiteKingReturnsDistinctWhiteKingCopy() {
+  public void MakeCopy_WhiteKing_ReturnsDistinctWhiteKingCopy() {
     King king = new King(PieceColor.WHITE);
 
     Piece copy = king.makeCopy();
@@ -77,7 +77,7 @@ public class KingTests {
   }
 
   @Test
-  public void makeCopyNullColorKingThrowsIllegalArgumentException() {
+  public void MakeCopy_NullColorKing_ThrowsIllegalArgumentException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> new King(null)
@@ -87,7 +87,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeOneSquareVerticalDownReturnsTrue() {
+  public void IsValidMoveShape_OneSquareVerticalDown_ReturnsTrue() {
     King king = new King(PieceColor.WHITE);
 
     assertTrue(king.isValidMoveShape(
@@ -97,7 +97,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeOneSquareVerticalUpReturnsTrue() {
+  public void IsValidMoveShape_OneSquareVerticalUp_ReturnsTrue() {
     King king = new King(PieceColor.WHITE);
 
     assertTrue(king.isValidMoveShape(
@@ -107,7 +107,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeOneSquareHorizontalRightReturnsTrue() {
+  public void IsValidMoveShape_OneSquareHorizontalRight_ReturnsTrue() {
     King king = new King(PieceColor.WHITE);
 
     assertTrue(king.isValidMoveShape(
@@ -117,7 +117,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeOneSquareHorizontalLeftReturnsTrue() {
+  public void IsValidMoveShape_OneSquareHorizontalLeft_ReturnsTrue() {
     King king = new King(PieceColor.WHITE);
 
     assertTrue(king.isValidMoveShape(
@@ -127,7 +127,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeOneSquareDiagonalReturnsTrue() {
+  public void IsValidMoveShape_OneSquareDiagonal_ReturnsTrue() {
     King king = new King(PieceColor.WHITE);
 
     assertTrue(king.isValidMoveShape(
@@ -137,7 +137,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeOneSquareDiagonalOppositeReturnsTrue() {
+  public void IsValidMoveShape_OneSquareDiagonalOpposite_ReturnsTrue() {
     King king = new King(PieceColor.WHITE);
 
     assertTrue(king.isValidMoveShape(
@@ -147,7 +147,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeSameSquareReturnsFalse() {
+  public void IsValidMoveShape_SameSquare_ReturnsFalse() {
     King king = new King(PieceColor.WHITE);
 
     assertFalse(king.isValidMoveShape(
@@ -157,7 +157,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeHorizontalOverreachReturnsFalse() {
+  public void IsValidMoveShape_HorizontalOverreach_ReturnsFalse() {
     King king = new King(PieceColor.WHITE);
 
     assertFalse(king.isValidMoveShape(
@@ -167,7 +167,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeVerticalOverreachReturnsFalse() {
+  public void IsValidMoveShape_VerticalOverreach_ReturnsFalse() {
     King king = new King(PieceColor.WHITE);
 
     assertFalse(king.isValidMoveShape(
@@ -177,7 +177,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeDiagonalOverreachReturnsFalse() {
+  public void IsValidMoveShape_DiagonalOverreach_ReturnsFalse() {
     King king = new King(PieceColor.WHITE);
 
     assertFalse(king.isValidMoveShape(
@@ -187,7 +187,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeOneSquareFromMinCornerIntoBoardReturnsTrue() {
+  public void IsValidMoveShape_OneSquareFromMinCornerIntoBoard_ReturnsTrue() {
     King king = new King(PieceColor.WHITE);
 
     assertTrue(king.isValidMoveShape(
@@ -197,7 +197,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeDestinationBelowMinXReturnsFalse() {
+  public void IsValidMoveShape_DestinationBelowMinX_ReturnsFalse() {
     King king = new King(PieceColor.WHITE);
 
     assertFalse(king.isValidMoveShape(
@@ -207,7 +207,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeDestinationAboveMaxXReturnsFalse() {
+  public void IsValidMoveShape_DestinationAboveMaxX_ReturnsFalse() {
     King king = new King(PieceColor.WHITE);
 
     assertFalse(king.isValidMoveShape(
@@ -217,7 +217,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeDestinationAboveMaxYReturnsFalse() {
+  public void IsValidMoveShape_DestinationAboveMaxY_ReturnsFalse() {
     King king = new King(PieceColor.WHITE);
 
     assertFalse(king.isValidMoveShape(
@@ -227,7 +227,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeFromNullThrowsIllegalArgumentException() {
+  public void IsValidMoveShape_FromNull_ThrowsIllegalArgumentException() {
     King king = new King(PieceColor.WHITE);
 
     IllegalArgumentException exception = assertThrows(
@@ -239,7 +239,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeDestinationBelowMinYReturnsFalse() {
+  public void IsValidMoveShape_DestinationBelowMinY_ReturnsFalse() {
     King king = new King(PieceColor.WHITE);
 
     assertFalse(king.isValidMoveShape(
@@ -249,7 +249,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeToNullThrowsIllegalArgumentException() {
+  public void IsValidMoveShape_ToNull_ThrowsIllegalArgumentException() {
     King king = new King(PieceColor.WHITE);
 
     IllegalArgumentException exception = assertThrows(
@@ -261,7 +261,7 @@ public class KingTests {
   }
 
   @Test
-  public void isValidMoveShapeNegativeHorizontalOverreachReturnsFalse() {
+  public void IsValidMoveShape_NegativeHorizontalOverreach_ReturnsFalse() {
     King king = new King(PieceColor.WHITE);
 
     assertFalse(king.isValidMoveShape(

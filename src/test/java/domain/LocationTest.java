@@ -1,45 +1,45 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LocationTest {
 
   // --- getX() boundary tests (TC1–TC6) ---
 
   @Test
-  void getXReturnsMinWhenXIsZero() {                   // TC1
+  void getX_returnsMin_whenXIsZero() {                   // TC1
     Location loc = new Location(0, 3);
     assertEquals(0, loc.getX());
   }
 
   @Test
-  void getXReturnsMaxWhenXIsSeven() {                  // TC2
+  void getX_returnsMax_whenXIsSeven() {                  // TC2
     Location loc = new Location(7, 3);
     assertEquals(7, loc.getX());
   }
 
   @Test
-  void getXReturnsMinPlusOneWhenXIsOne() {             // TC3
+  void getX_returnsMinPlusOne_whenXIsOne() {             // TC3
     Location loc = new Location(1, 3);
     assertEquals(1, loc.getX());
   }
 
   @Test
-  void getXReturnsMaxMinusOneWhenXIsSix() {            // TC4
+  void getX_returnsMaxMinusOne_whenXIsSix() {            // TC4
     Location loc = new Location(6, 3);
     assertEquals(6, loc.getX());
   }
 
   @Test
-  void getXReturnsBelowMinWhenXIsNegativeOne() {       // TC5
+  void getX_returnsBelowMin_whenXIsNegativeOne() {       // TC5
     Location loc = new Location(-1, 3);
     assertEquals(-1, loc.getX());
   }
 
   @Test
-  void getXReturnsAboveMaxWhenXIsEight() {             // TC6
+  void getX_returnsAboveMax_whenXIsEight() {             // TC6
     Location loc = new Location(8, 3);
     assertEquals(8, loc.getX());
   }
@@ -47,37 +47,37 @@ class LocationTest {
   // --- getY() boundary tests (TC7–TC12) ---
 
   @Test
-  void getYReturnsMinWhenYIsZero() {                   // TC7
+  void getY_returnsMin_whenYIsZero() {                   // TC7
     Location loc = new Location(3, 0);
     assertEquals(0, loc.getY());
   }
 
   @Test
-  void getYReturnsMaxWhenYIsSeven() {                  // TC8
+  void getY_returnsMax_whenYIsSeven() {                  // TC8
     Location loc = new Location(3, 7);
     assertEquals(7, loc.getY());
   }
 
   @Test
-  void getYReturnsMinPlusOneWhenYIsOne() {             // TC9
+  void getY_returnsMinPlusOne_whenYIsOne() {             // TC9
     Location loc = new Location(3, 1);
     assertEquals(1, loc.getY());
   }
 
   @Test
-  void getYReturnsMaxMinusOneWhenYIsSix() {            // TC10
+  void getY_returnsMaxMinusOne_whenYIsSix() {            // TC10
     Location loc = new Location(3, 6);
     assertEquals(6, loc.getY());
   }
 
   @Test
-  void getYReturnsBelowMinWhenYIsNegativeOne() {       // TC11
+  void getY_returnsBelowMin_whenYIsNegativeOne() {       // TC11
     Location loc = new Location(3, -1);
     assertEquals(-1, loc.getY());
   }
 
   @Test
-  void getYReturnsAboveMaxWhenYIsEight() {             // TC12
+  void getY_returnsAboveMax_whenYIsEight() {             // TC12
     Location loc = new Location(3, 8);
     assertEquals(8, loc.getY());
   }

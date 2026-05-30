@@ -4,10 +4,10 @@ import domain.Location;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.PieceType;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -15,13 +15,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 public class BoardView extends JPanel {
 
   private static final int BOARD_SIZE = 8;
   private static final int TILE_SIZE = 100; // size of each square in pixels
-  private final Color LIGHT_SQUARE_COLOR = new Color(240, 217, 181);
-  private final Color DARK_SQUARE_COLOR = new Color(181, 136, 99);
+  private static final Color LIGHT_SQUARE_COLOR = new Color(240, 217, 181);
+  private static final Color DARK_SQUARE_COLOR = new Color(181, 136, 99);
 
   private final Color SELECTED_SQUARE_COLOR = new Color(164, 149, 195); // NU Purple 40
   private int selectedRow = -1;

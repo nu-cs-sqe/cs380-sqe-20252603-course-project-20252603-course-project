@@ -30,43 +30,70 @@ public class BoardController {
     Piece[][] snapshot = board.getSnapshot();
     Piece clickedPiece = snapshot[location.getY()][location.getX()];
 
-    // First click: Selecting the piece to move
     if (selectedLocation == null) {
-      if (clickedPiece != null) {
-        selectedLocation = location;
-        // Optional: boardView.highlightSquare(location);
-        System.out.println("Source selected: " + location.getX() + ", " + location.getY());
-      }
+      selectSource(location, clickedPiece);
       return;
     }
 
-    // Second click: Same square clicked again cancels the selection
-    if (selectedLocation.getX() == location.getX() && selectedLocation.getY() == location.getY()) {
-      selectedLocation = null;
-      // Optional: boardView.clearHighlights();
-      System.out.println("Selection canceled.");
+    if (isSameSquare(location)) {
+      cancelSelection();
       return;
     }
 
-    // Second click: Clicking another piece of the same color switches the source selection
-    if (clickedPiece != null && clickedPiece.getColor() == snapshot[selectedLocation.getY()][selectedLocation.getX()].getColor()) {
+    if (isSwitchSource(location, clickedPiece, snapshot)) {
+      switchSource(location);
+      return;
+    }
+
+    attemptMove(location);
+  }
+
+  private void selectSource(Location location, Piece clickedPiece) {
+    if (clickedPiece != null) {
       selectedLocation = location;
-      System.out.println("Source switched to: " + location.getX() + ", " + location.getY());
-      return;
+      System.out.println("Source selected: " + location.getX() + ", " + location.getY());
     }
+  }
 
-    // Second click: Attempting a move execution
-    boolean success = board.movePiece(selectedLocation, location);
+  private void cancelSelection() {
+    selectedLocation = null;
+    System.out.println("Selection canceled.");
+  }
+
+  private void switchSource(Location location) {
+    selectedLocation = location;
+    System.out.println("Source switched to: " + location.getX() + ", " + location.getY());
+  }
+
+  private void attemptMove(Location destination) {
+    boolean success = board.movePiece(selectedLocation, destination);
 
     if (success) {
-      System.out.println("Move successful from " + selectedLocation + " to " + location);
-      selectedLocation = null; // Reset for the next move sequence
+      System.out.println("Move successful from " + selectedLocation + " to " + destination);
+      selectedLocation = null;
     } else {
       System.out.println("Invalid move attempted. Selection maintained or rejected.");
     }
   }
 
+  private boolean isSameSquare(Location location) {
+    return selectedLocation.getX() == location.getX()
+        && selectedLocation.getY() == location.getY();
+  }
+
+  private boolean isSwitchSource(Location location, Piece clickedPiece, Piece[][] snapshot) {
+    return clickedPiece != null
+        && clickedPiece.getColor()
+        == snapshot[selectedLocation.getY()][selectedLocation.getX()].getColor();
+  }
+
   public Piece[][] getBoardSnapshot() {
     return this.board.getSnapshot();
+  }
+
+  protected void repaintBoardView() {
+    if (boardView != null) {
+      boardView.repaint();
+    }
   }
 }

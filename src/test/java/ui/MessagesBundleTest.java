@@ -24,7 +24,8 @@ class MessagesBundleTest {
       "welcome.player1Label",
       "welcome.player2Label",
       "welcome.startButton",
-      "welcome.title"
+      "welcome.title",
+      "window.title"
   );
 
   @Test

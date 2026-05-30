@@ -3,6 +3,7 @@ package ui;
 import domain.GameState;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -27,29 +28,33 @@ public class GameStatsView extends JPanel {
       BorderFactory.createEmptyBorder(0, 20, 0, 0);
 
   private JLabel currentPlayerLabel;
+  private final ResourceBundle messages;
 
   /**
    * Creates the game stats panel showing player information.
    */
-  public GameStatsView(String player1Name, String player2Name) {
+  public GameStatsView(String player1Name, String player2Name, ResourceBundle messages) {
+    this.messages = messages;
 
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setOpaque(true);
     setBackground(PANEL_BACKGROUND);
 
-    JLabel playerInfoLabel = new JLabel("Player Information");
+    JLabel playerInfoLabel = new JLabel(messages.getString("game.playerInfo"));
     playerInfoLabel.setFont(HEADER_FONT);
     playerInfoLabel.setForeground(LABEL_FOREGROUND);
 
     JLabel player1Label =
-        new JLabel("Player 1: " + player1Name + " (Team: White)");
+        new JLabel(messages.getString("game.player1") + ": " + player1Name + " ("
+            + messages.getString("game.teamWhite") + ")");
     styleBodyLabel(player1Label);
 
     JLabel player2Label =
-        new JLabel("Player 2: " + player2Name + " (Team: Black)");
+        new JLabel(messages.getString("game.player2") + ": " + player2Name + " ("
+            + messages.getString("game.teamBlack") + ")");
     styleBodyLabel(player2Label);
 
-    currentPlayerLabel = new JLabel("Current Player: " + player1Name);
+    currentPlayerLabel = new JLabel(messages.getString("game.currentPlayer") + " " + player1Name);
     currentPlayerLabel.setFont(HEADER_FONT);
     currentPlayerLabel.setForeground(LABEL_FOREGROUND);
 
@@ -70,6 +75,6 @@ public class GameStatsView extends JPanel {
   }
 
   public void updateCurrentPlayerLabel(String name) {
-    currentPlayerLabel.setText("Current Player: " + name);
+    currentPlayerLabel.setText(messages.getString("game.currentPlayer") + " " + name);
   }
 }

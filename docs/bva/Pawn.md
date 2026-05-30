@@ -93,3 +93,42 @@
 | Test Case 34 | white pawn at starting row; `from = Location(4, 6)`, `to = Location(5, 4)` | return `false`; two-square forward with `dx = 1` is not a valid pawn shape | :white_check_mark: |
 | Test Case 35 | white pawn at starting row; `from = Location(4, 6)`, `to = Location(4, -1)` | return `false`; destination just below minimum `y` is off-board | :white_check_mark: |
 | Test Case 36 | black pawn at starting row; `from = Location(4, 1)`, `to = Location(4, 8)` | return `false`; destination just above maximum `y` is off-board | :white_check_mark: |
+| Test Case 37 | white pawn not at starting row; `from = Location(4, 5)`, `to = Location(4, 4)` | return `true`; single-step forward is legal from any board row | :white_check_mark: |
+| Test Case 38 | black pawn not at starting row; `from = Location(4, 3)`, `to = Location(4, 4)` | return `true`; single-step forward is legal from any board row | :white_check_mark: |
+
+
+### Method under test: `canJump()`
+
+A pawn cannot leap over other pieces.
+
+|              | System under test         | Expected output   | Implemented? |
+|--------------|---------------------------|-------------------|--------------|
+| Test Case 39 | pawn: `Pawn(WHITE)`       | return `false`    | :white_check_mark: |
+
+
+## Movement-Rule Gaps Identified During API Review
+
+**Gap 1 — Single-step forward blocked outside starting row (closed in this issue):**
+The original `Pawn.isValidMoveShape` contained an early-return guard
+`if (from.getY() != startingRow) { return false; }` that silently blocked all
+pawn movement from non-starting rows, including single-step advances. A pawn on
+`y = 3` could not advance to `y = 4` (black) or `y = 2` (white). This was
+identified via test cases 37–38 and fixed by conditioning only the double-step
+on `from.getY() == startingRow` while leaving the single-step unconstrained.
+
+**Gap 2 — Capture occupancy not enforced (open, must be closed before integration tests pass):**
+`isValidMoveShape` returns `true` for a diagonal forward move regardless of
+whether an opponent piece occupies the destination. Board-level move validation
+must verify that a diagonal pawn move has an opponent piece at the destination
+and a straight forward move has an empty destination. This is intentionally out
+of scope for `isValidMoveShape`, which only checks move geometry.
+
+**Gap 3 — En passant not modeled (open, future work):**
+`isValidMoveShape` has no mechanism to approve en passant captures because it
+receives only `from` and `to` locations with no board state. En passant requires
+knowledge of the opponent's last move and must be handled at the board-move level.
+
+**Gap 4 — Promotion not modeled (open, future work):**
+Pawn promotion on reaching the opposite back rank is not reflected in
+`isValidMoveShape`. The geometry of the final forward step is already covered,
+but the promotion trigger must be handled by the board or game-flow layer.

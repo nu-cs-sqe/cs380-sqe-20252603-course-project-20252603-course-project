@@ -666,6 +666,10 @@ class BoardTests {
   void castle_KingHasMoved_ReturnsFalseAndBoardUnchanged() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
+    mockKing.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
+    mockRook.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(true);
     EasyMock.replay(mockKing, mockRook);
 
@@ -687,6 +691,10 @@ class BoardTests {
   void castle_RookHasMoved_ReturnsFalseAndBoardUnchanged() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
+    mockKing.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
+    mockRook.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(true);
     EasyMock.replay(mockKing, mockRook);
@@ -709,6 +717,10 @@ class BoardTests {
   void castle_PieceBetweenKingAndRook_ReturnsFalseAndBoardUnchanged() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
+    mockKing.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
+    mockRook.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
     final Piece blocker = mockAttacker(PieceColor.WHITE, false);
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
@@ -734,6 +746,10 @@ class BoardTests {
   void castle_KingCurrentlyInCheck_ReturnsFalseAndBoardUnchanged() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
+    mockKing.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
+    mockRook.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
     final Piece blackAttacker = mockAttacker(PieceColor.BLACK, true);
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
@@ -760,6 +776,10 @@ class BoardTests {
   void castle_KingTransitSquareAttacked_ReturnsFalseAndBoardUnchanged() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
+    mockKing.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
+    mockRook.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
     final Piece blackAttacker = EasyMock.createMock(Piece.class);
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
@@ -794,6 +814,10 @@ class BoardTests {
   void castle_KingLandingSquareAttacked_ReturnsFalseAndBoardUnchanged() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
+    mockKing.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
+    mockRook.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
     final Piece blackAttacker = EasyMock.createMock(Piece.class);
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
@@ -829,6 +853,10 @@ class BoardTests {
   void castle_AllPreconditionsMet_SucceedsAndRepositionesPiecesAndUpdatesKingLocation() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
+    mockKing.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
+    mockRook.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockKing.getColor()).andStubReturn(PieceColor.WHITE);
@@ -857,6 +885,10 @@ class BoardTests {
   void castle_BlackAllPreconditionsMet_SucceedsAndUpdatesBlackKingLocation() {
     final Piece mockKing = EasyMock.createMock(Piece.class);
     final Piece mockRook = EasyMock.createMock(Piece.class);
+    mockKing.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
+    mockRook.setHasMoved(EasyMock.anyBoolean());
+    EasyMock.expectLastCall().asStub();
     EasyMock.expect(mockKing.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockRook.hasMoved()).andStubReturn(false);
     EasyMock.expect(mockKing.getColor()).andStubReturn(PieceColor.BLACK);

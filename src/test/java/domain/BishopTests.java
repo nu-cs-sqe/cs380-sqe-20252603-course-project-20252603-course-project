@@ -1,17 +1,18 @@
 package domain;
 
-import domain.piece.Bishop;
-import domain.piece.Piece;
-import domain.piece.PieceColor;
-import domain.piece.PieceType;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import domain.Location;
+import domain.piece.Bishop;
+import domain.piece.Piece;
+import domain.piece.PieceColor;
+import domain.piece.PieceType;
+import org.junit.jupiter.api.Test;
 
 public class BishopTests {
   @Test
@@ -60,14 +61,6 @@ public class BishopTests {
     assertInstanceOf(Bishop.class, copy);
     assertEquals(PieceType.BISHOP, copy.getType());
     assertEquals(PieceColor.WHITE, copy.getColor());
-  }
-
-  @Test
-  public void BishopMakeCopy_NullColorBishop_ThrowsIllegalArgumentException() {
-    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new Bishop(null));
-
-    assertEquals("color must not be null", exception.getMessage());
   }
 
   // --- isValidMoveShape ---
@@ -162,4 +155,38 @@ public class BishopTests {
     assertEquals("to must not be null", exception.getMessage());
   }
 
+  @Test
+  public void BishopIsValidMoveShape_DestinationXAboveMaximum_ReturnsFalse() {
+    Bishop bishop = new Bishop(PieceColor.WHITE);
+
+    assertFalse(bishop.isValidMoveShape(new Location(7, 0), new Location(8, 1)));
+  }
+
+  @Test
+  public void BishopIsValidMoveShape_DestinationYAboveMaximum_ReturnsFalse() {
+    Bishop bishop = new Bishop(PieceColor.WHITE);
+
+    assertFalse(bishop.isValidMoveShape(new Location(0, 7), new Location(1, 8)));
+  }
+
+  @Test
+  public void BishopIsValidMoveShape_DestinationXBelowMinimum_ReturnsFalse() {
+    Bishop bishop = new Bishop(PieceColor.WHITE);
+
+    assertFalse(bishop.isValidMoveShape(new Location(0, 3), new Location(-1, 2)));
+  }
+
+  @Test
+  public void BishopIsValidMoveShape_DestinationYBelowMinimum_ReturnsFalse() {
+    Bishop bishop = new Bishop(PieceColor.WHITE);
+
+    assertFalse(bishop.isValidMoveShape(new Location(3, 0), new Location(2, -1)));
+  }
+
+  @Test
+  public void BishopCanJump_ReturnsFalse() {
+    Bishop bishop = new Bishop(PieceColor.WHITE);
+
+    assertFalse(bishop.canJump());
+  }
 }

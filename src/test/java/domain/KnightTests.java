@@ -1,17 +1,18 @@
 package domain;
 
-import domain.piece.Knight;
-import domain.piece.Piece;
-import domain.piece.PieceColor;
-import domain.piece.PieceType;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import domain.Location;
+import domain.piece.Knight;
+import domain.piece.Piece;
+import domain.piece.PieceColor;
+import domain.piece.PieceType;
+import org.junit.jupiter.api.Test;
 
 public class KnightTests {
 
@@ -72,42 +73,42 @@ public class KnightTests {
   }
 
   @Test
-  public void IsValidMoveShape_LShapeDx1Dy2_ReturnsTrue() {
+  public void IsValidMoveShape_LshapeDx1Dy2_ReturnsTrue() {
     Knight knight = new Knight(PieceColor.WHITE);
 
     assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(5, 6)));
   }
 
   @Test
-  public void IsValidMoveShape_LShapeDx1Dy2OppositeHorizontal_ReturnsTrue() {
+  public void IsValidMoveShape_LshapeDx1Dy2OppositeHorizontal_ReturnsTrue() {
     Knight knight = new Knight(PieceColor.WHITE);
 
     assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(3, 6)));
   }
 
   @Test
-  public void IsValidMoveShape_LShapeDx1Dy2OppositeVertical_ReturnsTrue() {
+  public void IsValidMoveShape_LshapeDx1Dy2OppositeVertical_ReturnsTrue() {
     Knight knight = new Knight(PieceColor.WHITE);
 
     assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(5, 2)));
   }
 
   @Test
-  public void IsValidMoveShape_LShapeDx2Dy1_ReturnsTrue() {
+  public void IsValidMoveShape_LshapeDx2Dy1_ReturnsTrue() {
     Knight knight = new Knight(PieceColor.WHITE);
 
     assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(6, 5)));
   }
 
   @Test
-  public void IsValidMoveShapeLShape_Dx2Dy1OppositeHorizontal_ReturnsTrue() {
+  public void IsValidMoveShapeLshape_Dx2Dy1OppositeHorizontal_ReturnsTrue() {
     Knight knight = new Knight(PieceColor.WHITE);
 
     assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(2, 5)));
   }
 
   @Test
-  public void IsValidMoveShape_LShapeDx2Dy1OppositeVertical_ReturnsTrue() {
+  public void IsValidMoveShape_LshapeDx2Dy1OppositeVertical_ReturnsTrue() {
     Knight knight = new Knight(PieceColor.WHITE);
 
     assertTrue(knight.isValidMoveShape(new Location(4, 4), new Location(6, 3)));
@@ -149,7 +150,7 @@ public class KnightTests {
   }
 
   @Test
-  public void IsValidMoveShape_LShapeFromMinimumCorner_ReturnsTrue() {
+  public void IsValidMoveShape_LshapeFromMinimumCorner_ReturnsTrue() {
     Knight knight = new Knight(PieceColor.WHITE);
 
     assertTrue(knight.isValidMoveShape(new Location(0, 0), new Location(1, 2)));
@@ -201,5 +202,12 @@ public class KnightTests {
         () -> knight.isValidMoveShape(new Location(4, 4), null));
 
     assertEquals("to must not be null", exception.getMessage());
+  }
+
+  @Test
+  public void KnightCanJump_ReturnsTrue() {
+    Knight knight = new Knight(PieceColor.WHITE);
+
+    assertTrue(knight.canJump());
   }
 }

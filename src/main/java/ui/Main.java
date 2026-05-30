@@ -1,9 +1,9 @@
 package ui;
 
-import javax.swing.SwingUtilities;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javax.swing.SwingUtilities;
 
 /**
  * Launches the chess application.

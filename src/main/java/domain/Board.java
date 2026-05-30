@@ -126,7 +126,7 @@ public class Board {
     return snapshot;
   }
 
-  public GameState getGameState() {
+  public GameState getCurrentGameState() {
     return gameState;
   }
 

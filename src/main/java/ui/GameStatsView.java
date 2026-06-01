@@ -28,7 +28,7 @@ public class GameStatsView extends JPanel {
   private static final Border LEFT_INDENT =
       BorderFactory.createEmptyBorder(0, 20, 0, 0);
 
-  private final ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle");
+  private ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle");
 
   private JLabel currentPlayerLabel;
 
@@ -36,6 +36,8 @@ public class GameStatsView extends JPanel {
    * Creates the game stats panel showing player information.
    */
   public GameStatsView(String player1Name, String player2Name, ResourceBundle messages) {
+    this.messages = messages;
+
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setOpaque(true);
     setBackground(PANEL_BACKGROUND);
@@ -65,10 +67,6 @@ public class GameStatsView extends JPanel {
     add(player1Label);
     add(player2Label);
     add(currentPlayerLabel);
-  }
-
-  public GameStatsView(String player1Name, String player2Name, GameState initialState) {
-    this(player1Name, player2Name, ResourceBundle.getBundle("MessagesBundle"));
   }
 
   private void styleBodyLabel(JLabel label) {

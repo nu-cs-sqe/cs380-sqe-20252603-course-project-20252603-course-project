@@ -129,30 +129,36 @@ public class WelcomeView extends JFrame {
   }
 
   void refreshLabels() {
-    setTitle(messages.getString("welcome.title"));
-    languageLabel.setText(messages.getString("welcome.languageLabel"));
-    player1Label.setText(messages.getString("welcome.player1Label"));
-    player2Label.setText(messages.getString("welcome.player2Label"));
-    startButton.setText(messages.getString("welcome.startButton"));
+    isUpdating = true;
+    try {
+      setTitle(messages.getString("welcome.title"));
+      languageLabel.setText(messages.getString("welcome.languageLabel"));
+      player1Label.setText(messages.getString("welcome.player1Label"));
+      player2Label.setText(messages.getString("welcome.player2Label"));
+      startButton.setText(messages.getString("welcome.startButton"));
 
-    // Update language names in selector
-    Map<Locale, String> locales = LocaleLoader.getSupportedLocales();
-    for (int i = 0; i < languageSelector.getItemCount(); i++) {
-      LanguageOption option = languageSelector.getItemAt(i);
-      String newDisplayName = messages.getString(locales.get(option.locale));
-      // We need to update the display name. Since LanguageOption is immutable here, 
-      // we might need a different approach or just recreate options.
-      // But actually, we can just replace the items or have LanguageOption use messages.
-    }
-    // Simplest is to recreate options if we want them to change language too.
-    LanguageOption currentSelected = (LanguageOption) languageSelector.getSelectedItem();
-    languageSelector.removeAllItems();
-    for (Map.Entry<Locale, String> entry : locales.entrySet()) {
-      LanguageOption option = new LanguageOption(entry.getKey(), messages.getString(entry.getValue()));
-      languageSelector.addItem(option);
-      if (currentSelected != null && option.locale.equals(currentSelected.locale)) {
-        languageSelector.setSelectedItem(option);
+      Map<Locale, String> locales = LocaleLoader.getSupportedLocales();
+
+      LanguageOption currentSelected =
+          (LanguageOption) languageSelector.getSelectedItem();
+
+      languageSelector.removeAllItems();
+
+      for (Map.Entry<Locale, String> entry : locales.entrySet()) {
+        LanguageOption option =
+            new LanguageOption(
+                entry.getKey(),
+                messages.getString(entry.getValue()));
+
+        languageSelector.addItem(option);
+
+        if (currentSelected != null
+            && option.locale.equals(currentSelected.locale)) {
+          languageSelector.setSelectedItem(option);
+        }
       }
+    } finally {
+      isUpdating = false;
     }
   }
 

@@ -205,6 +205,11 @@ public class Board {
   /**
    * Determines whether a move is legal for the given piece type, including
    * both movement rules and board-state constraints.
+   *
+   * Pawn: considers shape, if it is a first move or not, if it is a capture, if blocked by friendly piece
+   * King: considers shape
+   * Rook, Bishop, Queen: considers shape, if blocked by friendly piece
+   * Knight: considers shape
    */
   private boolean isLegalMoveForPiece(Piece piece, Location from, Location to, Piece destinationPiece) {
     switch (piece.getType()) {

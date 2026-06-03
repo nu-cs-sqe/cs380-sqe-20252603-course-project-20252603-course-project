@@ -78,4 +78,21 @@ public class OneTurnIntegrationTests {
     assertTrue(state[ROW_7][COL_2] instanceof Bishop);
     assertNull(state[ROW_5][COL_0]);
   }
+
+  @Test
+  void KnightJump_SucceedsThroughPieces() {
+
+    boolean result = board.movePiece(
+        new Location(COL_1, ROW_7),
+        new Location(COL_2, ROW_5)
+    );
+
+    state = board.getSnapshot();
+
+    assertTrue(result);
+
+    assertNull(state[ROW_7][COL_1]);
+    assertTrue(state[ROW_5][COL_2] instanceof Knight);
+  }
+
 }

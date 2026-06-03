@@ -10,6 +10,7 @@ import domain.Board;
 import domain.Location;
 import domain.piece.Bishop;
 import domain.piece.Knight;
+import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
 import domain.piece.Rook;
@@ -95,4 +96,19 @@ public class OneTurnIntegrationTests {
     assertTrue(state[ROW_5][COL_2] instanceof Knight);
   }
 
+  @Test
+  void PawnDiagonalMoveToEmptySquare_IsRejected() {
+
+    boolean result = board.movePiece(
+        new Location(COL_3, ROW_6),
+        new Location(COL_4, ROW_5)
+    );
+
+    state = board.getSnapshot();
+
+    assertFalse(result);
+
+    assertTrue(state[ROW_6][COL_3] instanceof Pawn);
+    assertNull(state[ROW_5][COL_4]);
+  }
 }

@@ -13,6 +13,7 @@ import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
+import domain.piece.Queen;
 import domain.piece.Rook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -110,5 +111,22 @@ public class OneTurnIntegrationTests {
 
     assertTrue(state[ROW_6][COL_3] instanceof Pawn);
     assertNull(state[ROW_5][COL_4]);
+  }
+
+  @Test
+  void QueenBlockedStraightPath_IsRejected() {
+
+    // queen is blocked by pawn at (6,3)
+    boolean result = board.movePiece(
+        new Location(COL_3, ROW_7),
+        new Location(COL_3, ROW_5)
+    );
+
+    state = board.getSnapshot();
+
+    assertFalse(result);
+
+    assertTrue(state[ROW_7][COL_3] instanceof Queen);
+    assertNotNull(state[ROW_6][COL_3]);
   }
 }

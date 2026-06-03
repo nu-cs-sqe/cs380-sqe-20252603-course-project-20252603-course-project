@@ -1,5 +1,6 @@
 package integration;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -9,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import domain.Board;
 import domain.Location;
 import domain.piece.Bishop;
+import domain.piece.King;
 import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Piece;
@@ -143,5 +145,53 @@ public class OneTurnIntegrationTests {
     assertFalse(result);
 
     assertTrue(state[ROW_7][COL_3] instanceof Queen);
+  }
+
+  @Test
+  void KingCannotMoveIntoCheckViaMoveSequence_IsRejected() {
+    boolean result;
+    // e4
+    result = board.movePiece(
+        new Location(4, 6),
+        new Location(4, 4)
+    );
+    assertTrue(result);
+    // ..e5
+    result = board.movePiece(
+        new Location(4, 1),
+        new Location(4, 3)
+    );
+    assertTrue(result);
+    // Ke1 -> Ke2
+    result = board.movePiece(
+        new Location(4, 7),
+        new Location(4, 6)
+    );
+    assertTrue(result);
+    // ..Ke8 -> Ke7
+    result = board.movePiece(
+        new Location(4, 0),
+        new Location(4, 1)
+    );
+    assertTrue(result);
+    // Ke2 -> Kf3
+    result = board.movePiece(
+        new Location(4, 6),
+        new Location(5, 5)
+    );
+    assertTrue(result);
+    // ..Ke7 -> Kf6
+    result = board.movePiece(
+        new Location(4, 1),
+        new Location(5, 2)
+    );
+    assertTrue(result);
+
+    // Kf3 -> Kf4 (illegal, into black king's pawn check)
+    result = board.movePiece(
+        new Location(5, 5),
+        new Location(5, 4)
+    );
+    assertFalse(result);
   }
 }

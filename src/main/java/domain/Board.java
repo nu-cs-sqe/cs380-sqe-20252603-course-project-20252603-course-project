@@ -96,6 +96,9 @@ public class Board {
 
     pieces[WHITE_BACK_RANK][QUEEN_COL] = new Queen(PieceColor.WHITE);
     pieces[WHITE_BACK_RANK][KING_COL] = new King(PieceColor.WHITE);
+
+    whiteKingLocation = new Location(4, 7);
+    blackKingLocation = new Location(4, 0);
   }
 
   Piece getPiece(int row, int col) {
@@ -177,6 +180,10 @@ public class Board {
     }
 
     if (!isLegalMoveForPiece(piece, from, to, destinationPiece)) {
+      return false;
+    }
+
+    if (!applyMoveIfKingSafe(from, to)) {
       return false;
     }
 
@@ -297,7 +304,7 @@ public class Board {
       for (int col = 0; col < TOTAL_COLS; col++) {
         Piece attacker = pieces[row][col];
         if (attacker != null && attacker.getColor() != kingColor) {
-          if (attacker.canAttack(new Location(row, col), kingLoc, pieces)) {
+          if (attacker.canAttack(new Location(col, row), kingLoc, pieces)) {
             return true;
           }
         }

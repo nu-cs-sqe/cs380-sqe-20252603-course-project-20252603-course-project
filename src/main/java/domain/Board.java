@@ -202,6 +202,10 @@ public class Board {
     return destination != null && destination.getColor() == moving.getColor();
   }
 
+  /**
+   * Determines whether a move is legal for the given piece type, including
+   * both movement rules and board-state constraints.
+   */
   private boolean isLegalMoveForPiece(Piece piece, Location from, Location to, Piece destinationPiece) {
     switch (piece.getType()) {
       case PAWN:

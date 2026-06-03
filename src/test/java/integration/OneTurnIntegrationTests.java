@@ -194,4 +194,52 @@ public class OneTurnIntegrationTests {
     );
     assertFalse(result);
   }
+
+  @Test
+  void KingCannotMoveIntoSameColorPiece_IsRejected() {
+    boolean result;
+    // e4
+    result = board.movePiece(
+        new Location(4, 6),
+        new Location(4, 4)
+    );
+    assertTrue(result);
+    // ..e5
+    result = board.movePiece(
+        new Location(4, 1),
+        new Location(4, 3)
+    );
+    assertTrue(result);
+    // Ke1 -> Ke2
+    result = board.movePiece(
+        new Location(4, 7),
+        new Location(4, 6)
+    );
+    assertTrue(result);
+    // ..Ke8 -> Ke7
+    result = board.movePiece(
+        new Location(4, 0),
+        new Location(4, 1)
+    );
+    assertTrue(result);
+    // Ke2 -> Kf3
+    result = board.movePiece(
+        new Location(4, 6),
+        new Location(5, 5)
+    );
+    assertTrue(result);
+    // ..Ke7 -> Kf6
+    result = board.movePiece(
+        new Location(4, 1),
+        new Location(5, 2)
+    );
+    assertTrue(result);
+
+    // Kf3 -> Ke4 (illegal, into white's own king pawn)
+    result = board.movePiece(
+        new Location(5, 5),
+        new Location(4, 4)
+    );
+    assertFalse(result);
+  }
 }

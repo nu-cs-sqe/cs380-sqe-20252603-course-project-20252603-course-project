@@ -129,4 +129,19 @@ public class OneTurnIntegrationTests {
     assertTrue(state[ROW_7][COL_3] instanceof Queen);
     assertNotNull(state[ROW_6][COL_3]);
   }
+
+  @Test
+  void QueenDiagonalBlocked_IsRejected() {
+
+    boolean result = board.movePiece(
+        new Location(COL_3, ROW_7),
+        new Location(COL_5, ROW_5)
+    );
+
+    state = board.getSnapshot();
+
+    assertFalse(result);
+
+    assertTrue(state[ROW_7][COL_3] instanceof Queen);
+  }
 }

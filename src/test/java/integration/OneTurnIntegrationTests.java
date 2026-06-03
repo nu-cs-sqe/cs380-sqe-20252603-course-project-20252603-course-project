@@ -242,4 +242,33 @@ public class OneTurnIntegrationTests {
     );
     assertFalse(result);
   }
+
+  @Test
+  void PieceShieldingKingFromCheckTriesToMove_IsRejected() {
+    boolean result;
+    // e4
+    result = board.movePiece(
+        new Location(4, 6),
+        new Location(4, 4)
+    );
+    assertTrue(result);
+    // ..e5
+    result = board.movePiece(
+        new Location(4, 1),
+        new Location(4, 3)
+    );
+    assertTrue(result);
+    // Qd1 -> Qh5
+    result = board.movePiece(
+        new Location(3, 7),
+        new Location(7, 3)
+    );
+    assertTrue(result);
+    // ..f7 -> f6 (illegal, as this pawn blocks white's queen from checking the black king)
+    result = board.movePiece(
+        new Location(5, 1),
+        new Location(5, 2)
+    );
+    assertFalse(result);
+  }
 }

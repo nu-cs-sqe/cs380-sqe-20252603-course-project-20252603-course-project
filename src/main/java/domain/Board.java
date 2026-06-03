@@ -188,6 +188,7 @@ public class Board {
     }
 
     placePiece(piece, from, to);
+    switchTurn();
     return true;
   }
 
@@ -214,7 +215,7 @@ public class Board {
    * both movement rules and board-state constraints.
    *
    * Pawn: considers shape, if it is a first move or not, if it is a capture, if blocked by friendly piece
-   * King: considers shape
+   * King: considers shape, if it will put the king in danger
    * Rook, Bishop, Queen: considers shape, if blocked by friendly piece
    * Knight: considers shape
    */

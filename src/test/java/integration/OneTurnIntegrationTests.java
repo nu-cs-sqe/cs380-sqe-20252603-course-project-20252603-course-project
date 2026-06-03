@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import domain.Board;
 import domain.Location;
+import domain.piece.Bishop;
 import domain.piece.Knight;
 import domain.piece.Piece;
 import domain.piece.PieceColor;
@@ -58,6 +59,23 @@ public class OneTurnIntegrationTests {
 
     // rook should not have moved, destination empty
     assertTrue(state[ROW_7][COL_0] instanceof Rook);
+    assertNull(state[ROW_5][COL_0]);
+  }
+
+  @Test
+  void BishopBlockedDiagonal_IsRejected_BoardUnchanged() {
+
+    // bishop at (7,2), pawn blocks at (6,1)
+    boolean result = board.movePiece(
+        new Location(COL_2, ROW_7),
+        new Location(COL_0, ROW_5)
+    );
+
+    state = board.getSnapshot();
+
+    assertFalse(result);
+
+    assertTrue(state[ROW_7][COL_2] instanceof Bishop);
     assertNull(state[ROW_5][COL_0]);
   }
 }

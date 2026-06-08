@@ -125,12 +125,12 @@
 | G69 | Current player plays a Cat Card | Current player does not change | :y: |
 | G70 | Current player plays a Cat Card | Deck size does not change | :y: |
 | G71 | Current player plays a Cat Card | No player is eliminated | :y: |
-| G72 | Current player plays `FAVOR` without a target player | Throws `IllegalArgumentException` | :n: |
-| G73 | Current player plays `FAVOR` with `null` target player | Throws `IllegalArgumentException` | :n: |
-| G74 | Current player plays `FAVOR` with a target player not in the game | Throws `IllegalArgumentException` | :n: |
-| G75 | Current player plays `FAVOR` targeting themself | Throws `IllegalArgumentException` | :n: |
-| G76 | Current player plays `FAVOR` targeting a player with no cards | Throws `IllegalStateException` | :n: |
-| G77 | Current player does not have `FAVOR` | Throws `IllegalStateException` | :n: |
+| G72 | Current player plays `FAVOR` without a target player | Throws `IllegalArgumentException` | :y: |
+| G73 | Current player plays `FAVOR` with `null` target player | Throws `IllegalArgumentException` | :y: |
+| G74 | Current player plays `FAVOR` with a target player not in the game | Throws `IllegalArgumentException` | :y: |
+| G75 | Current player plays `FAVOR` targeting themself | Throws `IllegalArgumentException` | :y: |
+| G76 | Current player plays `FAVOR` targeting a player with no cards | Throws `IllegalStateException` | :y: |
+| G77 | Current player does not have `FAVOR` | Throws `IllegalStateException` | :y: |
 | G78 | Current player plays `FAVOR` | Removes `FAVOR` from current player's hand | :n: |
 | G79 | Current player plays `FAVOR` | Adds `FAVOR` to the discard pile | :n: |
 | G80 | Current player plays `FAVOR` targeting a player with cards | Target player loses one card | :n: |

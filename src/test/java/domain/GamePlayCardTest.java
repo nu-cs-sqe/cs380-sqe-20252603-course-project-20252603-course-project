@@ -302,4 +302,107 @@ public class GamePlayCardTest {
         assertTrue(player1.isActive());
         assertTrue(player2.isActive());
     }
+
+    // G72
+    @Test
+    public void playCardWithFavorWithoutTargetThrowsException() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+
+        game.setupGame();
+        player1.addCard(new Card(CardType.FAVOR));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            game.playCard(CardType.FAVOR);
+        });
+    }
+
+    // G73
+    @Test
+    public void playCardWithFavorThrowsExceptionWhenTargetPlayerIsNull() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+
+        game.setupGame();
+        player1.addCard(new Card(CardType.FAVOR));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            game.playCard(CardType.FAVOR, null);
+        });
+    }
+
+    // G74
+    @Test
+    public void playCardWithFavorThrowsExceptionWhenTargetPlayerIsNotInGame() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Player player3 = new Player("Player 3");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+
+        game.setupGame();
+        player1.addCard(new Card(CardType.FAVOR));
+        player3.addCard(new Card(CardType.SKIP));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            game.playCard(CardType.FAVOR, player3);
+        });
+    }
+
+    // G75
+    @Test
+    public void playCardWithFavorThrowsExceptionWhenTargetPlayerIsCurrentPlayer() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+
+        game.setupGame();
+        player1.addCard(new Card(CardType.FAVOR));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            game.playCard(CardType.FAVOR, player1);
+        });
+    }
+
+    // G76
+    @Test
+    public void playCardWithFavorThrowsExceptionWhenTargetPlayerHasNoCards() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+
+        game.setupGame();
+        while (!player2.getHand().isEmpty()) {
+            player2.removeCard(player2.getHand().get(0).getType());
+        }
+        player1.addCard(new Card(CardType.FAVOR));
+
+        assertThrows(IllegalStateException.class, () -> {
+            game.playCard(CardType.FAVOR, player2);
+        });
+    }
+
+    // G77
+    @Test
+    public void playCardWithFavorThrowsExceptionWhenCurrentPlayerDoesNotHaveFavor() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+
+        game.setupGame();
+        while (player1.hasCard(CardType.FAVOR)) {
+            player1.removeCard(CardType.FAVOR);
+        }
+
+        assertThrows(IllegalStateException.class, () -> {
+            game.playCard(CardType.FAVOR, player2);
+        });
+    }
 }

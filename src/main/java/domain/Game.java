@@ -193,6 +193,10 @@ public class Game {
             throw new IllegalArgumentException("Card type cannot be null");
         }
 
+        if (type == CardType.FAVOR) {
+            throw new IllegalArgumentException("Favor requires a target player");
+        }
+
         if (!setupComplete) {
             throw new IllegalStateException("Game setup has not been completed");
         }
@@ -202,6 +206,46 @@ public class Game {
         }
 
         Player currentPlayer = getCurrentPlayer();
+        Card playedCard = currentPlayer.removeCard(type);
+        discardPile.add(playedCard);
+    }
+
+    public void playCard(CardType type, Player targetPlayer) {
+        if (type == null) {
+            throw new IllegalArgumentException("Card type cannot be null");
+        }
+
+        if (type != CardType.FAVOR) {
+            playCard(type);
+            return;
+        }
+
+        if (!setupComplete) {
+            throw new IllegalStateException("Game setup has not been completed");
+        }
+
+        if (getActivePlayerCount() <= 1) {
+            throw new IllegalStateException("Game is over");
+        }
+
+        if (targetPlayer == null) {
+            throw new IllegalArgumentException("Target player cannot be null");
+        }
+
+        if (!players.contains(targetPlayer)) {
+            throw new IllegalArgumentException("Target player must be in the game");
+        }
+
+        Player currentPlayer = getCurrentPlayer();
+
+        if (targetPlayer == currentPlayer) {
+            throw new IllegalArgumentException("Target player must be different");
+        }
+
+        if (targetPlayer.getHand().isEmpty()) {
+            throw new IllegalStateException("Target player has no cards");
+        }
+
         Card playedCard = currentPlayer.removeCard(type);
         discardPile.add(playedCard);
     }

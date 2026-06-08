@@ -131,9 +131,9 @@
 | G75 | Current player plays `FAVOR` targeting themself | Throws `IllegalArgumentException` | :y: |
 | G76 | Current player plays `FAVOR` targeting a player with no cards | Throws `IllegalStateException` | :y: |
 | G77 | Current player does not have `FAVOR` | Throws `IllegalStateException` | :y: |
-| G78 | Current player plays `FAVOR` | Removes `FAVOR` from current player's hand | :n: |
-| G79 | Current player plays `FAVOR` | Adds `FAVOR` to the discard pile | :n: |
-| G80 | Current player plays `FAVOR` targeting a player with cards | Target player loses one card | :n: |
-| G81 | Current player plays `FAVOR` targeting a player with cards | Current player receives the transferred card | :n: |
-| G82 | Target player has multiple cards | Transfers the first card from the target player's hand | :n: |
-| G83 | Current player plays `FAVOR` | Current player does not change | :n: |
+| G78 | Current player plays `FAVOR` | Removes `FAVOR` from current player's hand | :y: |
+| G79 | Current player plays `FAVOR` | Adds `FAVOR` to the discard pile | :y: |
+| G80 | Current player plays `FAVOR` targeting a player with cards | Target player loses one card | :y: |
+| G81 | Current player plays `FAVOR` targeting a player with cards | Current player receives the transferred card | :y: |
+| G82 | Target player has multiple cards | Transfers the first card from the target player's hand | :y: |
+| G83 | Current player plays `FAVOR` | Current player does not change | :y: |

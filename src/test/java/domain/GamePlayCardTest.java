@@ -405,4 +405,122 @@ public class GamePlayCardTest {
             game.playCard(CardType.FAVOR, player2);
         });
     }
+
+    // G78
+    @Test
+    public void playCardWithFavorRemovesFavorFromCurrentPlayersHand() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+        Card favor = new Card(CardType.FAVOR);
+
+        game.setupGame();
+        player1.addCard(favor);
+
+        game.playCard(CardType.FAVOR, player2);
+
+        assertFalse(player1.getHand().contains(favor));
+    }
+
+    // G79
+    @Test
+    public void playCardWithFavorAddsFavorToDiscardPile() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+        Card favor = new Card(CardType.FAVOR);
+
+        game.setupGame();
+        player1.addCard(favor);
+
+        game.playCard(CardType.FAVOR, player2);
+
+        assertTrue(game.getDiscardPile().contains(favor));
+    }
+
+    // G80
+    @Test
+    public void playCardWithFavorRemovesOneCardFromTargetPlayer() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+
+        game.setupGame();
+        while (!player2.getHand().isEmpty()) {
+            player2.removeCard(player2.getHand().get(0).getType());
+        }
+        player1.addCard(new Card(CardType.FAVOR));
+        player2.addCard(new Card(CardType.SKIP));
+        player2.addCard(new Card(CardType.ATTACK));
+
+        game.playCard(CardType.FAVOR, player2);
+
+        assertEquals(1, player2.getHand().size());
+    }
+
+    // G81
+    @Test
+    public void playCardWithFavorAddsTransferredCardToCurrentPlayer() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+        Card targetCard = new Card(CardType.SKIP);
+
+        game.setupGame();
+        while (!player2.getHand().isEmpty()) {
+            player2.removeCard(player2.getHand().get(0).getType());
+        }
+        player1.addCard(new Card(CardType.FAVOR));
+        player2.addCard(targetCard);
+
+        game.playCard(CardType.FAVOR, player2);
+
+        assertTrue(player1.getHand().contains(targetCard));
+    }
+
+    // G82
+    @Test
+    public void playCardWithFavorTransfersFirstCardFromTargetPlayer() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+        Card firstCard = new Card(CardType.SKIP);
+        Card secondCard = new Card(CardType.ATTACK);
+
+        game.setupGame();
+        while (!player2.getHand().isEmpty()) {
+            player2.removeCard(player2.getHand().get(0).getType());
+        }
+        player1.addCard(new Card(CardType.FAVOR));
+        player2.addCard(firstCard);
+        player2.addCard(secondCard);
+
+        game.playCard(CardType.FAVOR, player2);
+
+        assertTrue(player1.getHand().contains(firstCard));
+        assertFalse(player1.getHand().contains(secondCard));
+        assertFalse(player2.getHand().contains(firstCard));
+        assertTrue(player2.getHand().contains(secondCard));
+    }
+
+    // G83
+    @Test
+    public void playCardWithFavorDoesNotAdvanceTurn() {
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+        Deck deck = new Deck(new Random());
+        Game game = new Game(List.of(player1, player2), deck);
+
+        game.setupGame();
+        player1.addCard(new Card(CardType.FAVOR));
+
+        game.playCard(CardType.FAVOR, player2);
+
+        assertEquals(player1, game.getCurrentPlayer());
+    }
 }

@@ -1,0 +1,236 @@
+# BVA Analysis — `GameModel`
+
+
+### Method under test: `GameModel()` *(constructor)*
+
+- **TC1: GameModel constructs without error** ( :white_check_mark: )
+    - **State of the system**: `new GameModel()` called
+    - **Expected output**: Object created; `getContinents()` returns an empty list before initialization
+
+---
+
+### Method under test: `initializeContinentsAndTerritories()`
+
+- **TC2: Creates exactly 6 continents** ( :white_check_mark: )
+    - **State of the system**: `GameModel` constructed; `initializeContinentsAndTerritories()` called
+    - **Expected output**: `getContinents().size()` returns `6`
+
+- **TC3: Creates exactly 42 territories across all continents** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: Sum of `continent.getTerritories().size()` across all 6 continents equals `42`
+
+    
+- **TC5: All territories start with zero armies** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: Every territory across all continents returns `getArmyCount() == 0`
+
+- **TC6: Each continent has the correct territory count** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: North America = 9, South America = 4, Europe = 7, Africa = 6, Asia = 12, Australia = 4
+
+- **TC7: Each continent has the correct bonus army value** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: North America = 5, South America = 2, Europe = 5, Africa = 3, Asia = 7, Australia = 2
+
+- **TC8: Every territory is assigned to exactly one continent** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: No territory appears in more than one continent's territory list; total unique territories = 42
+
+- **TC9: Every territory has at least one adjacent territory** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: Every territory's `getAdjacentTerritories().size()` is greater than `0`
+
+- **TC10: Adjacency is reciprocal for all territories** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: For every territory A, if B is in A's adjacency list then A is in B's adjacency list
+
+- **TC11: Alaska is adjacent to Kamchatka** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: Alaska's adjacency list contains Kamchatka; Kamchatka's adjacency list contains Alaska
+
+- **TC12: No territory is adjacent to itself** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: For every territory, its adjacency list does not contain itself
+
+- **TC13: Deck is initialized with 44 cards after board initialization** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: `getDeck().size()` returns `44`
+
+- **TC14: Deck is shuffled — draw pile is ready** ( :white_check_mark: )
+    - **State of the system**: `initializeContinentsAndTerritories()` called
+    - **Expected output**: `getDeck().isEmpty()` returns `false`
+
+---
+
+### Method under test: `setPlayerCount(int count)`
+
+- **TC15: Rejects player count below minimum** ( :white_check_mark: )
+    - **State of the system**: `GameModel` constructed; `setPlayerCount(2)` called
+    - **Expected output**: Returns `false`; player count is not accepted because valid player counts are in `[3, 6]`
+
+- **TC16: Accepts minimum player count** ( :white_check_mark: )
+    - **State of the system**: `GameModel` constructed; `setPlayerCount(3)` called
+    - **Expected output**: Returns `true`; player count is stored as `3`
+
+- **TC17: Accepts maximum player count** ( :white_check_mark: )
+    - **State of the system**: `GameModel` constructed; `setPlayerCount(6)` called
+    - **Expected output**: Returns `true`; player count is stored as `6`
+
+- **TC18: Rejects player count above maximum** ( :white_check_mark: )
+    - **State of the system**: `GameModel` constructed; `setPlayerCount(7)` called
+    - **Expected output**: Returns `false`; player count is not accepted because valid player counts are in `[3, 6]`
+
+---
+
+### Method under test: `addPlayer(String name, PlayerColor color)`
+
+- **TC19: Adds first player with correct minimum-count infantry** ( :white_check_mark: )
+    - **State of the system**: `setPlayerCount(3)` has returned `true`; `addPlayer("Player 1", PlayerColor.RED)` called
+    - **Expected output**: Returns a player named `"Player 1"` with color `RED` and `35` available Infantry
+
+- **TC20: Adds player with correct four-player infantry** ( :white_check_mark: )
+    - **State of the system**: `setPlayerCount(4)` has returned `true`; `addPlayer("Player 1", PlayerColor.BLUE)` called
+    - **Expected output**: Returns a player with `30` available Infantry
+
+- **TC21: Adds player with correct five-player infantry** ( :white_check_mark: )
+    - **State of the system**: `setPlayerCount(5)` has returned `true`; `addPlayer("Player 1", PlayerColor.GREEN)` called
+    - **Expected output**: Returns a player with `25` available Infantry
+
+- **TC22: Adds player with correct maximum-count infantry** ( :white_check_mark: )
+    - **State of the system**: `setPlayerCount(6)` has returned `true`; `addPlayer("Player 1", PlayerColor.YELLOW)` called
+    - **Expected output**: Returns a player with `20` available Infantry
+
+- **TC24: Rejects adding more players than configured** ( :white_check_mark: )
+    - **State of the system**: `setPlayerCount(3)` has returned `true`; three players have already been added
+    - **Expected output**: A fourth `addPlayer(...)` call is rejected; player list remains size `3`
+
+---
+
+### Method under test: `setCurrentPlayerIndex(int index)`
+
+- **TC28: Accepts first player index** ( :white_check_mark: )
+    - **State of the system**: Three players have been registered; `setCurrentPlayerIndex(0)` called
+    - **Expected output**: Current player becomes the first registered player
+
+- **TC29: Accepts last valid player index** ( :white_check_mark: )
+    - **State of the system**: Three players have been registered; `setCurrentPlayerIndex(2)` called
+    - **Expected output**: Current player becomes the third registered player
+
+- **TC30: Rejects index below valid range** ( :white_check_mark: )
+    - **State of the system**: Three players have been registered; `setCurrentPlayerIndex(-1)` called
+    - **Expected output**: Current player index is not changed because valid indices are in `[0, playerCount - 1]`
+
+- **TC31: Rejects index above valid range** ( :white_check_mark: )
+    - **State of the system**: Three players have been registered; `setCurrentPlayerIndex(3)` called
+    - **Expected output**: Current player index is not changed because `3` is one past the last valid index
+
+---
+
+### Method under test: `getCurrentPlayerName()`
+
+- **TC32: Returns selected first player name** ( :white_check_mark: )
+    - **State of the system**: Three players have been registered; current player index is set to `0`
+    - **Expected output**: Returns the first registered player name
+
+- **TC33: Returns selected last player name** ( :white_check_mark: )
+    - **State of the system**: Three players have been registered; current player index is set to `2`
+    - **Expected output**: Returns the third registered player name
+
+---
+
+### Method under test: `claimTerritoryDuringSetup(Player player, Territory territory, HashMap<ArmyType, Integer> pieces)`
+
+- **TC34: Claim unclaimed territory with exactly one Infantry** ( :white_check_mark: )
+    - **State of the system**: Territory is unclaimed; player has available armies containing at least `INFANTRY -> 1`; `claimTerritoryDuringSetup()` is called with a pieces map containing exactly `INFANTRY -> 1`
+    - **Expected output**: Method returns `true`; territory owner is set to the player; territory contains exactly one Infantry; player owns the territory; player's available Infantry decreases by one
+
+- **TC35: Cannot claim already claimed territory** ( :white_check_mark: )
+    - **State of the system**: Territory is already owned by `playerOne`; `playerTwo` attempts to claim the same territory with exactly `INFANTRY -> 1`
+    - **Expected output**: Method returns `false`; territory owner remains `playerOne`; territory Infantry count remains unchanged; `playerTwo` does not gain the territory; `playerTwo`'s available Infantry count remains unchanged
+
+- **TC36: Cannot claim territory with zero Infantry** ( :white_check_mark: )
+    - **State of the system**: Territory is unclaimed; player has available Infantry; `claimTerritoryDuringSetup()` is called with a pieces map containing `INFANTRY -> 0`
+    - **Expected output**: Method returns `false`; territory remains unclaimed; no Infantry is placed; player does not gain the territory; player's available Infantry count remains unchanged
+
+- **TC37: Cannot claim territory with more than one Infantry** ( :white_check_mark: )
+    - **State of the system**: Territory is unclaimed; player has available Infantry; `claimTerritoryDuringSetup()` is called with a pieces map containing `INFANTRY -> 2`
+    - **Expected output**: Method returns `false`; territory remains unclaimed; no Infantry is placed; player does not gain the territory; player's available Infantry count remains unchanged
+
+- **TC38: Cannot claim territory when player lacks available Infantry** ( :white_check_mark: )
+    - **State of the system**: Territory is unclaimed; player has available armies containing `INFANTRY -> 0`; `claimTerritoryDuringSetup()` is called with a pieces map containing exactly `INFANTRY -> 1`
+    - **Expected output**: Method returns `false`; territory remains unclaimed; no Infantry is placed; player does not gain the territory
+
+---
+
+### Method under test: `areAllTerritoriesClaimed()`
+
+- **TC39: Returns false when no territories are claimed** ( :white_check_mark: )
+    - **State of the system**: Game board has been initialized; all territories are still unclaimed
+    - **Expected output**: Returns `false`
+
+- **TC40: Returns false when one territory remains unclaimed** ( :white_check_mark: )
+    - **State of the system**: 41 territories are claimed and exactly 1 territory is still unclaimed
+    - **Expected output**: Returns `false`
+
+- **TC41: Returns true when all territories are claimed** ( :white_check_mark: )
+    - **State of the system**: All 42 territories have been claimed
+    - **Expected output**: Returns `true`
+
+---
+
+### Method under test: `advanceCurrentPlayerIndex()`
+
+- **TC34: Advances from first player to second player** ( :white_check_mark: )
+    - **State of the system**: Three-player game has been created; current player index is `0`
+    - **Expected output**: Current player advances to index `1`; `getCurrentPlayerName()` returns the second player name
+
+- **TC35: Advances from middle player to next player** ( :white_check_mark: )
+    - **State of the system**: Three-player game has been created; current player index is `1`
+    - **Expected output**: Current player advances to index `2`; `getCurrentPlayerName()` returns the third player name
+
+- **TC36: Wraps from last player back to first player** ( :white_check_mark: )
+    - **State of the system**: Three-player game has been created; current player index is `2`
+    - **Expected output**: Current player advances to index `0`; `getCurrentPlayerName()` returns the first player name
+
+- **TC37: Does not advance when no players are registered** ( :white_check_mark: )
+    - **State of the system**: GameModel has no registered players
+    - **Expected output**: Current player remains unavailable; method does not change player state
+---
+
+### Method under test: `getCurrentPlayerName()`
+
+- **TC42: Returns first player's name when current player index is first player** ( :white_check_mark: )
+    - **State of the system**: Three-player game has been created; current player index is `0`
+    - **Expected output**: Returns `"Player 1"`
+
+- **TC43: Returns middle player's name when current player index is middle player** ( :white_check_mark: )
+    - **State of the system**: Three-player game has been created; current player index is `1`
+    - **Expected output**: Returns `"Player 2"`
+
+---
+
+### Method under test: `getUnclaimedTerritoriesByContinent()`
+
+- **TC46: Returns all territories grouped by continent when no territories are claimed** ( :white_check_mark: )
+    - **State of the system**: Game board has been initialized; all territories are unclaimed
+    - **Expected output**: Returns a string containing continent names and all unclaimed territory names grouped under their continents
+
+- **TC47: Excludes claimed territory from unclaimed territory display** ( :white_check_mark: )
+    - **State of the system**: Game board has been initialized; `"Alaska"` has been claimed by the current player
+    - **Expected output**: Returned string contains `"North America"` but does not contain `"Alaska"`
+
+---
+
+### Method under test: `getCurrentPlayerTerritoriesByContinent()`
+
+- **TC48: Returns empty grouped display when current player owns no territories** ( :white_check_mark: )
+    - **State of the system**: Three-player game has been created; current player owns no territories
+    - **Expected output**: Returns a string that does not list any territory names for the current player
+
+- **TC49: Returns current player's owned territories grouped by continent** ( :white_check_mark: )
+    - **State of the system**: Current player has claimed `"Alaska"` in `"North America"`
+    - **Expected output**: Returned string contains `"North America"` and `"Alaska"`
+
+- **TC50: Excludes territories owned by other players** ( :white_check_mark:)
+    - **State of the system**: Player 1 owns `"Alaska"`; current player is Player 2
+    - **Expected output**: Returned string does not contain `"Alaska"`

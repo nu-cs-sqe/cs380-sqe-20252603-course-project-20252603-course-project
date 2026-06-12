@@ -1,6 +1,9 @@
 package domain.model;
 
 import domain.model.board.BoardHandler;
+import domain.model.development_cards.DevelopmentCard;
+import domain.model.development_cards.DevelopmentCardDeck;
+import domain.model.exceptions.EmptyDeckException;
 import domain.model.exceptions.IllegalCityPlacementException;
 import domain.model.exceptions.IllegalGamePhaseException;
 import domain.model.exceptions.IllegalSettlementPlacementException;
@@ -22,6 +25,10 @@ public class GameModel {
     private static final int POINTS_FOR_SETTLEMENT = 1;
     private static final int POINTS_FOR_CITY = 1;
     private static final int POINTS_FOR_LONGEST_ROAD = 2;
+    
+    private static final int DEV_CARD_ORE_COST = 1;
+    private static final int DEV_CARD_WOOL_COST = 1;
+    private static final int DEV_CARD_GRAIN_COST = 1;
 
     @SuppressFBWarnings(value = "EI_EXPOSE_REP2",
             justification = "BoardHandler is intentionally shared between GameSetupModel and GameModel as it represents the single game board state")
@@ -328,7 +335,24 @@ public List<Player> getOtherPlayers() {
 
     public void playDevCard(){};
 
-    public void buyDevCard(){};
+    public DevelopmentCard buyDevCard(DevelopmentCardDeck deck) throws EmptyDeckException {
+        checkCurrentGamePhaseMatches(GamePhase.GENERAL_PLAY);
+        checkPlayerOwnsEnoughResources(currentPlayerColor, Resource.ORE, DEV_CARD_ORE_COST);
+        checkPlayerOwnsEnoughResources(currentPlayerColor, Resource.WOOL, DEV_CARD_WOOL_COST);
+        checkPlayerOwnsEnoughResources(currentPlayerColor, Resource.GRAIN, DEV_CARD_GRAIN_COST);
+
+        DevelopmentCard card = deck.drawCard(currentRound);
+
+        reducePlayerResources(currentPlayerColor, Resource.ORE, DEV_CARD_ORE_COST);
+        oreDeck.replenish();
+        reducePlayerResources(currentPlayerColor, Resource.WOOL, DEV_CARD_WOOL_COST);
+        woolDeck.replenish();
+        reducePlayerResources(currentPlayerColor, Resource.GRAIN, DEV_CARD_GRAIN_COST);
+        grainDeck.replenish();
+
+        getCurrentPlayer().addDevelopmentCard(card);
+        return card;
+    }
 
     public void moveRobberAndSteal(){};
 

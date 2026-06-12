@@ -1,6 +1,8 @@
 package domain.model;
 
 import domain.model.board.BoardHandler;
+import domain.model.development_cards.DevelopmentCard;
+import domain.model.development_cards.DevelopmentCardDeck;
 import domain.model.exceptions.*;
 import domain.model.player.Player;
 import domain.model.player.PlayerColor;
@@ -1554,5 +1556,41 @@ public class GameModelTests {
         assertEquals(PlayerColor.RED, model.getCurrentLongestRoadPlayerColor());
 
         EasyMock.verify(boardMock, redStateMock, whiteStateMock);
+    }
+
+    // TC1: GENERAL_PLAY, exact cost (ORE=1, WOOL=1, GRAIN=1), deck full (25)
+    @Test
+    void buyDevCard_ExactCostResourcesDeckFull_ExpectCardReturnedAndResourcesDeducted() throws EmptyDeckException {
+        final int currentRound = 0;
+        Player redStateMock = EasyMock.createMock(Player.class);
+        ColorToPlayerObjMock = Map.of(PlayerColor.RED, redStateMock);
+        DevelopmentCardDeck devDeckMock = EasyMock.createMock(DevelopmentCardDeck.class);
+        DevelopmentCard expectedCard = EasyMock.createMock(DevelopmentCard.class);
+
+        EasyMock.expect(redStateMock.getResourceCount(Resource.ORE)).andReturn(1);
+        EasyMock.expect(redStateMock.getResourceCount(Resource.WOOL)).andReturn(1);
+        EasyMock.expect(redStateMock.getResourceCount(Resource.GRAIN)).andReturn(1);
+        EasyMock.expect(devDeckMock.drawCard(currentRound)).andReturn(expectedCard);
+        redStateMock.updateResources(Resource.ORE, -1);
+        oreDeckMock.replenish();
+        redStateMock.updateResources(Resource.WOOL, -1);
+        woolDeckMock.replenish();
+        redStateMock.updateResources(Resource.GRAIN, -1);
+        grainDeckMock.replenish();
+        redStateMock.addDevelopmentCard(expectedCard);
+
+        EasyMock.replay(redStateMock, devDeckMock, expectedCard,
+                oreDeckMock, woolDeckMock, grainDeckMock, lumberDeckMock, brickDeckMock, boardMock);
+
+        GameModel model = new GameModel(lumberDeckMock, brickDeckMock, grainDeckMock,
+                oreDeckMock, woolDeckMock, ColorToPlayerObjMock, boardMock);
+        model.setCurrentPlayerColor(PlayerColor.RED);
+        model.setCurrentGamePhase(GamePhase.GENERAL_PLAY);
+
+        DevelopmentCard result = model.buyDevCard(devDeckMock);
+
+        assertSame(expectedCard, result);
+        EasyMock.verify(redStateMock, devDeckMock, expectedCard,
+                oreDeckMock, woolDeckMock, grainDeckMock, lumberDeckMock, brickDeckMock, boardMock);
     }
 }

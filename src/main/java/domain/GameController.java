@@ -193,7 +193,8 @@ public class GameController {
                     }
 
                     if (isValidMove(cardsPlayed, currentPlayer, target)) {
-                        CardController cardController = getControllerType(cardsPlayed.get(0), cardsPlayed.size());
+                        CardController cardController = getControllerType(
+                                cardsPlayed.get(0), cardsPlayed.size());
                         cardController.executeCardAction(this, currentPlayer, target);
 
                         for (Card card : cardsPlayed) {

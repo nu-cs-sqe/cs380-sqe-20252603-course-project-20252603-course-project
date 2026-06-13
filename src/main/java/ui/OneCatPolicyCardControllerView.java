@@ -15,12 +15,14 @@ public class OneCatPolicyCardControllerView {
     }
 
     public void displayTurnsAdded(int turnsAdded) {
-        System.out.printf("Pairs or triples of cat cards for next player (turns added): %d%n", turnsAdded);
+        System.out.printf("Pairs or triples of cat cards for next player (turns added):" +
+                " %d%n", turnsAdded);
 
     }
 
     public void displayNoTurnsAdded() {
-        System.out.println("No pairs or triples of cat cards detected in next player's hand. No turns added.");
+        System.out.println("No pairs or triples of cat cards detected in next player's hand. " +
+                "No turns added.");
 
     }
 }

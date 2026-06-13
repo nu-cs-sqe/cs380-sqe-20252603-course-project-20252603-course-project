@@ -12,7 +12,8 @@ public class OneCatPolicyCardControllerTests {
 
     @Test
     public void executeCardAction_NextPlayerHasZeroCatCards_AddsNoTurns() {
-        OneCatPolicyCardControllerView mockView = createStrictMock(OneCatPolicyCardControllerView.class);
+        OneCatPolicyCardControllerView mockView = createStrictMock(
+                OneCatPolicyCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
         Player mockInitiator = createMock(Player.class);
@@ -29,23 +30,27 @@ public class OneCatPolicyCardControllerTests {
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGameController.getNextPlayerIndex()).andReturn(1);
 
-        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(mockInitiator, mockNextPlayer));
+        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(
+                mockInitiator, mockNextPlayer));
 
         expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
 
         mockView.displayNoTurnsAdded();
 
-        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, nonCat1, nonCat2);
+        replay(mockView, mockGameController, mockGame,
+                mockInitiator, mockNextPlayer, nonCat1, nonCat2);
 
         OneCatPolicyCardController controller = new OneCatPolicyCardController(mockView);
         controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
 
-        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, nonCat1, nonCat2);
+        verify(mockView, mockGameController, mockGame,
+                mockInitiator, mockNextPlayer, nonCat1, nonCat2);
     }
 
     @Test
     public void executeCardAction_NextPlayerHasOneCatCard_AddsNoTurns() {
-        OneCatPolicyCardControllerView mockView = createStrictMock(OneCatPolicyCardControllerView.class);
+        OneCatPolicyCardControllerView mockView = createStrictMock(
+                OneCatPolicyCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
         Player mockInitiator = createMock(Player.class);
@@ -62,23 +67,27 @@ public class OneCatPolicyCardControllerTests {
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGameController.getNextPlayerIndex()).andReturn(1);
 
-        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(mockInitiator, mockNextPlayer));
+        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(
+                mockInitiator, mockNextPlayer));
 
         expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
 
         mockView.displayNoTurnsAdded();
 
-        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1, nonCat);
+        replay(mockView, mockGameController, mockGame, mockInitiator,
+                mockNextPlayer, cat1, nonCat);
 
         OneCatPolicyCardController controller = new OneCatPolicyCardController(mockView);
         controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
 
-        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1, nonCat);
+        verify(mockView, mockGameController, mockGame, mockInitiator,
+                mockNextPlayer, cat1, nonCat);
     }
 
     @Test
     public void executeCardAction_NextPlayerHasMaxUniqueCatCards_AddsNoTurns() {
-        OneCatPolicyCardControllerView mockView = createStrictMock(OneCatPolicyCardControllerView.class);
+        OneCatPolicyCardControllerView mockView = createStrictMock(
+                OneCatPolicyCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
         Player mockInitiator = createMock(Player.class);
@@ -94,28 +103,33 @@ public class OneCatPolicyCardControllerTests {
         expect(cat3.getType()).andReturn(CardType.CAT_CARD_3).anyTimes();
         expect(cat4.getType()).andReturn(CardType.CAT_CARD_4).anyTimes();
 
-        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(cat1, cat2, cat3, cat4));
+        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
+                cat1, cat2, cat3, cat4));
 
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGameController.getNextPlayerIndex()).andReturn(1);
 
-        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(mockInitiator, mockNextPlayer));
+        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(
+                mockInitiator, mockNextPlayer));
 
         expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
 
         mockView.displayNoTurnsAdded();
 
-        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1, cat2, cat3, cat4);
+        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer,
+                cat1, cat2, cat3, cat4);
 
         OneCatPolicyCardController controller = new OneCatPolicyCardController(mockView);
         controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
 
-        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1, cat2, cat3, cat4);
+        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer,
+                cat1, cat2, cat3, cat4);
     }
 
     @Test
     public void executeCardAction_NextPlayerHasExactlyTwoSameCatCards_AddsOneTurn() {
-        OneCatPolicyCardControllerView mockView = createStrictMock(OneCatPolicyCardControllerView.class);
+        OneCatPolicyCardControllerView mockView = createStrictMock(
+                OneCatPolicyCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
         Player mockInitiator = createMock(Player.class);
@@ -127,12 +141,14 @@ public class OneCatPolicyCardControllerTests {
         expect(cat1A.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
         expect(cat1B.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
 
-        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(cat1A, cat1B));
+        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
+                cat1A, cat1B));
 
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGameController.getNextPlayerIndex()).andReturn(1);
 
-        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(mockInitiator, mockNextPlayer));
+        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(
+                mockInitiator, mockNextPlayer));
 
         expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
 
@@ -141,17 +157,22 @@ public class OneCatPolicyCardControllerTests {
 
         mockView.displayTurnsAdded(1);
 
-        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1A, cat1B);
+        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer,
+                cat1A, cat1B);
 
         OneCatPolicyCardController controller = new OneCatPolicyCardController(mockView);
-        controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
+        controller.executeCardAction(mockGameController,
+                mockInitiator,
+                Optional.empty());
 
-        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1A, cat1B);
+        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer,
+                cat1A, cat1B);
     }
 
     @Test
     public void executeCardAction_NextPlayerHasThreeSameCatCards_AddsOneTurn() {
-        OneCatPolicyCardControllerView mockView = createStrictMock(OneCatPolicyCardControllerView.class);
+        OneCatPolicyCardControllerView mockView = createStrictMock(
+                OneCatPolicyCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
         Player mockInitiator = createMock(Player.class);
@@ -165,12 +186,14 @@ public class OneCatPolicyCardControllerTests {
         expect(cat1B.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
         expect(cat1C.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
 
-        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(cat1A, cat1B, cat1C));
+        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
+                cat1A, cat1B, cat1C));
 
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGameController.getNextPlayerIndex()).andReturn(1);
 
-        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(mockInitiator, mockNextPlayer));
+        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(
+                mockInitiator, mockNextPlayer));
 
         expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
 
@@ -179,17 +202,22 @@ public class OneCatPolicyCardControllerTests {
 
         mockView.displayTurnsAdded(1);
 
-        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1A, cat1B, cat1C);
+        replay(mockView, mockGameController, mockGame, mockInitiator,
+                mockNextPlayer, cat1A, cat1B, cat1C);
 
         OneCatPolicyCardController controller = new OneCatPolicyCardController(mockView);
-        controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
+        controller.executeCardAction(mockGameController,
+                mockInitiator,
+                Optional.empty());
 
-        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1A, cat1B, cat1C);
+        verify(mockView, mockGameController, mockGame, mockInitiator,
+                mockNextPlayer, cat1A, cat1B, cat1C);
     }
 
     @Test
     public void executeCardAction_NextPlayerHasMultipleDistinctCatGroups_AddsMultipleTurns() {
-        OneCatPolicyCardControllerView mockView = createStrictMock(OneCatPolicyCardControllerView.class);
+        OneCatPolicyCardControllerView mockView = createStrictMock(
+                OneCatPolicyCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
         Player mockInitiator = createMock(Player.class);
@@ -214,7 +242,8 @@ public class OneCatPolicyCardControllerTests {
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGameController.getNextPlayerIndex()).andReturn(1);
 
-        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(mockInitiator, mockNextPlayer));
+        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(
+                mockInitiator, mockNextPlayer));
 
         expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
 
@@ -227,7 +256,9 @@ public class OneCatPolicyCardControllerTests {
                 cat1A, cat1B, cat2A, cat2B, cat2C);
 
         OneCatPolicyCardController controller = new OneCatPolicyCardController(mockView);
-        controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
+        controller.executeCardAction(mockGameController,
+                mockInitiator,
+                Optional.empty());
 
         verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer,
                 cat1A, cat1B, cat2A, cat2B, cat2C);
@@ -235,7 +266,8 @@ public class OneCatPolicyCardControllerTests {
 
     @Test
     public void executeCardAction_NextPlayerHasFourSameCatCards_AddsOneTurn() {
-        OneCatPolicyCardControllerView mockView = createStrictMock(OneCatPolicyCardControllerView.class);
+        OneCatPolicyCardControllerView mockView = createStrictMock(
+                OneCatPolicyCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
         Player mockInitiator = createMock(Player.class);
@@ -251,12 +283,14 @@ public class OneCatPolicyCardControllerTests {
         expect(cat1C.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
         expect(cat1D.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
 
-        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(cat1A, cat1B, cat1C, cat1D));
+        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
+                cat1A, cat1B, cat1C, cat1D));
 
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGameController.getNextPlayerIndex()).andReturn(1);
 
-        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(mockInitiator, mockNextPlayer));
+        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(
+                mockInitiator, mockNextPlayer));
 
         expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
 
@@ -265,11 +299,15 @@ public class OneCatPolicyCardControllerTests {
 
         mockView.displayTurnsAdded(1);
 
-        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1A, cat1B, cat1C, cat1D);
+        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer,
+                cat1A, cat1B, cat1C, cat1D);
 
         OneCatPolicyCardController controller = new OneCatPolicyCardController(mockView);
-        controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
+        controller.executeCardAction(mockGameController,
+                mockInitiator,
+                Optional.empty());
 
-        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1A, cat1B, cat1C, cat1D);
+        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer,
+                cat1A, cat1B, cat1C, cat1D);
     }
 }

@@ -39,7 +39,7 @@ Controller instantiated as new CatCardController(2, controllerView).
     - **State of the system**: target is valid. target.get().getHandSize() is 0.
     - **Expected output**: Returns Optional.empty(). No hand changes.
 
-- **TC5: executeCardAction_twoCardsTargetOneCard_stealsOnlyCard ** ( x )
+- **TC5: executeCardAction_twoCardsTargetOneCard_stealsOnlyCard ** ( :white_check_mark: )
     - **State of the system**: target is valid. target.get().getHandSize() is 1. (boundary)
     - **Expected output**: Returns Optional.of([stolenCard]). initiator.getHandSize() increases by 1. target.getHandSize() is 0.
 

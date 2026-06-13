@@ -32,6 +32,15 @@ public class CatCardController implements CardController {
 
         if (cardsPlayed == 2) {
             if (actualTarget.getHandSize() == 0) return Optional.empty();
+
+            List<Card> targetHandSnapshot = actualTarget.getHand();
+            int randomIndex = (int) (Math.random() * targetHandSnapshot.size());
+            Card stolenCard = targetHandSnapshot.get(randomIndex);
+
+            actualTarget.removeCard(stolenCard);
+            initiator.addCard(stolenCard);
+
+            return Optional.of(List.of(stolenCard));
         }
 
         return Optional.empty();

@@ -227,4 +227,48 @@ public class TargetAttackControllerTests {
         EasyMock.verify(mockGameController, mockGame, mockP1, mockP2, mockView);
         assertTrue(result.isEmpty(), "TargetAttackController should return Optional.empty()");
     }
+
+    @Test
+    public void executeCardAction_TargetIsDead_RetriesUntilValid() {
+        String deadIndex = "1";
+        String validIndex = "2";
+
+        GameController mockGameController = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Player mockP1 = EasyMock.createMock(Player.class);
+        Player mockP2 = EasyMock.createMock(Player.class);
+        Player mockP3 = EasyMock.createMock(Player.class);
+        TargetAttackControllerView mockView = EasyMock.createMock(TargetAttackControllerView.class);
+
+        ArrayList<Player> alivePlayers = new ArrayList<>();
+        alivePlayers.add(mockP1);
+        alivePlayers.add(mockP2);
+        alivePlayers.add(mockP3);
+
+        EasyMock.expect(mockGameController.getGame()).andReturn(mockGame);
+        EasyMock.expect(mockGame.getAlivePlayers()).andReturn(alivePlayers);
+
+        mockView.displayAlivePlayers(alivePlayers, mockP1);
+        EasyMock.expectLastCall().once();
+
+        EasyMock.expect(mockView.getTargetPlayerIndex()).andReturn(deadIndex).once();
+        EasyMock.expect(mockP2.isAlive()).andReturn(false).anyTimes();
+        mockView.displayInvalidTarget("Target must be alive");
+        EasyMock.expectLastCall().once();
+
+        EasyMock.expect(mockView.getTargetPlayerIndex()).andReturn(validIndex).once();
+        EasyMock.expect(mockP3.isAlive()).andReturn(true).anyTimes();
+        mockGameController.setNextPlayerTurnsLeft(2);
+        EasyMock.expectLastCall().once();
+
+        EasyMock.expect(mockP1.isAlive()).andReturn(true).anyTimes();
+
+        EasyMock.replay(mockGameController, mockGame, mockP1, mockP2, mockP3, mockView);
+
+        TargetAttackController controller = new TargetAttackController(mockView);
+        Optional<List<Card>> result = controller.executeCardAction(mockGameController, mockP1, Optional.empty());
+
+        EasyMock.verify(mockGameController, mockGame, mockP1, mockP2, mockP3, mockView);
+        assertTrue(result.isEmpty(), "TargetAttackController should return Optional.empty()");
+    }
 }

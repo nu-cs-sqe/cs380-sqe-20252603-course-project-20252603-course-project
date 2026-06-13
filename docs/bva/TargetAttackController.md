@@ -23,6 +23,6 @@
   - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"abc"` then `"1"`.
   - **Result**: `NumberFormatException` caught. `displayInvalidIndex` called. Loop retries. Valid P2 selected. Loop breaks.
 
-- **TC6: Target is dead**
+- **TC6: Target is dead** ( :white-check-mark: )
   - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. P2 is dead. View returns `"1"` then index of a valid alive player.
   - **Result**: `displayInvalid*Expected output**: `NumberFormatException` is thrown (assuming string-to-integer parsing is handled inside the controller). Game state is unchanged.

@@ -361,7 +361,7 @@
   - **State of the System**: `currentPlayer`'s hand: `[SKIP]`, other player hand: `[NOPE]`, `userChoice` = "0", other player chooses to Nope
   - **Expected output**: action cancelled, NOPE removed from other player's hand, SKIP remains in `currentPlayer`'s hand
 
-- **TC: card played, double NOPE, action executes** ( x )
+- **TC: card played, double NOPE, action executes** ( :white-check-mark:)
   - **State of the System**: `currentPlayer`'s hand: `[SKIP, NOPE]`, other player hand: `[NOPE]`, `userChoice` = "0", other player Nopes, then current player Nopes back
   - **Expected output**: action executes, both NOPEs removed from hands
 

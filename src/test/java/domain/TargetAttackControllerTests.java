@@ -222,7 +222,9 @@ public class TargetAttackControllerTests {
         EasyMock.replay(mockGameController, mockGame, mockP1, mockP2, mockView);
 
         TargetAttackController controller = new TargetAttackController(mockView);
-        Optional<List<Card>> result = controller.executeCardAction(mockGameController, mockP1, Optional.empty());
+        Optional<List<Card>> result = controller.executeCardAction(mockGameController,
+                mockP1,
+                Optional.empty());
 
         EasyMock.verify(mockGameController, mockGame, mockP1, mockP2, mockView);
         assertTrue(result.isEmpty(), "TargetAttackController should return Optional.empty()");
@@ -238,7 +240,8 @@ public class TargetAttackControllerTests {
         Player mockP1 = EasyMock.createMock(Player.class);
         Player mockP2 = EasyMock.createMock(Player.class);
         Player mockP3 = EasyMock.createMock(Player.class);
-        TargetAttackControllerView mockView = EasyMock.createMock(TargetAttackControllerView.class);
+        TargetAttackControllerView mockView = EasyMock.createMock(
+                TargetAttackControllerView.class);
 
         ArrayList<Player> alivePlayers = new ArrayList<>();
         alivePlayers.add(mockP1);
@@ -263,12 +266,17 @@ public class TargetAttackControllerTests {
 
         EasyMock.expect(mockP1.isAlive()).andReturn(true).anyTimes();
 
-        EasyMock.replay(mockGameController, mockGame, mockP1, mockP2, mockP3, mockView);
+        EasyMock.replay(mockGameController, mockGame, mockP1,
+                mockP2, mockP3, mockView);
 
         TargetAttackController controller = new TargetAttackController(mockView);
-        Optional<List<Card>> result = controller.executeCardAction(mockGameController, mockP1, Optional.empty());
+        Optional<List<Card>> result = controller.executeCardAction(mockGameController,
+                mockP1,
+                Optional.empty());
 
-        EasyMock.verify(mockGameController, mockGame, mockP1, mockP2, mockP3, mockView);
-        assertTrue(result.isEmpty(), "TargetAttackController should return Optional.empty()");
+        EasyMock.verify(mockGameController, mockGame, mockP1,
+                mockP2, mockP3, mockView);
+        assertTrue(result.isEmpty(),
+                "TargetAttackController should return Optional.empty()");
     }
 }

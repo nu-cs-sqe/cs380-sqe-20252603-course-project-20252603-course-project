@@ -37,7 +37,8 @@ public class TargetAttackController implements CardController {
                 }
 
                 else if (actualTarget == initiator) {
-                    controllerView.displayInvalidTarget("Target and initiator must be different players.");
+                    controllerView.displayInvalidTarget(
+                            "Target and initiator must be different players.");
                 }
 
                 else {

@@ -25,6 +25,7 @@ public class CatCardController implements CardController {
                                                   Player initiator,
                                                   Optional<Player> target) {
         if (target.isEmpty()) return Optional.empty();
+        if (target.get().equals(initiator)) return Optional.empty();
 
         return Optional.empty();
     }

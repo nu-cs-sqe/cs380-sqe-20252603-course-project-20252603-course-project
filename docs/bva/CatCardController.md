@@ -20,11 +20,11 @@ output: Optional<List<Card>> (Optional.empty() or Optional.of(List.of(stolenCard
 
 Category 1: Invalid Plays (Defensive Guards)
 
-- **TC1: executeCardAction_targetMissing_noSteal ** ( x )
+- **TC1: executeCardAction_targetMissing_noSteal ** ( :white_check_mark: )
     - **State of the system**: target is Optional.empty().
     - **Expected output**: Returns Optional.empty(). No hand changes.
 
-- **TC2: executeCardAction_selfTargeting_noSteal ** ( x )
+- **TC2: executeCardAction_selfTargeting_noSteal ** ( :white_check_mark: )
     - **State of the system**: target.isPresent() is true. target.get().equals(initiator) is true.
     - **Expected output**: Returns Optional.empty(). No hand changes.
 

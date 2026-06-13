@@ -2,7 +2,7 @@
 
 ### Method under test: `executeCardAction()`
 
-- **TC1: Next player has zero cat cards**
+- **TC1: Next player has zero cat cards** ( :white-check-mark: )
   - **State of the system**: `nextPlayer`'s hand contains only non-cat cards (e.g., Defuse, Skip, Attack),
     `nextPlayerTurnsLeft` = 1
   - **Expected output**: `displayPolicyAvoided` is called, `nextPlayerTurnsLeft` remains 1

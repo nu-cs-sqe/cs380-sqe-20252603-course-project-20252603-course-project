@@ -37,7 +37,8 @@ public class BuryCardControllerView {
         int deckSize = deck.count();
         System.out.printf("The deck currently has %d cards.%n", deckSize);
         System.out.printf("Enter where to place the card at (between 0 and %d)%n", deckSize);
-        System.out.printf("(e.g. 0 = top of deck, 1 = after the first card, %d = at the bottom of deck)", deckSize);
+        System.out.printf("(e.g. 0 = top of deck, 1 = after the first card," +
+                " %d = at the bottom of deck)", deckSize);
         return scanner.nextLine();
     }
 }

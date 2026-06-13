@@ -28,7 +28,7 @@ Category 1: Invalid Plays (Defensive Guards)
     - **State of the system**: target.isPresent() is true. target.get().equals(initiator) is true.
     - **Expected output**: Returns Optional.empty(). No hand changes.
 
-- **TC3: executeCardAction_targetNotAlive_noSteal ** ( x )
+- **TC3: executeCardAction_targetNotAlive_noSteal ** ( :white_check_mark: )
     - **State of the system**: target.isPresent() is true. target.get() is not in gameController.getGame().getAlivePlayers().
     - **Expected output**: Returns Optional.empty(). No hand changes.
 

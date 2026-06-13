@@ -181,8 +181,7 @@ public class ExplodingKittenCardControllerTests {
         EasyMock.replay(mockController, mockView);
 
         ExplodingKittenCardController controller = new ExplodingKittenCardController(mockView);
-        assertDoesNotThrow(() -> 
-                controller.executeCardAction(mockController, user, Optional.empty()));
+        controller.executeCardAction(mockController, user, Optional.empty());
 
         assertFalse(user.isAlive());
         assertEquals(1, game.getAlivePlayerCount());

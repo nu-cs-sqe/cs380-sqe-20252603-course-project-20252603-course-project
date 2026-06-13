@@ -353,11 +353,11 @@
   - **State of the System**: `currentPlayer`'s hand: `[CAT_CARD_3, DRAW_FROM_BOTTOM, SKIP, CAT_CARD_3, CAT_CARD_3]`, `userChoice` = "0,3,4", `currentPlayerTurnsLeft` = 2
   - **Expected output**: `currentPlayer`'s hand size: 3, `currentPlayerTurnsLeft` = 2
 
-- **TC: input is d, draws exploding kitten, no defuse, player killed** ( :white-check-mark: )
+- **TC: player draws a card, draws exploding kitten, no defuse, player killed** ( :white-check-mark: )
   - **State of the System**: deck = `[EXPLODING_KITTEN]`, `currentPlayer` hand = `[]`, no defuse, `currentPlayerTurnsLeft` = 1
   - **Expected output**: `currentPlayer`.isAlive(): false, `currentPlayerTurnsLeft` = 0
 
-- **TC: input is d, draws exploding kitten, has defuse, player survives** (not tested at takeTurn level — defuse logic covered by ExplodingKittenCardControllerTests TC2–TC5)
+- **TC: player draws a card, draws exploding kitten, has defuse, player survives** (not tested at takeTurn level — defuse logic covered by ExplodingKittenCardControllerTests TC2–TC5)
   - **State of the System**: deck = `[EXPLODING_KITTEN]`, `currentPlayer` hand = `[DEFUSE]`, `currentPlayerTurnsLeft` = 1
   - **Expected output**: `currentPlayer`.isAlive(): true, `currentPlayerTurnsLeft` = 0
 

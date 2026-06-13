@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExplodingWildkittenSteps {
 
@@ -29,6 +30,11 @@ public class ExplodingWildkittenSteps {
         // Fresh game players start with empty hands by default
     }
 
+    @And("the current player has a Defuse card")
+    public void theCurrentPlayerHasADefuseCard() {
+        currentPlayer.addCard(Card.createCard(CardType.DEFUSE));
+    }
+
     @When("the current player draws an Exploding Wildkitten card")
     public void theCurrentPlayerDrawsAnExplodingWildkittenCard() {
         // Provide insert-position input before constructing the controller,
@@ -43,5 +49,18 @@ public class ExplodingWildkittenSteps {
     public void theCurrentPlayerIsEliminatedFromTheGame() {
         assertFalse(currentPlayer.isAlive());
         assertFalse(game.getAlivePlayers().contains(currentPlayer));
+    }
+
+    @Then("the current player is not eliminated from the game")
+    public void theCurrentPlayerIsNotEliminatedFromTheGame() {
+        assertTrue(currentPlayer.isAlive());
+        assertTrue(game.getAlivePlayers().contains(currentPlayer));
+    }
+
+    @And("the Exploding Wildkitten card is returned to the deck")
+    public void theExplodingWildkittenCardIsReturnedToTheDeck() {
+        boolean deckContainsEk = game.getDeck().getCards().stream()
+                .anyMatch(c -> c.getType() == CardType.EXPLODING_KITTEN);
+        assertTrue(deckContainsEk);
     }
 }

@@ -150,10 +150,10 @@ public class GameController {
 
         if (cards.size() == 1) {
             CardType type = cards.get(0).getType();
-            if (type.canHaveTarget()) {
+            if (type == CardType.FAVOR) {
                 return target.isPresent() && isTargetValid(type, initiator, target.get());
             }
-            return target.isEmpty();
+            return !type.canHaveTarget() && target.isEmpty();
         } else if (cards.size() == 2 || cards.size() == 3) {
             return cardsAllMatchingCatCards(cards)
                     && target.isPresent()
@@ -198,7 +198,8 @@ public class GameController {
                     controllerView.displayDuplicateCardInMove(userChoice);
                 } else {
                     Optional<Player> target = Optional.empty();
-                    if (cardsPlayed.size() >= 2) {
+                    if (cardsPlayed.size() >= 2 || (cardsPlayed.size() == 1
+                            && cardsPlayed.get(0).getType() == CardType.FAVOR)) {
                         ArrayList<Player> arrayListAlivePlayers =
                                 new ArrayList<Player>(game.getAlivePlayers());
                         String targetChoice = controllerView

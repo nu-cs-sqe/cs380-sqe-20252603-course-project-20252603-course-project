@@ -369,7 +369,7 @@
   - **State of the System**: deck = `[EXPLODING_KITTEN]`, `currentPlayer` hand = `[DEFUSE]`, `currentPlayerTurnsLeft` = 1
   - **Expected output**: `currentPlayer`.isAlive(): true, `currentPlayerTurnsLeft` = 0
 
-- **TC: player plays a FAVOR card, prompts for a target, executes action, removes card from hand** ( x )
+- **TC: player plays a FAVOR card, prompts for a target, executes action, removes card from hand** (:white-check-mark:)
   - **State of the System**: `currentPlayer`'s hand = `[FAVOR]`, `userChoice` = "0", `target` = player2, `currentPlayerTurnsLeft` = 1
   - **Expected output**: `getTargetPlayerIndex` is called, `executeCardAction` is called with `target = Optional.of(player2)`, FAVOR card removed from hand, `currentPlayerTurnsLeft` = 1
 

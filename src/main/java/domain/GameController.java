@@ -87,6 +87,15 @@ public class GameController {
         cardToControllerMap.put(CardType.CAT_CARD_2, new CatCardController());
         cardToControllerMap.put(CardType.CAT_CARD_3, new CatCardController());
         cardToControllerMap.put(CardType.CAT_CARD_4, new CatCardController());
+        cardToControllerMap.put(CardType.FAVOR, new FavorCardController());
+        cardToControllerMap.put(CardType.BOUNTY, new BountyCardController());
+        cardToControllerMap.put(CardType.BURY, new BuryCardController());
+        cardToControllerMap.put(CardType.DRAW_TWO, new DrawTwoController());
+        cardToControllerMap.put(CardType.HAIL_MARY, new HailMaryController());
+        cardToControllerMap.put(CardType.HOT_POTATO, new HotPotatoController());
+        cardToControllerMap.put(CardType.REVERSE, new ReverseCardController());
+        cardToControllerMap.put(CardType.SELFISH_ROBIN_HOOD, new SelfishRobinHoodCardController());
+        cardToControllerMap.put(CardType.SWAP_TOP_AND_BOTTOM, new SwapTopAndBottomCardController());
         if (cardToControllerMap.containsKey(card.getType())) {
             return cardToControllerMap.get(card.getType());
         }

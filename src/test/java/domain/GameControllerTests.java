@@ -3,6 +3,9 @@ package domain;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -1035,6 +1038,7 @@ public class GameControllerTests {
 
         expect(mockGame.getDeck()).andReturn(mockDeck);
         mockGame.draw(mockPlayer, mockDeck);
+        expect(mockPlayer.getHand()).andReturn(new ArrayList<>()).anyTimes();
         expectLastCall();
 
         replay(mockGame, mockPlayer, mockDeck, mockControllerView);
@@ -1838,4 +1842,151 @@ public class GameControllerTests {
 
         EasyMock.verify(mockView);
     }
+    @Test
+    void takeTurn_DrawsExplodingKitten_NoDefuse_PlayerKilled() {
+        Game mockGame = mock(Game.class);
+        Player mockPlayer = mock(Player.class);
+        Deck mockDeck = mock(Deck.class);
+        GameControllerView mockView = mock(GameControllerView.class);
+
+        ArrayList<Player> alivePlayers = new ArrayList<>();
+        alivePlayers.add(mockPlayer);
+
+        expect(mockGame.getAlivePlayers()).andReturn(alivePlayers);
+        expect(mockGame.getAlivePlayerCount()).andReturn(2).anyTimes();
+        mockView.displayCurrentPlayerAndCardsInHand(mockPlayer);
+        expectLastCall();
+        expect(mockView.getCardChoiceOrDraw()).andReturn("d");
+        expect(mockGame.getDeck()).andReturn(mockDeck);
+        mockGame.draw(mockPlayer, mockDeck);
+        expectLastCall();
+        ArrayList<Card> kittenHand = new ArrayList<>(List.of(new Card(CardType.EXPLODING_KITTEN)));
+        expect(mockPlayer.getHand()).andReturn(kittenHand).anyTimes();
+        expect(mockPlayer.hasDefuse()).andReturn(false).anyTimes();
+        mockGame.removeAlivePlayer(mockPlayer);
+        expectLastCall().once();
+
+        replay(mockGame, mockPlayer, mockDeck, mockView);
+
+        GameController controller = new GameController(mockGame);
+        controller.setCurrentPlayerIndex(0);
+        controller.setCurrentPlayerTurnsLeft(1);
+        controller.takeTurn(mockView);
+
+        assertEquals(0, controller.getCurrentPlayerTurnsLeft());
+        verify(mockGame, mockPlayer, mockDeck, mockView);
+    }
+
+    @Test
+    void runGame_TwoPlayersFirstPlayerHasDefuse_FirstPlayerSurvives() {
+        Game game = new Game(2);
+        Player player0 = game.getAlivePlayers().get(0);
+        Player player1 = game.getAlivePlayers().get(1);
+
+        player0.addCard(Card.createCard(CardType.DEFUSE));
+        game.getDeck().insert(Card.createCard(CardType.EXPLODING_KITTEN), 0);
+
+        GameController controller = new GameController(game);
+        controller.setCurrentPlayerIndex(0);
+        controller.setNextPlayerIndex(1);
+        controller.setCurrentPlayerTurnsLeft(1);
+        controller.setNextPlayerTurnsLeft(1);
+
+        GameControllerView mockView = EasyMock.createMock(GameControllerView.class);
+        mockView.displayCurrentPlayerAndCardsInHand(player0);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockView.getCardChoiceOrDraw()).andReturn("d");
+        mockView.displayCurrentPlayerAndCardsInHand(player1);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockView.getCardChoiceOrDraw()).andReturn("d");
+        EasyMock.replay(mockView);
+
+        InputStream originalIn = System.in;
+        System.setIn(new ByteArrayInputStream("0\n".getBytes(StandardCharsets.UTF_8)));
+        try {
+            controller.runGame(mockView);
+        } finally {
+            System.setIn(originalIn);
+        }
+
+        assertEquals(1, game.getAlivePlayerCount());
+        assertSame(player0, game.getAlivePlayers().get(0));
+        EasyMock.verify(mockView);
+    }
+
+    @Test
+    void runGame_FivePlayersFirstPlayerDrawsKittenNoDefuse_OuterLoopContinuesUntilOneRemains() {
+        Game game = new Game(5);
+        Player player0 = game.getAlivePlayers().get(0);
+        Player player1 = game.getAlivePlayers().get(1);
+        Player player2 = game.getAlivePlayers().get(2);
+        Player player3 = game.getAlivePlayers().get(3);
+        Player player4 = game.getAlivePlayers().get(4);
+
+        for (int i = 0; i < 4; i++) {
+            game.getDeck().insert(Card.createCard(CardType.EXPLODING_KITTEN), 0);
+        }
+
+        GameController controller = new GameController(game);
+        controller.setCurrentPlayerIndex(0);
+        controller.setNextPlayerIndex(1);
+        controller.setCurrentPlayerTurnsLeft(1);
+        controller.setNextPlayerTurnsLeft(1);
+
+        GameControllerView mockView = EasyMock.createMock(GameControllerView.class);
+        mockView.displayCurrentPlayerAndCardsInHand(player0);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockView.getCardChoiceOrDraw()).andReturn("d");
+        mockView.displayCurrentPlayerAndCardsInHand(player1);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockView.getCardChoiceOrDraw()).andReturn("d");
+        mockView.displayCurrentPlayerAndCardsInHand(player2);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockView.getCardChoiceOrDraw()).andReturn("d");
+        mockView.displayCurrentPlayerAndCardsInHand(player3);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockView.getCardChoiceOrDraw()).andReturn("d");
+        EasyMock.replay(mockView);
+
+        controller.runGame(mockView);
+
+        assertEquals(1, game.getAlivePlayerCount());
+        assertSame(player4, game.getAlivePlayers().get(0));
+        EasyMock.verify(mockView);
+    }
+
+    @Test
+    void runGame_PlayerPlaysCardThenDraws_InnerLoopCallsTakeTurnTwice() {
+        Game game = new Game(2);
+        Player player0 = game.getAlivePlayers().get(0);
+        Player player1 = game.getAlivePlayers().get(1);
+
+        player0.addCard(Card.createCard(CardType.SEE_THE_FUTURE));
+        game.getDeck().insert(Card.createCard(CardType.EXPLODING_KITTEN), 1);
+
+        GameController controller = new GameController(game);
+        controller.setCurrentPlayerIndex(0);
+        controller.setNextPlayerIndex(1);
+        controller.setCurrentPlayerTurnsLeft(1);
+        controller.setNextPlayerTurnsLeft(1);
+
+        GameControllerView mockView = EasyMock.createMock(GameControllerView.class);
+        mockView.displayCurrentPlayerAndCardsInHand(player0);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockView.getCardChoiceOrDraw()).andReturn("0");
+        mockView.displayCurrentPlayerAndCardsInHand(player0);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockView.getCardChoiceOrDraw()).andReturn("d");
+        mockView.displayCurrentPlayerAndCardsInHand(player1);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockView.getCardChoiceOrDraw()).andReturn("d");
+        EasyMock.replay(mockView);
+
+        controller.runGame(mockView);
+
+        assertEquals(1, game.getAlivePlayerCount());
+        assertSame(player0, game.getAlivePlayers().get(0));
+        EasyMock.verify(mockView);
+    }
+
 }

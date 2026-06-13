@@ -88,4 +88,39 @@ public class BuryCardControllerTests {
         verify(mockView, mockGameController, mockGame,
                 mockDeck, mockInitiator, mockDrawnCard);
     }
+
+    @Test
+    public void testExecuteCardAction_InsertIndexIsBottomOfDeck() {
+        BuryCardControllerView mockView = createStrictMock(BuryCardControllerView.class);
+        GameController mockGameController = createMock(GameController.class);
+        Game mockGame = createMock(Game.class);
+        Deck mockDeck = createMock(Deck.class);
+        Player mockInitiator = createMock(Player.class);
+
+        Card mockDrawnCard = createMock(Card.class);
+
+        expect(mockGameController.getGame()).andReturn(mockGame);
+        expect(mockGame.getDeck()).andReturn(mockDeck);
+
+        expect(mockDeck.takeTopCard()).andReturn(mockDrawnCard);
+        mockView.displayDrawnCard(mockDrawnCard);
+
+        expect(mockView.getIndexChoice(mockDeck)).andReturn("15");
+
+        mockDeck.insert(mockDrawnCard, 15);
+        expectLastCall().once();
+
+        mockView.displayValidInsert(mockDrawnCard, 15);
+
+        replay(mockView, mockGameController, mockGame,
+                mockDeck, mockInitiator, mockDrawnCard);
+
+        BuryCardController controller = new BuryCardController(mockView);
+        controller.executeCardAction(mockGameController,
+                mockInitiator,
+                Optional.empty());
+
+        verify(mockView, mockGameController, mockGame,
+                mockDeck, mockInitiator, mockDrawnCard);
+    }
 }

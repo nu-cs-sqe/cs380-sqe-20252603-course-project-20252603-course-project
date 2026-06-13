@@ -9,7 +9,7 @@
     - **State of the system**: Deck has 10 cards, `userChoice` = "0", 
     - **Expected output**: Top card is inserted before the first card
 
-- **TC3: Insert Index is Bottom of Deck** 
+- **TC3: Insert Index is Bottom of Deck** ( :white-check-mark: )
     - **State of the system**: Deck has 15 cards, `userChoice` = "15",
       - **Expected output**: Top card is inserted after the last (15th) card
 

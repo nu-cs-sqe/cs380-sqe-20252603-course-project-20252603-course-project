@@ -16,6 +16,14 @@ public class HailMaryController implements CardController {
             throw new IllegalStateException("not enough cards in deck to redraw");
         }
 
+        for (Card card : initiator.getHand()) {
+            initiator.removeCard(card);
+        }
+
+        for (int i = 0; i < handSize; i++) {
+            initiator.addCard(deck.takeTopCard());
+        }
+
         return Optional.empty();
     }
 }

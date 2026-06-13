@@ -1,11 +1,11 @@
 # BVA Analysis for BuryCardController class
 
 ### Method under test: `executeCardAction()`
-- **TC1: Invalid Inputs and Insert in Middle of Deck**
+- **TC1: Invalid Inputs and Insert in Middle of Deck** ( :white-check-mark: )
     - **State of the system**: Deck has initially 3 cards, try to input userChoice = "One", "-1", "3", and finally accept "1"
       - **Expected output**: invalid index called 3 times, top card is inserted after the first card
 
-- **TC2: Insert Index is Top of Deck** 
+- **TC2: Insert Index is Top of Deck** ( :white-check-mark: )
     - **State of the system**: Deck has 10 cards, `userChoice` = "0", 
     - **Expected output**: Top card is inserted before the first card
 

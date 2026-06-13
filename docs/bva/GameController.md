@@ -282,11 +282,11 @@
 - **TC: four cards (too many cards)** ( :white-check-mark: )
   - **State of the system**: `cards = [CAT_CARD_1, CAT_CARD_3, CAT_CARD_2, shuffle], initiator = player1`
 
-- **TC: FAVOR card with valid target** ( ☐ )
+- **TC: FAVOR card with valid target** ( :white-check-mark: )
   - **State of the system**: `cards = [FAVOR]`, `initiator = player1`, `target = player2`, `player1.hand = [FAVOR]`
   - **Expected output**: `true`
 
-- **TC: FAVOR card with no target** ( ☐ )
+- **TC: FAVOR card with no target** ( x )
   - **State of the system**: `cards = [FAVOR]`, `initiator = player1`, `target = Optional.empty()`, `player1.hand = [FAVOR]`
   - **Expected output**: `false`
 
@@ -369,7 +369,7 @@
   - **State of the System**: deck = `[EXPLODING_KITTEN]`, `currentPlayer` hand = `[DEFUSE]`, `currentPlayerTurnsLeft` = 1
   - **Expected output**: `currentPlayer`.isAlive(): true, `currentPlayerTurnsLeft` = 0
 
-- **TC: player plays a FAVOR card, prompts for a target, executes action, removes card from hand** ( ☐ )
+- **TC: player plays a FAVOR card, prompts for a target, executes action, removes card from hand** ( x )
   - **State of the System**: `currentPlayer`'s hand = `[FAVOR]`, `userChoice` = "0", `target` = player2, `currentPlayerTurnsLeft` = 1
   - **Expected output**: `getTargetPlayerIndex` is called, `executeCardAction` is called with `target = Optional.of(player2)`, FAVOR card removed from hand, `currentPlayerTurnsLeft` = 1
 

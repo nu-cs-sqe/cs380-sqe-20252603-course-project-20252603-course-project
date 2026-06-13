@@ -4,20 +4,24 @@ import ui.CatCardControllerView;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 public class CatCardController implements CardController {
 
     private final int cardsPlayed;
     private final CatCardControllerView controllerView;
+    private final Random random;
 
     public CatCardController(int cardsPlayed) {
         this.cardsPlayed = cardsPlayed;
         this.controllerView = new CatCardControllerView();
+        this.random = new Random();
     }
 
-    CatCardController(int cardsPlayed, CatCardControllerView controllerView) {
+    CatCardController(int cardsPlayed, CatCardControllerView controllerView, Random random) {
         this.cardsPlayed = cardsPlayed;
         this.controllerView = controllerView;
+        this.random = random;
     }
 
     @Override
@@ -36,7 +40,7 @@ public class CatCardController implements CardController {
             if (actualTarget.getHandSize() == 0) return Optional.empty();
 
             List<Card> targetHandSnapshot = actualTarget.getHand();
-            int randomIndex = (int) (Math.random() * targetHandSnapshot.size());
+            int randomIndex = (int) (random.nextDouble() * targetHandSnapshot.size());
             Card stolenCard = targetHandSnapshot.get(randomIndex);
 
             actualTarget.removeCard(stolenCard);

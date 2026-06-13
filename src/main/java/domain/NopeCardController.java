@@ -7,6 +7,6 @@ public class NopeCardController implements CardController {
     public Optional<List<Card>> executeCardAction(GameController gameController,
                                                   Player user,
                                                   Optional<Player> target){
-        throw new UnsupportedOperationException("not yet implemented");
+        return Optional.empty();
     }
 }

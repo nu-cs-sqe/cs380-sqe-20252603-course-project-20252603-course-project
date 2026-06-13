@@ -5,7 +5,11 @@ import java.util.Optional;
 
 public class HailMaryController implements CardController {
     @Override
-    public Optional<List<Card>> executeCardAction(GameController gameController, Player initiator, Optional<Player> target) {
+    public Optional<List<Card>> executeCardAction(
+            GameController gameController,
+            Player initiator,
+            Optional<Player> target)
+    {
         int handSize = initiator.getHandSize();
         if (handSize == 0) {
             throw new IllegalStateException("initiator's hand cannot be empty");

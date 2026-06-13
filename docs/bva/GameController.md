@@ -353,11 +353,11 @@
   - **State of the System**: `currentPlayer`'s hand: `[CAT_CARD_3, DRAW_FROM_BOTTOM, SKIP, CAT_CARD_3, CAT_CARD_3]`, `userChoice` = "0,3,4", `currentPlayerTurnsLeft` = 2
   - **Expected output**: `currentPlayer`'s hand size: 3, `currentPlayerTurnsLeft` = 2
 
-- **TC: card played, no other player has NOPE, action executes** ( x )
+- **TC: card played, no other player has NOPE, action executes** ( :white-check-mark: )
   - **State of the System**: `currentPlayer`'s hand: `[SKIP]`, other player hand: `[]`, `userChoice` = "0"
   - **Expected output**: action executes, `doesPlayerWantToNope` never called
 
-- **TC: card played, other player has NOPE and plays it, action cancelled** ( x )
+- **TC: card played, other player has NOPE and plays it, action cancelled** ( :white-check-mark: )
   - **State of the System**: `currentPlayer`'s hand: `[SKIP]`, other player hand: `[NOPE]`, `userChoice` = "0", other player chooses to Nope
   - **Expected output**: action cancelled, NOPE removed from other player's hand, SKIP remains in `currentPlayer`'s hand
 

@@ -193,11 +193,28 @@ public class GameController {
                     }
 
                     if (isValidMove(cardsPlayed, currentPlayer, target)) {
-                        CardController cardController = getControllerType(cardsPlayed.get(0));
-                        cardController.executeCardAction(this, currentPlayer, target);
+                        boolean noped = false;
+                        for (Player player : game.getAlivePlayers()) {
+                            if (player == currentPlayer) continue;
+                            if (playerHasCardOfType(player, CardType.NOPE)) {
+                                if (controllerView.doesPlayerWantToNope(player)) {
+                                    for (Card c : player.getHand()) {
+                                        if (c.getType() == CardType.NOPE) {
+                                            player.removeCard(c);
+                                            break;
+                                        }
+                                    }
+                                    noped = !noped;
+                                }
+                            }
+                        }
 
-                        for (Card card : cardsPlayed) {
-                            currentPlayer.removeCard(card);
+                        if (!noped) {
+                            CardController cardController = getControllerType(cardsPlayed.get(0));
+                            cardController.executeCardAction(this, currentPlayer, target);
+                            for (Card card : cardsPlayed) {
+                                currentPlayer.removeCard(card);
+                            }
                         }
                     } else {
                         controllerView.displayInvalidMove(cardsPlayed);

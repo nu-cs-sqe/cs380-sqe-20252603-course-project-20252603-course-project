@@ -1163,7 +1163,7 @@ public class GameControllerTests {
         };
 
         expect(mockGame.getAlivePlayerCount()).andReturn(2).anyTimes();
-        expect(mockGame.getAlivePlayers()).andReturn(realAlivePlayers);
+        expect(mockGame.getAlivePlayers()).andReturn(realAlivePlayers).anyTimes();
 
         mockControllerView.displayCurrentPlayerAndCardsInHand(mockPlayer);
         expectLastCall();
@@ -1558,6 +1558,7 @@ public class GameControllerTests {
                 .andReturn(mockTargetChoice);
 
         expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
+        expect(mockTargetPlayer.getHand()).andReturn(new ArrayList<>()).anyTimes();
 
         expect(mockCatCard1.getType()).andReturn(CardType.CAT_CARD_3).anyTimes();
         expect(mockDrawBottomCard.getType()).andReturn(CardType.DRAW_FROM_BOTTOM).anyTimes();
@@ -1852,6 +1853,57 @@ public class GameControllerTests {
         controller.takeTurn(mockControllerView);
 
         verify(mockGame, mockCurrentPlayer, mockOtherPlayer, mockSkipCard,
+                mockCardController, mockControllerView);
+    }
+
+    @Test
+    void takeTurn_OtherPlayerNopes_ActionCancelled() {
+        Game mockGame = mock(Game.class);
+        Player mockCurrentPlayer = mock(Player.class);
+        Player mockOtherPlayer = mock(Player.class);
+        Card mockSkipCard = mock(Card.class);
+        Card mockNopeCard = mock(Card.class);
+        CardController mockCardController = mock(CardController.class);
+        GameControllerView mockControllerView = mock(GameControllerView.class);
+
+        ArrayList<Player> alivePlayers = new ArrayList<>();
+        alivePlayers.add(mockCurrentPlayer);
+        alivePlayers.add(mockOtherPlayer);
+
+        ArrayList<Card> currentHand = new ArrayList<>();
+        currentHand.add(mockSkipCard);
+
+        ArrayList<Card> otherHand = new ArrayList<>();
+        otherHand.add(mockNopeCard);
+
+        GameController controller = new GameController(mockGame) {
+            @Override
+            public CardController getControllerType(Card card) {
+                return mockCardController;
+            }
+        };
+
+        expect(mockGame.getAlivePlayerCount()).andReturn(2).anyTimes();
+        expect(mockGame.getAlivePlayers()).andReturn(alivePlayers).anyTimes();
+        mockControllerView.displayCurrentPlayerAndCardsInHand(mockCurrentPlayer);
+        expectLastCall();
+        expect(mockControllerView.getCardChoiceOrDraw()).andReturn("0");
+        expect(mockCurrentPlayer.getHand()).andReturn(currentHand).anyTimes();
+        expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
+        expect(mockOtherPlayer.getHand()).andReturn(otherHand).anyTimes();
+        expect(mockNopeCard.getType()).andReturn(CardType.NOPE).anyTimes();
+        expect(mockControllerView.doesPlayerWantToNope(mockOtherPlayer)).andReturn(true);
+        mockOtherPlayer.removeCard(mockNopeCard);
+        expectLastCall();
+
+        replay(mockGame, mockCurrentPlayer, mockOtherPlayer, mockSkipCard, mockNopeCard,
+                mockCardController, mockControllerView);
+
+        controller.setCurrentPlayerIndex(0);
+        controller.setCurrentPlayerTurnsLeft(1);
+        controller.takeTurn(mockControllerView);
+
+        verify(mockGame, mockCurrentPlayer, mockOtherPlayer, mockSkipCard, mockNopeCard,
                 mockCardController, mockControllerView);
     }
 

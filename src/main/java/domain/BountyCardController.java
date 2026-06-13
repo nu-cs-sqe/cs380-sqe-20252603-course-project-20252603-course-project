@@ -7,8 +7,8 @@ import java.util.Random;
 public class BountyCardController implements CardController {
     private static final Random RANDOM = new Random();
 
-    public Optional<List<Card>> executeCardAction(Game game, Player user, Optional<Player> target) {
-        List<Player> alivePlayers = game.getAlivePlayers();
+    public Optional<List<Card>> executeCardAction(GameController gameController, Player user, Optional<Player> target) {
+        List<Player> alivePlayers = gameController.getGame().getAlivePlayers();
         for (Player currentPlayer : alivePlayers) {
             if (currentPlayer == user) continue;
             if (currentPlayer.getHandSize() > 0) {

@@ -18,7 +18,6 @@ public class OneCatPolicyCardControllerTests {
         Player mockInitiator = createMock(Player.class);
         Player mockNextPlayer = createMock(Player.class);
 
-        // Build Hand: No cat cards
         Card nonCat1 = createMock(Card.class);
         Card nonCat2 = createMock(Card.class);
 
@@ -34,7 +33,6 @@ public class OneCatPolicyCardControllerTests {
 
         expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
 
-        // Expect the view to display that no turns were added
         mockView.displayNoTurnsAdded();
 
         replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, nonCat1, nonCat2);
@@ -43,5 +41,38 @@ public class OneCatPolicyCardControllerTests {
         controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
 
         verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, nonCat1, nonCat2);
+    }
+
+    @Test
+    public void executeCardAction_NextPlayerHasOneCatCard_AddsNoTurns() {
+        OneCatPolicyCardControllerView mockView = createStrictMock(OneCatPolicyCardControllerView.class);
+        GameController mockGameController = createMock(GameController.class);
+        Game mockGame = createMock(Game.class);
+        Player mockInitiator = createMock(Player.class);
+        Player mockNextPlayer = createMock(Player.class);
+
+        Card cat1 = createMock(Card.class);
+        Card nonCat = createMock(Card.class);
+
+        expect(cat1.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(nonCat.getType()).andReturn(CardType.DEFUSE).anyTimes();
+
+        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(cat1, nonCat));
+
+        expect(mockGameController.getGame()).andReturn(mockGame);
+        expect(mockGameController.getNextPlayerIndex()).andReturn(1);
+
+        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(mockInitiator, mockNextPlayer));
+
+        expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
+
+        mockView.displayNoTurnsAdded();
+
+        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1, nonCat);
+
+        OneCatPolicyCardController controller = new OneCatPolicyCardController(mockView);
+        controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
+
+        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1, nonCat);
     }
 }

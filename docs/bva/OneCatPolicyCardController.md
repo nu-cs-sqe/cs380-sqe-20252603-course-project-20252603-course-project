@@ -7,7 +7,7 @@
     `nextPlayerTurnsLeft` = 1
   - **Expected output**: `displayPolicyAvoided` is called, `nextPlayerTurnsLeft` remains 1
 
-- **TC2: Next player has exactly one cat card (Boundary - 1)**
+- **TC2: Next player has exactly one cat card (Boundary - 1)** ( :white-check-mark: )
   - **State of the system**: `nextPlayer`'s hand contains exactly 1 `CAT_CARD_1` (alongside any non-cat cards),
       `nextPlayerTurnsLeft` = 1
   - **Expected output**: `displayPolicyAvoided` is called, `nextPlayerTurnsLeft` remains 1

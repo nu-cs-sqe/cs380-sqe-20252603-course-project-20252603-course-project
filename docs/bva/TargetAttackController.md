@@ -7,7 +7,7 @@
   - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"1"`.
   - **Result**: Valid P2 selected. `GameController.setNextPlayerTurnsLeft(2)` called. Loop breaks.
 
-- **TC2: Target is initiator**
+- **TC2: Target is initiator** ( :white-check-mark: )
   - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"0"` then `"1"`.
   - **Result**: `displayInvalidTarget` called. Loop retries. Valid P2 selected. Loop breaks.
 

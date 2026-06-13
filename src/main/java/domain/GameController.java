@@ -150,7 +150,10 @@ public class GameController {
 
         if (cards.size() == 1) {
             CardType type = cards.get(0).getType();
-            return !type.canHaveTarget() && target.isEmpty();
+            if (type.canHaveTarget()) {
+                return target.isPresent() && isTargetValid(type, initiator, target.get());
+            }
+            return target.isEmpty();
         } else if (cards.size() == 2 || cards.size() == 3) {
             return cardsAllMatchingCatCards(cards)
                     && target.isPresent()

@@ -1609,6 +1609,20 @@ public class GameControllerTests {
     }
 
     @Test
+    void isValidMove_FavorCard_WithTarget_ReturnsTrue() {
+        Game game = new Game(2);
+        GameController controller = new GameController(game);
+        Player player1 = game.getAlivePlayers().get(0);
+        Player player2 = game.getAlivePlayers().get(1);
+        player1.addCard(new Card(CardType.FAVOR));
+
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardType.FAVOR));
+
+        assertTrue(controller.isValidMove(cards, player1, Optional.of(player2)));
+    }
+
+    @Test
     void playerHasCardOfType_EmptyHand_ReturnsFalse() {
         Game mockGame = EasyMock.createMock(Game.class);
         Player mockPlayer = EasyMock.createMock(Player.class);

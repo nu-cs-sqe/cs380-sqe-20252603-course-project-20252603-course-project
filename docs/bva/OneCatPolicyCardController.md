@@ -26,7 +26,7 @@
   - **Expected output**: `displayPolicyEnforced` is called, `nextPlayerTurnsLeft` becomes 2 (the controller correctly
       short-circuits at the 2nd card and increments turns by 1, regardless of having a 3rd)
 
-- **TC6: Multiple distinct cat card groups**
+- **TC6: Multiple distinct cat card groups** ( :white-check-mark: )
   - **State of the system**: `nextPlayer`'s hand contains 2x `CAT_CARD_1` and 3x `CAT_CARD_2`, `nextPlayerTurnsLeft` =
       1
   - **Expected output**: `displayPolicyEnforced` is called, `nextPlayerTurnsLeft` becomes 3 (1 base + 2 penalty turns)

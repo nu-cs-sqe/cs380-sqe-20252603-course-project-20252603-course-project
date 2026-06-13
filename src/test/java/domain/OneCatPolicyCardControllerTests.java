@@ -186,4 +186,50 @@ public class OneCatPolicyCardControllerTests {
 
         verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer, cat1A, cat1B, cat1C);
     }
+
+    @Test
+    public void executeCardAction_NextPlayerHasMultipleDistinctCatGroups_AddsMultipleTurns() {
+        OneCatPolicyCardControllerView mockView = createStrictMock(OneCatPolicyCardControllerView.class);
+        GameController mockGameController = createMock(GameController.class);
+        Game mockGame = createMock(Game.class);
+        Player mockInitiator = createMock(Player.class);
+        Player mockNextPlayer = createMock(Player.class);
+
+        Card cat1A = createMock(Card.class);
+        Card cat1B = createMock(Card.class);
+        Card cat2A = createMock(Card.class);
+        Card cat2B = createMock(Card.class);
+        Card cat2C = createMock(Card.class);
+
+        expect(cat1A.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(cat1B.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(cat2A.getType()).andReturn(CardType.CAT_CARD_2).anyTimes();
+        expect(cat2B.getType()).andReturn(CardType.CAT_CARD_2).anyTimes();
+        expect(cat2C.getType()).andReturn(CardType.CAT_CARD_2).anyTimes();
+
+        ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
+                cat1A, cat1B, cat2A, cat2B, cat2C
+        ));
+
+        expect(mockGameController.getGame()).andReturn(mockGame);
+        expect(mockGameController.getNextPlayerIndex()).andReturn(1);
+
+        expect(mockGame.getAlivePlayers()).andReturn(java.util.Arrays.asList(mockInitiator, mockNextPlayer));
+
+        expect(mockNextPlayer.getHand()).andReturn(nextPlayerHand);
+
+        expect(mockGameController.getNextPlayerTurnsLeft()).andReturn(1);
+        mockGameController.setNextPlayerTurnsLeft(3);
+
+        mockView.displayTurnsAdded(2);
+
+        replay(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer,
+                cat1A, cat1B, cat2A, cat2B, cat2C);
+
+        OneCatPolicyCardController controller = new OneCatPolicyCardController(mockView);
+        controller.executeCardAction(mockGameController, mockInitiator, Optional.empty());
+
+        verify(mockView, mockGameController, mockGame, mockInitiator, mockNextPlayer,
+                cat1A, cat1B, cat2A, cat2B, cat2C);
+    }
 }

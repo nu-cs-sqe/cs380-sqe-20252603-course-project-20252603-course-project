@@ -160,6 +160,10 @@ public class GameController {
 
         if (userChoice.equalsIgnoreCase("d")) {
             game.draw(currentPlayer, game.getDeck());
+            if (playerHasCardOfType(currentPlayer, CardType.EXPLODING_KITTEN)) {
+                new ExplodingKittenCardController()
+                        .executeCardAction(this, currentPlayer, Optional.empty());
+            }
             this.currentPlayerTurnsLeft--;
         } else {
             try {
@@ -222,11 +226,8 @@ public class GameController {
         while (currentPlayerTurnsLeft > 0) {
             Player currentPlayer = game.getAlivePlayers().get(currentPlayerIndex);
             takeTurn(view);
-            if (playerHasCardOfType(currentPlayer, CardType.EXPLODING_KITTEN)
-                    && !playerHasCardOfType(currentPlayer, CardType.DEFUSE)) {
-                int eliminatedIndex = currentPlayerIndex;
-                game.removeAlivePlayer(currentPlayer);
-                if (nextPlayerIndex > eliminatedIndex) {
+            if (!currentPlayer.isAlive()) {
+                if (nextPlayerIndex > currentPlayerIndex) {
                     nextPlayerIndex--;
                 }
                 break;

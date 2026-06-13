@@ -50,7 +50,7 @@ Controller instantiated as new CatCardController(2, controllerView).
 Category 3: The 3-Card Play (Chosen Steal)
 Controller instantiated as new CatCardController(3, controllerView).
 
-- **TC7: executeCardAction_threeCardsMissingRequestedCard_noSteal ** ( x )
+- **TC7: executeCardAction_threeCardsMissingRequestedCard_noSteal ** ( :white_check_mark: )
     - **State of the system**: target is valid. controllerView.getRequestedCardType() returns Optional.empty().
     - **Expected output**: Returns Optional.empty(). No hand changes.
 

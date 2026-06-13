@@ -43,6 +43,11 @@ public class CatCardController implements CardController {
             return Optional.of(List.of(stolenCard));
         }
 
+        if (cardsPlayed == 3) {
+            Optional<CardType> requestedType = controllerView.getRequestedCardType();
+            if (requestedType.isEmpty()) return Optional.empty();
+        }
+
         return Optional.empty();
     }
 }

@@ -167,4 +167,29 @@ public class CatCardControllerTests {
         EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget,
                 mockCard1, mockCard2, mockCard3, mockView);
     }
+
+    @Test
+    void executeCardAction_threeCardsMissingRequestedCard_noSteal() {
+        GameController mockGc = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Player mockInitiator = EasyMock.createMock(Player.class);
+        Player mockTarget = EasyMock.createMock(Player.class);
+        CatCardControllerView mockView = EasyMock.createMock(CatCardControllerView.class);
+
+        EasyMock.expect(mockGc.getGame()).andReturn(mockGame).anyTimes();
+        EasyMock.expect(mockGame.getAlivePlayers()).andReturn(
+                List.of(mockInitiator, mockTarget)
+        ).anyTimes();
+        EasyMock.expect(mockView.getRequestedCardType()).andReturn(Optional.empty()).once();
+
+        EasyMock.replay(mockGc, mockGame, mockInitiator, mockTarget, mockView);
+
+        CatCardController controller = new CatCardController(3, mockView);
+        Optional<List<Card>> result = controller.executeCardAction(
+                mockGc, mockInitiator, Optional.of(mockTarget)
+        );
+
+        assertEquals(Optional.empty(), result);
+        EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget, mockView);
+    }
 }

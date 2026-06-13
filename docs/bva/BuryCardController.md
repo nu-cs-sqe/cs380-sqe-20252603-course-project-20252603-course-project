@@ -17,6 +17,6 @@
     - **State of the system**: Deck has 0 cards
     - **Expected output**: no cards in deck called.
 
-- **TC5: Deck Only Has One Card** 
+- **TC5: Deck Only Has One Card** ( :white-check-mark: )
     - **State of the system**: Deck has 1 card, `userChoice` = "0",
-    - **Expected output**: Top card is inserted before the first card
+    - **Expected output**: Two card is inserted before the first card

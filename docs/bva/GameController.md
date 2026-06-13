@@ -286,7 +286,7 @@
   - **State of the system**: `cards = [FAVOR]`, `initiator = player1`, `target = player2`, `player1.hand = [FAVOR]`
   - **Expected output**: `true`
 
-- **TC: FAVOR card with no target** ( x )
+- **TC: FAVOR card with no target** ( :white-check-mark )
   - **State of the system**: `cards = [FAVOR]`, `initiator = player1`, `target = Optional.empty()`, `player1.hand = [FAVOR]`
   - **Expected output**: `false`
 

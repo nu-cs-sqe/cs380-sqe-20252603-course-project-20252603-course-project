@@ -1633,6 +1633,29 @@ public class GameControllerTests {
     }
 
     @Test
+    void isValidMove_FavorCard_NoTarget_ReturnsFalse() {
+        Game mockGame = EasyMock.createMock(Game.class);
+        Player mockInitiator = EasyMock.createMock(Player.class);
+        Card mockFavorCard = EasyMock.createMock(Card.class);
+
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(mockFavorCard);
+
+        EasyMock.expect(mockFavorCard.getType()).andReturn(CardType.FAVOR).anyTimes();
+        EasyMock.expect(mockInitiator.getHand()).andReturn(hand).anyTimes();
+
+        EasyMock.replay(mockGame, mockInitiator, mockFavorCard);
+
+        GameController controller = new GameController(mockGame);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(mockFavorCard);
+
+        assertFalse(controller.isValidMove(cards, mockInitiator, Optional.empty()));
+
+        EasyMock.verify(mockGame, mockInitiator, mockFavorCard);
+    }
+
+    @Test
     void playerHasCardOfType_EmptyHand_ReturnsFalse() {
         Game mockGame = EasyMock.createMock(Game.class);
         Player mockPlayer = EasyMock.createMock(Player.class);

@@ -45,6 +45,9 @@ public class BuryCardControllerTests {
         expectLastCall().once();
         mockView.displayValidInsert(mockDrawnCard, 1);
 
+        expect(mockGameController.getCurrentPlayerTurnsLeft()).andReturn(1);
+        mockGameController.setCurrentPlayerTurnsLeft(0);
+
         replay(mockView, mockGameController, mockGame,
                 mockDeck, mockInitiator, mockDrawnCard);
 
@@ -80,6 +83,9 @@ public class BuryCardControllerTests {
         expectLastCall().once();
 
         mockView.displayValidInsert(mockDrawnCard, 0);
+
+        expect(mockGameController.getCurrentPlayerTurnsLeft()).andReturn(1);
+        mockGameController.setCurrentPlayerTurnsLeft(0);
 
         replay(mockView, mockGameController, mockGame,
                 mockDeck, mockInitiator, mockDrawnCard);
@@ -117,6 +123,9 @@ public class BuryCardControllerTests {
         expectLastCall().once();
 
         mockView.displayValidInsert(mockDrawnCard, 15);
+
+        expect(mockGameController.getCurrentPlayerTurnsLeft()).andReturn(1);
+        mockGameController.setCurrentPlayerTurnsLeft(0);
 
         replay(mockView, mockGameController, mockGame,
                 mockDeck, mockInitiator, mockDrawnCard);
@@ -181,6 +190,9 @@ public class BuryCardControllerTests {
         expectLastCall().once();
 
         mockView.displayValidInsert(mockDrawnCard, 0);
+
+        expect(mockGameController.getCurrentPlayerTurnsLeft()).andReturn(1);
+        mockGameController.setCurrentPlayerTurnsLeft(0);
 
         replay(mockView, mockGameController, mockGame,
                 mockDeck, mockInitiator, mockDrawnCard);

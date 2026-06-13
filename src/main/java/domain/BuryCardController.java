@@ -44,6 +44,9 @@ public class BuryCardController {
             }
         }
 
+        int currentTurns = gameController.getCurrentPlayerTurnsLeft();
+        gameController.setCurrentPlayerTurnsLeft(currentTurns - 1);
+
         return Optional.empty();
     }
 }

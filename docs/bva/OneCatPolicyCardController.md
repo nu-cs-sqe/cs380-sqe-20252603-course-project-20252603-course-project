@@ -31,7 +31,7 @@
       1
   - **Expected output**: `displayPolicyEnforced` is called, `nextPlayerTurnsLeft` becomes 3 (1 base + 2 penalty turns)
 
-- **TC7: Four of the same cat card (Upper constraint on a single type)**
+- **TC7: Four of the same cat card (Upper constraint on a single type)** ( :white-check-mark: )
   - **State of the system**: `nextPlayer`'s hand contains 4x `CAT_CARD_1`, `nextPlayerTurnsLeft` = 1
   - **Expected output**: `displayPolicyEnforced` is called, `nextPlayerTurnsLeft` becomes 2 (1 base + 1 penalty turn,
       bypassing extra penalty for 3rd/4th card of the same type)

@@ -18,8 +18,6 @@ output: Optional<List<Card>> (Optional.empty() or Optional.of(List.of(stolenCard
 - BOOLEAN: initiator.getHandSize() increases by 1 on successful steal
 - BOOLEAN: target.getHandSize() decreases by 1 on successful steal
 
-Category 1: Invalid Plays (Defensive Guards)
-
 - **TC1: executeCardAction_targetMissing_noSteal ** ( :white_check_mark: )
     - **State of the system**: target is Optional.empty().
     - **Expected output**: Returns Optional.empty(). No hand changes.
@@ -32,9 +30,6 @@ Category 1: Invalid Plays (Defensive Guards)
     - **State of the system**: target.isPresent() is true. target.get() is not in gameController.getGame().getAlivePlayers().
     - **Expected output**: Returns Optional.empty(). No hand changes.
 
-Category 2: The 2-Card Play (Random Steal)
-Controller instantiated as new CatCardController(2, controllerView).
-
 - **TC4: executeCardAction_twoCardsTargetEmptyHand_noSteal ** ( :white_check_mark: )
     - **State of the system**: target is valid. target.get().getHandSize() is 0.
     - **Expected output**: Returns Optional.empty(). No hand changes.
@@ -46,9 +41,6 @@ Controller instantiated as new CatCardController(2, controllerView).
 - **TC6: executeCardAction_twoCardsNominal_stealsRandomCard ** ( :white_check_mark: )
     - **State of the system**: target is valid. target.get().getHandSize() is > 1.
     - **Expected output**: Returns Optional.of([stolenCard]). initiator.getHandSize() increases by 1. target.getHandSize() decreases by 1.
-
-Category 3: The 3-Card Play (Chosen Steal)
-Controller instantiated as new CatCardController(3, controllerView).
 
 - **TC7: executeCardAction_threeCardsMissingRequestedCard_noSteal ** ( :white_check_mark: )
     - **State of the system**: target is valid. controllerView.getRequestedCardType() returns Optional.empty().

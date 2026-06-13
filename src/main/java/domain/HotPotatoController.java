@@ -2,8 +2,14 @@ package domain;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 public class HotPotatoController implements CardController {
+    private final Random random;
+
+    HotPotatoController() { this(new Random()); }
+    HotPotatoController(Random random) { this.random = random; }
+
     @Override
     public Optional<List<Card>> executeCardAction(
             GameController gameController,
@@ -15,7 +21,7 @@ public class HotPotatoController implements CardController {
         }
 
         List<Card> hand = initiator.getHand();
-        Card card = hand.get(0);
+        Card card = hand.get(random.nextInt(hand.size()));
         initiator.removeCard(card);
 
         int nextPlayerIndex = gameController.getNextPlayerIndex();

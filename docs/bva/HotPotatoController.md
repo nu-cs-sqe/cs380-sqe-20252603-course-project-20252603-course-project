@@ -10,6 +10,6 @@
   - **State of the system**: initiator = player1 (1 card), nextPlayer = player2
   - **Expected output**: Optional.empty() is returned. The card is removed from player1's hand and added to player2's hand.
 
-- **TC3: initiator has 2+ cards** ( :x: )
+- **TC3: initiator has 2+ cards** ( ☑️ )
   - **State of the system**: initiator = player1 (2+ cards), nextPlayer = player2
   - **Expected output**: Optional.empty() is returned. One card is removed from player1's hand and added to player2's hand.

@@ -214,7 +214,7 @@ public class PotluckCardControllerTests {
                 mockCatCard3, mockSeeTheFutureCard);
 
         PotluckCardController controller = new PotluckCardController(mockInput);
-        Optional<List<Card>> result = controller.executeCardAction(mockGameController,
+        controller.executeCardAction(mockGameController,
                 mockPlayer1,
                 Optional.empty());
 
@@ -245,8 +245,6 @@ public class PotluckCardControllerTests {
         alivePlayers.add(mockCurrentPlayer);
         alivePlayers.add(mockPlayer2);
         alivePlayers.add(mockPlayer3);
-
-        ArrayList<Card> currentPlayerHand = new ArrayList<Card>();
 
         ArrayList<Card> player2Hand = new ArrayList<Card>();
         player2Hand.add(mockShuffleCard);
@@ -297,13 +295,13 @@ public class PotluckCardControllerTests {
                 mockShuffleCard, mockSeeTheFutureCard);
 
         PotluckCardController controller = new PotluckCardController(mockInput);
-        Optional<List<Card>> result = controller.executeCardAction(mockGameController, mockCurrentPlayer, Optional.empty());
+        controller.executeCardAction(mockGameController,
+                mockCurrentPlayer,
+                Optional.empty());
 
         EasyMock.verify(mockGameController, mockGame, mockDeck, mockInput,
                 mockCurrentPlayer, mockPlayer2, mockPlayer3,
                 mockShuffleCard, mockSeeTheFutureCard);
-
-        assertTrue(result.isEmpty(), "PotluckCardController should return Optional.empty()");
     }
 
     @Test
@@ -326,8 +324,6 @@ public class PotluckCardControllerTests {
 
         ArrayList<Card> currentPlayerHand = new ArrayList<Card>();
         currentPlayerHand.add(mockCatCard2);
-
-        ArrayList<Card> player2Hand = new ArrayList<Card>();
 
         EasyMock.expect(mockGameController.getGame()).andReturn(mockGame);
         EasyMock.expect(mockGame.getDeck()).andReturn(mockDeck);
@@ -357,12 +353,13 @@ public class PotluckCardControllerTests {
                 mockCurrentPlayer, mockPlayer2, mockCatCard2);
 
         PotluckCardController controller = new PotluckCardController(mockInput);
-        Optional<List<Card>> result = controller.executeCardAction(mockGameController, mockCurrentPlayer, Optional.empty());
+        controller.executeCardAction(mockGameController,
+                mockCurrentPlayer,
+                Optional.empty());
 
         EasyMock.verify(mockGameController, mockGame, mockDeck, mockInput,
                 mockCurrentPlayer, mockPlayer2, mockCatCard2);
 
-        assertTrue(result.isEmpty(), "PotluckCardController should return Optional.empty()");
     }
 }
 

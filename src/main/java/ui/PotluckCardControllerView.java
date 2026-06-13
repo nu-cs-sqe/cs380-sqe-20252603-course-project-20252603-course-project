@@ -26,7 +26,8 @@ public class PotluckCardControllerView {
 
     public void displayNoCardsAvailable(Player player) {
         System.out.printf("Player: %s%n", player.getPlayerName());
-        System.out.println("You have no cards in your hand. So you will be skipped from putting a card in the draw pile.");
+        System.out.print("You have no cards in your hand. ");
+        System.out.println("So you will be skipped from putting a card in the draw pile.");
     }
 
     public void displayInvalidIndex(String userChoice) {

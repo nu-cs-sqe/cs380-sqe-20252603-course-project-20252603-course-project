@@ -74,7 +74,7 @@ public class GameController {
         return this.nextPlayerTurnsLeft;
     }
 
-    public CardController getControllerType(Card card) {
+    public CardController getControllerType(Card card, int numCardsPlayed) {
         Map<CardType, CardController> cardToControllerMap = new EnumMap<>(CardType.class);
         cardToControllerMap.put(CardType.ATTACK, new AttackCardController());
         cardToControllerMap.put(CardType.DEFUSE, new DefuseCardController());
@@ -83,10 +83,10 @@ public class GameController {
         cardToControllerMap.put(CardType.SKIP, new SkipCardController());
         cardToControllerMap.put(CardType.NOPE, new NopeCardController());
         cardToControllerMap.put(CardType.DRAW_FROM_BOTTOM, new DrawFromBottomCardController());
-        cardToControllerMap.put(CardType.CAT_CARD_1, new CatCardController());
-        cardToControllerMap.put(CardType.CAT_CARD_2, new CatCardController());
-        cardToControllerMap.put(CardType.CAT_CARD_3, new CatCardController());
-        cardToControllerMap.put(CardType.CAT_CARD_4, new CatCardController());
+        cardToControllerMap.put(CardType.CAT_CARD_1, new CatCardController(numCardsPlayed));
+        cardToControllerMap.put(CardType.CAT_CARD_2, new CatCardController(numCardsPlayed));
+        cardToControllerMap.put(CardType.CAT_CARD_3, new CatCardController(numCardsPlayed));
+        cardToControllerMap.put(CardType.CAT_CARD_4, new CatCardController(numCardsPlayed));
 
         if (cardToControllerMap.containsKey(card.getType())) {
             return cardToControllerMap.get(card.getType());
@@ -193,7 +193,7 @@ public class GameController {
                     }
 
                     if (isValidMove(cardsPlayed, currentPlayer, target)) {
-                        CardController cardController = getControllerType(cardsPlayed.get(0));
+                        CardController cardController = getControllerType(cardsPlayed.get(0), cardsPlayed.size());
                         cardController.executeCardAction(this, currentPlayer, target);
 
                         for (Card card : cardsPlayed) {

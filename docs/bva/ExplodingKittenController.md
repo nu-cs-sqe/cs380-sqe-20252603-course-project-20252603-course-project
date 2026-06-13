@@ -27,3 +27,7 @@ output: Optional.empty() (Optional<List<Card>>)
 - **TC5: executeCardAction_firstCardDefuseThreeCards_playerLivesOneCard ** ( :white_check_mark: )
     - **State of the system**: hand: [DEFUSE, ATTACK, SKIP]
     - **Expected output**: initiator.isAlive(): true, initiator.getHand(): [ATTACK, SKIP]
+
+- **TC6: executeCardAction_noDefuse_removeAlivePlayerHandlesKill (integration)** ( :white_check_mark: )
+    - **State of the system**: real Game with 2 players, user has no defuse
+    - **Expected output**: user.isAlive(): false, alivePlayerCount: 1, no exception thrown

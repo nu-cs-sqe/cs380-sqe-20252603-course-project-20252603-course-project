@@ -129,4 +129,42 @@ public class CatCardControllerTests {
         assertEquals(mockStolenCard, result.get().get(0));
         EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget, mockStolenCard, mockView);
     }
+
+    @Test
+    void executeCardAction_twoCardsNominal_stealsRandomCard() {
+        GameController mockGc = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Player mockInitiator = EasyMock.createMock(Player.class);
+        Player mockTarget = EasyMock.createMock(Player.class);
+        Card mockCard1 = EasyMock.createMock(Card.class);
+        Card mockCard2 = EasyMock.createMock(Card.class);
+        Card mockCard3 = EasyMock.createMock(Card.class);
+        CatCardControllerView mockView = EasyMock.createMock(CatCardControllerView.class);
+
+        EasyMock.expect(mockGc.getGame()).andReturn(mockGame).anyTimes();
+        EasyMock.expect(mockGame.getAlivePlayers()).andReturn(
+                List.of(mockInitiator, mockTarget)
+        ).anyTimes();
+        EasyMock.expect(mockTarget.getHandSize()).andReturn(3).anyTimes();
+        EasyMock.expect(mockTarget.getHand()).andReturn(
+                new ArrayList<>(List.of(mockCard1, mockCard2, mockCard3))
+        ).anyTimes();
+        mockTarget.removeCard(EasyMock.anyObject(Card.class));
+        EasyMock.expectLastCall().once();
+        mockInitiator.addCard(EasyMock.anyObject(Card.class));
+        EasyMock.expectLastCall().once();
+
+        EasyMock.replay(mockGc, mockGame, mockInitiator, mockTarget,
+                mockCard1, mockCard2, mockCard3, mockView);
+
+        CatCardController controller = new CatCardController(2, mockView);
+        Optional<List<Card>> result = controller.executeCardAction(
+                mockGc, mockInitiator, Optional.of(mockTarget)
+        );
+
+        assertTrue(result.isPresent());
+        assertEquals(1, result.get().size());
+        EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget,
+                mockCard1, mockCard2, mockCard3, mockView);
+    }
 }

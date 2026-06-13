@@ -43,7 +43,7 @@ Controller instantiated as new CatCardController(2, controllerView).
     - **State of the system**: target is valid. target.get().getHandSize() is 1. (boundary)
     - **Expected output**: Returns Optional.of([stolenCard]). initiator.getHandSize() increases by 1. target.getHandSize() is 0.
 
-- **TC6: executeCardAction_twoCardsNominal_stealsRandomCard ** ( x )
+- **TC6: executeCardAction_twoCardsNominal_stealsRandomCard ** ( :white_check_mark: )
     - **State of the system**: target is valid. target.get().getHandSize() is > 1.
     - **Expected output**: Returns Optional.of([stolenCard]). initiator.getHandSize() increases by 1. target.getHandSize() decreases by 1.
 

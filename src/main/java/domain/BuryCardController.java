@@ -21,6 +21,11 @@ public class BuryCardController {
                                                   Optional<Player> target) {
         Game game = gameController.getGame();
         Deck deck = game.getDeck();
+        if (deck.count() < 1) {
+            controllerView.displayNoCardsInDeck();
+            return Optional.empty();
+        }
+
         Card drawnCard = deck.takeTopCard();
 
         controllerView.displayDrawnCard(drawnCard);

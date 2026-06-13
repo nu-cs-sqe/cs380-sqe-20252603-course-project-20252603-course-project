@@ -13,7 +13,7 @@
     - **State of the system**: Deck has 15 cards, `userChoice` = "15",
       - **Expected output**: Top card is inserted after the last (15th) card
 
-- **TC4: Deck is Empty** 
+- **TC4: Deck is Empty** ( :white-check-mark: )
     - **State of the system**: Deck has 0 cards
     - **Expected output**: no cards in deck called.
 

@@ -10,7 +10,7 @@ import static org.easymock.EasyMock.*;
 public class BuryCardControllerTests {
 
     @Test
-    public void testExecuteCardAction_InvalidInputsAndInsertInMiddle() {
+    public void executeCardAction_InvalidInputsAndInsertInMiddle() {
         BuryCardControllerView mockView = createStrictMock(BuryCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
@@ -21,6 +21,8 @@ public class BuryCardControllerTests {
 
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGame.getDeck()).andReturn(mockDeck);
+
+        expect(mockDeck.count()).andReturn(3);
 
         expect(mockDeck.takeTopCard()).andReturn(mockDrawnCard);
         mockView.displayDrawnCard(mockDrawnCard);
@@ -55,7 +57,7 @@ public class BuryCardControllerTests {
     }
 
     @Test
-    public void testExecuteCardAction_InsertIndexIsTopOfDeck() {
+    public void executeCardAction_InsertIndexIsTopOfDeck() {
         BuryCardControllerView mockView = createStrictMock(BuryCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
@@ -66,6 +68,8 @@ public class BuryCardControllerTests {
 
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGame.getDeck()).andReturn(mockDeck);
+
+        expect(mockDeck.count()).andReturn(10);
 
         expect(mockDeck.takeTopCard()).andReturn(mockDrawnCard);
         mockView.displayDrawnCard(mockDrawnCard);
@@ -90,7 +94,7 @@ public class BuryCardControllerTests {
     }
 
     @Test
-    public void testExecuteCardAction_InsertIndexIsBottomOfDeck() {
+    public void executeCardAction_InsertIndexIsBottomOfDeck() {
         BuryCardControllerView mockView = createStrictMock(BuryCardControllerView.class);
         GameController mockGameController = createMock(GameController.class);
         Game mockGame = createMock(Game.class);
@@ -101,6 +105,8 @@ public class BuryCardControllerTests {
 
         expect(mockGameController.getGame()).andReturn(mockGame);
         expect(mockGame.getDeck()).andReturn(mockDeck);
+
+        expect(mockDeck.count()).andReturn(15);
 
         expect(mockDeck.takeTopCard()).andReturn(mockDrawnCard);
         mockView.displayDrawnCard(mockDrawnCard);
@@ -122,5 +128,32 @@ public class BuryCardControllerTests {
 
         verify(mockView, mockGameController, mockGame,
                 mockDeck, mockInitiator, mockDrawnCard);
+    }
+
+    @Test
+    public void executeCardAction_DeckIsEmpty() {
+        BuryCardControllerView mockView = createStrictMock(BuryCardControllerView.class);
+        GameController mockGameController = createMock(GameController.class);
+        Game mockGame = createMock(Game.class);
+        Deck mockDeck = createMock(Deck.class);
+        Player mockInitiator = createMock(Player.class);
+
+        expect(mockGameController.getGame()).andReturn(mockGame);
+        expect(mockGame.getDeck()).andReturn(mockDeck);
+
+        expect(mockDeck.count()).andReturn(0);
+
+        mockView.displayNoCardsInDeck();
+
+        replay(mockView, mockGameController, mockGame,
+                mockDeck, mockInitiator);
+
+        BuryCardController controller = new BuryCardController(mockView);
+        controller.executeCardAction(mockGameController,
+                mockInitiator,
+                Optional.empty());
+
+        verify(mockView, mockGameController, mockGame,
+                mockDeck, mockInitiator);
     }
 }

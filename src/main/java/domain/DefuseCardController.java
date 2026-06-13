@@ -7,6 +7,6 @@ public class DefuseCardController implements CardController {
     public Optional<List<Card>> executeCardAction(GameController gameController,
                                                   Player user,
                                                   Optional<Player> target){
-        throw new UnsupportedOperationException("not yet implemented");
+        throw new IllegalStateException("defuse cards can not be played directly");
     }
 }

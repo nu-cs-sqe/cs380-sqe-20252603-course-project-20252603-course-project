@@ -10,7 +10,18 @@ public class HotPotatoController implements CardController {
             Player initiator,
             Optional<Player> target)
     {
-        initiator.getHandSize();
-        throw new IllegalStateException("Initiator's hand cannot be empty");
+        if(initiator.getHandSize() == 0){
+            throw new IllegalStateException("Initiator's hand cannot be empty");
+        }
+
+        List<Card> hand = initiator.getHand();
+        Card card = hand.get(0);
+        initiator.removeCard(card);
+
+        int nextPlayerIndex = gameController.getNextPlayerIndex();
+        Player nextPlayer = gameController.getGame().getAlivePlayers().get(nextPlayerIndex);
+        nextPlayer.addCard(card);
+
+        return Optional.empty();
     }
 }

@@ -5,7 +5,7 @@ import ui.BuryCardControllerView;
 import java.util.List;
 import java.util.Optional;
 
-public class BuryCardController {
+public class BuryCardController implements CardController {
     private final BuryCardControllerView controllerView;
 
     public BuryCardController() {

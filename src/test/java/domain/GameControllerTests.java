@@ -1806,6 +1806,56 @@ public class GameControllerTests {
     }
 
     @Test
+    void takeTurn_NoOtherPlayerHasNope_ActionExecutes() {
+        Game mockGame = mock(Game.class);
+        Player mockCurrentPlayer = mock(Player.class);
+        Player mockOtherPlayer = mock(Player.class);
+        Card mockSkipCard = mock(Card.class);
+        CardController mockCardController = mock(CardController.class);
+        GameControllerView mockControllerView = mock(GameControllerView.class);
+
+        ArrayList<Player> alivePlayers = new ArrayList<>();
+        alivePlayers.add(mockCurrentPlayer);
+        alivePlayers.add(mockOtherPlayer);
+
+        ArrayList<Card> currentHand = new ArrayList<>();
+        currentHand.add(mockSkipCard);
+
+        ArrayList<Card> otherHand = new ArrayList<>();
+
+        GameController controller = new GameController(mockGame) {
+            @Override
+            public CardController getControllerType(Card card) {
+                return mockCardController;
+            }
+        };
+
+        expect(mockGame.getAlivePlayerCount()).andReturn(2).anyTimes();
+        expect(mockGame.getAlivePlayers()).andReturn(alivePlayers).anyTimes();
+        mockControllerView.displayCurrentPlayerAndCardsInHand(mockCurrentPlayer);
+        expectLastCall();
+        expect(mockControllerView.getCardChoiceOrDraw()).andReturn("0");
+        expect(mockCurrentPlayer.getHand()).andReturn(currentHand).anyTimes();
+        expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
+        expect(mockOtherPlayer.getHand()).andReturn(otherHand).anyTimes();
+        expect(mockCardController.executeCardAction(
+                eq(controller), eq(mockCurrentPlayer), eq(Optional.empty())))
+                .andReturn(Optional.empty());
+        mockCurrentPlayer.removeCard(mockSkipCard);
+        expectLastCall();
+
+        replay(mockGame, mockCurrentPlayer, mockOtherPlayer, mockSkipCard,
+                mockCardController, mockControllerView);
+
+        controller.setCurrentPlayerIndex(0);
+        controller.setCurrentPlayerTurnsLeft(1);
+        controller.takeTurn(mockControllerView);
+
+        verify(mockGame, mockCurrentPlayer, mockOtherPlayer, mockSkipCard,
+                mockCardController, mockControllerView);
+    }
+
+    @Test
     void runGame_NonLastPlayerEliminated_NextPlayerIndexAdjusts() {
         Game game = new Game(3);
         game.getDeck().insert(Card.createCard(CardType.EXPLODING_KITTEN), 0);

@@ -58,6 +58,6 @@ Controller instantiated as new CatCardController(3, controllerView).
     - **State of the system**: target is valid. controllerView.getRequestedCardType() returns a valid CardType. target.get().hasCard(requestedType) is false.
     - **Expected output**: Returns Optional.empty(). No hand changes.
 
-- **TC9: executeCardAction_threeCardsTargetHasCard_stealsChosenCard ** ( x )
+- **TC9: executeCardAction_threeCardsTargetHasCard_stealsChosenCard ** ( :white_check_mark: )
     - **State of the system**: target is valid. controllerView.getRequestedCardType() returns a valid CardType. target.get().hasCard(requestedType) is true.
     - **Expected output**: Returns Optional.of([stolenCard]) where stolenCard.getType() matches requestedType. initiator.getHandSize() increases by 1. target.getHandSize() decreases by 1.

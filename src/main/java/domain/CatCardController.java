@@ -47,6 +47,16 @@ public class CatCardController implements CardController {
             Optional<CardType> requestedType = controllerView.getRequestedCardType();
             if (requestedType.isEmpty()) return Optional.empty();
             if (!actualTarget.hasCard(requestedType.get())) return Optional.empty();
+
+            Card stolenCard = actualTarget.getHand().stream()
+                    .filter(card -> card.getType() == requestedType.get())
+                    .findFirst()
+                    .get();
+
+            actualTarget.removeCard(stolenCard);
+            initiator.addCard(stolenCard);
+
+            return Optional.of(List.of(stolenCard));
         }
 
         return Optional.empty();

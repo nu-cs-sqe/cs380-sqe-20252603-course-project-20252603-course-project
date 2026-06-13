@@ -3,23 +3,26 @@
 ### Method under test: `executeCardAction()`
 
 ### Test Cases
+- **TC1: Valid target index selected** ( :white-check-mark: )
+  - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"1"`.
+  - **Result**: Valid P2 selected. `GameController.setNextPlayerTurnsLeft(2)` called. Loop breaks.
 
-- **TC1: Valid target index selected** (  )
-  - **State of the system**: `initiator` = player1, `alivePlayers` = [player1, player2, player3]. View prints players and returns index `1` (which maps to player2).
-  - **Expected output**: Target is successfully resolved to player2. `Optional.empty()` is returned. `GameController.setNextPlayerTurnsLeft(2)` is called.
+- **TC2: Target is initiator**
+  - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"0"` then `"1"`.
+  - **Result**: `displayInvalidTarget` called. Loop retries. Valid P2 selected. Loop breaks.
 
-- **TC2: Target index points to the initiator** (  )
-  - **State of the system**: `initiator` = player1, `alivePlayers` = [player1, player2, player3]. View returns index `0` (which maps to the initiator, player1).
-  - **Expected output**: `IllegalArgumentException` is thrown indicating the initiator cannot target themselves. Game state is unchanged.
+- **TC3: Target is out-of-bounds (Negative)**
+  - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"-1"` then `"1"`.
+  - **Result**: `IndexOutOfBoundsException` caught. `displayInvalidIndex` called. Loop retries. Valid P2 selected. Loop breaks.
 
-- **TC3: Target index is out of bounds (Negative)** (  )
-  - **State of the system**: `initiator` = player1, `alivePlayers` = [player1, player2, player3]. View returns index `-1`.
-  - **Expected output**: `IndexOutOfBoundsException` or `IllegalArgumentException` is thrown. Game state is unchanged.
+- **TC4: Target is out-of-bounds (Too large)**
+  - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"2"` then `"1"`.
+  - **Result**: `IndexOutOfBoundsException` caught. `displayInvalidIndex` called. Loop retries. Valid P2 selected. Loop breaks.
 
-- **TC4: Target index is out of bounds (Exceeds list size)** (  )
-  - **State of the system**: `initiator` = player1, `alivePlayers` = [player1, player2, player3]. View returns index `3` (size is 3, maximum valid index is 2).
-  - **Expected output**: `IndexOutOfBoundsException` or `IllegalArgumentException` is thrown. Game state is unchanged.
+- **TC5: Input format invalid**
+  - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"abc"` then `"1"`.
+  - **Result**: `NumberFormatException` caught. `displayInvalidIndex` called. Loop retries. Valid P2 selected. Loop breaks.
 
-- **TC5: Input format is invalid / Non-integer** (  )
-  - **State of the system**: `initiator` = player1, `alivePlayers` = [player1, player2]. View returns an unparseable string (e.g., `"abc"` or `""`).
-  - **Expected output**: `NumberFormatException` is thrown (assuming string-to-integer parsing is handled inside the controller). Game state is unchanged.
+- **TC6: Target is dead**
+  - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. P2 is dead. View returns `"1"` then index of a valid alive player.
+  - **Result**: `displayInvalid*Expected output**: `NumberFormatException` is thrown (assuming string-to-integer parsing is handled inside the controller). Game state is unchanged.

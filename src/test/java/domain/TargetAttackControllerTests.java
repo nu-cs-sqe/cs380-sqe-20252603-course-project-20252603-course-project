@@ -2,7 +2,9 @@ package domain;
 
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
+import ui.TargetAttackControllerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,69 +13,45 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TargetAttackControllerTests {
     @Test
-    public void executeCardAction_EmptyTarget_ThrowsException() {
-        GameController mockController = EasyMock.createMock(GameController.class);
-        Player mockUser = EasyMock.createMock(Player.class);
+    public void executeCardAction_ValidTargetIndex_ReturnsEmptyAndAssignsTurns() {
+        String validIndex = "1";
 
-        EasyMock.replay(mockController, mockUser);
+        GameController mockGameController = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Player mockP1 = EasyMock.createMock(Player.class);
+        Player mockP2 = EasyMock.createMock(Player.class);
+        TargetAttackControllerView mockView = EasyMock.createMock(
+                TargetAttackControllerView.class);
 
-        TargetAttackController controller = new TargetAttackController();
-        assertThrows(IllegalArgumentException.class, () ->
-                controller.executeCardAction(mockController, mockUser, Optional.empty()));
+        ArrayList<Player> alivePlayers = new ArrayList<>();
+        alivePlayers.add(mockP1);
+        alivePlayers.add(mockP2);
 
-        EasyMock.verify(mockController, mockUser);
-    }
+        EasyMock.expect(mockGameController.getGame()).andReturn(mockGame);
+        EasyMock.expect(mockGame.getAlivePlayers()).andReturn(alivePlayers);
 
-    @Test
-    public void executeCardAction_AliveTarget_ReturnEmptyAndAssignsTwoTurns() {
-        GameController mockController = EasyMock.createMock(GameController.class);
-        Player mockUser = EasyMock.createMock(Player.class);
-        Player mockTarget = EasyMock.createMock(Player.class);
-
-        EasyMock.expect(mockTarget.isAlive()).andReturn(true);
-        mockController.setNextPlayerTurnsLeft(2);
+        mockView.displayAlivePlayers(alivePlayers, mockP1);
         EasyMock.expectLastCall().once();
 
-        EasyMock.replay(mockController, mockUser, mockTarget);
+        EasyMock.expect(mockView.getTargetPlayerIndex()).andReturn(validIndex).once();
 
-        TargetAttackController controller = new TargetAttackController();
-        Optional<List<Card>> result = controller.executeCardAction(
-                mockController, mockUser, Optional.of(mockTarget));
+        EasyMock.expect(mockP2.isAlive()).andReturn(true);
 
-        assertTrue(result.isEmpty());
-        EasyMock.verify(mockController, mockUser, mockTarget);
+        mockGameController.setNextPlayerTurnsLeft(2);
+        EasyMock.expectLastCall().once();
+
+        EasyMock.replay(mockGameController, mockGame, mockP1,
+                mockP2, mockView);
+
+        TargetAttackController controller = new TargetAttackController(mockView);
+        Optional<List<Card>> result = controller.executeCardAction(mockGameController,
+                mockP1,
+                Optional.empty());
+
+        EasyMock.verify(mockGameController, mockGame, mockP1,
+                mockP2, mockView);
+        assertTrue(result.isEmpty(),
+                "TargetAttackController should return Optional.empty()");
     }
 
-    @Test
-    public void executeCardAction_TargetIsInitiator_ThrowsException() {
-        GameController mockController = EasyMock.createMock(GameController.class);
-        Player mockUser = EasyMock.createMock(Player.class);
-
-        EasyMock.expect(mockUser.isAlive()).andReturn(true);
-
-        EasyMock.replay(mockController, mockUser);
-
-        TargetAttackController controller = new TargetAttackController();
-        assertThrows(IllegalArgumentException.class, () ->
-                controller.executeCardAction(mockController, mockUser, Optional.of(mockUser)));
-
-        EasyMock.verify(mockController, mockUser);
-    }
-
-    @Test
-    public void executeCardAction_DeadTarget_ThrowsException() {
-        GameController mockController = EasyMock.createMock(GameController.class);
-        Player mockUser = EasyMock.createMock(Player.class);
-        Player mockTarget = EasyMock.createMock(Player.class);
-
-        EasyMock.expect(mockTarget.isAlive()).andReturn(false);
-
-        EasyMock.replay(mockController, mockUser, mockTarget);
-
-        TargetAttackController controller = new TargetAttackController();
-        assertThrows(IllegalArgumentException.class, () ->
-                controller.executeCardAction(mockController, mockUser, Optional.of(mockTarget)));
-
-        EasyMock.verify(mockController, mockUser, mockTarget);
-    }
 }

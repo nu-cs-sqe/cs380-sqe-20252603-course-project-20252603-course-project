@@ -205,7 +205,19 @@ public class GameController {
                                         }
                                     }
                                     noped = !noped;
+                                    break;
                                 }
+                            }
+                        }
+                        if (noped && playerHasCardOfType(currentPlayer, CardType.NOPE)) {
+                            if (controllerView.doesPlayerWantToNope(currentPlayer)) {
+                                for (Card c : currentPlayer.getHand()) {
+                                    if (c.getType() == CardType.NOPE) {
+                                        currentPlayer.removeCard(c);
+                                        break;
+                                    }
+                                }
+                                noped = !noped;
                             }
                         }
 

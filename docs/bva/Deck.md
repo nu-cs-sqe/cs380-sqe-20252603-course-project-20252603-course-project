@@ -22,7 +22,7 @@
 ### Method under test: `shuffle()`
 - **TC4: Empty Deck** ( :white_check_mark: )
   - **State of the system**: Deck.cards is empty
-  - **Expected Output**: 
+  - **Expected Output**: Deck.cards is empty
 
 - **TC5: Deck With One Card** ( :white_check_mark: )
     - **State of the system**: Deck.cards contains exactly 1 card

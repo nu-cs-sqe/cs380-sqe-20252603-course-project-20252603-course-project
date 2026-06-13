@@ -426,7 +426,9 @@ public class PotluckCardControllerTests {
                 mockCurrentPlayer, mockPlayer2, mockSkipCard1, mockSkipCard2);
 
         PotluckCardController controller = new PotluckCardController(mockInput);
-        Optional<List<Card>> result = controller.executeCardAction(mockGameController, mockCurrentPlayer, Optional.empty());
+        Optional<List<Card>> result = controller.executeCardAction(mockGameController,
+                mockCurrentPlayer,
+                Optional.empty());
 
         EasyMock.verify(mockGameController, mockGame, mockDeck, mockInput,
                 mockCurrentPlayer, mockPlayer2, mockSkipCard1, mockSkipCard2);

@@ -25,7 +25,8 @@ public class BountyCardControllerTests {
         EasyMock.replay(mockController, mockGame, user, other);
 
         BountyCardController controller = new BountyCardController();
-        Optional<List<Card>> result = controller.executeCardAction(mockController, user, Optional.empty());
+        Optional<List<Card>> result =
+                controller.executeCardAction(mockController, user, Optional.empty());
 
         assertTrue(result.isEmpty());
         EasyMock.verify(mockController, mockGame, user, other);
@@ -49,7 +50,8 @@ public class BountyCardControllerTests {
         EasyMock.replay(mockController, mockGame, user, other);
 
         BountyCardController controller = new BountyCardController();
-        Optional<List<Card>> result = controller.executeCardAction(mockController, user, Optional.empty());
+        Optional<List<Card>> result =
+                controller.executeCardAction(mockController, user, Optional.empty());
 
         assertTrue(result.isEmpty());
         EasyMock.verify(mockController, mockGame, user, other);
@@ -77,7 +79,8 @@ public class BountyCardControllerTests {
         EasyMock.replay(mockController, mockGame, user, other);
 
         BountyCardController controller = new BountyCardController();
-        Optional<List<Card>> result = controller.executeCardAction(mockController, user, Optional.empty());
+        Optional<List<Card>> result =
+                controller.executeCardAction(mockController, user, Optional.empty());
 
         assertTrue(result.isEmpty());
         EasyMock.verify(mockController, mockGame, user, other);
@@ -99,7 +102,8 @@ public class BountyCardControllerTests {
         EasyMock.replay(mockController, mockGame, user, other1, other2);
 
         BountyCardController controller = new BountyCardController();
-        Optional<List<Card>> result = controller.executeCardAction(mockController, user, Optional.empty());
+        Optional<List<Card>> result =
+                controller.executeCardAction(mockController, user, Optional.empty());
 
         assertTrue(result.isEmpty());
         EasyMock.verify(mockController, mockGame, user, other1, other2);
@@ -125,7 +129,8 @@ public class BountyCardControllerTests {
         EasyMock.replay(mockController, mockGame, user, other1, other2);
 
         BountyCardController controller = new BountyCardController();
-        Optional<List<Card>> result = controller.executeCardAction(mockController, user, Optional.empty());
+        Optional<List<Card>> result =
+                controller.executeCardAction(mockController, user, Optional.empty());
 
         assertTrue(result.isEmpty());
         EasyMock.verify(mockController, mockGame, user, other1, other2);
@@ -162,7 +167,8 @@ public class BountyCardControllerTests {
         EasyMock.replay(mockController, mockGame, user, other1, other2);
 
         BountyCardController controller = new BountyCardController();
-        Optional<List<Card>> result = controller.executeCardAction(mockController, user, Optional.empty());
+        Optional<List<Card>> result =
+                controller.executeCardAction(mockController, user, Optional.empty());
 
         assertTrue(result.isEmpty());
         EasyMock.verify(mockController, mockGame, user, other1, other2);

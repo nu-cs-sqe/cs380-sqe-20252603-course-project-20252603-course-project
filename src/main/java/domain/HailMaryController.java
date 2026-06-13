@@ -6,9 +6,16 @@ import java.util.Optional;
 public class HailMaryController implements CardController {
     @Override
     public Optional<List<Card>> executeCardAction(GameController gameController, Player initiator, Optional<Player> target) {
-        if (initiator.getHandSize() == 0) {
+        int handSize = initiator.getHandSize();
+        if (handSize == 0) {
             throw new IllegalStateException("initiator's hand cannot be empty");
         }
+
+        Deck deck = gameController.getGame().getDeck();
+        if (deck.count() < handSize) {
+            throw new IllegalStateException("not enough cards in deck to redraw");
+        }
+
         return Optional.empty();
     }
 }

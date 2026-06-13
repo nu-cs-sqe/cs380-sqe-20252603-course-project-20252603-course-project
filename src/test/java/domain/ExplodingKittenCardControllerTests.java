@@ -4,6 +4,10 @@ import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import ui.ExplodingKittenCardControllerView;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +26,6 @@ public class ExplodingKittenCardControllerTests {
         EasyMock.expect(mockGameController.getGame()).andReturn(mockGame);
         EasyMock.expect(mockGame.getDeck()).andReturn(mockDeck).anyTimes();
         EasyMock.expect(mockUser.hasDefuse()).andReturn(false).anyTimes();
-        mockUser.kill();
-        EasyMock.expectLastCall().once();
         mockGame.removeAlivePlayer(mockUser);
         EasyMock.expectLastCall().once();
 
@@ -165,5 +167,25 @@ public class ExplodingKittenCardControllerTests {
         controller.executeCardAction(mockGameController, mockUser, Optional.empty());
 
         EasyMock.verify(mockGameController, mockGame, mockUser, mockDeck, mockInput);
+    }
+
+    @Test
+    void executeCardAction_noDefuse_removeAlivePlayerHandlesKill() {
+        Game game = new Game(2);
+        Player user = game.getAlivePlayers().get(0);
+        GameController mockController = EasyMock.createMock(GameController.class);
+        ExplodingKittenCardControllerView mockView = 
+                EasyMock.createMock(ExplodingKittenCardControllerView.class);
+
+        EasyMock.expect(mockController.getGame()).andReturn(game).anyTimes();
+        EasyMock.replay(mockController, mockView);
+
+        ExplodingKittenCardController controller = new ExplodingKittenCardController(mockView);
+        controller.executeCardAction(mockController, user, Optional.empty());
+
+        assertFalse(user.isAlive());
+        assertEquals(1, game.getAlivePlayerCount());
+
+        EasyMock.verify(mockController, mockView);
     }
 }

@@ -15,11 +15,11 @@
   - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"-1"` then `"1"`.
   - **Result**: `IndexOutOfBoundsException` caught. `displayInvalidIndex` called. Loop retries. Valid P2 selected. Loop breaks.
 
-- **TC4: Target is out-of-bounds (Too large)**
+- **TC4: Target is out-of-bounds (Too large)** ( :white-check-mark: )
   - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"2"` then `"1"`.
   - **Result**: `IndexOutOfBoundsException` caught. `displayInvalidIndex` called. Loop retries. Valid P2 selected. Loop breaks.
 
-- **TC5: Input format invalid**
+- **TC5: Input format invalid** 
   - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"abc"` then `"1"`.
   - **Result**: `NumberFormatException` caught. `displayInvalidIndex` called. Loop retries. Valid P2 selected. Loop breaks.
 

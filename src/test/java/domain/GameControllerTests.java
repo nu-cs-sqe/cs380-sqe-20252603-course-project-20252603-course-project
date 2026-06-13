@@ -1610,16 +1610,26 @@ public class GameControllerTests {
 
     @Test
     void isValidMove_FavorCard_WithTarget_ReturnsTrue() {
-        Game game = new Game(2);
-        GameController controller = new GameController(game);
-        Player player1 = game.getAlivePlayers().get(0);
-        Player player2 = game.getAlivePlayers().get(1);
-        player1.addCard(new Card(CardType.FAVOR));
+        Game mockGame = EasyMock.createMock(Game.class);
+        Player mockInitiator = EasyMock.createMock(Player.class);
+        Player mockTarget = EasyMock.createMock(Player.class);
+        Card mockFavorCard = EasyMock.createMock(Card.class);
 
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(mockFavorCard);
+
+        EasyMock.expect(mockFavorCard.getType()).andReturn(CardType.FAVOR).anyTimes();
+        EasyMock.expect(mockInitiator.getHand()).andReturn(hand).anyTimes();
+
+        EasyMock.replay(mockGame, mockInitiator, mockTarget, mockFavorCard);
+
+        GameController controller = new GameController(mockGame);
         ArrayList<Card> cards = new ArrayList<>();
-        cards.add(new Card(CardType.FAVOR));
+        cards.add(mockFavorCard);
 
-        assertTrue(controller.isValidMove(cards, player1, Optional.of(player2)));
+        assertTrue(controller.isValidMove(cards, mockInitiator, Optional.of(mockTarget)));
+
+        EasyMock.verify(mockGame, mockInitiator, mockTarget, mockFavorCard);
     }
 
     @Test

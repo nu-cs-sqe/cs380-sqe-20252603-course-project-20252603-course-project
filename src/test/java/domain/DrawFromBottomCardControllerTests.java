@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DrawFromBottomControllerTests {
+public class DrawFromBottomCardControllerTests {
 
     @Test
     public void executeCardAction_DrawFromEmptyDeck_IllegalStateException() {
         Game game = Game.createGame(2);
+        GameController gc = new GameController(game);
         Player player1 = game.getTotalPlayers().get(0);
-
 
         for (int i = 0; i < 34; i++) {
             game.getDeck().takeTopCard();
@@ -21,10 +21,10 @@ public class DrawFromBottomControllerTests {
 
         assertEquals(0, game.getDeck().getCards().size());
 
-        DrawFromBottomController controller = new DrawFromBottomController();
+        DrawFromBottomCardController controller = new DrawFromBottomCardController();
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            controller.executeCardAction(game, player1, Optional.empty());
+            controller.executeCardAction(gc, player1, Optional.empty());
         });
 
         assertEquals("no cards left in deck", exception.getMessage());
@@ -33,6 +33,7 @@ public class DrawFromBottomControllerTests {
     @Test
     public void executeCardAction_DrawFromDeckOneCard_CardMovedToPlayer() {
         Game game = Game.createGame(2);
+        GameController gc = new GameController(game);
         Player player1 = game.getTotalPlayers().get(0);
 
         assertEquals(new ArrayList<Card>(), player1.getHand());
@@ -44,9 +45,9 @@ public class DrawFromBottomControllerTests {
         assertEquals(1, game.getDeck().getCards().size());
         Card remainingCard = game.getDeck().getCards().get(0);
 
-        DrawFromBottomController controller = new DrawFromBottomController();
+        DrawFromBottomCardController controller = new DrawFromBottomCardController();
 
-        controller.executeCardAction(game, player1, Optional.empty());
+        controller.executeCardAction(gc, player1, Optional.empty());
 
         ArrayList<Card> expectedHand = new ArrayList<Card>();
         expectedHand.add(remainingCard);
@@ -60,6 +61,7 @@ public class DrawFromBottomControllerTests {
     @Test
     public void executeCardAction_DrawFromDeckFifteenCards_CardMovedToPlayer() {
         Game game = Game.createGame(2);
+        GameController gc = new GameController(game);
         Player player1 = game.getTotalPlayers().get(0);
 
         assertEquals(new ArrayList<Card>(), player1.getHand());
@@ -72,9 +74,9 @@ public class DrawFromBottomControllerTests {
         assertEquals(15, gameDeckCards.size());
         Card lastCard = gameDeckCards.get(gameDeckCards.size() - 1);
 
-        DrawFromBottomController controller = new DrawFromBottomController();
+        DrawFromBottomCardController controller = new DrawFromBottomCardController();
 
-        controller.executeCardAction(game, player1, Optional.empty());
+        controller.executeCardAction(gc, player1, Optional.empty());
 
         ArrayList<Card> expectedHand = new ArrayList<Card>();
         expectedHand.add(lastCard);

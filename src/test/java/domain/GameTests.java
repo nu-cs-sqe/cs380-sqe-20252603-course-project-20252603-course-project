@@ -12,89 +12,59 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTests {
-    @Test
-    public void createGame_OneBelowMinNumPlayer_ThrowsException() {
+    @ParameterizedTest
+    @ValueSource(ints = {1, 6})
+    void createGame_InvalidPlayerCount_ThrowsException(int invalidCount) {
         assertThrows(IllegalArgumentException.class, () -> {
-            Game.createGame(1);
+            Game.createGame(invalidCount);
         });
     }
 
-    @Test
-    public void createGame_MinNumPlayers_MakesGame(){
-        Game game = Game.createGame(2);
-        assertEquals(2, game.getTotalPlayerCount());
-        assertEquals(2, game.getAlivePlayerCount());
+    @ParameterizedTest
+    @ValueSource(ints = {2, 5})
+    void createGame_ValidPlayerCount_MakesGame(int validCount) {
+        Game game = Game.createGame(validCount);
+        assertEquals(validCount, game.getTotalPlayerCount());
+        assertEquals(validCount, game.getAlivePlayerCount());
     }
 
-    @Test
-    public void createGame_MaxNumPlayers_MakesGame(){
-        Game game = Game.createGame(5);
-        assertEquals(5, game.getTotalPlayerCount());
-        assertEquals(5, game.getAlivePlayerCount());
-    }
-
-    @Test
-    public void createGame_OneAboveMaxNumPlayers_MakesGame(){
-        assertThrows(IllegalArgumentException.class, () -> {
-            Game.createGame(6);
-        });
-    }
-
-    @Test
-    public void setup_MinimumNumPlayers() {
-        Game game = Game.createGame(2);
+    @ParameterizedTest
+    @CsvSource({
+            "2, 1",
+            "5, 4"
+    })
+    void setup_ValidNumPlayers_DealsCorrectCardsAndKittens(
+            int playerCount, int expectedKittens) {
+        Game game = Game.createGame(playerCount);
         game.setup();
 
         for (Player player : game.getTotalPlayers()) {
             assertEquals(7, player.getHandSize());
         }
 
-        int kittenCount = 0;
-        for (Card card : game.getDeck().getCards()) {
-            if (card.getType() == CardType.EXPLODING_KITTEN) {
-                kittenCount++;
-            }
-        }
-        assertEquals(1, kittenCount);
+        long actualKittens = game.getDeck().getCards().stream()
+                .filter(card -> card.getType() == CardType.EXPLODING_KITTEN)
+                .count();
+
+        assertEquals(expectedKittens, actualKittens);
     }
 
-    @Test
-    public void setup_MaximumNumPlayers(){
+    @ParameterizedTest
+    @ValueSource(ints = {1, 20})
+    void draw_FromValidDeck_UpdatesHandAndDeck(int deckSize) {
         Game game = Game.createGame(5);
-        game.setup();
-
-        for (Player player : game.getTotalPlayers()) {
-            assertEquals(7, player.getHandSize());
-        }
-
-        int kittenCount = 0;
-        for (Card card : game.getDeck().getCards()) {
-            if (card.getType() == CardType.EXPLODING_KITTEN) {
-                kittenCount++;
-            }
-        }
-        assertEquals(4, kittenCount);
-    }
-
-    @Test
-    public void draw_FromDeckWithOneCard(){
-        Game game = Game.createGame(5);
-
-        Deck deck = new Deck(1);
-        Card deckOnlyCard = deck.getCards().get(0);
-        int deckOriginalSize = deck.count();
-
+        Deck deck = new Deck(deckSize);
+        Card topCard = deck.getCards().get(0);
         Player player = Player.createPlayer("Test Name");
-        assertEquals(0, player.getHandSize());
 
         game.draw(player, deck);
 
-        assertTrue(player.hasCard(deckOnlyCard.getType()));
-        assertEquals(deckOriginalSize - 1, deck.count());
+        assertTrue(player.hasCard(topCard.getType()));
+        assertEquals(deckSize - 1, deck.count());
     }
 
     @Test
-    public void draw_FromEmptyDeck(){
+    void draw_FromEmptyDeck(){
         Game game = Game.createGame(5);
         Deck deck = new Deck(0);
         Player player = Player.createPlayer("Test Name");
@@ -104,84 +74,64 @@ public class GameTests {
         });
     }
 
-    @Test
-    public void draw_FromDeckWithManyCards(){
-        Game game = Game.createGame(5);
-
-        Deck deck = new Deck();
-        Card deckTopCard = deck.getCards().get(0);
-        int deckOriginalSize = deck.count();
-
-        Player player = Player.createPlayer("Test Name");
-        assertEquals(0, player.getHandSize());
-
-        game.draw(player, deck);
-
-        assertTrue(player.hasCard(deckTopCard.getType()));
-        assertEquals(deckOriginalSize - 1, deck.count());
+    @ParameterizedTest
+    @ValueSource(ints = {2, 5})
+    void getTotalPlayerCount_ValidBounds_ReturnsCorrectCount(int playerCount) {
+        Game game = Game.createGame(playerCount);
+        assertEquals(playerCount, game.getTotalPlayerCount());
     }
 
-    @Test
-    public void getTotalPlayerCount_MinNumPlayers_ReturnsTwo() {
-        Game game = Game.createGame(2);
-        assertEquals(2, game.getTotalPlayerCount());
-    }
+    @ParameterizedTest
+    @CsvSource({
+            "2, 0, 2",
+            "2, 1, 1",
+            "5, 4, 1"
+    })
+    void getAlivePlayerCount_AfterEliminations_ReturnsCount(
+            int initialPlayers, int eliminations, int expectedRemaining) {
+        Game game = Game.createGame(initialPlayers);
 
-    @Test
-    public void getTotalPlayerCount_MaxNumPlayers_ReturnsFive() {
-        Game game = Game.createGame(5);
-        assertEquals(5, game.getTotalPlayerCount());
-    }
-
-    @Test
-    public void getAlivePlayerCount_NoPlayersEliminated_ReturnsTwo() {
-        Game game = Game.createGame(2);
-        assertEquals(2, game.getAlivePlayerCount());
-    }
-
-    @Test
-    public void getAlivePlayerCount_OnePlayerEliminated_ReturnsOne() {
-        Game game = Game.createGame(2);
-        Player playerToRemove = game.getAlivePlayers().get(0);
-        game.removeAlivePlayer(playerToRemove);
-        assertEquals(1, game.getAlivePlayerCount());
-    }
-
-    @Test
-    public void getAlivePlayerCount_LastPlayerRemaining_ReturnsOne() {
-        Game game = Game.createGame(5);
-        for (int i = 0; i < 4; i++) {
-            Player playerToRemove = game.getAlivePlayers().get(0);
-            game.removeAlivePlayer(playerToRemove);
+        for (int i = 0; i < eliminations; i++) {
+            game.removeAlivePlayer(game.getAlivePlayers().get(0));
         }
-        assertEquals(1, game.getAlivePlayerCount());
+
+        assertEquals(expectedRemaining, game.getAlivePlayerCount());
     }
 
-    @Test
-    public void getTotalPlayers_ThreePlayers_ReturnsAllThreePlayers() {
-        Game game = Game.createGame(2);
-        List<Player> totalPlayers = game.getTotalPlayers();
-        assertEquals(2, totalPlayers.size());
+    @ParameterizedTest
+    @ValueSource(ints = {2, 5})
+    void getTotalPlayers_ValidBounds_ReturnsCorrectListSize(int count) {
+        Game game = Game.createGame(count);
+        assertEquals(count, game.getTotalPlayers().size());
     }
 
-    @Test
-    public void getAlivePlayers_NoPlayersEliminated_ReturnsAllPlayers() {
-        Game game = Game.createGame(5);
+    @ParameterizedTest
+    @CsvSource({
+            "5, 0, 5",
+            "5, 1, 4"
+    })
+    void getAlivePlayers_AfterEliminations_ReturnsCorrectListSize(
+            int initialPlayers, int eliminations, int expectedRemaining) {
+        Game game = Game.createGame(initialPlayers);
+
+        for (int i = 0; i < eliminations; i++) {
+            game.removeAlivePlayer(game.getAlivePlayers().get(0));
+        }
+
         List<Player> alivePlayers = game.getAlivePlayers();
-        assertEquals(5, alivePlayers.size());
+        assertEquals(expectedRemaining, alivePlayers.size());
     }
 
     @Test
-    public void getAlivePlayers_OnePlayerEliminated_ReturnsFourPlayers() {
+    void getAlivePlayers_ReturnsUnmodifiableList() {
         Game game = Game.createGame(5);
-        Player playerToRemove = game.getAlivePlayers().get(0);
-        game.removeAlivePlayer(playerToRemove);
-        List<Player> alivePlayers = game.getAlivePlayers();
-        assertEquals(4, alivePlayers.size());
+        List<Player> players = game.getAlivePlayers();
+
+        assertThrows(UnsupportedOperationException.class, players::clear);
     }
 
     @Test
-    public void removeAlivePlayer_ManyPlayers_RemovesPlayer() {
+    void removeAlivePlayer_ManyPlayers_RemovesPlayer() {
         Game game = Game.createGame(5);
         Player playerToRemove = game.getAlivePlayers().get(0);
         game.removeAlivePlayer(playerToRemove);
@@ -190,7 +140,7 @@ public class GameTests {
     }
 
     @Test
-    public void removeAlivePlayer_OnePlayer_EmptiesList() {
+    void removeAlivePlayer_OnePlayer_EmptiesList() {
         Game game = Game.createGame(2);
         game.removeAlivePlayer(game.getAlivePlayers().get(0));
         game.removeAlivePlayer(game.getAlivePlayers().get(0));
@@ -198,7 +148,7 @@ public class GameTests {
     }
 
     @Test
-    public void removeAlivePlayer_EmptyList_ThrowsException() {
+    void removeAlivePlayer_EmptyList_ThrowsException() {
         Game game = Game.createGame(2);
         game.removeAlivePlayer(game.getAlivePlayers().get(0));
         game.removeAlivePlayer(game.getAlivePlayers().get(0));
@@ -209,7 +159,7 @@ public class GameTests {
     }
 
     @Test
-    public void removeAlivePlayer_PlayerNotInAliveList_ThrowsException() {
+    void removeAlivePlayer_PlayerNotInAliveList_ThrowsException() {
         Game game = Game.createGame(2);
         Player playerToRemove = game.getAlivePlayers().get(0);
         game.removeAlivePlayer(playerToRemove);
@@ -219,7 +169,7 @@ public class GameTests {
     }
 
     @Test
-    public void addAlivePlayer_NoAlivePlayers_AddsPlayer() {
+    void addAlivePlayer_NoAlivePlayers_AddsPlayer() {
         Game game = Game.createGame(2);
         Player playerToAdd = game.getAlivePlayers().get(0);
         game.removeAlivePlayer(game.getAlivePlayers().get(0));
@@ -229,7 +179,7 @@ public class GameTests {
     }
 
     @Test
-    public void addAlivePlayer_SomeAlivePlayers_AddsPlayer() {
+    void addAlivePlayer_SomeAlivePlayers_AddsPlayer() {
         Game game = Game.createGame(5);
         Player playerToAdd = game.getAlivePlayers().get(0);
         game.removeAlivePlayer(playerToAdd);
@@ -238,7 +188,7 @@ public class GameTests {
     }
 
     @Test
-    public void addAlivePlayer_PlayerNotInGame_ThrowsException() {
+    void addAlivePlayer_PlayerNotInGame_ThrowsException() {
         Game game = Game.createGame(2);
         Player extraPlayer = Player.createPlayer("Extra");
         assertThrows(IllegalArgumentException.class, () -> {
@@ -247,11 +197,51 @@ public class GameTests {
     }
 
     @Test
-    public void addAlivePlayer_PlayerAlreadyAlive_ThrowsException() {
+    void addAlivePlayer_PlayerAlreadyAlive_ThrowsException() {
         Game game = Game.createGame(2);
         Player alivePlayer = game.getAlivePlayers().get(0);
         assertThrows(IllegalArgumentException.class, () -> {
             game.addAlivePlayer(alivePlayer);
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {2, 5})
+    void setAlivePlayersOrder_ValidBounds_UpdatesOrder(int playerCount) {
+        Game game = Game.createGame(playerCount);
+
+        List<Player> newOrder = new ArrayList<>(game.getAlivePlayers());
+        java.util.Collections.reverse(newOrder);
+
+        game.setAlivePlayersOrder(newOrder);
+        assertEquals(newOrder, game.getAlivePlayers());
+    }
+
+    @Test
+    void setAlivePlayersOrder_ShorterList_ThrowsException() {
+        Game game = Game.createGame(4);
+        List<Player> original = game.getAlivePlayers();
+
+        List<Player> shortList = List.of(
+                original.get(0), original.get(1), original.get(2)
+        );
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            game.setAlivePlayersOrder(shortList);
+        });
+    }
+
+    @Test
+    void setAlivePlayersOrder_LongerList_ThrowsException() {
+        Game game = Game.createGame(4);
+        List<Player> original = game.getAlivePlayers();
+
+        List<Player> longList = List.of(original.get(0), original.get(1),
+                original.get(2), original.get(3), Player.createPlayer("Extra")
+        );
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            game.setAlivePlayersOrder(longList);
         });
     }
 }

@@ -28,6 +28,12 @@ public class CatCardController implements CardController {
         if (target.get().equals(initiator)) return Optional.empty();
         if (!gameController.getGame().getAlivePlayers().contains(target.get())) return Optional.empty();
 
+        Player actualTarget = target.get();
+
+        if (cardsPlayed == 2) {
+            if (actualTarget.getHandSize() == 0) return Optional.empty();
+        }
+
         return Optional.empty();
     }
 }

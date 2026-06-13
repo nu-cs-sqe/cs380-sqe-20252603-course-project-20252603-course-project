@@ -35,7 +35,7 @@ Category 1: Invalid Plays (Defensive Guards)
 Category 2: The 2-Card Play (Random Steal)
 Controller instantiated as new CatCardController(2, controllerView).
 
-- **TC4: executeCardAction_twoCardsTargetEmptyHand_noSteal ** ( x )
+- **TC4: executeCardAction_twoCardsTargetEmptyHand_noSteal ** ( :white_check_mark: )
     - **State of the system**: target is valid. target.get().getHandSize() is 0.
     - **Expected output**: Returns Optional.empty(). No hand changes.
 

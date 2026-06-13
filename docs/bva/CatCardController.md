@@ -54,7 +54,7 @@ Controller instantiated as new CatCardController(3, controllerView).
     - **State of the system**: target is valid. controllerView.getRequestedCardType() returns Optional.empty().
     - **Expected output**: Returns Optional.empty(). No hand changes.
 
-- **TC8: executeCardAction_threeCardsTargetDoesNotHaveCard_whiff ** ( x )
+- **TC8: executeCardAction_threeCardsTargetDoesNotHaveCard_whiff ** ( :white_check_mark: )
     - **State of the system**: target is valid. controllerView.getRequestedCardType() returns a valid CardType. target.get().hasCard(requestedType) is false.
     - **Expected output**: Returns Optional.empty(). No hand changes.
 

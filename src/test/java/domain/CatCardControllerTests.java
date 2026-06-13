@@ -192,4 +192,32 @@ public class CatCardControllerTests {
         assertEquals(Optional.empty(), result);
         EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget, mockView);
     }
+
+    @Test
+    void executeCardAction_threeCardsTargetDoesNotHaveCard_whiff() {
+        GameController mockGc = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Player mockInitiator = EasyMock.createMock(Player.class);
+        Player mockTarget = EasyMock.createMock(Player.class);
+        CatCardControllerView mockView = EasyMock.createMock(CatCardControllerView.class);
+
+        EasyMock.expect(mockGc.getGame()).andReturn(mockGame).anyTimes();
+        EasyMock.expect(mockGame.getAlivePlayers()).andReturn(
+                List.of(mockInitiator, mockTarget)
+        ).anyTimes();
+        EasyMock.expect(mockView.getRequestedCardType()).andReturn(
+                Optional.of(CardType.ATTACK)
+        ).once();
+        EasyMock.expect(mockTarget.hasCard(CardType.ATTACK)).andReturn(false).once();
+
+        EasyMock.replay(mockGc, mockGame, mockInitiator, mockTarget, mockView);
+
+        CatCardController controller = new CatCardController(3, mockView);
+        Optional<List<Card>> result = controller.executeCardAction(
+                mockGc, mockInitiator, Optional.of(mockTarget)
+        );
+
+        assertEquals(Optional.empty(), result);
+        EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget, mockView);
+    }
 }

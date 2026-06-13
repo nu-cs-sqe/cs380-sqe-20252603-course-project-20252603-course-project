@@ -361,5 +361,77 @@ public class PotluckCardControllerTests {
                 mockCurrentPlayer, mockPlayer2, mockCatCard2);
 
     }
+
+    @Test
+    public void executeCardAction_MultiplePlayersPlaySameCardType_CardsRemovedAndAddedToDeck() {
+        String userChoice = "0";
+
+        GameController mockGameController = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Deck mockDeck = EasyMock.createMock(Deck.class);
+        PotluckCardControllerView mockInput = EasyMock.createMock(PotluckCardControllerView.class);
+
+        Player mockCurrentPlayer = EasyMock.createMock(Player.class);
+        Player mockPlayer2 = EasyMock.createMock(Player.class);
+        Card mockSkipCard1 = EasyMock.createMock(Card.class);
+        Card mockSkipCard2 = EasyMock.createMock(Card.class);
+
+        ArrayList<Player> alivePlayers = new ArrayList<Player>();
+        alivePlayers.add(mockCurrentPlayer);
+        alivePlayers.add(mockPlayer2);
+
+        ArrayList<Card> currentPlayerHand = new ArrayList<Card>();
+        currentPlayerHand.add(mockSkipCard1);
+
+        ArrayList<Card> player2Hand = new ArrayList<Card>();
+        player2Hand.add(mockSkipCard2);
+
+        EasyMock.expect(mockGameController.getGame()).andReturn(mockGame);
+        EasyMock.expect(mockGame.getDeck()).andReturn(mockDeck);
+        EasyMock.expect(mockGame.getAlivePlayers()).andReturn(alivePlayers);
+        EasyMock.expect(mockGame.getAlivePlayerCount()).andReturn(2);
+        EasyMock.expect(mockGameController.getCurrentPlayerIndex()).andReturn(0);
+
+        EasyMock.expect(mockCurrentPlayer.getHandSize()).andReturn(1);
+        EasyMock.expect(mockCurrentPlayer.getHand()).andReturn(currentPlayerHand);
+        mockInput.displayPlayerAndCardsInHand(mockCurrentPlayer);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockInput.getCardChoice()).andReturn(userChoice).once();
+
+        mockCurrentPlayer.removeCard(mockSkipCard1);
+        EasyMock.expectLastCall().once();
+
+        mockDeck.insert(mockSkipCard1, 0);
+        EasyMock.expectLastCall().once();
+
+        mockInput.displayValidCard(mockSkipCard1);
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(mockPlayer2.getHandSize()).andReturn(1);
+        EasyMock.expect(mockPlayer2.getHand()).andReturn(player2Hand);
+        mockInput.displayPlayerAndCardsInHand(mockPlayer2);
+        EasyMock.expectLastCall();
+        EasyMock.expect(mockInput.getCardChoice()).andReturn(userChoice).once();
+
+        mockPlayer2.removeCard(mockSkipCard2);
+        EasyMock.expectLastCall().once();
+
+        mockDeck.insert(mockSkipCard2, 0);
+        EasyMock.expectLastCall().once();
+
+        mockInput.displayValidCard(mockSkipCard2);
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(mockGameController, mockGame, mockDeck, mockInput,
+                mockCurrentPlayer, mockPlayer2, mockSkipCard1, mockSkipCard2);
+
+        PotluckCardController controller = new PotluckCardController(mockInput);
+        Optional<List<Card>> result = controller.executeCardAction(mockGameController, mockCurrentPlayer, Optional.empty());
+
+        EasyMock.verify(mockGameController, mockGame, mockDeck, mockInput,
+                mockCurrentPlayer, mockPlayer2, mockSkipCard1, mockSkipCard2);
+
+        assertTrue(result.isEmpty(), "PotluckCardController should return Optional.empty()");
+    }
 }
 

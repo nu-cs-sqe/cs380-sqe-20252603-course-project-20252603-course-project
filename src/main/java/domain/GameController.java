@@ -87,7 +87,6 @@ public class GameController {
         cardToControllerMap.put(CardType.CAT_CARD_2, new CatCardController());
         cardToControllerMap.put(CardType.CAT_CARD_3, new CatCardController());
         cardToControllerMap.put(CardType.CAT_CARD_4, new CatCardController());
-
         if (cardToControllerMap.containsKey(card.getType())) {
             return cardToControllerMap.get(card.getType());
         }

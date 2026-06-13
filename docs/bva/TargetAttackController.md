@@ -11,7 +11,7 @@
   - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"0"` then `"1"`.
   - **Result**: `displayInvalidTarget` called. Loop retries. Valid P2 selected. Loop breaks.
 
-- **TC3: Target is out-of-bounds (Negative)**
+- **TC3: Target is out-of-bounds (Negative)** ( :white-check-mark: )
   - **System State**: `initiator` = P1, `alivePlayers` = [P1, P2]. View returns `"-1"` then `"1"`.
   - **Result**: `IndexOutOfBoundsException` caught. `displayInvalidIndex` called. Loop retries. Valid P2 selected. Loop breaks.
 

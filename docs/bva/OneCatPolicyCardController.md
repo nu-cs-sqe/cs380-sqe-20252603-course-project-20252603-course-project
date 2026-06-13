@@ -12,7 +12,7 @@
       `nextPlayerTurnsLeft` = 1
   - **Expected output**: `displayPolicyAvoided` is called, `nextPlayerTurnsLeft` remains 1
 
-- **TC3: Next player has maximum unique cat cards below the boundary**
+- **TC3: Next player has maximum unique cat cards below the boundary** ( :white-check-mark: )
   - **State of the system**: `nextPlayer`'s hand contains 1x `CAT_CARD_1`, 1x `CAT_CARD_2`, 1x `CAT_CARD_3`, and 1x
       `CAT_CARD_4`, `nextPlayerTurnsLeft` = 1
   - **Expected output**: `displayPolicyAvoided` is called, `nextPlayerTurnsLeft` remains 1

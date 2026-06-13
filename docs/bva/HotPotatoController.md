@@ -2,7 +2,7 @@
 
 ### Method under test: executeCardAction()
 
-- **TC1: initiator has an empty hand** ( :x: )
+- **TC1: initiator has an empty hand** ( ☑️ )
   - **State of the system**: initiator = player1 (0 cards), nextPlayer = player2
   - **Expected output**: IllegalStateException is thrown. Game state is unchanged.
 

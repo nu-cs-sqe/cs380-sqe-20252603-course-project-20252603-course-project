@@ -18,7 +18,7 @@ repositories {
 }
 
 application {
-    mainClass = "Code.Main"
+    mainClass = "ui.Main"
 }
 
 dependencies {
@@ -27,6 +27,8 @@ dependencies {
 
     // Source: https://mvnrepository.com/artifact/org.easymock/easymock
     testImplementation("org.easymock:easymock:5.4.0")
+
+    compileOnly("com.github.spotbugs:spotbugs-annotations:4.9.7")
 }
 
 java {
@@ -42,6 +44,10 @@ jacoco {
 
 tasks.compileJava {
     options.release = 11
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }
 
 tasks.test {

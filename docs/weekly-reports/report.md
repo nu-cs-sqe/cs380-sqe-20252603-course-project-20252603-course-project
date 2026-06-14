@@ -80,3 +80,10 @@
 3. [30%] Everyone: Work on 3 + 1 cards
 4. [10%] Everyone: Implement Integration Testing
 5. [10%] Everyone: Implement i18n
+
+# Week 11 (06/06/2026-06/13/2026)
+**Planning and Progress Tracking**:
+1. [finished] Everyone: Work on 3 + 1 cards
+2. [finished] Everyone: Implement Integration Testing
+3. [finished] Everyone: Implement i18n
+4. [finished] Everyone: Finish all tasks left 

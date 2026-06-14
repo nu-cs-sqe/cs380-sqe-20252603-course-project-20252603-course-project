@@ -19,7 +19,7 @@ public class CardTypeTests {
 
     @Test
     public void CAT_CARD_3_ReturnsTrue(){
-        CardType type = CardType.CAT_CARD_3;
+        CardType type = CardType.BEARD_CAT;
         assertTrue(type.canHaveTarget());
     }
 

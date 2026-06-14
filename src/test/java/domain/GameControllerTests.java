@@ -604,10 +604,10 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_3));
+        player.addCard(new Card(CardType.BEARD_CAT));
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_3));
+        cards.add(new Card(CardType.BEARD_CAT));
         cards.add(new Card(CardType.CATERMELLON));
         cards.add(new Card(CardType.CAT_CARD_4));
 
@@ -786,7 +786,7 @@ public class GameControllerTests {
 
         ArrayList<Card> cards = new ArrayList<Card>();
         cards.add(new Card(CardType.TACOCAT));
-        cards.add(new Card(CardType.CAT_CARD_3));
+        cards.add(new Card(CardType.BEARD_CAT));
         cards.add(new Card(CardType.CATERMELLON));
 
         assertFalse(controller.isValidMove(cards, player1, Optional.empty()));
@@ -814,7 +814,7 @@ public class GameControllerTests {
 
         ArrayList<Card> cards = new ArrayList<Card>();
         cards.add(new Card(CardType.TACOCAT));
-        cards.add(new Card(CardType.CAT_CARD_3));
+        cards.add(new Card(CardType.BEARD_CAT));
         cards.add(new Card(CardType.CATERMELLON));
         cards.add(new Card(CardType.SHUFFLE));
 
@@ -1564,11 +1564,11 @@ public class GameControllerTests {
         expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
         expect(mockTargetPlayer.getHand()).andReturn(new ArrayList<>()).anyTimes();
 
-        expect(mockCatCard1.getType()).andReturn(CardType.CAT_CARD_3).anyTimes();
+        expect(mockCatCard1.getType()).andReturn(CardType.BEARD_CAT).anyTimes();
         expect(mockDrawBottomCard.getType()).andReturn(CardType.DRAW_FROM_BOTTOM).anyTimes();
         expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
-        expect(mockCatCard2.getType()).andReturn(CardType.CAT_CARD_3).anyTimes();
-        expect(mockCatCard3.getType()).andReturn(CardType.CAT_CARD_3).anyTimes();
+        expect(mockCatCard2.getType()).andReturn(CardType.BEARD_CAT).anyTimes();
+        expect(mockCatCard3.getType()).andReturn(CardType.BEARD_CAT).anyTimes();
 
         expect(mockCardController.executeCardAction(eq(controller),
                 eq(mockPlayer),

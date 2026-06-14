@@ -16,7 +16,7 @@ public class CatCardControllerView {
     public Optional<CardType> getRequestedCardType() {
         System.out.println("Enter the card type you want to steal:");
         System.out.println("(e.g. ATTACK, SKIP, NOPE, SHUFFLE, SEE_THE_FUTURE,");
-        System.out.println("DRAW_FROM_BOTTOM, TACOCAT, CATERMELLON, CAT_CARD_3, CAT_CARD_4):");
+        System.out.println("DRAW_FROM_BOTTOM, TACOCAT, CATERMELLON, BEARD_CAT, CAT_CARD_4):");
         String input = scanner.nextLine().trim().toUpperCase();
         try {
             return Optional.of(CardType.valueOf(input));

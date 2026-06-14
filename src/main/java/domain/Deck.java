@@ -16,7 +16,7 @@ public class Deck {
             CardType.NOPE, 4,
             CardType.TACOCAT, 4,
             CardType.CATERMELLON, 4,
-            CardType.CAT_CARD_3, 4,
+            CardType.BEARD_CAT, 4,
             CardType.CAT_CARD_4, 4
     );
 

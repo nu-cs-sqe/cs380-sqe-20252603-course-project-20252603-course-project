@@ -126,7 +126,8 @@ public class CatCardControllerTests {
         mockInitiator.addCard(mockStolenCard);
         EasyMock.expectLastCall().once();
 
-        EasyMock.replay(mockGc, mockGame, mockInitiator, mockTarget, mockStolenCard, mockView, mockRandom);
+        EasyMock.replay(mockGc, mockGame, mockInitiator, mockTarget,
+                mockStolenCard, mockView, mockRandom);
 
         CatCardController controller = new CatCardController(2, mockView, mockRandom);
         Optional<List<Card>> result = controller.executeCardAction(
@@ -136,7 +137,8 @@ public class CatCardControllerTests {
         assertTrue(result.isPresent());
         assertEquals(1, result.get().size());
         assertEquals(mockStolenCard, result.get().get(0));
-        EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget, mockStolenCard, mockView, mockRandom);
+        EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget,
+                mockStolenCard, mockView, mockRandom);
     }
 
     @Test
@@ -226,7 +228,8 @@ public class CatCardControllerTests {
         ).once();
         EasyMock.expect(mockTarget.hasCard(CardType.ATTACK)).andReturn(false).once();
 
-        EasyMock.replay(mockGc, mockGame, mockInitiator, mockTarget, mockView, mockRandom);
+        EasyMock.replay(mockGc, mockGame, mockInitiator,
+                mockTarget, mockView, mockRandom);
 
         CatCardController controller = new CatCardController(3, mockView, mockRandom);
         Optional<List<Card>> result = controller.executeCardAction(
@@ -234,7 +237,8 @@ public class CatCardControllerTests {
         );
 
         assertEquals(Optional.empty(), result);
-        EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget, mockView, mockRandom);
+        EasyMock.verify(mockGc, mockGame, mockInitiator,
+                mockTarget, mockView, mockRandom);
     }
 
     @Test
@@ -264,7 +268,8 @@ public class CatCardControllerTests {
         mockInitiator.addCard(mockStolenCard);
         EasyMock.expectLastCall().once();
 
-        EasyMock.replay(mockGc, mockGame, mockInitiator, mockTarget, mockStolenCard, mockView, mockRandom);
+        EasyMock.replay(mockGc, mockGame, mockInitiator, mockTarget,
+                mockStolenCard, mockView, mockRandom);
 
         CatCardController controller = new CatCardController(3, mockView, mockRandom);
         Optional<List<Card>> result = controller.executeCardAction(
@@ -274,6 +279,7 @@ public class CatCardControllerTests {
         assertTrue(result.isPresent());
         assertEquals(1, result.get().size());
         assertEquals(mockStolenCard, result.get().get(0));
-        EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget, mockStolenCard, mockView, mockRandom);
+        EasyMock.verify(mockGc, mockGame, mockInitiator, mockTarget,
+                mockStolenCard, mockView, mockRandom);
     }
 }

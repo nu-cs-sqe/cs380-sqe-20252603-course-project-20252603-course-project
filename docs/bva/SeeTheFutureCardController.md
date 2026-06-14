@@ -30,6 +30,6 @@
     - **State of the system**: Deck contains 2 cards
     - **Expected output**: `view.displayTopCards` is called with those 2 cards
 
-- **TC8: Deck With No Cards — view displays empty list ( ☐ )
+- **TC8: Deck With No Cards — view displays empty list ( :white-check-mark: )
     - **State of the system**: Deck contains no cards
     - **Expected output**: `view.displayTopCards` is called with an empty list

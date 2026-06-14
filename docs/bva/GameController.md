@@ -282,6 +282,14 @@
 - **TC: four cards (too many cards)** ( :white-check-mark: )
   - **State of the system**: `cards = [CAT_CARD_1, CAT_CARD_3, CAT_CARD_2, shuffle], initiator = player1`
 
+- **TC: FAVOR card with valid target** ( :white-check-mark: )
+  - **State of the system**: `cards = [FAVOR]`, `initiator = player1`, `target = player2`, `player1.hand = [FAVOR]`
+  - **Expected output**: `true`
+
+- **TC: FAVOR card with no target** ( :white-check-mark )
+  - **State of the system**: `cards = [FAVOR]`, `initiator = player1`, `target = Optional.empty()`, `player1.hand = [FAVOR]`
+  - **Expected output**: `false`
+
 
 ### Method under test: `advanceTurn()`
 - **TC: Standard Turn Advance** (:white-check-mark:)
@@ -353,13 +361,21 @@
   - **State of the System**: `currentPlayer`'s hand: `[CAT_CARD_3, DRAW_FROM_BOTTOM, SKIP, CAT_CARD_3, CAT_CARD_3]`, `userChoice` = "0,3,4", `currentPlayerTurnsLeft` = 2
   - **Expected output**: `currentPlayer`'s hand size: 3, `currentPlayerTurnsLeft` = 2
 
-- **TC: player draws a card, draws exploding kitten, no defuse, player killed** ( :white-check-mark: )
-  - **State of the System**: deck = `[EXPLODING_KITTEN]`, `currentPlayer` hand = `[]`, no defuse, `currentPlayerTurnsLeft` = 1
-  - **Expected output**: `currentPlayer`.isAlive(): false, `currentPlayerTurnsLeft` = 0
+- **TC: card played, no other player has NOPE, action executes** ( :white-check-mark: )
+  - **State of the System**: `currentPlayer`'s hand: `[SKIP]`, other player hand: `[]`, `userChoice` = "0"
+  - **Expected output**: action executes, `doesPlayerWantToNope` never called
 
-- **TC: player draws a card, draws exploding kitten, has defuse, player survives** (not tested at takeTurn level — defuse logic covered by ExplodingKittenCardControllerTests TC2–TC5)
-  - **State of the System**: deck = `[EXPLODING_KITTEN]`, `currentPlayer` hand = `[DEFUSE]`, `currentPlayerTurnsLeft` = 1
-  - **Expected output**: `currentPlayer`.isAlive(): true, `currentPlayerTurnsLeft` = 0
+- **TC: card played, other player has NOPE and plays it, action cancelled** ( :white-check-mark: )
+  - **State of the System**: `currentPlayer`'s hand: `[SKIP]`, other player hand: `[NOPE]`, `userChoice` = "0", other player chooses to Nope
+  - **Expected output**: action cancelled, NOPE removed from other player's hand, SKIP remains in `currentPlayer`'s hand
+
+- **TC: card played, double NOPE, action executes** ( :white-check-mark:)
+  - **State of the System**: `currentPlayer`'s hand: `[SKIP, NOPE]`, other player hand: `[NOPE]`, `userChoice` = "0", other player Nopes, then current player Nopes back
+  - **Expected output**: action executes, both NOPEs removed from hands
+
+- **TC: player plays a FAVOR card, prompts for a target, executes action, removes card from hand** (:white-check-mark:)
+  - **State of the System**: `currentPlayer`'s hand = `[FAVOR]`, `userChoice` = "0", `target` = player2, `currentPlayerTurnsLeft` = 1
+  - **Expected output**: `getTargetPlayerIndex` is called, `executeCardAction` is called with `target = Optional.of(player2)`, FAVOR card removed from hand, `currentPlayerTurnsLeft` = 1
 
 ### Method under test: `playerHasCardOfType(Player player, CardType type)`
 
@@ -394,7 +410,7 @@
   - **State of the system**: `alivePlayerCount = 2`, `currentPlayerTurnsLeft = 1`, deck = `[normal_card, EXPLODING_KITTEN]`, neither player has defuse
   - **Expected output**: player 0 completes turn, `advanceTurn()` is called, player 1 draws kitten, player 1 is eliminated, player 0 is the sole survivor
 
-- **TC: 2 players, player 0 draws exploding kitten but has a defuse card** (:white-check-mark:)
+- **TC: 2 players, player 0 draws exploding kitten but has a defuse card** ( :white-check-mark: )
   - **State of the system**: `alivePlayerCount = 2`, `currentPlayerTurnsLeft = 1`, deck = `[EXPLODING_KITTEN]`, player 0 hand = `[DEFUSE]`
   - **Expected output**: player 0 is NOT eliminated, game continues (player 1 then draws the re-inserted kitten and loses)
 
@@ -402,13 +418,13 @@
   - **State of the system**: `alivePlayerCount = 2`, `currentPlayerTurnsLeft = 2`, deck = `[EXPLODING_KITTEN]`, player 0 hand = `[]`
   - **Expected output**: player 0 is eliminated after first sub-turn (before using second turn), `alivePlayerCount = 1`, player 1 wins
 
-- **TC: 5 players (maximum), player 0 draws exploding kitten, no defuse** (:white-check-mark:)
-  - **State of the system**: `alivePlayerCount = 5`, `currentPlayerTurnsLeft = 1`, deck = `[EXPLODING_KITTEN × 4]`, players 0–3 have no defuse
-  - **Expected output**: player 0 is eliminated, `alivePlayerCount = 4`, outer loop continues; players 1–3 also eliminated in sequence, player 4 is sole survivor
+- **TC: 5 players (maximum), player 0 draws exploding kitten, no defuse** ( :white-check-mark: )
+  - **State of the system**: `alivePlayerCount = 5`, `currentPlayerTurnsLeft = 1`, deck = `[EXPLODING_KITTEN]`, player 0 hand = `[]`
+  - **Expected output**: player 0 is eliminated, `alivePlayerCount = 4`, outer loop continues (game not over)
 
-- **TC: player plays a non-draw card before drawing on their turn (inner loop calls takeTurn() multiple times)** (:white-check-mark:)
-  - **State of the system**: `alivePlayerCount = 2`, `currentPlayerTurnsLeft = 1`, player 0 hand = `[SEE_THE_FUTURE]`, deck = `[normal_card, EXPLODING_KITTEN, ...]`; player plays SEE_THE_FUTURE (turns stay at 1), then draws on next call (turns decrement to 0)
-  - **Expected output**: inner loop calls `takeTurn()` twice for player 0, `currentPlayerTurnsLeft` = 0 after the draw, `advanceTurn()` is called, player 1 draws kitten and is eliminated
+- **TC: player plays a non-draw card before drawing on their turn (inner loop calls takeTurn() multiple times)** ( :white-check-mark: )
+  - **State of the system**: `alivePlayerCount = 2`, `currentPlayerTurnsLeft = 1`, player 0 hand = `[SEE_THE_FUTURE]`, deck = `[normal_card, normal_card]`; player plays SEE_THE_FUTURE (turns stay at 1), then draws on next call (turns decrement to 0)
+  - **Expected output**: inner loop calls `takeTurn()` twice, `currentPlayerTurnsLeft` = 0 after the draw, `advanceTurn()` is called, game continues
 
 - **TC: 3 players, sequential eliminations until 1 player remains** (:white-check-mark:)
   - **State of the system**: `alivePlayerCount = 3`, each player draws kitten with no defuse on their first turn; deck = `[EXPLODING_KITTEN, EXPLODING_KITTEN]`

@@ -52,6 +52,12 @@ public class GameControllerView {
         return scanner.nextLine();
     }
 
+    public boolean doesPlayerWantToNope(Player player) {
+        System.out.printf("%s: do you want to play a Nope? (y/n): ", player.getPlayerName());
+        String input = scanner.nextLine();
+        return input.trim().equalsIgnoreCase("y");
+    }
+
     public String getTargetPlayerIndex(ArrayList<Player> alivePlayers, Player currentPlayer) {
         System.out.println("You may target these players:");
         for (int i = 0; i < alivePlayers.size();  i++) {

@@ -18,7 +18,7 @@ repositories {
 }
 
 application {
-    mainClass = "Code.Main"
+    mainClass = "ui.Main"
 }
 
 dependencies {
@@ -32,6 +32,8 @@ dependencies {
     // Cucumber BDD integration testing
     testImplementation("io.cucumber:cucumber-java:7.18.1")
     testImplementation("io.cucumber:cucumber-junit-platform-engine:7.18.1")
+    
+    compileOnly("com.github.spotbugs:spotbugs-annotations:4.9.7")
 }
 
 java {
@@ -47,6 +49,10 @@ jacoco {
 
 tasks.compileJava {
     options.release = 11
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }
 
 tasks.test {

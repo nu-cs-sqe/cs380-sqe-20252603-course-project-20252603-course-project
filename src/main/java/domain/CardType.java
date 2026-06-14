@@ -14,9 +14,18 @@ public enum CardType {
     CAT_CARD_2,
     CAT_CARD_3,
     CAT_CARD_4,
-    FAVOR;
+    FAVOR,
+    BOUNTY,
+    BURY,
+    DRAW_TWO,
+    HAIL_MARY,
+    HOT_POTATO,
+    REVERSE,
+    SELFISH_ROBIN_HOOD,
+    SWAP_TOP_AND_BOTTOM;
 
     public boolean canHaveTarget(){
-        return this == CAT_CARD_1 || this == CAT_CARD_2 || this == CAT_CARD_3 || this == CAT_CARD_4;
+        return this == CAT_CARD_1 || this == CAT_CARD_2 || this == CAT_CARD_3 || this == CAT_CARD_4
+                || this == FAVOR;
     }
 }

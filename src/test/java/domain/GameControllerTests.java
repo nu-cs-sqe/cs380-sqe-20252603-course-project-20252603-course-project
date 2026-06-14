@@ -1685,6 +1685,7 @@ public class GameControllerTests {
         expectLastCall();
         expect(mockControllerView.getCardChoiceOrDraw()).andReturn("0");
         expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
+        expect(mockTargetPlayer.getHand()).andReturn(new ArrayList<>()).anyTimes();
         expect(mockFavorCard.getType()).andReturn(CardType.FAVOR).anyTimes();
         expect(mockControllerView.getTargetPlayerIndex(eq(realAlivePlayers), eq(mockPlayer)))
                 .andReturn("1");

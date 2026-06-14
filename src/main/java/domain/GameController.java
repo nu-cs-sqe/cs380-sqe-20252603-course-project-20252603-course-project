@@ -214,12 +214,42 @@ public class GameController {
                     }
 
                     if (isValidMove(cardsPlayed, currentPlayer, target)) {
-                        CardController cardController = getControllerType(
-                                cardsPlayed.get(0), cardsPlayed.size());
-                        cardController.executeCardAction(this, currentPlayer, target);
+                        boolean noped = false;
+                        for (Player player : game.getAlivePlayers()) {
+                            if (player == currentPlayer) continue;
+                            if (playerHasCardOfType(player, CardType.NOPE)) {
+                                if (controllerView.doesPlayerWantToNope(player)) {
+                                    for (Card c : player.getHand()) {
+                                        if (c.getType() == CardType.NOPE) {
+                                            player.removeCard(c);
+                                            break;
+                                        }
+                                    }
+                                    noped = !noped;
+                                    break;
+                                }
+                            }
+                        }
+                        if (noped && playerHasCardOfType(currentPlayer, CardType.NOPE)) {
+                            if (controllerView.doesPlayerWantToNope(currentPlayer)) {
+                                for (Card c : currentPlayer.getHand()) {
+                                    if (c.getType() == CardType.NOPE) {
+                                        currentPlayer.removeCard(c);
+                                        break;
+                                    }
+                                }
+                                noped = !noped;
+                            }
+                        }
 
-                        for (Card card : cardsPlayed) {
-                            currentPlayer.removeCard(card);
+                        if (!noped) {
+                            // Merged main branch logic: passing size as the second argument
+                            CardController cardController = getControllerType(
+                                    cardsPlayed.get(0), cardsPlayed.size());
+                            cardController.executeCardAction(this, currentPlayer, target);
+                            for (Card card : cardsPlayed) {
+                                currentPlayer.removeCard(card);
+                            }
                         }
                     } else {
                         controllerView.displayInvalidMove(cardsPlayed);

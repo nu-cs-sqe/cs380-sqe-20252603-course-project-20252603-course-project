@@ -278,7 +278,7 @@ public class GameControllerTests {
         Card card = new Card(CardType.TEST_TYPE);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            controller.getControllerType(card);
+            controller.getControllerType(card, 1);
         });
     }
 
@@ -1161,7 +1161,7 @@ public class GameControllerTests {
 
         GameController controller = new GameController(mockGame) {
             @Override
-            public CardController getControllerType(Card card) {
+            public CardController getControllerType(Card card, int numCardsPlayed) {
                 return mockCardController;
             }
         };
@@ -1226,7 +1226,7 @@ public class GameControllerTests {
 
         GameController controller = new GameController(mockGame) {
             @Override
-            public CardController getControllerType(Card card) {
+            public CardController getControllerType(Card card, int numCardsPlayed) {
                 return mockCardController;
             }
         };
@@ -1302,7 +1302,7 @@ public class GameControllerTests {
 
         GameController controller = new GameController(mockGame) {
             @Override
-            public CardController getControllerType(Card card) {
+            public CardController getControllerType(Card card, int numCardsPlayed) {
                 return mockCardController;
             }
         };
@@ -1544,7 +1544,7 @@ public class GameControllerTests {
 
         GameController controller = new GameController(mockGame) {
             @Override
-            public CardController getControllerType(Card card) {
+            public CardController getControllerType(Card card, int numCardsPlayed) {
                 return mockCardController;
             }
         };
@@ -1673,7 +1673,7 @@ public class GameControllerTests {
 
         GameController controller = new GameController(mockGame) {
             @Override
-            public CardController getControllerType(Card card) {
+            public CardController getControllerType(Card card, int numCardsPlayed) {
                 return mockCardController;
             }
         };

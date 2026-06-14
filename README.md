@@ -16,4 +16,6 @@
 - Gradle 8.10
 
 ## Acknowledgements
-REFERENCES, SOURCE OF HELP ETC
+REFERENCES, SOURCE OF HELP ETC:
+- Claude
+- Gemini

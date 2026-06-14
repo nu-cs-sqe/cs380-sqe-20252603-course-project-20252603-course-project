@@ -25,7 +25,7 @@ public enum CardType {
     SWAP_TOP_AND_BOTTOM;
 
     public boolean canHaveTarget(){
-        return this == TACOCAT || this == CATERMELLON || this == BEARD_CAT || this == HAIRY_POTATO_CAT
-                || this == FAVOR;
+        return this == TACOCAT || this == CATERMELLON || this == BEARD_CAT
+                || this == HAIRY_POTATO_CAT || this == FAVOR;
     }
 }

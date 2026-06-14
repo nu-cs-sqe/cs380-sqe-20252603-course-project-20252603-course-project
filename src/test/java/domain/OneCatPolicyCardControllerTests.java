@@ -101,7 +101,7 @@ public class OneCatPolicyCardControllerTests {
         expect(cat1.getType()).andReturn(CardType.TACOCAT).anyTimes();
         expect(cat2.getType()).andReturn(CardType.CATERMELLON).anyTimes();
         expect(cat3.getType()).andReturn(CardType.BEARD_CAT).anyTimes();
-        expect(cat4.getType()).andReturn(CardType.CAT_CARD_4).anyTimes();
+        expect(cat4.getType()).andReturn(CardType.HAIRY_POTATO_CAT).anyTimes();
 
         ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
                 cat1, cat2, cat3, cat4));

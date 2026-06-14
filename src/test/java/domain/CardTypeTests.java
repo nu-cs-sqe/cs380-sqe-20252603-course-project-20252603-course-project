@@ -25,7 +25,7 @@ public class CardTypeTests {
 
     @Test
     public void CAT_CARD_4_ReturnsTrue(){
-        CardType type = CardType.CAT_CARD_4;
+        CardType type = CardType.HAIRY_POTATO_CAT;
         assertTrue(type.canHaveTarget());
     }
 

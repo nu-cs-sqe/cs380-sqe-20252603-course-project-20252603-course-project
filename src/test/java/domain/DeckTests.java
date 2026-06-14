@@ -26,7 +26,7 @@ public class DeckTests {
                 CardType.TACOCAT, 0,
                 CardType.CATERMELLON, 0,
                 CardType.BEARD_CAT, 0,
-                CardType.CAT_CARD_4, 0
+                CardType.HAIRY_POTATO_CAT, 0
         )
         );
 
@@ -43,7 +43,7 @@ public class DeckTests {
         assertEquals(4, card_counts.get(CardType.TACOCAT));
         assertEquals(4, card_counts.get(CardType.CATERMELLON));
         assertEquals(4, card_counts.get(CardType.BEARD_CAT));
-        assertEquals(4, card_counts.get(CardType.CAT_CARD_4));
+        assertEquals(4, card_counts.get(CardType.HAIRY_POTATO_CAT));
         assertEquals(34, cards.size());
     }
 

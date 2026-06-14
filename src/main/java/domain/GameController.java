@@ -91,7 +91,7 @@ public class GameController {
         cardToControllerMap.put(CardType.TACOCAT, new CatCardController(numCardsPlayed));
         cardToControllerMap.put(CardType.CATERMELLON, new CatCardController(numCardsPlayed));
         cardToControllerMap.put(CardType.BEARD_CAT, new CatCardController(numCardsPlayed));
-        cardToControllerMap.put(CardType.CAT_CARD_4, new CatCardController(numCardsPlayed));
+        cardToControllerMap.put(CardType.HAIRY_POTATO_CAT, new CatCardController(numCardsPlayed));
         cardToControllerMap.put(CardType.FAVOR, new FavorCardController());
         cardToControllerMap.put(CardType.BOUNTY, new BountyCardController());
         cardToControllerMap.put(CardType.BURY, new BuryCardController());

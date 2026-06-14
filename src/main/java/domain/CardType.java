@@ -13,7 +13,7 @@ public enum CardType {
     TACOCAT,
     CATERMELLON,
     BEARD_CAT,
-    CAT_CARD_4,
+    HAIRY_POTATO_CAT,
     FAVOR,
     BOUNTY,
     BURY,
@@ -25,7 +25,7 @@ public enum CardType {
     SWAP_TOP_AND_BOTTOM;
 
     public boolean canHaveTarget(){
-        return this == TACOCAT || this == CATERMELLON || this == BEARD_CAT || this == CAT_CARD_4
+        return this == TACOCAT || this == CATERMELLON || this == BEARD_CAT || this == HAIRY_POTATO_CAT
                 || this == FAVOR;
     }
 }

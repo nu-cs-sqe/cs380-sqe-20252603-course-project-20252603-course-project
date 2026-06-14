@@ -585,14 +585,14 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_4));
+        player.addCard(new Card(CardType.HAIRY_POTATO_CAT));
         player.addCard(new Card(CardType.SEE_THE_FUTURE));
         player.addCard(new Card(CardType.SHUFFLE));
         player.addCard(new Card(CardType.SKIP));
 
         ArrayList<Card> cards = new ArrayList<Card>();
         cards.add(new Card(CardType.SKIP));
-        cards.add(new Card(CardType.CAT_CARD_4));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
 
         assertTrue(controller.playerHasCards(player, cards));
         ;
@@ -609,7 +609,7 @@ public class GameControllerTests {
         ArrayList<Card> cards = new ArrayList<Card>();
         cards.add(new Card(CardType.BEARD_CAT));
         cards.add(new Card(CardType.CATERMELLON));
-        cards.add(new Card(CardType.CAT_CARD_4));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
 
         assertFalse(controller.playerHasCards(player, cards));
         ;
@@ -621,18 +621,18 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_4));
+        player.addCard(new Card(CardType.HAIRY_POTATO_CAT));
         player.addCard(new Card(CardType.ATTACK));
-        player.addCard(new Card(CardType.CAT_CARD_4));
-        player.addCard(new Card(CardType.CAT_CARD_4));
+        player.addCard(new Card(CardType.HAIRY_POTATO_CAT));
+        player.addCard(new Card(CardType.HAIRY_POTATO_CAT));
         player.addCard(new Card(CardType.SHUFFLE));
         player.addCard(new Card(CardType.SKIP));
 
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_4));
-        cards.add(new Card(CardType.CAT_CARD_4));
-        cards.add(new Card(CardType.CAT_CARD_4));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
 
         assertTrue(controller.playerHasCards(player, cards));
         ;

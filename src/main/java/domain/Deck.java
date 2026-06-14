@@ -17,7 +17,7 @@ public class Deck {
             CardType.TACOCAT, 4,
             CardType.CATERMELLON, 4,
             CardType.BEARD_CAT, 4,
-            CardType.CAT_CARD_4, 4
+            CardType.HAIRY_POTATO_CAT, 4
     );
 
     public Deck(){

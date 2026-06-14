@@ -73,10 +73,17 @@
 10. [10%] Everyone: Implement Integration Testing
 11. [10%] Everyone: Implement i18n
 
-# Week 10 (05/31/2026-06//2026)
+# Week 10 (05/31/2026-06/06/2026)
 **Planning and Progress Tracking**:
 1. [finished] Game Controller: Dani, Audrey, & Chris
 2. [finished] Everyone: Fixed unit tests 
 3. [30%] Everyone: Work on 3 + 1 cards
 4. [10%] Everyone: Implement Integration Testing
 5. [10%] Everyone: Implement i18n
+
+# Week 11 (06/06/2026-06/13/2026)
+**Planning and Progress Tracking**:
+1. [finished] Everyone: Work on 3 + 1 cards
+2. [finished] Everyone: Implement Integration Testing
+3. [finished] Everyone: Implement i18n
+4. [finished] Everyone: Finish all tasks left 

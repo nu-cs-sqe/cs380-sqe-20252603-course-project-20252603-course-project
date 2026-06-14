@@ -11,7 +11,7 @@ public class GameController {
     private int currentPlayerTurnsLeft;
     private int nextPlayerTurnsLeft;
 
-    GameController(Game game) {
+    public GameController(Game game) {
         this.game = game;
     }
 

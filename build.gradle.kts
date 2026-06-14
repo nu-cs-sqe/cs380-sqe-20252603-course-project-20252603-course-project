@@ -18,7 +18,7 @@ repositories {
 }
 
 application {
-    mainClass = "Code.Main"
+    mainClass = "ui.Main"
 }
 
 dependencies {
@@ -42,6 +42,10 @@ jacoco {
 
 tasks.compileJava {
     options.release = 11
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }
 
 tasks.test {

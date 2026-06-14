@@ -1,7 +1,10 @@
 package domain;
 
+import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
+import ui.SeeTheFutureCardControllerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +12,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SeeTheFutureCardControllerTests {
+    @Test
+    public void executeCardAction_FourCardsInDeck_CallsDisplayWithTopThree() {
+        GameController mockGc = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Deck mockDeck = EasyMock.createMock(Deck.class);
+        Player mockUser = EasyMock.createMock(Player.class);
+        SeeTheFutureCardControllerView mockView =
+                EasyMock.createMock(SeeTheFutureCardControllerView.class);
+
+        Card c1 = Card.createCard(CardType.SKIP);
+        Card c2 = Card.createCard(CardType.ATTACK);
+        Card c3 = Card.createCard(CardType.SHUFFLE);
+        Card c4 = Card.createCard(CardType.NOPE);
+        ArrayList<Card> deckCards = new ArrayList<>(List.of(c1, c2, c3, c4));
+
+        EasyMock.expect(mockGc.getGame()).andReturn(mockGame);
+        EasyMock.expect(mockGame.getDeck()).andReturn(mockDeck);
+        EasyMock.expect(mockDeck.getCards()).andReturn(deckCards);
+        mockView.displayTopCards(List.of(c1, c2, c3));
+        EasyMock.expectLastCall().once();
+
+        EasyMock.replay(mockGc, mockGame, mockDeck, mockUser, mockView);
+
+        SeeTheFutureCardController controller = new SeeTheFutureCardController(mockView);
+        controller.executeCardAction(mockGc, mockUser, Optional.empty());
+
+        EasyMock.verify(mockGc, mockGame, mockDeck, mockUser, mockView);
+    }
+
     @Test
     public void executeCardAction_FourCardsInDeck_ReturnsListOfTopThree() {
         Game game = new Game(2);
@@ -151,5 +183,57 @@ public class SeeTheFutureCardControllerTests {
         assertTrue(returnedCards.isEmpty());
 
         assertEquals(initialDeckSize, game.getDeck().count());
+    }
+
+    @Test
+    public void executeCardAction_TwoCardsInDeck_CallsDisplayWithTopTwo() {
+        GameController mockGc = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Deck mockDeck = EasyMock.createMock(Deck.class);
+        Player mockUser = EasyMock.createMock(Player.class);
+        SeeTheFutureCardControllerView mockView =
+                EasyMock.createMock(SeeTheFutureCardControllerView.class);
+
+        Card c1 = Card.createCard(CardType.SKIP);
+        Card c2 = Card.createCard(CardType.ATTACK);
+        ArrayList<Card> deckCards = new ArrayList<>(List.of(c1, c2));
+
+        EasyMock.expect(mockGc.getGame()).andReturn(mockGame);
+        EasyMock.expect(mockGame.getDeck()).andReturn(mockDeck);
+        EasyMock.expect(mockDeck.getCards()).andReturn(deckCards);
+        mockView.displayTopCards(List.of(c1, c2));
+        EasyMock.expectLastCall().once();
+
+        EasyMock.replay(mockGc, mockGame, mockDeck, mockUser, mockView);
+
+        SeeTheFutureCardController controller = new SeeTheFutureCardController(mockView);
+        controller.executeCardAction(mockGc, mockUser, Optional.empty());
+
+        EasyMock.verify(mockGc, mockGame, mockDeck, mockUser, mockView);
+    }
+
+    @Test
+    public void executeCardAction_EmptyDeck_CallsDisplayWithEmptyList() {
+        GameController mockGc = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Deck mockDeck = EasyMock.createMock(Deck.class);
+        Player mockUser = EasyMock.createMock(Player.class);
+        SeeTheFutureCardControllerView mockView =
+                EasyMock.createMock(SeeTheFutureCardControllerView.class);
+
+        ArrayList<Card> deckCards = new ArrayList<>();
+
+        EasyMock.expect(mockGc.getGame()).andReturn(mockGame);
+        EasyMock.expect(mockGame.getDeck()).andReturn(mockDeck);
+        EasyMock.expect(mockDeck.getCards()).andReturn(deckCards);
+        mockView.displayTopCards(List.of());
+        EasyMock.expectLastCall().once();
+
+        EasyMock.replay(mockGc, mockGame, mockDeck, mockUser, mockView);
+
+        SeeTheFutureCardController controller = new SeeTheFutureCardController(mockView);
+        controller.executeCardAction(mockGc, mockUser, Optional.empty());
+
+        EasyMock.verify(mockGc, mockGame, mockDeck, mockUser, mockView);
     }
 }

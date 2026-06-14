@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DrawTwoController {
+public class DrawTwoController implements CardController {
     public Optional<List<Card>> executeCardAction(GameController gameController,
                                                   Player user,
                                                   Optional<Player> target) {

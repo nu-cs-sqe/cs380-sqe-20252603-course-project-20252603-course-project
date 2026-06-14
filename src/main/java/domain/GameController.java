@@ -1,5 +1,7 @@
 package domain;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.*;
 
 import ui.GameControllerView;
@@ -11,7 +13,10 @@ public class GameController {
     private int currentPlayerTurnsLeft;
     private int nextPlayerTurnsLeft;
 
-    GameController(Game game) {
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP2",
+            justification = "GameController intentionally holds a shared reference to "
+                    + "Game to manage game state")
+    public GameController(Game game) {
         this.game = game;
     }
 
@@ -87,7 +92,15 @@ public class GameController {
         cardToControllerMap.put(CardType.CAT_CARD_2, new CatCardController());
         cardToControllerMap.put(CardType.CAT_CARD_3, new CatCardController());
         cardToControllerMap.put(CardType.CAT_CARD_4, new CatCardController());
-
+        cardToControllerMap.put(CardType.FAVOR, new FavorCardController());
+        cardToControllerMap.put(CardType.BOUNTY, new BountyCardController());
+        cardToControllerMap.put(CardType.BURY, new BuryCardController());
+        cardToControllerMap.put(CardType.DRAW_TWO, new DrawTwoController());
+        cardToControllerMap.put(CardType.HAIL_MARY, new HailMaryController());
+        cardToControllerMap.put(CardType.HOT_POTATO, new HotPotatoController());
+        cardToControllerMap.put(CardType.REVERSE, new ReverseCardController());
+        cardToControllerMap.put(CardType.SELFISH_ROBIN_HOOD, new SelfishRobinHoodCardController());
+        cardToControllerMap.put(CardType.SWAP_TOP_AND_BOTTOM, new SwapTopAndBottomCardController());
         if (cardToControllerMap.containsKey(card.getType())) {
             return cardToControllerMap.get(card.getType());
         }
@@ -142,6 +155,9 @@ public class GameController {
 
         if (cards.size() == 1) {
             CardType type = cards.get(0).getType();
+            if (type == CardType.FAVOR) {
+                return target.isPresent() && isTargetValid(type, initiator, target.get());
+            }
             return !type.canHaveTarget() && target.isEmpty();
         } else if (cards.size() == 2 || cards.size() == 3) {
             return cardsAllMatchingCatCards(cards)
@@ -187,7 +203,8 @@ public class GameController {
                     controllerView.displayDuplicateCardInMove(userChoice);
                 } else {
                     Optional<Player> target = Optional.empty();
-                    if (cardsPlayed.size() >= 2) {
+                    if (cardsPlayed.size() >= 2 || (cardsPlayed.size() == 1
+                            && cardsPlayed.get(0).getType() == CardType.FAVOR)) {
                         ArrayList<Player> arrayListAlivePlayers =
                                 new ArrayList<Player>(game.getAlivePlayers());
                         String targetChoice = controllerView

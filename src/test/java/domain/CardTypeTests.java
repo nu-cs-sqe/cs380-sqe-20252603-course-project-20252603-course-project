@@ -7,25 +7,25 @@ import org.junit.jupiter.api.Test;
 public class CardTypeTests {
     @Test
     public void CatCard1_ReturnsTrue(){
-        CardType type = CardType.CAT_CARD_1;
+        CardType type = CardType.TACOCAT;
         assertTrue(type.canHaveTarget());
     }
 
     @Test
     public void CAT_CARD_2_ReturnsTrue(){
-        CardType type = CardType.CAT_CARD_2;
+        CardType type = CardType.CATERMELLON;
         assertTrue(type.canHaveTarget());
     }
 
     @Test
     public void CAT_CARD_3_ReturnsTrue(){
-        CardType type = CardType.CAT_CARD_3;
+        CardType type = CardType.BEARD_CAT;
         assertTrue(type.canHaveTarget());
     }
 
     @Test
     public void CAT_CARD_4_ReturnsTrue(){
-        CardType type = CardType.CAT_CARD_4;
+        CardType type = CardType.HAIRY_POTATO_CAT;
         assertTrue(type.canHaveTarget());
     }
 

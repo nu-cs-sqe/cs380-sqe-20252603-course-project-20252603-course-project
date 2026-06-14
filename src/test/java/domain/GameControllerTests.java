@@ -290,7 +290,7 @@ public class GameControllerTests {
 
         EasyMock.replay(initiator, target);
 
-        assertTrue(controller.isTargetValid(CardType.CAT_CARD_1, initiator, target));
+        assertTrue(controller.isTargetValid(CardType.TACOCAT, initiator, target));
 
         EasyMock.verify(initiator, target);
     }
@@ -315,7 +315,7 @@ public class GameControllerTests {
 
         EasyMock.replay(initiator);
 
-        assertFalse(controller.isTargetValid(CardType.CAT_CARD_1, initiator, initiator));
+        assertFalse(controller.isTargetValid(CardType.TACOCAT, initiator, initiator));
 
         EasyMock.verify(initiator);
     }
@@ -335,7 +335,7 @@ public class GameControllerTests {
     void cardsAllMatchingCatCards_SingleCatCard_ReturnsTrue() {
         GameController controller = new GameController(null);
         Card mockCard = EasyMock.createMock(Card.class);
-        EasyMock.expect(mockCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        EasyMock.expect(mockCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
         EasyMock.replay(mockCard);
 
         ArrayList<Card> cards = new ArrayList<>();
@@ -365,7 +365,7 @@ public class GameControllerTests {
     void cardsAllMatchingCatCards_AllMatchingCatCards_ReturnsTrue() {
         GameController controller = new GameController(null);
         Card mockCard = EasyMock.createMock(Card.class);
-        EasyMock.expect(mockCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        EasyMock.expect(mockCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
         EasyMock.replay(mockCard);
 
         ArrayList<Card> cards = new ArrayList<>();
@@ -400,7 +400,7 @@ public class GameControllerTests {
         GameController controller = new GameController(null);
         Card mockCatCard = EasyMock.createMock(Card.class);
         Card mockSkipCard = EasyMock.createMock(Card.class);
-        EasyMock.expect(mockCatCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        EasyMock.expect(mockCatCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
         EasyMock.expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
         EasyMock.replay(mockCatCard, mockSkipCard);
 
@@ -420,7 +420,7 @@ public class GameControllerTests {
         Card mockSkipCard = EasyMock.createMock(Card.class);
         Card mockCatCard = EasyMock.createMock(Card.class);
         EasyMock.expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
-        EasyMock.expect(mockCatCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        EasyMock.expect(mockCatCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
         EasyMock.replay(mockSkipCard, mockCatCard);
 
         ArrayList<Card> cards = new ArrayList<>();
@@ -438,8 +438,8 @@ public class GameControllerTests {
         GameController controller = new GameController(null);
         Card mockCatCard1 = EasyMock.createMock(Card.class);
         Card mockCatCard2 = EasyMock.createMock(Card.class);
-        EasyMock.expect(mockCatCard1.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        EasyMock.expect(mockCatCard2.getType()).andReturn(CardType.CAT_CARD_2).anyTimes();
+        EasyMock.expect(mockCatCard1.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        EasyMock.expect(mockCatCard2.getType()).andReturn(CardType.CATERMELLON).anyTimes();
         EasyMock.replay(mockCatCard1, mockCatCard2);
 
         ArrayList<Card> cards = new ArrayList<>();
@@ -473,11 +473,11 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_1));
+        player.addCard(new Card(CardType.TACOCAT));
         player.addCard(new Card(CardType.SKIP));
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
+        cards.add(new Card(CardType.TACOCAT));
 
         assertTrue(controller.playerHasCards(player, cards));
         ;
@@ -489,11 +489,11 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_1));
+        player.addCard(new Card(CardType.TACOCAT));
         player.addCard(new Card(CardType.SKIP));
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_2));
+        cards.add(new Card(CardType.CATERMELLON));
 
         assertFalse(controller.playerHasCards(player, cards));
         ;
@@ -506,7 +506,7 @@ public class GameControllerTests {
         Player player = game.getAlivePlayers().get(0);
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_2));
+        cards.add(new Card(CardType.CATERMELLON));
 
         assertFalse(controller.playerHasCards(player, cards));
         ;
@@ -518,11 +518,11 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_1));
+        player.addCard(new Card(CardType.TACOCAT));
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_1));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.TACOCAT));
 
         assertFalse(controller.playerHasCards(player, cards));
         ;
@@ -534,12 +534,12 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_2));
-        player.addCard(new Card(CardType.CAT_CARD_2));
+        player.addCard(new Card(CardType.CATERMELLON));
+        player.addCard(new Card(CardType.CATERMELLON));
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_2));
-        cards.add(new Card(CardType.CAT_CARD_2));
+        cards.add(new Card(CardType.CATERMELLON));
+        cards.add(new Card(CardType.CATERMELLON));
 
         assertTrue(controller.playerHasCards(player, cards));
         ;
@@ -551,12 +551,12 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_2));
+        player.addCard(new Card(CardType.CATERMELLON));
         player.addCard(new Card(CardType.SHUFFLE));
 
         ArrayList<Card> cards = new ArrayList<Card>();
         cards.add(new Card(CardType.SKIP));
-        cards.add(new Card(CardType.CAT_CARD_2));
+        cards.add(new Card(CardType.CATERMELLON));
 
         assertFalse(controller.playerHasCards(player, cards));
         ;
@@ -572,7 +572,7 @@ public class GameControllerTests {
         player.addCard(new Card(CardType.SEE_THE_FUTURE));
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_2));
+        cards.add(new Card(CardType.CATERMELLON));
         cards.add(new Card(CardType.SKIP));
 
         assertFalse(controller.playerHasCards(player, cards));
@@ -585,14 +585,14 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_4));
+        player.addCard(new Card(CardType.HAIRY_POTATO_CAT));
         player.addCard(new Card(CardType.SEE_THE_FUTURE));
         player.addCard(new Card(CardType.SHUFFLE));
         player.addCard(new Card(CardType.SKIP));
 
         ArrayList<Card> cards = new ArrayList<Card>();
         cards.add(new Card(CardType.SKIP));
-        cards.add(new Card(CardType.CAT_CARD_4));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
 
         assertTrue(controller.playerHasCards(player, cards));
         ;
@@ -604,12 +604,12 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_3));
+        player.addCard(new Card(CardType.BEARD_CAT));
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_3));
-        cards.add(new Card(CardType.CAT_CARD_2));
-        cards.add(new Card(CardType.CAT_CARD_4));
+        cards.add(new Card(CardType.BEARD_CAT));
+        cards.add(new Card(CardType.CATERMELLON));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
 
         assertFalse(controller.playerHasCards(player, cards));
         ;
@@ -621,18 +621,18 @@ public class GameControllerTests {
         GameController controller = new GameController(game);
         Player player = game.getAlivePlayers().get(0);
 
-        player.addCard(new Card(CardType.CAT_CARD_4));
+        player.addCard(new Card(CardType.HAIRY_POTATO_CAT));
         player.addCard(new Card(CardType.ATTACK));
-        player.addCard(new Card(CardType.CAT_CARD_4));
-        player.addCard(new Card(CardType.CAT_CARD_4));
+        player.addCard(new Card(CardType.HAIRY_POTATO_CAT));
+        player.addCard(new Card(CardType.HAIRY_POTATO_CAT));
         player.addCard(new Card(CardType.SHUFFLE));
         player.addCard(new Card(CardType.SKIP));
 
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_4));
-        cards.add(new Card(CardType.CAT_CARD_4));
-        cards.add(new Card(CardType.CAT_CARD_4));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
+        cards.add(new Card(CardType.HAIRY_POTATO_CAT));
 
         assertTrue(controller.playerHasCards(player, cards));
         ;
@@ -669,7 +669,7 @@ public class GameControllerTests {
         Player player1 = game.getAlivePlayers().get(0);
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
+        cards.add(new Card(CardType.TACOCAT));
 
         assertFalse(controller.isValidMove(cards, player1, Optional.empty()));
     }
@@ -681,12 +681,12 @@ public class GameControllerTests {
         Player player1 = game.getAlivePlayers().get(0);
         Player player2 = game.getAlivePlayers().get(1);
 
-        player1.addCard(new Card(CardType.CAT_CARD_1));
-        player1.addCard(new Card(CardType.CAT_CARD_1));
+        player1.addCard(new Card(CardType.TACOCAT));
+        player1.addCard(new Card(CardType.TACOCAT));
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_1));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.TACOCAT));
 
         assertTrue(controller.isValidMove(cards, player1, Optional.of(player2)));
     }
@@ -698,8 +698,8 @@ public class GameControllerTests {
         Player player1 = game.getAlivePlayers().get(0);
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_1));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.TACOCAT));
 
         assertFalse(controller.isValidMove(cards, player1, Optional.empty()));
     }
@@ -711,8 +711,8 @@ public class GameControllerTests {
         Player player1 = game.getAlivePlayers().get(0);
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_1));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.TACOCAT));
 
         assertFalse(controller.isValidMove(cards, player1, Optional.of(player1)));
     }
@@ -725,8 +725,8 @@ public class GameControllerTests {
         Player player2 = game.getAlivePlayers().get(1);
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_2));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.CATERMELLON));
 
         assertFalse(controller.isValidMove(cards, player1, Optional.of(player2)));
     }
@@ -752,14 +752,14 @@ public class GameControllerTests {
         Player player1 = game.getAlivePlayers().get(0);
         Player player2 = game.getAlivePlayers().get(1);
 
-        player1.addCard(new Card(CardType.CAT_CARD_1));
-        player1.addCard(new Card(CardType.CAT_CARD_1));
-        player1.addCard(new Card(CardType.CAT_CARD_1));
+        player1.addCard(new Card(CardType.TACOCAT));
+        player1.addCard(new Card(CardType.TACOCAT));
+        player1.addCard(new Card(CardType.TACOCAT));
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_1));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.TACOCAT));
 
         assertTrue(controller.isValidMove(cards, player1, Optional.of(player2)));
     }
@@ -771,9 +771,9 @@ public class GameControllerTests {
         Player player1 = game.getAlivePlayers().get(0);
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_1));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.TACOCAT));
 
         assertFalse(controller.isValidMove(cards, player1, Optional.empty()));
     }
@@ -785,9 +785,9 @@ public class GameControllerTests {
         Player player1 = game.getAlivePlayers().get(0);
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_3));
-        cards.add(new Card(CardType.CAT_CARD_2));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.BEARD_CAT));
+        cards.add(new Card(CardType.CATERMELLON));
 
         assertFalse(controller.isValidMove(cards, player1, Optional.empty()));
     }
@@ -813,9 +813,9 @@ public class GameControllerTests {
         Player player1 = game.getAlivePlayers().get(0);
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        cards.add(new Card(CardType.CAT_CARD_1));
-        cards.add(new Card(CardType.CAT_CARD_3));
-        cards.add(new Card(CardType.CAT_CARD_2));
+        cards.add(new Card(CardType.TACOCAT));
+        cards.add(new Card(CardType.BEARD_CAT));
+        cards.add(new Card(CardType.CATERMELLON));
         cards.add(new Card(CardType.SHUFFLE));
 
         assertFalse(controller.isValidMove(cards, player1, Optional.empty()));
@@ -1081,7 +1081,7 @@ public class GameControllerTests {
 
         expect(mockPlayer.getHand()).andReturn(hand).anyTimes();
         expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
-        expect(mockCatCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(mockCatCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
 
         mockControllerView.displayInvalidMove(isA(ArrayList.class));
         expectLastCall();
@@ -1177,7 +1177,7 @@ public class GameControllerTests {
         expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
 
         expect(mockSeeTheFutureCard.getType()).andReturn(CardType.SEE_THE_FUTURE).anyTimes();
-        expect(mockCatCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(mockCatCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
 
         expect(mockCardController.executeCardAction(eq(controller),
                 eq(mockPlayer),
@@ -1241,7 +1241,7 @@ public class GameControllerTests {
         expect(mockControllerView.getCardChoiceOrDraw()).andReturn(mockUserChoice);
         expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
 
-        expect(mockCatCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(mockCatCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
         expect(mockDrawBottomCard.getType()).andReturn(CardType.DRAW_FROM_BOTTOM).anyTimes();
         expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
 
@@ -1316,7 +1316,7 @@ public class GameControllerTests {
         expect(mockControllerView.getCardChoiceOrDraw()).andReturn(mockUserChoice);
         expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
 
-        expect(mockCatCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(mockCatCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
         expect(mockDrawBottomCard.getType()).andReturn(CardType.DRAW_FROM_BOTTOM).anyTimes();
         expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
 
@@ -1390,7 +1390,7 @@ public class GameControllerTests {
         expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
 
         expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
-        expect(mockCatCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(mockCatCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
 
         mockControllerView.displayInvalidMove(anyObject());
         expectLastCall();
@@ -1492,7 +1492,7 @@ public class GameControllerTests {
         expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
 
         expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
-        expect(mockCatCard.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(mockCatCard.getType()).andReturn(CardType.TACOCAT).anyTimes();
 
         mockControllerView.displayInvalidMove(anyObject());
         expectLastCall();
@@ -1564,11 +1564,11 @@ public class GameControllerTests {
         expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
         expect(mockTargetPlayer.getHand()).andReturn(new ArrayList<>()).anyTimes();
 
-        expect(mockCatCard1.getType()).andReturn(CardType.CAT_CARD_3).anyTimes();
+        expect(mockCatCard1.getType()).andReturn(CardType.BEARD_CAT).anyTimes();
         expect(mockDrawBottomCard.getType()).andReturn(CardType.DRAW_FROM_BOTTOM).anyTimes();
         expect(mockSkipCard.getType()).andReturn(CardType.SKIP).anyTimes();
-        expect(mockCatCard2.getType()).andReturn(CardType.CAT_CARD_3).anyTimes();
-        expect(mockCatCard3.getType()).andReturn(CardType.CAT_CARD_3).anyTimes();
+        expect(mockCatCard2.getType()).andReturn(CardType.BEARD_CAT).anyTimes();
+        expect(mockCatCard3.getType()).andReturn(CardType.BEARD_CAT).anyTimes();
 
         expect(mockCardController.executeCardAction(eq(controller),
                 eq(mockPlayer),
@@ -1758,7 +1758,7 @@ public class GameControllerTests {
         ArrayList<Card> hand = new ArrayList<>();
         hand.add(Card.createCard(CardType.SKIP));
         hand.add(Card.createCard(CardType.DEFUSE));
-        hand.add(Card.createCard(CardType.CAT_CARD_1));
+        hand.add(Card.createCard(CardType.TACOCAT));
         EasyMock.expect(mockPlayer.getHand()).andReturn(hand);
         EasyMock.replay(mockGame, mockPlayer);
 
@@ -1775,7 +1775,7 @@ public class GameControllerTests {
         ArrayList<Card> hand = new ArrayList<>();
         hand.add(Card.createCard(CardType.SKIP));
         hand.add(Card.createCard(CardType.EXPLODING_KITTEN));
-        hand.add(Card.createCard(CardType.CAT_CARD_1));
+        hand.add(Card.createCard(CardType.TACOCAT));
         EasyMock.expect(mockPlayer.getHand()).andReturn(hand);
         EasyMock.replay(mockGame, mockPlayer);
 

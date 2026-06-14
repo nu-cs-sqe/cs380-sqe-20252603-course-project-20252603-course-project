@@ -88,10 +88,10 @@ public class GameController {
         cardToControllerMap.put(CardType.SKIP, new SkipCardController());
         cardToControllerMap.put(CardType.NOPE, new NopeCardController());
         cardToControllerMap.put(CardType.DRAW_FROM_BOTTOM, new DrawFromBottomCardController());
-        cardToControllerMap.put(CardType.CAT_CARD_1, new CatCardController(numCardsPlayed));
-        cardToControllerMap.put(CardType.CAT_CARD_2, new CatCardController(numCardsPlayed));
-        cardToControllerMap.put(CardType.CAT_CARD_3, new CatCardController(numCardsPlayed));
-        cardToControllerMap.put(CardType.CAT_CARD_4, new CatCardController(numCardsPlayed));
+        cardToControllerMap.put(CardType.TACOCAT, new CatCardController(numCardsPlayed));
+        cardToControllerMap.put(CardType.CATERMELLON, new CatCardController(numCardsPlayed));
+        cardToControllerMap.put(CardType.BEARD_CAT, new CatCardController(numCardsPlayed));
+        cardToControllerMap.put(CardType.HAIRY_POTATO_CAT, new CatCardController(numCardsPlayed));
         cardToControllerMap.put(CardType.FAVOR, new FavorCardController());
         cardToControllerMap.put(CardType.BOUNTY, new BountyCardController());
         cardToControllerMap.put(CardType.BURY, new BuryCardController());

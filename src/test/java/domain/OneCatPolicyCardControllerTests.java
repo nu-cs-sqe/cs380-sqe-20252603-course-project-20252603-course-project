@@ -59,7 +59,7 @@ public class OneCatPolicyCardControllerTests {
         Card cat1 = createMock(Card.class);
         Card nonCat = createMock(Card.class);
 
-        expect(cat1.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(cat1.getType()).andReturn(CardType.TACOCAT).anyTimes();
         expect(nonCat.getType()).andReturn(CardType.DEFUSE).anyTimes();
 
         ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(cat1, nonCat));
@@ -98,10 +98,10 @@ public class OneCatPolicyCardControllerTests {
         Card cat3 = createMock(Card.class);
         Card cat4 = createMock(Card.class);
 
-        expect(cat1.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        expect(cat2.getType()).andReturn(CardType.CAT_CARD_2).anyTimes();
-        expect(cat3.getType()).andReturn(CardType.CAT_CARD_3).anyTimes();
-        expect(cat4.getType()).andReturn(CardType.CAT_CARD_4).anyTimes();
+        expect(cat1.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        expect(cat2.getType()).andReturn(CardType.CATERMELLON).anyTimes();
+        expect(cat3.getType()).andReturn(CardType.BEARD_CAT).anyTimes();
+        expect(cat4.getType()).andReturn(CardType.HAIRY_POTATO_CAT).anyTimes();
 
         ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
                 cat1, cat2, cat3, cat4));
@@ -138,8 +138,8 @@ public class OneCatPolicyCardControllerTests {
         Card cat1A = createMock(Card.class);
         Card cat1B = createMock(Card.class);
 
-        expect(cat1A.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        expect(cat1B.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(cat1A.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        expect(cat1B.getType()).andReturn(CardType.TACOCAT).anyTimes();
 
         ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
                 cat1A, cat1B));
@@ -182,9 +182,9 @@ public class OneCatPolicyCardControllerTests {
         Card cat1B = createMock(Card.class);
         Card cat1C = createMock(Card.class);
 
-        expect(cat1A.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        expect(cat1B.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        expect(cat1C.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(cat1A.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        expect(cat1B.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        expect(cat1C.getType()).andReturn(CardType.TACOCAT).anyTimes();
 
         ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
                 cat1A, cat1B, cat1C));
@@ -229,11 +229,11 @@ public class OneCatPolicyCardControllerTests {
         Card cat2B = createMock(Card.class);
         Card cat2C = createMock(Card.class);
 
-        expect(cat1A.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        expect(cat1B.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        expect(cat2A.getType()).andReturn(CardType.CAT_CARD_2).anyTimes();
-        expect(cat2B.getType()).andReturn(CardType.CAT_CARD_2).anyTimes();
-        expect(cat2C.getType()).andReturn(CardType.CAT_CARD_2).anyTimes();
+        expect(cat1A.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        expect(cat1B.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        expect(cat2A.getType()).andReturn(CardType.CATERMELLON).anyTimes();
+        expect(cat2B.getType()).andReturn(CardType.CATERMELLON).anyTimes();
+        expect(cat2C.getType()).andReturn(CardType.CATERMELLON).anyTimes();
 
         ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
                 cat1A, cat1B, cat2A, cat2B, cat2C
@@ -278,10 +278,10 @@ public class OneCatPolicyCardControllerTests {
         Card cat1C = createMock(Card.class);
         Card cat1D = createMock(Card.class);
 
-        expect(cat1A.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        expect(cat1B.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        expect(cat1C.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
-        expect(cat1D.getType()).andReturn(CardType.CAT_CARD_1).anyTimes();
+        expect(cat1A.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        expect(cat1B.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        expect(cat1C.getType()).andReturn(CardType.TACOCAT).anyTimes();
+        expect(cat1D.getType()).andReturn(CardType.TACOCAT).anyTimes();
 
         ArrayList<Card> nextPlayerHand = new ArrayList<>(java.util.Arrays.asList(
                 cat1A, cat1B, cat1C, cat1D));

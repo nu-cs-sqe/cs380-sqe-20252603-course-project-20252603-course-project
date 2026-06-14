@@ -33,10 +33,10 @@ public class OneCatPolicyCardController {
         for (Card card : nextPlayer.getHand()) {
             CardType type = card.getType();
 
-            if (type == CardType.CAT_CARD_1 ||
-                    type == CardType.CAT_CARD_2 ||
-                    type == CardType.CAT_CARD_3 ||
-                    type == CardType.CAT_CARD_4) {
+            if (type == CardType.TACOCAT ||
+                    type == CardType.CATERMELLON ||
+                    type == CardType.BEARD_CAT ||
+                    type == CardType.HAIRY_POTATO_CAT) {
 
                 catCounts.put(type, catCounts.getOrDefault(type, 0) + 1);
             }

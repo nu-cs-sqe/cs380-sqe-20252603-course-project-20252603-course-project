@@ -41,7 +41,7 @@ public class BountyCardControllerTests {
         Player user = EasyMock.createMock(Player.class);
         Player other = EasyMock.createMock(Player.class);
         Random mockRandom = EasyMock.createMock(Random.class);
-        Card card = new Card(CardType.CAT_CARD_1);
+        Card card = new Card(CardType.TACOCAT);
 
         EasyMock.expect(mockController.getGame()).andReturn(mockGame);
         EasyMock.expect(mockGame.getAlivePlayers()).andReturn(List.of(user, other));
@@ -73,7 +73,7 @@ public class BountyCardControllerTests {
 
         ArrayList<Card> hand = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            hand.add(new Card(CardType.CAT_CARD_1));
+            hand.add(new Card(CardType.TACOCAT));
         }
 
         EasyMock.expect(mockController.getGame()).andReturn(mockGame);
@@ -129,7 +129,7 @@ public class BountyCardControllerTests {
         Player other1 = EasyMock.createMock(Player.class);
         Player other2 = EasyMock.createMock(Player.class);
         Random mockRandom = EasyMock.createMock(Random.class);
-        Card card = new Card(CardType.CAT_CARD_1);
+        Card card = new Card(CardType.TACOCAT);
 
         EasyMock.expect(mockController.getGame()).andReturn(mockGame);
         EasyMock.expect(mockGame.getAlivePlayers()).andReturn(List.of(user, other1, other2));
@@ -162,13 +162,13 @@ public class BountyCardControllerTests {
         Random mockRandom = EasyMock.createMock(Random.class);
 
         ArrayList<Card> hand1 = new ArrayList<>();
-        hand1.add(new Card(CardType.CAT_CARD_1));
-        hand1.add(new Card(CardType.CAT_CARD_1));
+        hand1.add(new Card(CardType.TACOCAT));
+        hand1.add(new Card(CardType.TACOCAT));
 
         ArrayList<Card> hand2 = new ArrayList<>();
-        hand2.add(new Card(CardType.CAT_CARD_2));
-        hand2.add(new Card(CardType.CAT_CARD_2));
-        hand2.add(new Card(CardType.CAT_CARD_2));
+        hand2.add(new Card(CardType.CATERMELLON));
+        hand2.add(new Card(CardType.CATERMELLON));
+        hand2.add(new Card(CardType.CATERMELLON));
 
         EasyMock.expect(mockController.getGame()).andReturn(mockGame);
         EasyMock.expect(mockGame.getAlivePlayers()).andReturn(List.of(user, other1, other2));

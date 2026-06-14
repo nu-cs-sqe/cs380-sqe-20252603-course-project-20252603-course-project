@@ -14,7 +14,8 @@ public class GameController {
     private int nextPlayerTurnsLeft;
 
     @SuppressFBWarnings(value = "EI_EXPOSE_REP2",
-            justification = "GameController intentionally holds a shared reference to Game to manage game state")
+            justification = "GameController intentionally holds a shared reference to "
+                    + "Game to manage game state")
     public GameController(Game game) {
         this.game = game;
     }

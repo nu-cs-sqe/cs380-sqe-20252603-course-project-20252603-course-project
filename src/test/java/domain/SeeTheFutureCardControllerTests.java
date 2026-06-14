@@ -211,4 +211,29 @@ public class SeeTheFutureCardControllerTests {
 
         EasyMock.verify(mockGc, mockGame, mockDeck, mockUser, mockView);
     }
+
+    @Test
+    public void executeCardAction_EmptyDeck_CallsDisplayWithEmptyList() {
+        GameController mockGc = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Deck mockDeck = EasyMock.createMock(Deck.class);
+        Player mockUser = EasyMock.createMock(Player.class);
+        SeeTheFutureCardControllerView mockView =
+                EasyMock.createMock(SeeTheFutureCardControllerView.class);
+
+        ArrayList<Card> deckCards = new ArrayList<>();
+
+        EasyMock.expect(mockGc.getGame()).andReturn(mockGame);
+        EasyMock.expect(mockGame.getDeck()).andReturn(mockDeck);
+        EasyMock.expect(mockDeck.getCards()).andReturn(deckCards);
+        mockView.displayTopCards(List.of());
+        EasyMock.expectLastCall().once();
+
+        EasyMock.replay(mockGc, mockGame, mockDeck, mockUser, mockView);
+
+        SeeTheFutureCardController controller = new SeeTheFutureCardController(mockView);
+        controller.executeCardAction(mockGc, mockUser, Optional.empty());
+
+        EasyMock.verify(mockGc, mockGame, mockDeck, mockUser, mockView);
+    }
 }

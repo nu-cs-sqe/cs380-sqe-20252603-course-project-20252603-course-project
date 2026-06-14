@@ -89,7 +89,7 @@ public class GameController {
         cardToControllerMap.put(CardType.NOPE, new NopeCardController());
         cardToControllerMap.put(CardType.DRAW_FROM_BOTTOM, new DrawFromBottomCardController());
         cardToControllerMap.put(CardType.TACOCAT, new CatCardController(numCardsPlayed));
-        cardToControllerMap.put(CardType.CAT_CARD_2, new CatCardController(numCardsPlayed));
+        cardToControllerMap.put(CardType.CATERMELLON, new CatCardController(numCardsPlayed));
         cardToControllerMap.put(CardType.CAT_CARD_3, new CatCardController(numCardsPlayed));
         cardToControllerMap.put(CardType.CAT_CARD_4, new CatCardController(numCardsPlayed));
         cardToControllerMap.put(CardType.FAVOR, new FavorCardController());

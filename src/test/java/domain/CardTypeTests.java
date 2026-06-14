@@ -13,7 +13,7 @@ public class CardTypeTests {
 
     @Test
     public void CAT_CARD_2_ReturnsTrue(){
-        CardType type = CardType.CAT_CARD_2;
+        CardType type = CardType.CATERMELLON;
         assertTrue(type.canHaveTarget());
     }
 

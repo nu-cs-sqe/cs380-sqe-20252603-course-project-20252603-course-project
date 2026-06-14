@@ -34,7 +34,7 @@ public class OneCatPolicyCardController {
             CardType type = card.getType();
 
             if (type == CardType.TACOCAT ||
-                    type == CardType.CAT_CARD_2 ||
+                    type == CardType.CATERMELLON ||
                     type == CardType.CAT_CARD_3 ||
                     type == CardType.CAT_CARD_4) {
 

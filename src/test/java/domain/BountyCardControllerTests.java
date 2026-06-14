@@ -166,9 +166,9 @@ public class BountyCardControllerTests {
         hand1.add(new Card(CardType.TACOCAT));
 
         ArrayList<Card> hand2 = new ArrayList<>();
-        hand2.add(new Card(CardType.CAT_CARD_2));
-        hand2.add(new Card(CardType.CAT_CARD_2));
-        hand2.add(new Card(CardType.CAT_CARD_2));
+        hand2.add(new Card(CardType.CATERMELLON));
+        hand2.add(new Card(CardType.CATERMELLON));
+        hand2.add(new Card(CardType.CATERMELLON));
 
         EasyMock.expect(mockController.getGame()).andReturn(mockGame);
         EasyMock.expect(mockGame.getAlivePlayers()).andReturn(List.of(user, other1, other2));

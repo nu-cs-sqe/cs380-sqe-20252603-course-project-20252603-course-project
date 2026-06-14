@@ -1672,7 +1672,6 @@ public class GameControllerTests {
         realHand.add(mockFavorCard);
 
         GameController controller = new GameController(mockGame) {
-            @Override
             public CardController getControllerType(Card card) {
                 return mockCardController;
             }

@@ -5,7 +5,15 @@ import java.util.Optional;
 import java.util.Random;
 
 public class BountyCardController implements CardController {
-    private static final Random RANDOM = new Random();
+    private final Random random;
+
+    public BountyCardController() {
+        this.random = new Random();
+    }
+
+    BountyCardController(Random random) {
+        this.random = random;
+    }
 
     public Optional<List<Card>> executeCardAction(GameController gameController,
                                                   Player user,
@@ -15,7 +23,7 @@ public class BountyCardController implements CardController {
             if (currentPlayer == user) continue;
             if (currentPlayer.getHandSize() > 0) {
                 List<Card> hand = currentPlayer.getHand();
-                Card stolen = hand.get(RANDOM.nextInt(hand.size()));
+                Card stolen = hand.get(random.nextInt(hand.size()));
                 currentPlayer.removeCard(stolen);
                 user.addCard(stolen);
             }

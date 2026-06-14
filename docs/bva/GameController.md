@@ -282,6 +282,14 @@
 - **TC: four cards (too many cards)** ( :white-check-mark: )
   - **State of the system**: `cards = [CAT_CARD_1, CAT_CARD_3, CAT_CARD_2, shuffle], initiator = player1`
 
+- **TC: FAVOR card with valid target** ( :white-check-mark: )
+  - **State of the system**: `cards = [FAVOR]`, `initiator = player1`, `target = player2`, `player1.hand = [FAVOR]`
+  - **Expected output**: `true`
+
+- **TC: FAVOR card with no target** ( :white-check-mark )
+  - **State of the system**: `cards = [FAVOR]`, `initiator = player1`, `target = Optional.empty()`, `player1.hand = [FAVOR]`
+  - **Expected output**: `false`
+
 
 ### Method under test: `advanceTurn()`
 - **TC: Standard Turn Advance** (:white-check-mark:)
@@ -364,6 +372,10 @@
 - **TC: card played, double NOPE, action executes** ( :white-check-mark:)
   - **State of the System**: `currentPlayer`'s hand: `[SKIP, NOPE]`, other player hand: `[NOPE]`, `userChoice` = "0", other player Nopes, then current player Nopes back
   - **Expected output**: action executes, both NOPEs removed from hands
+
+- **TC: player plays a FAVOR card, prompts for a target, executes action, removes card from hand** (:white-check-mark:)
+  - **State of the System**: `currentPlayer`'s hand = `[FAVOR]`, `userChoice` = "0", `target` = player2, `currentPlayerTurnsLeft` = 1
+  - **Expected output**: `getTargetPlayerIndex` is called, `executeCardAction` is called with `target = Optional.of(player2)`, FAVOR card removed from hand, `currentPlayerTurnsLeft` = 1
 
 ### Method under test: `playerHasCardOfType(Player player, CardType type)`
 

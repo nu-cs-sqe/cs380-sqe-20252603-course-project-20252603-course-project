@@ -23,7 +23,7 @@ public class DeckTests {
                 CardType.SEE_THE_FUTURE, 0,
                 CardType.SHUFFLE, 0,
                 CardType.NOPE, 0,
-                CardType.CAT_CARD_1, 0,
+                CardType.TACOCAT, 0,
                 CardType.CAT_CARD_2, 0,
                 CardType.CAT_CARD_3, 0,
                 CardType.CAT_CARD_4, 0
@@ -40,7 +40,7 @@ public class DeckTests {
         assertEquals(4, card_counts.get(CardType.SEE_THE_FUTURE));
         assertEquals(4, card_counts.get(CardType.SHUFFLE));
         assertEquals(4, card_counts.get(CardType.NOPE));
-        assertEquals(4, card_counts.get(CardType.CAT_CARD_1));
+        assertEquals(4, card_counts.get(CardType.TACOCAT));
         assertEquals(4, card_counts.get(CardType.CAT_CARD_2));
         assertEquals(4, card_counts.get(CardType.CAT_CARD_3));
         assertEquals(4, card_counts.get(CardType.CAT_CARD_4));

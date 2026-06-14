@@ -14,7 +14,7 @@ public class Deck {
             CardType.SEE_THE_FUTURE, 4,
             CardType.SHUFFLE, 4,
             CardType.NOPE, 4,
-            CardType.CAT_CARD_1, 4,
+            CardType.TACOCAT, 4,
             CardType.CAT_CARD_2, 4,
             CardType.CAT_CARD_3, 4,
             CardType.CAT_CARD_4, 4
@@ -34,7 +34,7 @@ public class Deck {
         this.cards = new ArrayList<>();
 
         for (int i = 0; i < num_cards; i++){
-            cards.add(Card.createCard(CardType.CAT_CARD_1));
+            cards.add(Card.createCard(CardType.TACOCAT));
         }
     }
 

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class CardTypeTests {
     @Test
     public void CatCard1_ReturnsTrue(){
-        CardType type = CardType.CAT_CARD_1;
+        CardType type = CardType.TACOCAT;
         assertTrue(type.canHaveTarget());
     }
 

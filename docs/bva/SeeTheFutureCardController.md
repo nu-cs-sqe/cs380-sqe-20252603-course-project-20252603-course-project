@@ -26,7 +26,7 @@
     - **State of the system**: Deck contains 4 cards
     - **Expected output**: `view.displayTopCards` is called with the top 3 cards
 
-- **TC7: Deck With Two Cards — view displays top two ( ☐ )
+- **TC7: Deck With Two Cards — view displays top two ( :white-check-mark: )
     - **State of the system**: Deck contains 2 cards
     - **Expected output**: `view.displayTopCards` is called with those 2 cards
 

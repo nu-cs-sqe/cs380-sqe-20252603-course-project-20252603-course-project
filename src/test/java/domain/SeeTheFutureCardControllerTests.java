@@ -184,4 +184,31 @@ public class SeeTheFutureCardControllerTests {
 
         assertEquals(initialDeckSize, game.getDeck().count());
     }
+
+    @Test
+    public void executeCardAction_TwoCardsInDeck_CallsDisplayWithTopTwo() {
+        GameController mockGc = EasyMock.createMock(GameController.class);
+        Game mockGame = EasyMock.createMock(Game.class);
+        Deck mockDeck = EasyMock.createMock(Deck.class);
+        Player mockUser = EasyMock.createMock(Player.class);
+        SeeTheFutureCardControllerView mockView =
+                EasyMock.createMock(SeeTheFutureCardControllerView.class);
+
+        Card c1 = Card.createCard(CardType.SKIP);
+        Card c2 = Card.createCard(CardType.ATTACK);
+        ArrayList<Card> deckCards = new ArrayList<>(List.of(c1, c2));
+
+        EasyMock.expect(mockGc.getGame()).andReturn(mockGame);
+        EasyMock.expect(mockGame.getDeck()).andReturn(mockDeck);
+        EasyMock.expect(mockDeck.getCards()).andReturn(deckCards);
+        mockView.displayTopCards(List.of(c1, c2));
+        EasyMock.expectLastCall().once();
+
+        EasyMock.replay(mockGc, mockGame, mockDeck, mockUser, mockView);
+
+        SeeTheFutureCardController controller = new SeeTheFutureCardController(mockView);
+        controller.executeCardAction(mockGc, mockUser, Optional.empty());
+
+        EasyMock.verify(mockGc, mockGame, mockDeck, mockUser, mockView);
+    }
 }

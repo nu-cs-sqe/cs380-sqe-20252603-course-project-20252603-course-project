@@ -1928,7 +1928,7 @@ public class GameControllerTests {
 
         GameController controller = new GameController(mockGame) {
             @Override
-            public CardController getControllerType(Card card) {
+            public CardController getControllerType(Card card, int numCardsPlayed) {
                 return mockCardController;
             }
         };
@@ -1980,7 +1980,7 @@ public class GameControllerTests {
 
         GameController controller = new GameController(mockGame) {
             @Override
-            public CardController getControllerType(Card card) {
+            public CardController getControllerType(Card card, int numCardsPlayed) {
                 return mockCardController;
             }
         };
@@ -2033,7 +2033,7 @@ public class GameControllerTests {
 
         GameController controller = new GameController(mockGame) {
             @Override
-            public CardController getControllerType(Card card) {
+            public CardController getControllerType(Card card, int numCardsPlayed) {
                 return mockCardController;
             }
         };

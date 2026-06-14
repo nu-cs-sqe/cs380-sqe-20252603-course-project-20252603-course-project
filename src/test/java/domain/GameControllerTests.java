@@ -1609,6 +1609,103 @@ public class GameControllerTests {
     }
 
     @Test
+    void isValidMove_FavorCard_WithTarget_ReturnsTrue() {
+        Game mockGame = EasyMock.createMock(Game.class);
+        Player mockInitiator = EasyMock.createMock(Player.class);
+        Player mockTarget = EasyMock.createMock(Player.class);
+        Card mockFavorCard = EasyMock.createMock(Card.class);
+
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(mockFavorCard);
+
+        EasyMock.expect(mockFavorCard.getType()).andReturn(CardType.FAVOR).anyTimes();
+        EasyMock.expect(mockInitiator.getHand()).andReturn(hand).anyTimes();
+
+        EasyMock.replay(mockGame, mockInitiator, mockTarget, mockFavorCard);
+
+        GameController controller = new GameController(mockGame);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(mockFavorCard);
+
+        assertTrue(controller.isValidMove(cards, mockInitiator, Optional.of(mockTarget)));
+
+        EasyMock.verify(mockGame, mockInitiator, mockTarget, mockFavorCard);
+    }
+
+    @Test
+    void isValidMove_FavorCard_NoTarget_ReturnsFalse() {
+        Game mockGame = EasyMock.createMock(Game.class);
+        Player mockInitiator = EasyMock.createMock(Player.class);
+        Card mockFavorCard = EasyMock.createMock(Card.class);
+
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(mockFavorCard);
+
+        EasyMock.expect(mockFavorCard.getType()).andReturn(CardType.FAVOR).anyTimes();
+        EasyMock.expect(mockInitiator.getHand()).andReturn(hand).anyTimes();
+
+        EasyMock.replay(mockGame, mockInitiator, mockFavorCard);
+
+        GameController controller = new GameController(mockGame);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(mockFavorCard);
+
+        assertFalse(controller.isValidMove(cards, mockInitiator, Optional.empty()));
+
+        EasyMock.verify(mockGame, mockInitiator, mockFavorCard);
+    }
+
+    @Test
+    void takeTurn_ValidFavorCard_PromptsForTargetAndExecutesAction() {
+        Game mockGame = mock(Game.class);
+        Player mockPlayer = mock(Player.class);
+        Player mockTargetPlayer = mock(Player.class);
+        CardController mockCardController = mock(CardController.class);
+        GameControllerView mockControllerView = mock(GameControllerView.class);
+        Card mockFavorCard = mock(Card.class);
+
+        ArrayList<Player> realAlivePlayers = new ArrayList<>();
+        realAlivePlayers.add(mockPlayer);
+        realAlivePlayers.add(mockTargetPlayer);
+
+        ArrayList<Card> realHand = new ArrayList<>();
+        realHand.add(mockFavorCard);
+
+        GameController controller = new GameController(mockGame) {
+            @Override
+            public CardController getControllerType(Card card) {
+                return mockCardController;
+            }
+        };
+
+        expect(mockGame.getAlivePlayerCount()).andReturn(2).anyTimes();
+        expect(mockGame.getAlivePlayers()).andReturn(realAlivePlayers).anyTimes();
+        mockControllerView.displayCurrentPlayerAndCardsInHand(mockPlayer);
+        expectLastCall();
+        expect(mockControllerView.getCardChoiceOrDraw()).andReturn("0");
+        expect(mockPlayer.getHand()).andReturn(realHand).anyTimes();
+        expect(mockFavorCard.getType()).andReturn(CardType.FAVOR).anyTimes();
+        expect(mockControllerView.getTargetPlayerIndex(eq(realAlivePlayers), eq(mockPlayer)))
+                .andReturn("1");
+        expect(mockCardController.executeCardAction(eq(controller), eq(mockPlayer),
+                eq(Optional.of(mockTargetPlayer))))
+                .andReturn(Optional.empty());
+        mockPlayer.removeCard(mockFavorCard);
+        expectLastCall().andAnswer(() -> { realHand.remove(mockFavorCard); return null; });
+
+        replay(mockGame, mockPlayer, mockTargetPlayer, mockCardController,
+                mockControllerView, mockFavorCard);
+
+        controller.setCurrentPlayerIndex(0);
+        controller.setCurrentPlayerTurnsLeft(1);
+        controller.takeTurn(mockControllerView);
+
+        assertEquals(1, controller.getCurrentPlayerTurnsLeft());
+        verify(mockGame, mockPlayer, mockTargetPlayer, mockCardController,
+                mockControllerView, mockFavorCard);
+    }
+
+    @Test
     void playerHasCardOfType_EmptyHand_ReturnsFalse() {
         Game mockGame = EasyMock.createMock(Game.class);
         Player mockPlayer = EasyMock.createMock(Player.class);

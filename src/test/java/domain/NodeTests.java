@@ -1,0 +1,207 @@
+package domain;
+
+import org.easymock.EasyMock;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class NodeTests {
+    @Test
+    public void getNodeOccupant_UnoccupiedNode_Return0() {
+        Node n = new Node(1);
+
+        assertNull(n.getNodeOccupant());
+    }
+
+    @Test public void buildSettlement_GetNodeOccupant_GetInfraType_SuccessfulReturnPlayerAndSettlement() {
+        Node n = new Node(1);
+        Player mockPlayer = EasyMock.createMock(Player.class);
+
+        EasyMock.replay(mockPlayer);
+
+        n.buildSettlement(mockPlayer);
+        Player actual = n.getNodeOccupant();
+        assertSame(mockPlayer, actual);
+
+        assertEquals(InfraType.SETTLEMENT, n.getInfraType());
+    }
+
+    @Test public void buildSettlement_UnsuccessfulBuild() {
+        Node n = new Node(1);
+        Player mockPlayer1 = EasyMock.createMock(Player.class);
+        Player mockPlayer2 = EasyMock.createMock(Player.class);
+
+        EasyMock.replay(mockPlayer1);
+        EasyMock.replay(mockPlayer2);
+
+        // player 1 builds a settlement
+        n.buildSettlement(mockPlayer1);
+
+        // player 2 tries to build a settlement
+        IllegalStateException exception = assertThrows(
+                IllegalStateException.class,
+                () -> n.buildSettlement(mockPlayer2)
+        );
+
+        assertEquals("Cannot settle on an already-settled node.", exception.getMessage());
+        assertSame(mockPlayer1, n.getNodeOccupant());
+    }
+
+    @Test public void buildCity_GetInfraType_SuccessfulUpgradeSettlementToCity() {
+        Node n = new Node(1);
+        Player mockPlayer = EasyMock.createMock(Player.class);
+
+        EasyMock.replay(mockPlayer);
+
+        n.buildSettlement(mockPlayer);
+        n.buildCity(mockPlayer);
+
+        assertEquals(InfraType.CITY, n.getInfraType());
+        assertSame(mockPlayer, n.getNodeOccupant());
+    }
+
+    @Test public void buildCity_UnsuccessfulUpgradeCityToCity() {
+        Node n = new Node(1);
+        Player mockPlayer = EasyMock.createMock(Player.class);
+
+        EasyMock.replay(mockPlayer);
+
+        n.buildSettlement(mockPlayer);
+        n.buildCity(mockPlayer);
+
+        // try to build a city on a city
+        IllegalStateException exception = assertThrows(
+                IllegalStateException.class,
+                () -> n.buildCity(mockPlayer)
+        );
+
+        assertEquals(InfraType.CITY, n.getInfraType());
+        assertSame(mockPlayer, n.getNodeOccupant());
+        assertEquals("Cannot upgrade a city further.", exception.getMessage());
+    }
+
+    @Test public void buildCity_GetInfraType_UnsuccessfulUpdateEmptyNodeToCity() {
+        Node n = new Node(1);
+        Player mockPlayer = EasyMock.createMock(Player.class);
+
+        EasyMock.replay(mockPlayer);
+
+        // try to build a city on an unoccupied node
+        IllegalStateException exception = assertThrows(
+                IllegalStateException.class,
+                () -> n.buildCity(mockPlayer)
+        );
+
+        assertNull(n.getInfraType());
+        assertNull(n.getNodeOccupant());
+        assertEquals("Cannot upgrade an unsettled node to city.", exception.getMessage());
+    }
+
+    @Test public void buildCity_UnsuccessfulUpgradeOpponentToCity() {
+        Node n = new Node(1);
+        Player mockPlayer1 = EasyMock.createMock(Player.class);
+        Player mockPlayer2 = EasyMock.createMock(Player.class);
+
+        EasyMock.replay(mockPlayer1);
+        EasyMock.replay(mockPlayer2);
+
+        n.buildSettlement(mockPlayer1);
+        n.buildCity(mockPlayer1);
+
+        IllegalStateException exception = assertThrows(
+                IllegalStateException.class,
+                () -> n.buildCity(mockPlayer2)
+        );
+
+        assertEquals(mockPlayer1, n.getNodeOccupant());
+        assertEquals("Cannot build a city on an already-settled node.", exception.getMessage());
+    }
+
+    @Test
+    public void equals_SameMinimumId_ReturnsTrue() {
+        Node node1 = new Node(0);
+        Node node2 = new Node(0);
+
+        assertEquals(node1, node2);
+    }
+
+
+    @Test
+    public void equals_SameMaximumId_ReturnsTrue() {
+        Node node1 = new Node(53);
+        Node node2 = new Node(53);
+
+        assertEquals(node1, node2);
+    }
+
+    @Test
+    public void equals_DifferentIds_ReturnsFalse() {
+        Node node1 = new Node(0);
+        Node node2 = new Node(1);
+
+        assertNotEquals(node1, node2);
+    }
+
+    @Test
+    public void hashCode_SameMinimumId_ReturnsSameHashCode() {
+        Node node1 = new Node(0);
+        Node node2 = new Node(0);
+
+        assertEquals(node1.hashCode(), node2.hashCode());
+    }
+
+    @Test
+    public void hashCode_SameMaximumId_ReturnsSameHashCode() {
+        Node node1 = new Node(53);
+        Node node2 = new Node(53);
+
+        assertEquals(node1.hashCode(), node2.hashCode());
+    }
+
+    @Test
+    public void hashCode_DifferentIds_NotEqual() {
+        Node node1 = new Node(0);
+        Node node2 = new Node(1);
+
+        assertNotEquals(node1.hashCode(), node2.hashCode());
+    }
+
+    @Test
+    public void equals_SameObject_ReturnsTrue() {
+        Node node = new Node(0);
+
+        assertTrue(node.equals(node));
+    }
+
+    @Test
+    public void equals_SameIdDifferentObject_ReturnsTrue() {
+        Node node1 = new Node(0);
+        Node node2 = new Node(0);
+
+        assertEquals(node1, node2);
+    }
+
+    @Test
+    public void equals_DifferentId_ReturnsFalse() {
+        Node node1 = new Node(0);
+        Node node2 = new Node(1);
+
+        assertNotEquals(node1, node2);
+    }
+
+    @Test
+    public void equals_Null_ReturnsFalse() {
+        Node node = new Node(0);
+
+        assertFalse(node.equals(null));
+    }
+
+    @Test
+    public void equals_NonNodeObject_ReturnsFalse() {
+        Node node = new Node(0);
+
+        assertFalse(node.equals("not a node"));
+    }
+
+
+}

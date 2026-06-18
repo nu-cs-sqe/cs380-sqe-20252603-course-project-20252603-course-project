@@ -1,0 +1,129 @@
+package model;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import util.Constants;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+public class GameEngine {
+
+    private final List<Player> players;
+    private final Board board;
+    private GameStatus status;
+    private int currentPlayerIndex;
+    private Deck chanceDeck;
+
+    @SuppressFBWarnings(
+            value = "EI_EXPOSE_REP2",
+            justification = "GameEngine intentionally keeps the provided Board so controllers and model operations share game state.")
+    public GameEngine(List<Player> players, Board board, Deck chanceDeck) {
+        this.players = new ArrayList<>(players);
+        this.board = board;
+        this.chanceDeck = chanceDeck;
+        this.status = GameStatus.NOT_STARTED;
+        this.currentPlayerIndex = 0;
+    }
+
+    public GameEngine(List<Player> players) {
+        this(players, null, null);
+    }
+
+    public GameEngine(List<Player> players, Board board) {
+        this(players, board, null);
+    }
+
+    public GameEngine(List<Player> players, Deck chanceDeck) {
+        this(players, null, chanceDeck);
+    }
+
+    public Deck getChanceDeck(){
+        return this.chanceDeck;
+    }
+
+    public void startGame() {
+        if (players.size() < Constants.MIN_NUM_PLAYERS) {
+            throw new IllegalArgumentException("At least " + Constants.MIN_NUM_PLAYERS + " players are required to start the game");
+        }
+        if (players.size() > Constants.MAX_NUM_PLAYERS) {
+            throw new IllegalArgumentException("At most " + Constants.MAX_NUM_PLAYERS + " players are allowed to start the game");
+        }
+        status = GameStatus.IN_PROGRESS;
+    }
+
+    public GameStatus getStatus(){
+        return status; 
+    }
+    public Player getCurrentPlayer(){
+        return players.get(currentPlayerIndex);
+    }
+
+    public List<Player> getActivePlayers() {
+        return Collections.unmodifiableList(players);
+    }
+
+    public void nextTurn(){
+        currentPlayerIndex = currentPlayerIndex + 1;
+        if (currentPlayerIndex >= players.size()) {
+            currentPlayerIndex = 0;
+        }
+    }
+
+    public void removeBankruptPlayer(Player player) {
+        int removeIdx = players.indexOf(player);
+        if (removeIdx < 0) {
+            return;
+        }
+        players.remove(removeIdx);
+        if (removeIdx < currentPlayerIndex) {
+            currentPlayerIndex--;
+        }
+        if (currentPlayerIndex >= players.size()) {
+            currentPlayerIndex = 0;
+        }
+        if (players.size() == 1) {
+            status = GameStatus.GAME_OVER;
+        }
+    }
+
+    public boolean isGameOver() {
+        if (status == GameStatus.GAME_OVER) {
+            return true;
+        }
+        return players.size() < 2;
+    }
+
+    public Optional<Player> getWinner() {
+        if (players.size() != 1 || status != GameStatus.GAME_OVER) {
+            return Optional.empty();
+        }
+        return Optional.of(players.get(0));
+    }
+
+    public Tile getTile(int index) {
+        return board.getTile(index);
+    }
+
+    public int getPlayerPosition(Player player) {
+        return board.getPlayerPosition(player);
+    }
+
+    public void setPlayerPosition(Player player, int index) {
+        board.setPlayerPosition(player, index);
+    }
+
+    public void movePlayer(Player player, int spaces) {
+        board.movePlayer(player, spaces);
+    }
+
+    public boolean didPassGo(int oldPosition, int newPosition) {
+        return board.didPassGo(oldPosition, newPosition);
+    }
+
+    public int getBoardSize() {
+        return board.getBoardSize();
+    }
+
+}

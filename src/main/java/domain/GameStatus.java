@@ -1,0 +1,9 @@
+package domain;
+
+public enum GameStatus {
+	IN_PROGRESS,
+	WHITE_WIN,
+	BLACK_WIN,
+	STALEMATE,
+	DRAW
+}
